@@ -3,6 +3,7 @@ name = "markitdown-core"
 description = "Office documents to Markdown, byte-for-byte compatible with Python markitdown"
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
 authors.workspace = true

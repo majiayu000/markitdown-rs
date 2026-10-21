@@ -1,0 +1,41 @@
+# 2026-10-22 02:21 CST | Apple M2 Max | Darwin 25.5.0
+# Python 3.12.12 markitdown 0.1.8 | rustc 1.97.0 (2d8144b78 2026-07-07)
+# load: 19.65 17.77 16.04
+## identical output (python CLI vs rust CLI)
+same  tests/fixtures/docx/markitdown-test.docx
+same  bench/corpus/medium.docx
+same  bench/corpus/large.docx
+same  tests/fixtures/pptx/markitdown-test.pptx
+same  bench/corpus/deck.pptx
+## in-process conversion (file read + convert, warm, median of 10; python: 5)
+file	median_ms	min_ms	out_chars
+tests/fixtures/docx/markitdown-test.docx	1.111	1.066	4651
+bench/corpus/medium.docx	17.112	16.031	125827
+bench/corpus/large.docx	224.107	221.258	2514667
+tests/fixtures/pptx/markitdown-test.pptx	1.469	1.438	2047
+bench/corpus/deck.pptx	54.757	50.461	314107
+# import+init_ms	181.1
+file	median_ms	min_ms	out_chars
+tests/fixtures/docx/markitdown-test.docx	23.164	22.389	4651
+bench/corpus/medium.docx	502.599	480.465	125827
+bench/corpus/large.docx	12281.717	11840.478	2514667
+tests/fixtures/pptx/markitdown-test.pptx	12.115	11.854	2047
+bench/corpus/deck.pptx	857.122	848.164	314107
+## CLI end to end (new process per run)
+markitdown	markitdown-test.docx	wall_median_ms=4.7	cpu_median_ms=3.4	wall_min_ms=4.3
+markitdown	markitdown-test.docx	wall_median_ms=252.8	cpu_median_ms=300.0	wall_min_ms=246.9
+markitdown	medium.docx	wall_median_ms=21.2	cpu_median_ms=19.7	wall_min_ms=20.9
+markitdown	medium.docx	wall_median_ms=710.2	cpu_median_ms=754.3	wall_min_ms=703.3
+markitdown	large.docx	wall_median_ms=237.2	cpu_median_ms=233.8	wall_min_ms=233.1
+markitdown	large.docx	wall_median_ms=11376.9	cpu_median_ms=11024.8	wall_min_ms=10524.2
+markitdown	markitdown-test.pptx	wall_median_ms=4.7	cpu_median_ms=3.6	wall_min_ms=4.5
+markitdown	markitdown-test.pptx	wall_median_ms=272.4	cpu_median_ms=317.8	wall_min_ms=262.0
+markitdown	deck.pptx	wall_median_ms=59.8	cpu_median_ms=57.9	wall_min_ms=59.0
+markitdown	deck.pptx	wall_median_ms=1148.1	cpu_median_ms=1196.9	wall_min_ms=1128.5
+## peak RSS in bytes (bench/corpus/large.docx)
+target/release/markitdown 117915648
+oracle/.venv/bin/markitdown 455868416
+## footprint
+binary bytes: 848864
+python venv (markitdown[docx,pptx] + python-docx): 243M
+# load after: 8.81 14.34 14.99

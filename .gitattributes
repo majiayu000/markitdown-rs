@@ -1,0 +1,4 @@
+# Snapshots are compared byte for byte; never convert their line endings.
+tests/snapshots/** -text
+*.docx binary
+*.pptx binary

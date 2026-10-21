@@ -5,6 +5,7 @@ members = ["crates/markitdown-core", "crates/markitdown-rs"]
 [workspace.package]
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.88"
 license = "MIT"
 repository = "https://github.com/majiayu000/markitdown-rs"
 authors = ["majiayu000 <1835304752@qq.com>"]

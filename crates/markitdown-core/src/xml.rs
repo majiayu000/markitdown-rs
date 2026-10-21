@@ -84,6 +84,10 @@ pub struct ParseOptions<'a> {
     pub normalize_after_unescape: bool,
 }
 
+/// Converters walk the tree recursively; Python markitdown hits its recursion
+/// limit on such documents too.
+const MAX_DEPTH: usize = 512;
+
 pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
     let xml = xml.strip_prefix(b"\xEF\xBB\xBF").unwrap_or(xml);
     let mut reader = NsReader::from_reader(xml);
@@ -95,6 +99,11 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
         let ev = reader.read_event_into(&mut buf).map_err(|e| err(&e))?;
         match ev {
             Event::Start(e) => {
+                if stack.len() >= MAX_DEPTH {
+                    return Err(Error::Xml(format!(
+                        "elements nested deeper than {MAX_DEPTH} levels"
+                    )));
+                }
                 let el = start_element(&reader, &e, opts)?;
                 stack.push(el);
             }

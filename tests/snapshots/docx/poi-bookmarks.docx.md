@@ -1,0 +1,3 @@
+Sample Word Document
+
+This is a sample Microsoft Word Document having bookmarks.

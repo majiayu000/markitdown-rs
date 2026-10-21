@@ -9,6 +9,8 @@ use crate::Error;
 use quick_xml::NsReader;
 use quick_xml::events::{BytesStart, Event};
 use quick_xml::name::{QName, ResolveResult};
+use std::collections::HashSet;
+use std::rc::Rc;
 
 #[derive(Debug, Clone)]
 pub enum Node {
@@ -18,15 +20,16 @@ pub enum Node {
 
 #[derive(Debug, Clone, Default)]
 pub struct Element {
-    pub name: String,
-    pub attrs: Vec<(String, String)>,
+    /// interned: documents repeat a few dozen names hundreds of thousands of times
+    pub name: Rc<str>,
+    pub attrs: Vec<(Rc<str>, String)>,
     pub children: Vec<Node>,
 }
 
 impl Element {
     pub fn new(name: &str, children: Vec<Node>) -> Self {
         Element {
-            name: name.to_string(),
+            name: name.into(),
             attrs: Vec::new(),
             children,
         }
@@ -35,7 +38,7 @@ impl Element {
     pub fn attr(&self, name: &str) -> Option<&str> {
         self.attrs
             .iter()
-            .find(|(k, _)| k == name)
+            .find(|(k, _)| &**k == name)
             .map(|(_, v)| v.as_str())
     }
 
@@ -47,11 +50,11 @@ impl Element {
     }
 
     pub fn child(&self, name: &str) -> Option<&Element> {
-        self.elements().find(|e| e.name == name)
+        self.elements().find(|e| &*e.name == name)
     }
 
     pub fn children_named<'a>(&'a self, name: &'a str) -> impl Iterator<Item = &'a Element> {
-        self.elements().filter(move |e| e.name == name)
+        self.elements().filter(move |e| &*e.name == name)
     }
 
     /// `child(a)?.child(b)?...` along a path of names.
@@ -94,6 +97,7 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
     let mut buf = Vec::new();
     let mut stack: Vec<Element> = Vec::new();
     let mut root: Option<Element> = None;
+    let mut names = HashSet::new();
     let err = |e: &dyn std::fmt::Display| Error::Xml(e.to_string());
     loop {
         let ev = reader.read_event_into(&mut buf).map_err(|e| err(&e))?;
@@ -104,17 +108,18 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
                         "elements nested deeper than {MAX_DEPTH} levels"
                     )));
                 }
-                let el = start_element(&reader, &e, opts)?;
+                let el = start_element(&reader, &e, opts, &mut names)?;
                 stack.push(el);
             }
             Event::Empty(e) => {
-                let el = start_element(&reader, &e, opts)?;
+                let el = start_element(&reader, &e, opts, &mut names)?;
                 attach(&mut stack, &mut root, el);
             }
             Event::End(_) => {
-                let el = stack
+                let mut el = stack
                     .pop()
                     .ok_or_else(|| Error::Xml("unbalanced end tag".into()))?;
+                el.children.shrink_to_fit();
                 attach(&mut stack, &mut root, el);
             }
             Event::Text(t) => {
@@ -178,13 +183,23 @@ fn canonical(opts: &ParseOptions, ns: ResolveResult, local: &[u8]) -> Result<Str
     }
 }
 
+fn intern(names: &mut HashSet<Rc<str>>, name: String) -> Rc<str> {
+    if let Some(n) = names.get(name.as_str()) {
+        return n.clone();
+    }
+    let n: Rc<str> = name.into();
+    names.insert(n.clone());
+    n
+}
+
 fn start_element(
     reader: &NsReader<&[u8]>,
     e: &BytesStart,
     opts: &ParseOptions,
+    names: &mut HashSet<Rc<str>>,
 ) -> Result<Element, Error> {
     let (ns, local) = reader.resolve_element(e.name());
-    let name = canonical(opts, ns, local.as_ref())?;
+    let name = intern(names, canonical(opts, ns, local.as_ref())?);
     let mut attrs = Vec::new();
     for a in e.attributes() {
         let a = a.map_err(|e| Error::Xml(e.to_string()))?;
@@ -193,10 +208,11 @@ fn start_element(
             continue;
         }
         let (ans, local) = reader.resolve_attribute(QName(key));
-        let k = canonical(opts, ans, local.as_ref())?;
+        let k = intern(names, canonical(opts, ans, local.as_ref())?);
         let raw = std::str::from_utf8(&a.value).map_err(|e| Error::Xml(e.to_string()))?;
         attrs.push((k, attr_value(raw, opts)?));
     }
+    attrs.shrink_to_fit();
     Ok(Element {
         name,
         attrs,

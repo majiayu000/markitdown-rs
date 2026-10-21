@@ -67,7 +67,7 @@ fn text_run(text: String) -> Node {
 /// namespace template, so markup from other namespaces makes it fail.
 fn to_latex(math: &Element) -> R<String> {
     check_namespaces(math)?;
-    if math.name != "m:oMath" {
+    if &*math.name != "m:oMath" {
         return Ok(String::new());
     }
     process_children(math, None)

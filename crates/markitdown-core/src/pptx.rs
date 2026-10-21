@@ -139,7 +139,7 @@ fn rel_by_id<'r>(rels: &'r [Rel], id: &str) -> Option<&'r str> {
 
 fn shape_elems(tree: &Element) -> impl Iterator<Item = &Element> {
     tree.elements()
-        .filter(|e| SHAPE_TAGS.contains(&e.name.as_str()))
+        .filter(|e| SHAPE_TAGS.contains(&e.name.as_ref()))
 }
 
 /// `./*[1]/p:nvPr/p:ph`
@@ -177,7 +177,7 @@ fn coordinate(v: &str) -> Option<i64> {
 
 /// The shape's own (top, left) from its xfrm, as `BaseShape.top/.left`.
 fn own_offset(shape: &Element) -> (Option<i64>, Option<i64>) {
-    let xfrm = match shape.name.as_str() {
+    let xfrm = match shape.name.as_ref() {
         "p:graphicFrame" => shape.child("p:xfrm"),
         "p:grpSp" => shape.path(&["p:grpSpPr", "a:xfrm"]),
         "p:sp" | "p:pic" | "p:cxnSp" => shape.path(&["p:spPr", "a:xfrm"]),
@@ -198,7 +198,7 @@ impl Layout<'_> {
     /// same idx, which in turn falls back to the master placeholder by type.
     fn offset(&self, shape: &Element) -> (Option<i64>, Option<i64>) {
         let own = own_offset(shape);
-        let inherits = matches!(shape.name.as_str(), "p:sp" | "p:pic") && ph(shape).is_some();
+        let inherits = matches!(shape.name.as_ref(), "p:sp" | "p:pic") && ph(shape).is_some();
         if !inherits || (own.0.is_some() && own.1.is_some()) {
             return own;
         }
@@ -213,7 +213,7 @@ impl Layout<'_> {
 
     fn layout_offset(&self, base: &Element) -> (Option<i64>, Option<i64>) {
         let own = own_offset(base);
-        if base.name != "p:sp" {
+        if &*base.name != "p:sp" {
             return own;
         }
         let master_type = match ph(base).map(ph_type) {
@@ -252,7 +252,7 @@ fn leading_text(e: &Element) -> String {
 
 fn paragraph_text(p: &Element) -> String {
     p.elements()
-        .filter_map(|c| match c.name.as_str() {
+        .filter_map(|c| match c.name.as_ref() {
             "a:r" | "a:fld" => Some(c.child("a:t").map(leading_text).unwrap_or_default()),
             "a:br" => Some("\u{b}".to_string()),
             _ => None,
@@ -481,7 +481,7 @@ impl Ctx<'_, '_> {
     }
 
     fn shape_content(&self, shape: &Element, md: &mut String) -> Result<(), Error> {
-        let name = shape.name.as_str();
+        let name = shape.name.as_ref();
         if self.is_picture(shape) {
             md.push_str(&self.picture(shape));
         }
@@ -517,7 +517,7 @@ impl Ctx<'_, '_> {
     fn svg_blip_part(&self, shape: &Element) -> Option<&str> {
         fn find<'e>(e: &'e Element, out: &mut Vec<&'e Element>) {
             for c in e.elements() {
-                if c.name == "asvg:svgBlip" {
+                if &*c.name == "asvg:svgBlip" {
                     out.push(c);
                 }
                 find(c, out);
@@ -540,7 +540,7 @@ impl Ctx<'_, '_> {
 
     fn is_picture(&self, shape: &Element) -> bool {
         let is_placeholder = ph(shape).is_some();
-        match shape.name.as_str() {
+        match shape.name.as_ref() {
             "p:pic" if !is_placeholder => shape
                 .path(&["p:nvPicPr", "p:nvPr", "a:videoFile"])
                 .is_none(),
@@ -651,7 +651,7 @@ fn table(frame: &Element) -> String {
         let tr = dom.element(table, "tr", Vec::new());
         for cell in row.children_named("a:tc") {
             let td = dom.element(tr, if i == 0 { "th" } else { "td" }, Vec::new());
-            dom.text(td, &frame_text(cell.child("a:txBody")));
+            dom.text(td, frame_text(cell.child("a:txBody")));
         }
     }
     let md = markdownify::convert(
@@ -692,7 +692,7 @@ const PLOT_TAGS: &[&str] = &[
 
 fn descendants<'e>(e: &'e Element, name: &str, out: &mut Vec<&'e Element>) {
     for c in e.elements() {
-        if c.name == name {
+        if &*c.name == name {
             out.push(c);
         }
         descendants(c, name, out);
@@ -722,7 +722,7 @@ fn chart_markdown(chart: &Element) -> Result<String, ChartError> {
     let plot_area = chart.child("c:plotArea").ok_or(ChartError::Unsupported)?;
     let x_charts: Vec<&Element> = plot_area
         .elements()
-        .filter(|e| PLOT_TAGS.contains(&e.name.as_str()))
+        .filter(|e| PLOT_TAGS.contains(&e.name.as_ref()))
         .collect();
     let first = x_charts.first().ok_or(ChartError::Unsupported)?;
     let supported_plots = [
@@ -736,7 +736,7 @@ fn chart_markdown(chart: &Element) -> Result<String, ChartError> {
         "c:radarChart",
         "c:scatterChart",
     ];
-    if !supported_plots.contains(&first.name.as_str()) {
+    if !supported_plots.contains(&first.name.as_ref()) {
         return Err(ChartError::Unsupported);
     }
 
@@ -786,7 +786,7 @@ fn chart_markdown(chart: &Element) -> Result<String, ChartError> {
     let mut names = Vec::new();
     let mut values: Vec<Vec<String>> = Vec::new();
     for xc in &x_charts {
-        let value_tag = match xc.name.as_str() {
+        let value_tag = match xc.name.as_ref() {
             "c:areaChart" | "c:barChart" | "c:doughnutChart" | "c:lineChart" | "c:pieChart"
             | "c:radarChart" => "c:val",
             "c:bubbleChart" | "c:scatterChart" => "c:yVal",

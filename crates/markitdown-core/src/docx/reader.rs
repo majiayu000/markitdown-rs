@@ -2,6 +2,7 @@
 //! `docx/body_xml.py` element by element (including what it ignores).
 
 use super::dingbats::DINGBATS;
+use super::html::{self, Block};
 use super::package::{ContentTypes, Numbering, Relationships, Styles};
 use crate::pystr;
 use crate::xml::{Element, Node};
@@ -24,19 +25,13 @@ pub enum BreakKind {
 pub enum DocEl {
     Paragraph {
         children: Vec<DocEl>,
-        style_id: Option<String>,
-        style_name: Option<String>,
-        numbering: Option<NumLevel>,
+        /// the style map is applied while reading so nodes stay small
+        block: Block,
     },
     Run(Run),
     Text(String),
     Tab,
-    Hyperlink {
-        children: Vec<DocEl>,
-        href: Option<String>,
-        anchor: Option<String>,
-        target_frame: Option<String>,
-    },
+    Hyperlink(Box<Link>),
     Checkbox(bool),
     Table {
         children: Vec<DocEl>,
@@ -52,12 +47,7 @@ pub enum DocEl {
         vmerge: bool,
     },
     Break(BreakKind),
-    Image {
-        alt: Option<String>,
-        content_type: Option<String>,
-        /// zip entry of the embedded image
-        path: String,
-    },
+    Image(Box<Image>),
     Bookmark(String),
     NoteRef {
         note_type: &'static str,
@@ -65,16 +55,40 @@ pub enum DocEl {
     },
 }
 
+#[derive(Debug, Clone)]
+pub struct Link {
+    pub children: Vec<DocEl>,
+    /// `#anchor` for internal links
+    pub href: String,
+    pub target_frame: Option<String>,
+}
+
+#[derive(Debug, Clone)]
+pub struct Image {
+    pub alt: Option<String>,
+    pub content_type: Option<String>,
+    /// zip entry of the embedded image
+    pub path: String,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
+pub enum VertAlign {
+    #[default]
+    Baseline,
+    Superscript,
+    Subscript,
+}
+
 #[derive(Debug, Clone, Default)]
 pub struct Run {
     pub children: Vec<DocEl>,
-    pub style_id: Option<String>,
-    pub style_name: Option<String>,
+    /// character style named "Strong" (`r[style-name='Strong'] => strong`)
+    pub strong_style: bool,
     pub bold: bool,
     pub italic: bool,
     pub underline: bool,
     pub strike: bool,
-    pub vert_align: Option<String>,
+    pub vert_align: VertAlign,
 }
 
 #[derive(Default)]
@@ -161,7 +175,7 @@ impl<'a, 'p> BodyReader<'a, 'p> {
     }
 
     fn read(&mut self, e: &'a Element) -> ReadResult {
-        match e.name.as_str() {
+        match e.name.as_ref() {
             "w:t" => ReadResult::one(DocEl::Text(e.inner_text())),
             "w:r" => self.run(e),
             "w:p" => self.paragraph(e),
@@ -235,9 +249,11 @@ impl<'a, 'p> BodyReader<'a, 'p> {
         let props = e.child("w:rPr");
         let prop = |name: &str| props.and_then(|p| p.child(name));
         let mut run = Run {
-            vert_align: prop("w:vertAlign")
-                .and_then(|v| v.attr("w:val"))
-                .map(str::to_string),
+            vert_align: match prop("w:vertAlign").and_then(|v| v.attr("w:val")) {
+                Some("superscript") => VertAlign::Superscript,
+                Some("subscript") => VertAlign::Subscript,
+                _ => VertAlign::Baseline,
+            },
             bold: boolean_element(prop("w:b")),
             italic: boolean_element(prop("w:i")),
             underline: prop("w:u")
@@ -246,17 +262,12 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             ..Run::default()
         };
         let styles = self.ctx.styles;
-        (run.style_id, run.style_name) =
-            self.style(props, "w:rStyle", |id| styles.character_name(id));
+        let (_, style_name) = self.style(props, "w:rStyle", |id| styles.character_name(id));
+        run.strong_style = html::eq_ci(style_name.as_deref(), "Strong");
         let mut r = self.read_children(Some(e));
         if let Some((href, anchor)) = self.current_hyperlink() {
             let children = std::mem::take(&mut r.elements);
-            r.elements = vec![DocEl::Hyperlink {
-                children,
-                href,
-                anchor,
-                target_frame: None,
-            }];
+            r.elements = vec![hyperlink(children, href, anchor, None)];
         }
         run.children = r.elements;
         ReadResult {
@@ -295,9 +306,11 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             self.numbering_properties(style_id.as_deref(), props.and_then(|p| p.child("w:numPr")));
         let p = DocEl::Paragraph {
             children: std::mem::take(&mut r.elements),
-            style_id,
-            style_name,
-            numbering,
+            block: html::classify_paragraph(
+                style_id.as_deref(),
+                style_name.as_deref(),
+                numbering.as_ref(),
+            ),
         };
         let mut elements = vec![p];
         elements.append(&mut r.extra);
@@ -485,12 +498,7 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             (None, Some(a)) => (None, Some(a)),
             (None, None) => return r,
         };
-        let link = DocEl::Hyperlink {
-            children: r.elements,
-            href,
-            anchor,
-            target_frame,
-        };
+        let link = hyperlink(r.elements, href, anchor, target_frame);
         ReadResult {
             elements: vec![link],
             extra: r.extra,
@@ -533,11 +541,11 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             None => format!("word/{target}"),
         };
         let content_type = self.ctx.content_types.find(&path);
-        ReadResult::one(DocEl::Image {
+        ReadResult::one(DocEl::Image(Box::new(Image {
             alt,
             content_type,
             path,
-        })
+        })))
     }
 
     fn note_ref(&self, note_type: &'static str, e: &Element) -> ReadResult {
@@ -564,6 +572,24 @@ impl<'a, 'p> BodyReader<'a, 'p> {
     }
 }
 
+/// mammoth's `visit_hyperlink` turns an anchor into `#anchor`.
+fn hyperlink(
+    children: Vec<DocEl>,
+    href: Option<String>,
+    anchor: Option<String>,
+    target_frame: Option<String>,
+) -> DocEl {
+    let href = match anchor {
+        Some(a) => format!("#{a}"),
+        None => href.unwrap_or_default(),
+    };
+    DocEl::Hyperlink(Box::new(Link {
+        children,
+        href,
+        target_frame,
+    }))
+}
+
 fn replace_first_text(el: &mut DocEl, checked: bool, done: &mut bool) {
     if let Some(children) = children_mut(el) {
         for c in children.iter_mut() {
@@ -581,8 +607,8 @@ fn replace_first_text(el: &mut DocEl, checked: bool, done: &mut bool) {
 
 fn children_mut(el: &mut DocEl) -> Option<&mut Vec<DocEl>> {
     match el {
+        DocEl::Hyperlink(l) => Some(&mut l.children),
         DocEl::Paragraph { children, .. }
-        | DocEl::Hyperlink { children, .. }
         | DocEl::Table { children, .. }
         | DocEl::TableRow { children, .. }
         | DocEl::TableCell { children, .. } => Some(children),

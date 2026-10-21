@@ -9,7 +9,7 @@ use crate::pystr;
 
 enum Kind {
     Element {
-        name: String,
+        name: &'static str,
         attrs: Vec<(String, String)>,
     },
     Text(String),
@@ -32,10 +32,10 @@ pub const ROOT: usize = 0;
 
 impl Dom {
     /// `root_name` is "[document]" for a whole parsed document.
-    pub fn new(root_name: &str) -> Self {
+    pub fn new(root_name: &'static str) -> Self {
         let root = DNode {
             kind: Kind::Element {
-                name: root_name.to_string(),
+                name: root_name,
                 attrs: Vec::new(),
             },
             parent: None,
@@ -58,28 +58,27 @@ impl Dom {
         id
     }
 
-    pub fn element(&mut self, parent: usize, name: &str, attrs: Vec<(String, String)>) -> usize {
-        self.push(
-            parent,
-            Kind::Element {
-                name: name.to_string(),
-                attrs,
-            },
-        )
+    pub fn element(
+        &mut self,
+        parent: usize,
+        name: &'static str,
+        attrs: Vec<(String, String)>,
+    ) -> usize {
+        self.push(parent, Kind::Element { name, attrs })
     }
 
     /// Append text, merging with a preceding text node like the HTML parser.
-    pub fn text(&mut self, parent: usize, s: &str) {
+    pub fn text(&mut self, parent: usize, s: String) {
         if s.is_empty() {
             return;
         }
         if let Some(&last) = self.nodes[parent].children.last()
             && let Kind::Text(t) = &mut self.nodes[last].kind
         {
-            t.push_str(s);
+            t.push_str(&s);
             return;
         }
-        self.push(parent, Kind::Text(s.to_string()));
+        self.push(parent, Kind::Text(s));
     }
 
     fn name(&self, id: usize) -> Option<&str> {

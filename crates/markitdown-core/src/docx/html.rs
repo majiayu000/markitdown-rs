@@ -2,7 +2,7 @@
 //! with markitdown's style map (`u => u` plus mammoth's defaults), then
 //! mammoth's empty-element stripping and collapsing of adjacent elements.
 
-use super::reader::{BreakKind, DocEl, NumLevel, Run};
+use super::reader::{BreakKind, DocEl, Link, NumLevel, Run, VertAlign};
 use crate::markdownify::Dom;
 
 pub struct Note {
@@ -12,7 +12,7 @@ pub struct Note {
 }
 
 enum HNode {
-    El(HEl),
+    El(Box<HEl>),
     Text(String),
     ForceWrite,
 }
@@ -42,22 +42,22 @@ fn element(
     children: Vec<HNode>,
 ) -> HNode {
     attrs.sort();
-    HNode::El(HEl {
+    HNode::El(Box::new(HEl {
         names,
         attrs,
         children,
         collapsible: false,
-    })
+    }))
 }
 
 fn wrap(path: &[PathEl], mut nodes: Vec<HNode>) -> Vec<HNode> {
     for p in path.iter().rev() {
-        nodes = vec![HNode::El(HEl {
+        nodes = vec![HNode::El(Box::new(HEl {
             names: p.names,
             attrs: Vec::new(),
             children: nodes,
             collapsible: !p.fresh,
-        })];
+        }))];
     }
     nodes
 }
@@ -75,29 +75,38 @@ fn list_path(level: usize, ordered: bool) -> Vec<PathEl> {
     path
 }
 
-fn eq_ci(a: Option<&str>, b: &str) -> bool {
+pub fn eq_ci(a: Option<&str>, b: &str) -> bool {
     a.is_some_and(|a| a.to_uppercase() == b.to_uppercase())
 }
 
 const HEADINGS: [&[&str]; 6] = [&["h1"], &["h2"], &["h3"], &["h4"], &["h5"], &["h6"]];
 
-fn paragraph_path(
+/// How a paragraph renders under the style map.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub enum Block {
+    Heading(usize),
+    List { level: usize, ordered: bool },
+    Paragraph,
+}
+
+/// The paragraph rules of the style map, first match wins.
+pub fn classify_paragraph(
     style_id: Option<&str>,
     style_name: Option<&str>,
     numbering: Option<&NumLevel>,
-) -> Vec<PathEl> {
-    for (i, h) in HEADINGS.iter().enumerate() {
-        if style_id == Some(format!("Heading{}", i + 1).as_str()) {
-            return vec![el(h, true)];
+) -> Block {
+    for i in 1..=6 {
+        if style_id == Some(format!("Heading{i}").as_str()) {
+            return Block::Heading(i);
         }
     }
-    for (i, h) in HEADINGS.iter().enumerate() {
-        if eq_ci(style_name, &format!("Heading {}", i + 1)) {
-            return vec![el(h, true)];
+    for i in 1..=6 {
+        if eq_ci(style_name, &format!("Heading {i}")) {
+            return Block::Heading(i);
         }
     }
     if style_id == Some("Heading") || eq_ci(style_name, "Heading") {
-        return vec![el(HEADINGS[0], true)];
+        return Block::Heading(1);
     }
     let note_styles = [
         "footnote text",
@@ -112,9 +121,20 @@ fn paragraph_path(
         && level < 5
         && n.level_index == level.to_string()
     {
-        return list_path(level, n.is_ordered);
+        return Block::List {
+            level,
+            ordered: n.is_ordered,
+        };
     }
-    vec![el(&["p"], true)]
+    Block::Paragraph
+}
+
+fn paragraph_path(block: Block) -> Vec<PathEl> {
+    match block {
+        Block::Heading(n) => vec![el(HEADINGS[n - 1], true)],
+        Block::List { level, ordered } => list_path(level, ordered),
+        Block::Paragraph => vec![el(&["p"], true)],
+    }
 }
 
 pub struct Converter<'a> {
@@ -139,7 +159,7 @@ impl<'a> Converter<'a> {
     }
 
     /// Convert the document body (plus referenced notes) into `dom`'s root.
-    pub fn convert_document(mut self, body: &[DocEl], dom: &mut Dom) {
+    pub fn convert_document(mut self, body: Vec<DocEl>, dom: &mut Dom) {
         let mut nodes = self.visit_all(body, false);
         let refs = self.note_refs.clone();
         let mut items = Vec::new();
@@ -150,69 +170,58 @@ impl<'a> Converter<'a> {
         }
         nodes.push(element(&["ol"], Vec::new(), items));
         let nodes = collapse(strip_empty(nodes));
-        write_dom(&nodes, dom, crate::markdownify::ROOT);
+        write_dom(nodes, dom, crate::markdownify::ROOT);
     }
 
-    fn visit_all(&mut self, els: &[DocEl], header: bool) -> Vec<HNode> {
-        els.iter().flat_map(|e| self.visit(e, header)).collect()
+    fn visit_all(&mut self, els: Vec<DocEl>, header: bool) -> Vec<HNode> {
+        els.into_iter()
+            .flat_map(|e| self.visit(e, header))
+            .collect()
     }
 
-    fn visit(&mut self, e: &DocEl, header: bool) -> Vec<HNode> {
+    fn visit(&mut self, e: DocEl, header: bool) -> Vec<HNode> {
         match e {
-            DocEl::Paragraph {
-                children,
-                style_id,
-                style_name,
-                numbering,
-            } => {
-                let path = paragraph_path(
-                    style_id.as_deref(),
-                    style_name.as_deref(),
-                    numbering.as_ref(),
-                );
+            DocEl::Paragraph { children, block } => {
+                let path = paragraph_path(block);
                 let content = self.visit_all(children, header);
                 wrap(&path, content)
             }
             DocEl::Run(r) => self.visit_run(r, header),
-            DocEl::Text(t) => vec![HNode::Text(t.clone())],
+            DocEl::Text(t) => vec![HNode::Text(t)],
             DocEl::Tab => vec![HNode::Text("\t".into())],
-            DocEl::Hyperlink {
-                children,
-                href,
-                anchor,
-                target_frame,
-            } => {
-                let href = match anchor {
-                    Some(a) => format!("#{a}"),
-                    None => href.clone().unwrap_or_default(),
-                };
+            DocEl::Hyperlink(link) => {
+                let Link {
+                    children,
+                    href,
+                    target_frame,
+                } = *link;
                 let mut attrs = vec![("href".to_string(), href)];
                 if let Some(t) = target_frame {
-                    attrs.push(("target".into(), t.clone()));
+                    attrs.push(("target".into(), t));
                 }
                 attrs.sort();
                 let children = self.visit_all(children, header);
-                vec![HNode::El(HEl {
+                vec![HNode::El(Box::new(HEl {
                     names: &["a"],
                     attrs,
                     children,
                     collapsible: true,
-                })]
+                }))]
             }
             DocEl::Checkbox(checked) => {
                 let mut attrs = vec![("type".to_string(), "checkbox".to_string())];
-                if *checked {
+                if checked {
                     attrs.push(("checked".into(), "checked".into()));
                 }
                 vec![element(&["input"], attrs, Vec::new())]
             }
-            DocEl::Bookmark(name) => vec![HNode::El(HEl {
+            DocEl::Bookmark(name) => vec![HNode::El(Box::new(HEl {
                 names: &["a"],
-                attrs: vec![("id".into(), name.clone())],
+                attrs: vec![("id".into(), name)],
                 children: vec![HNode::ForceWrite],
                 collapsible: true,
-            })],
-            DocEl::Table { children, .. } => {
+            }))],
+            DocEl::Table { mut children } => {
                 let body_index = children
                     .iter()
                     .position(|c| {
@@ -229,8 +238,9 @@ impl<'a> Converter<'a> {
                 if body_index == 0 {
                     inner.extend(self.visit_all(children, false));
                 } else {
-                    let head = self.visit_all(&children[..body_index], true);
-                    let rows = self.visit_all(&children[body_index..], false);
+                    let rows = children.split_off(body_index);
+                    let head = self.visit_all(children, true);
+                    let rows = self.visit_all(rows, false);
                     inner.push(element(&["thead"], Vec::new(), head));
                     inner.push(element(&["tbody"], Vec::new(), rows));
                 }
@@ -248,10 +258,10 @@ impl<'a> Converter<'a> {
                 ..
             } => {
                 let mut attrs = Vec::new();
-                if *colspan != 1 {
+                if colspan != 1 {
                     attrs.push(("colspan".to_string(), colspan.to_string()));
                 }
-                if *rowspan != 1 {
+                if rowspan != 1 {
                     attrs.push(("rowspan".to_string(), rowspan.to_string()));
                 }
                 let mut inner = vec![HNode::ForceWrite];
@@ -264,11 +274,9 @@ impl<'a> Converter<'a> {
             }
             DocEl::Break(BreakKind::Line) => wrap(&[el(&["br"], true)], Vec::new()),
             DocEl::Break(_) => Vec::new(),
-            DocEl::Image {
-                alt,
-                content_type,
-                path,
-            } => self.visit_image(alt.as_deref(), content_type.as_deref(), path),
+            DocEl::Image(img) => {
+                self.visit_image(img.alt.as_deref(), img.content_type.as_deref(), &img.path)
+            }
             DocEl::NoteRef { note_type, id } => {
                 self.note_refs.push((note_type, id.clone()));
                 let n = self.note_refs.len();
@@ -285,8 +293,8 @@ impl<'a> Converter<'a> {
         }
     }
 
-    fn visit_run(&mut self, r: &Run, header: bool) -> Vec<HNode> {
-        let mut nodes = self.visit_all(&r.children, header);
+    fn visit_run(&mut self, mut r: Run, header: bool) -> Vec<HNode> {
+        let mut nodes = self.visit_all(std::mem::take(&mut r.children), header);
         // innermost first, as mammoth applies them
         let mut paths: Vec<PathEl> = Vec::new();
         if r.strike {
@@ -295,10 +303,10 @@ impl<'a> Converter<'a> {
         if r.underline {
             paths.push(el(&["u"], false));
         }
-        match r.vert_align.as_deref() {
-            Some("subscript") => paths.push(el(&["sub"], false)),
-            Some("superscript") => paths.push(el(&["sup"], false)),
-            _ => {}
+        match r.vert_align {
+            VertAlign::Subscript => paths.push(el(&["sub"], false)),
+            VertAlign::Superscript => paths.push(el(&["sup"], false)),
+            VertAlign::Baseline => {}
         }
         if r.italic {
             paths.push(el(&["em"], false));
@@ -306,7 +314,7 @@ impl<'a> Converter<'a> {
         if r.bold {
             paths.push(el(&["strong"], false));
         }
-        if eq_ci(r.style_name.as_deref(), "Strong") {
+        if r.strong_style {
             paths.push(el(&["strong"], false));
         }
         for p in paths {
@@ -334,7 +342,7 @@ impl<'a> Converter<'a> {
     }
 
     fn visit_note(&mut self, note: &Note) -> Vec<HNode> {
-        let mut body = self.visit_all(&note.body, false);
+        let mut body = self.visit_all(note.body.clone(), false);
         let back = element(
             &["a"],
             vec![(
@@ -343,22 +351,18 @@ impl<'a> Converter<'a> {
             )],
             vec![HNode::Text("\u{2191}".into())],
         );
-        body.push(HNode::El(HEl {
+        body.push(HNode::El(Box::new(HEl {
             names: &["p"],
             attrs: Vec::new(),
             children: vec![HNode::Text(" ".into()), back],
             collapsible: true,
-        }));
+        })));
         vec![element(
             &["li"],
             vec![("id".into(), format!("{}-{}", note.note_type, note.id))],
             body,
         )]
     }
-}
-
-fn is_void(e: &HEl) -> bool {
-    e.children.is_empty() && matches!(e.names[0], "br" | "hr" | "img" | "input")
 }
 
 fn strip_empty(nodes: Vec<HNode>) -> Vec<HNode> {
@@ -401,6 +405,7 @@ fn collapsing_add(out: &mut Vec<HNode>, node: HNode) {
         && last.attrs == e.attrs
     {
         let HNode::El(e) = node else { unreachable!() };
+        let e = *e;
         for c in e.children {
             collapsing_add(&mut last.children, c);
         }
@@ -410,15 +415,14 @@ fn collapsing_add(out: &mut Vec<HNode>, node: HNode) {
 }
 
 /// What html.parser builds from mammoth's serialised HTML.
-fn write_dom(nodes: &[HNode], dom: &mut Dom, parent: usize) {
+fn write_dom(nodes: Vec<HNode>, dom: &mut Dom, parent: usize) {
     for n in nodes {
         match n {
             HNode::Text(t) => dom.text(parent, t),
             HNode::ForceWrite => {}
             HNode::El(e) => {
-                debug_assert!(!is_void(e) || e.children.is_empty());
-                let id = dom.element(parent, e.names[0], e.attrs.clone());
-                write_dom(&e.children, dom, id);
+                let id = dom.element(parent, e.names[0], e.attrs);
+                write_dom(e.children, dom, id);
             }
         }
     }

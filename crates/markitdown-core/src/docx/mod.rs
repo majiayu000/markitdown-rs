@@ -121,9 +121,9 @@ impl Package<'_> {
             normalize_after_unescape: false,
         };
         if !PREPROCESSED.contains(&name) {
-            return Ok(Some(collapse_alternate_content(xml::parse(
-                &bytes, &minidom,
-            )?)));
+            let mut root = xml::parse(&bytes, &minidom)?;
+            collapse_alternate_content(&mut root);
+            return Ok(Some(root));
         }
         // markitdown re-serialises these parts with BeautifulSoup/lxml first
         let lxml = ParseOptions {
@@ -145,7 +145,9 @@ impl Package<'_> {
                 None => {}
             }
         }
-        Ok(Some(collapse_alternate_content(root)))
+        drop(bytes);
+        collapse_alternate_content(&mut root);
+        Ok(Some(root))
     }
 
     fn rels_for(&mut self, part: &str) -> Result<Relationships, Error> {
@@ -170,9 +172,10 @@ fn contains(haystack: &[u8], needle: &[u8]) -> bool {
 }
 
 fn rename_dstrike(el: &mut Element) {
-    if el.name == "dstrike" || el.name.ends_with(":dstrike") || el.name.ends_with("}dstrike") {
-        el.name.truncate(el.name.len() - "dstrike".len());
-        el.name.push_str("strike");
+    if let Some(prefix) = el.name.strip_suffix("dstrike")
+        && (prefix.is_empty() || prefix.ends_with([':', '}']))
+    {
+        el.name = format!("{prefix}strike").into();
     }
     for c in &mut el.children {
         if let Node::Element(c) = c {
@@ -183,25 +186,34 @@ fn rename_dstrike(el: &mut Element) {
 
 /// mammoth's office_xml: `mc:AlternateContent` is replaced by the children of
 /// its `mc:Fallback`.
-fn collapse_alternate_content(mut el: Element) -> Element {
+fn collapse_alternate_content(el: &mut Element) {
+    let has_ac = el.elements().any(|e| &*e.name == "mc:AlternateContent");
+    if !has_ac {
+        for c in &mut el.children {
+            if let Node::Element(e) = c {
+                collapse_alternate_content(e);
+            }
+        }
+        return;
+    }
     let children = std::mem::take(&mut el.children);
     for c in children {
         match c {
-            Node::Element(e) if e.name == "mc:AlternateContent" => {
+            Node::Element(e) if &*e.name == "mc:AlternateContent" => {
                 if let Some(fb) = e.children.into_iter().find_map(|n| match n {
-                    Node::Element(f) if f.name == "mc:Fallback" => Some(f),
+                    Node::Element(f) if &*f.name == "mc:Fallback" => Some(f),
                     _ => None,
                 }) {
                     el.children.extend(fb.children);
                 }
             }
-            Node::Element(e) => el
-                .children
-                .push(Node::Element(collapse_alternate_content(e))),
+            Node::Element(mut e) => {
+                collapse_alternate_content(&mut e);
+                el.children.push(Node::Element(e));
+            }
             text => el.children.push(text),
         }
     }
-    el
 }
 
 fn split_path(path: &str) -> (&str, &str) {
@@ -288,7 +300,6 @@ pub fn convert(data: &[u8], opts: &Options) -> Result<String, Error> {
             });
         }
     }
-
     let document = pkg
         .read_xml(&document_path)?
         .ok_or_else(|| Error::MissingPart(document_path.clone()))?;
@@ -302,12 +313,13 @@ pub fn convert(data: &[u8], opts: &Options) -> Result<String, Error> {
         rels: &document_rels,
     };
     let body = BodyReader::new(ctx).read_all(&body_el.children);
+    // each stage is freed as soon as the next one is built to keep peak memory low
+    drop(document);
 
     let zip = std::cell::RefCell::new(pkg.zip);
     let image_data = |path: &str| zip.borrow_mut().read(path).ok().flatten();
     let mut dom = Dom::new("[document]");
-    html::Converter::new(&notes, opts.keep_data_uris, &image_data)
-        .convert_document(&body, &mut dom);
+    html::Converter::new(&notes, opts.keep_data_uris, &image_data).convert_document(body, &mut dom);
     let md = markdownify::convert(
         &dom,
         markdownify::ROOT,

@@ -1,0 +1,5 @@
+# Fixtures whose output is allowed to differ from Python markitdown, with the
+# reason. The parity test fails if a listed fixture starts matching again.
+#
+# <format>/<fixture>: <reason>
+docx/mammoth-embedded-style-map.docx: custom style maps embedded by mammoth (the mammoth/style-map part) are not applied

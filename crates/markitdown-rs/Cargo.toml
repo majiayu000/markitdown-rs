@@ -1,0 +1,15 @@
+[package]
+name = "markitdown-rs"
+description = "Single-binary drop-in replacement for the Python markitdown CLI"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "markitdown"
+path = "src/main.rs"
+
+[dependencies]
+markitdown-core.workspace = true

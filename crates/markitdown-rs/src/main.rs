@@ -24,7 +24,7 @@ options:
                         Provide a hint about the file's charset (accepted for compatibility).
   --keep-data-uris      Keep data URIs (like base64-encoded images) in the output.
 
-Supported formats: .docx";
+Supported formats: .docx, .pptx";
 
 struct Args {
     filename: Option<String>,
@@ -119,7 +119,7 @@ fn run() -> Result<(), String> {
         .or_else(|| args.mime_type.as_deref().and_then(Format::from_hint))
         .or(from_name)
         .or_else(|| Format::sniff(&data))
-        .ok_or("unsupported format: markitdown-rs converts .docx")?;
+        .ok_or("unsupported format: markitdown-rs converts .docx and .pptx")?;
     let opts = Options {
         keep_data_uris: args.keep_data_uris,
     };

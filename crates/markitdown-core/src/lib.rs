@@ -10,6 +10,7 @@
 mod base64;
 mod docx;
 mod markdownify;
+mod pptx;
 mod pystr;
 mod xml;
 mod zip;
@@ -19,6 +20,7 @@ use std::fmt;
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Format {
     Docx,
+    Pptx,
 }
 
 impl Format {
@@ -31,6 +33,10 @@ impl Format {
             )
         {
             Some(Format::Docx)
+        } else if h == "pptx"
+            || h.starts_with("application/vnd.openxmlformats-officedocument.presentationml")
+        {
+            Some(Format::Pptx)
         } else {
             None
         }
@@ -39,9 +45,13 @@ impl Format {
     /// Guess from the package contents.
     pub fn sniff(data: &[u8]) -> Option<Format> {
         let archive = zip::Archive::new(data).ok()?;
-        archive
-            .contains("word/document.xml")
-            .then_some(Format::Docx)
+        if archive.contains("word/document.xml") {
+            Some(Format::Docx)
+        } else if archive.contains("ppt/presentation.xml") {
+            Some(Format::Pptx)
+        } else {
+            None
+        }
     }
 }
 
@@ -76,6 +86,7 @@ impl std::error::Error for Error {}
 pub fn convert(data: &[u8], format: Format, opts: &Options) -> Result<String, Error> {
     let md = match format {
         Format::Docx => docx::convert(data, opts)?,
+        Format::Pptx => pptx::convert(data, opts)?,
     };
     Ok(pystr::normalize_output(&md))
 }

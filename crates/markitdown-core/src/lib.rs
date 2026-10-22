@@ -13,9 +13,12 @@ mod convert;
 mod detect;
 mod docx;
 mod dom;
+mod epub;
 mod formats;
 mod html;
 mod markdownify;
+mod media;
+mod msg;
 mod plain;
 mod pptx;
 mod pystr;
@@ -25,6 +28,7 @@ mod sheet;
 mod text;
 mod xml;
 mod zip;
+mod zipfile;
 
 use std::fmt;
 
@@ -38,6 +42,10 @@ pub struct StreamInfo {
     pub charset: Option<String>,
     /// the source URL; Wikipedia and Bing pages are only recognised by it
     pub url: Option<String>,
+    /// the file name, e.g. of a ZIP member
+    pub filename: Option<String>,
+    /// the path as given on the command line (shown by the ZIP converter)
+    pub local_path: Option<String>,
 }
 
 impl StreamInfo {
@@ -51,6 +59,8 @@ impl StreamInfo {
             .map(|i| name[stem_start + i..].to_string());
         StreamInfo {
             extension,
+            filename: Some(name.to_string()),
+            local_path: Some(path.to_string()),
             ..Default::default()
         }
     }

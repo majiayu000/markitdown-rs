@@ -4,3 +4,6 @@
 # <format>/<fixture>: <reason>
 docx/mammoth-embedded-style-map.docx: custom style maps embedded by mammoth (the mammoth/style-map part) are not applied
 text/gen-latin1.txt: legacy 8-bit text without a declared charset: charset_normalizer picks cp1250 for this short sample, markitdown-rs picks windows-1252
+msg/poi-ASCII_UTF-8_CP1252_LCID1031.msg: the message declares UTF-8 but stores CP1252 bytes; Python's charset_normalizer fallback reads "öäü" as Arabic (CP1256), markitdown-rs as CP1252
+msg/poi-ASCII_UTF-8_CP1252_LCID1031_HTML.msg: same mis-declared code page as above
+msg/poi-HTMLBodyBinary_UTF-8.msg: same mis-declared code page as above

@@ -279,8 +279,79 @@ def rss_fixtures():
     write("rss/gen-broken.xml", "<rss><channel><title>broken</title></channel>")
 
 
+def zip_bytes(files):
+    import io
+    import zipfile
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, data in files:
+            z.writestr(zipfile.ZipInfo(name, date_time=(2026, 1, 1, 0, 0, 0)), data)
+    return buf.getvalue()
+
+
+def epub(opf_path, opf, files):
+    container = ('<?xml version="1.0"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">'
+                 f'<rootfiles><rootfile full-path="{opf_path}" media-type="application/oebps-package+xml"/></rootfiles></container>')
+    return zip_bytes([("mimetype", "application/epub+zip"), ("META-INF/container.xml", container), (opf_path, opf)] + files)
+
+
+def epub_fixtures():
+    opf = """<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="id">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:title>  A <![CDATA[Generated]]> Book  </dc:title>
+    <dc:creator>First Author</dc:creator><dc:creator> </dc:creator><dc:creator>Second <i>Author</i></dc:creator>
+    <dc:language>en</dc:language>
+    <dc:identifier id="id">urn:uuid:1234</dc:identifier>
+    <dc:date>2026-10-22</dc:date>
+  </metadata>
+  <manifest>
+    <item id="c1" href="text/chapter%201.xhtml" media-type="application/xhtml+xml"/>
+    <item id="c2" href="text/ch2.html" media-type="text/html"/>
+    <item id="c3" href="../outside.xhtml" media-type="application/xhtml+xml"/>
+    <item id="img" href="images/a.png" media-type="image/png"/>
+    <item id="dup" href="first.xhtml"/><item id="dup" href="text/second.xhtml"/>
+  </manifest>
+  <spine><itemref idref="c1"/><itemref idref="missing"/><itemref idref="c2"/><itemref idref="dup"/><itemref idref="c3"/></spine>
+</package>"""
+    files = [
+        ("OEBPS/text/chapter 1.xhtml", '<?xml version="1.0"?><html xmlns="http://www.w3.org/1999/xhtml"><head><title>One</title></head>'
+         '<body><h1>Chapter 1</h1><p>First <em>chapter</em> text with a <a href="ch2.html">link</a>.</p></body></html>'),
+        ("OEBPS/text/ch2.html", "<html><body><h2>Chapter 2</h2><ul><li>a</li><li>b</li></ul></body></html>"),
+        ("OEBPS/text/second.xhtml", "<html><body><p>Second definition wins.</p></body></html>"),
+        ("outside.xhtml", "<html><body><p>Outside the OPF directory.</p></body></html>"),
+        ("OEBPS/images/a.png", b"\x89PNG\r\n\x1a\n"),
+    ]
+    write("epub/gen-book.epub", epub("OEBPS/content.opf", opf, files))
+    bare = """<package xmlns:opf="http://www.idpf.org/2007/opf"><opf:manifest><opf:item id="x" href="x.html"/></opf:manifest>
+<opf:spine><opf:itemref idref="x"/></opf:spine></package>"""
+    write("epub/gen-prefixed-opf.epub", epub("content.opf", bare, [("x.html", "<p>never read: prefixed OPF</p>")]))
+    write("epub/gen-no-metadata.epub", epub("book.opf", '<package><manifest><item id="a" href="a.html"/></manifest>'
+                                        '<spine><itemref idref="a"/></spine></package>', [("a.html", "<h1>Only content</h1>")]))
+
+
+def zip_fixtures():
+    root = ROOT
+    inner = zip_bytes([("inner/readme.txt", "inside a nested zip\n"), ("inner/data.csv", "a,b\n1,2\n")])
+    files = [
+        ("docs/", b""),
+        ("docs/report.docx", (root / "docx/mammoth-simple-list.docx").read_bytes()),
+        ("docs/page.HTML", "<html><body><h1>Upper-case extension</h1></body></html>"),
+        ("data/table.csv", "x,y\n1,2\n"),
+        ("notes.md", "# Notes\n\ntrailing   \n"),
+        ("nested.zip", inner),
+        ("binary.bin", bytes(range(256)) * 4),
+        ("empty.txt", b""),
+        ("unicode/日本語.txt", "テキスト\n"),
+        ("slides.pptx", (root / "pptx/python-pptx-minimal.pptx").read_bytes()),
+        ("feed.xml", RSS2),
+    ]
+    write("zip/gen-mixed.zip", zip_bytes(files))
+    write("zip/gen-empty.zip", zip_bytes([]))
+
+
 if __name__ == "__main__":
-    for d in ("html", "text", "csv", "ipynb", "rss"):
+    for d in ("html", "text", "csv", "ipynb", "rss", "epub", "zip"):
         for f in (ROOT / d).glob("gen-*"):
             f.unlink()
     html_fixtures()
@@ -288,4 +359,6 @@ if __name__ == "__main__":
     csv_fixtures()
     ipynb_fixtures()
     rss_fixtures()
+    epub_fixtures()
+    zip_fixtures()
     print("ok")

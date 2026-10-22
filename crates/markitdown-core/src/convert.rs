@@ -92,14 +92,14 @@ fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
         mimetype: Some(s.mimetype.to_string()),
         extension: guessed_ext,
         charset,
-        url: base.url.clone(),
+        ..base.clone()
     };
     if compatible {
         vec![StreamInfo {
             mimetype: base.mimetype.clone().or(sniffed.mimetype),
             extension: base.extension.clone().or(sniffed.extension),
             charset: base.charset.clone().or(sniffed.charset),
-            url: base.url.clone(),
+            ..base.clone()
         }]
     } else {
         vec![enhanced, sniffed]

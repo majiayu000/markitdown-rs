@@ -18,6 +18,29 @@ impl<'a> Archive<'a> {
         self.inner.index_for_name(name).is_some()
     }
 
+    /// Entry names in central-directory order.
+    pub fn names(&self) -> Vec<String> {
+        (0..self.inner.len())
+            .filter_map(|i| {
+                self.inner
+                    .name_for_index(i)
+                    .and_then(Result::ok)
+                    .map(|n| n.into_owned())
+            })
+            .collect()
+    }
+
+    pub fn read_index(&mut self, i: usize) -> Result<Vec<u8>, Error> {
+        let mut f = self
+            .inner
+            .by_index(i)
+            .map_err(|e| Error::Zip(e.to_string()))?;
+        let mut buf = Vec::with_capacity(f.size() as usize);
+        f.read_to_end(&mut buf)
+            .map_err(|e| Error::Zip(e.to_string()))?;
+        Ok(buf)
+    }
+
     pub fn read(&mut self, name: &str) -> Result<Option<Vec<u8>>, Error> {
         let Some(i) = self.inner.index_for_name(name) else {
             return Ok(None);

@@ -14,6 +14,8 @@ for f in "$@"; do
   out=tests/snapshots/$rel
   mkdir -p "$(dirname "$out")"
   rm -f "$out.md" "$out.py-error"
+  # media-exiftool fixtures run against a stub exiftool with fixed output
+  case "$rel" in media-exiftool/*) export EXIFTOOL_PATH=tests/exiftool-stub.sh ;; *) unset EXIFTOOL_PATH ;; esac
   if uv run --project oracle --frozen markitdown "$f" > "$out.md" 2> "$out.stderr"; then
     rm "$out.stderr"
   else

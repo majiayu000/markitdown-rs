@@ -2,7 +2,9 @@
 //! converters (most recently registered first), then the generic HTML, ZIP
 //! and plain-text ones. Each `accepts` mirrors the Python converter's.
 
-use crate::{Error, Options, StreamInfo, docx, html, plain, pptx, rss, sheet};
+use crate::{
+    Error, Options, StreamInfo, docx, epub, html, media, msg, plain, pptx, rss, sheet, zipfile,
+};
 
 pub struct Converter {
     pub name: &'static str,
@@ -31,9 +33,45 @@ pub static CONVERTERS: &[Converter] = &[
         convert: |d, i, _| plain::convert_csv(d, i.charset.as_deref()),
     },
     Converter {
+        name: "EpubConverter",
+        accepts: |_, i| {
+            matches(
+                i,
+                &[".epub"],
+                &[
+                    "application/epub",
+                    "application/epub+zip",
+                    "application/x-epub+zip",
+                ],
+            )
+        },
+        convert: |d, _, o| epub::convert(d, o.keep_data_uris),
+    },
+    Converter {
+        name: "OutlookMsgConverter",
+        accepts: msg::accepts,
+        convert: |d, _, _| msg::convert(d),
+    },
+    Converter {
         name: "IpynbConverter",
         accepts: plain::ipynb_accepts,
         convert: |d, i, _| plain::convert_ipynb(d, i.charset.as_deref()),
+    },
+    Converter {
+        name: "ImageConverter",
+        accepts: |_, i| matches(i, &[".jpg", ".jpeg", ".png"], &["image/jpeg", "image/png"]),
+        convert: |d, _, _| media::convert_image(d),
+    },
+    Converter {
+        name: "AudioConverter",
+        accepts: |_, i| {
+            matches(
+                i,
+                &[".wav", ".mp3", ".m4a", ".mp4"],
+                &["audio/x-wav", "audio/mpeg", "video/mp4"],
+            )
+        },
+        convert: |d, _, _| media::convert_audio(d),
     },
     Converter {
         name: "PptxConverter",
@@ -107,6 +145,11 @@ pub static CONVERTERS: &[Converter] = &[
         name: "HtmlConverter",
         accepts: |_, i| matches(i, HTML_EXTS, HTML_MIMES),
         convert: |d, i, o| Ok(html::convert(d, i.charset.as_deref(), o.keep_data_uris)),
+    },
+    Converter {
+        name: "ZipConverter",
+        accepts: |_, i| matches(i, &[".zip"], &["application/zip"]),
+        convert: zipfile::convert,
     },
     Converter {
         name: "PlainTextConverter",

@@ -4,6 +4,7 @@
 //! tests/snapshots/<format>/ produced by scripts/gen_snapshots.sh: either
 //! `<name>.md` (the Python CLI's stdout) or `<name>.py-error` when Python
 //! fails on the file, in which case we only require that we do not panic.
+//! Warning lines that xlrd prints to stdout before the markdown are ignored.
 
 use markitdown_core::{Options, StreamInfo, convert};
 use std::path::{Path, PathBuf};
@@ -53,6 +54,11 @@ fn check_format(dir: &str) {
         let err_snapshot = snapshots.join(format!("{name}.py-error"));
         let is_known = known.contains(&format!("{dir}/{name}"));
         if let Ok(want) = std::fs::read_to_string(&md_snapshot) {
+            // xlrd logs container warnings to stdout ahead of the markdown
+            let want: String = want
+                .split_inclusive('\n')
+                .filter(|l| !l.starts_with("WARNING *** "))
+                .collect();
             match got.map(|md| md + "\n") {
                 Ok(md) if md == want && is_known => failures.push(format!(
                     "{name}: matches now, remove it from tests/known-diffs.txt"
@@ -97,6 +103,8 @@ parity! {
     csv_matches_python => "csv",
     ipynb_matches_python => "ipynb",
     rss_matches_python => "rss",
+    xlsx_matches_python => "xlsx",
+    xls_matches_python => "xls",
 }
 
 /// Every input of html5lib-tests' tokenizer suite through the HTML

@@ -2,7 +2,7 @@
 //! converters (most recently registered first), then the generic HTML, ZIP
 //! and plain-text ones. Each `accepts` mirrors the Python converter's.
 
-use crate::{Error, Options, StreamInfo, docx, html, plain, pptx, rss};
+use crate::{Error, Options, StreamInfo, docx, html, plain, pptx, rss, sheet};
 
 pub struct Converter {
     pub name: &'static str,
@@ -45,6 +45,28 @@ pub static CONVERTERS: &[Converter] = &[
             )
         },
         convert: |d, _, o| pptx::convert(d, o),
+    },
+    Converter {
+        name: "XlsConverter",
+        accepts: |_, i| {
+            matches(
+                i,
+                &[".xls"],
+                &["application/vnd.ms-excel", "application/excel"],
+            )
+        },
+        convert: |d, _, o| sheet::convert_xls(d, o.keep_data_uris),
+    },
+    Converter {
+        name: "XlsxConverter",
+        accepts: |_, i| {
+            matches(
+                i,
+                &[".xlsx"],
+                &["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
+            )
+        },
+        convert: |d, _, o| sheet::convert_xlsx(d, o.keep_data_uris),
     },
     Converter {
         name: "DocxConverter",

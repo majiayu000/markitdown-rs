@@ -114,3 +114,47 @@ pub fn dedent(text: &str) -> String {
         .collect::<Vec<_>>()
         .join("\n")
 }
+
+/// `str(float)` as CPython prints it.
+pub fn float_repr(v: f64) -> String {
+    if v.is_nan() {
+        return "nan".into();
+    }
+    if v.is_infinite() {
+        return if v > 0.0 { "inf".into() } else { "-inf".into() };
+    }
+    let sci = format!("{v:e}");
+    let (mantissa, exp) = sci.split_once('e').unwrap_or((&sci, "0"));
+    let exp: i32 = exp.parse().unwrap_or(0);
+    let (sign, mantissa) = mantissa
+        .strip_prefix('-')
+        .map_or(("", mantissa), |m| ("-", m));
+    let digits: String = mantissa.chars().filter(char::is_ascii_digit).collect();
+    let decpt = exp + 1;
+    if (-4 < decpt) && (decpt <= 16) {
+        let d = digits.len() as i32;
+        let s = if decpt <= 0 {
+            format!("0.{}{digits}", "0".repeat((-decpt) as usize))
+        } else if decpt >= d {
+            format!("{digits}{}.0", "0".repeat((decpt - d) as usize))
+        } else {
+            format!(
+                "{}.{}",
+                &digits[..decpt as usize],
+                &digits[decpt as usize..]
+            )
+        };
+        format!("{sign}{s}")
+    } else {
+        let m = if digits.len() > 1 {
+            format!("{}.{}", &digits[..1], &digits[1..])
+        } else {
+            digits
+        };
+        format!(
+            "{sign}{m}e{}{:02}",
+            if exp < 0 { '-' } else { '+' },
+            exp.abs()
+        )
+    }
+}

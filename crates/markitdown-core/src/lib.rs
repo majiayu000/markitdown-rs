@@ -21,6 +21,7 @@ mod pptx;
 mod pystr;
 mod pyurl;
 mod rss;
+mod sheet;
 mod text;
 mod xml;
 mod zip;

@@ -28,6 +28,7 @@ mod rss;
 mod sheet;
 mod text;
 mod xml;
+mod youtube;
 mod zip;
 mod zipfile;
 

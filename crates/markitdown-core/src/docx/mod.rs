@@ -1,5 +1,5 @@
-//! DOCX -> Markdown with markitdown 0.1.8's output: its pre-processing
-//! (equations to LaTeX, double strike, style repairs), mammoth 1.11's
+//! DOCX -> Markdown with markitdown 0.1.9's output: its pre-processing
+//! (equations to LaTeX, double strike, style repairs), mammoth 1.13's
 //! docx-to-HTML conversion and markdownify, without the HTML round trip.
 
 mod dingbats;

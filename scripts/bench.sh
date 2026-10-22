@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Benchmark markitdown-rs against Python markitdown 0.1.8 on this machine.
+# Benchmark markitdown-rs against Python markitdown 0.1.9 on this machine.
 # Prints a report to stdout; README numbers come from bench/results-*.txt.
 #
 # usage: scripts/bench.sh [runs]   (default 10; Python runs on large.docx: 3)
@@ -23,7 +23,7 @@ fi
 export PYTHONUTF8=1
 
 echo "# $(date '+%Y-%m-%d %H:%M %Z') | $CPU | $(uname -sr)"
-echo "# $(oracle/.venv/bin/python -V) markitdown 0.1.8 | $(rustc -V)"
+echo "# $(oracle/.venv/bin/python -V) markitdown $(oracle/.venv/bin/python -c 'import markitdown; print(markitdown.__version__)') | $(rustc -V)"
 echo "# load: $(uptime | sed 's/.*load average[s]*: //')"
 
 echo "## identical output (python CLI vs rust CLI)"

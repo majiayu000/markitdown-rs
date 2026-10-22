@@ -1,4 +1,4 @@
-//! Byte-for-byte comparison with Python markitdown 0.1.8.
+//! Byte-for-byte comparison with Python markitdown 0.1.9.
 //!
 //! Every file in tests/fixtures/<format>/ has a snapshot in
 //! tests/snapshots/<format>/ produced by scripts/gen_snapshots.sh: either
@@ -67,5 +67,46 @@ fn html5lib_tokenizer_inputs_match_python() {
         failures.len(),
         cases.len(),
         failures[..failures.len().min(25)].join("\n")
+    );
+}
+
+/// The converters that only apply to content fetched from a URL
+/// (Wikipedia, Bing, YouTube): tests/url/cases.tsv, snapshots from
+/// scripts/gen_url_snapshots.py.
+#[test]
+fn url_converters_match_python() {
+    let cases = std::fs::read_to_string(root().join("tests/url/cases.tsv")).unwrap();
+    let mut failures = Vec::new();
+    let mut n = 0;
+    for line in cases
+        .lines()
+        .filter(|l| !l.trim().is_empty() && !l.starts_with('#'))
+    {
+        let f: Vec<&str> = line.split('\t').collect();
+        let opt = |i: usize| f.get(i).filter(|s| !s.is_empty()).map(|s| s.to_string());
+        let info = StreamInfo {
+            url: opt(2),
+            mimetype: opt(3),
+            charset: opt(4),
+            ..Default::default()
+        };
+        let data = std::fs::read(root().join("tests/fixtures").join(f[1])).unwrap();
+        let want = std::fs::read_to_string(root().join(format!("tests/url/{}.md", f[0]))).unwrap();
+        let got =
+            convert(&data, &info, &Options::default()).unwrap_or_else(|e| format!("ERROR {e}"));
+        if got != want {
+            failures.push(format!(
+                "{}: {}",
+                f[0],
+                got.chars().take(200).collect::<String>()
+            ));
+        }
+        n += 1;
+    }
+    assert!(
+        failures.is_empty(),
+        "{} of {n} URL cases differ:\n{}",
+        failures.len(),
+        failures.join("\n")
     );
 }

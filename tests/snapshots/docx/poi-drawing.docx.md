@@ -121,7 +121,7 @@ Moody's Interfax Rating Agency специализируется на анали�
 
 **Новости на РБК Новости на РБК**
 
-![ntop1](data:image/png;base64...)
+[![ntop1](data:image/png;base64...)](http://www.rbc.ru/)
 
 **Moody’s присвоило «ОмскВодоканалу» корпоративный рейтинг Caa1.**
 
@@ -148,7 +148,7 @@ Moody's Interfax Rating Agency специализируется на анали�
 
 |  |  |  |  |  |  |
 | --- | --- | --- | --- | --- | --- |
-| ![Информационное агентство "ФК-Новости"](data:image/png;base64...) | |  |  | | --- | --- | | ![empty](data:image/png;base64...) ![Прозрачность открывает реальность](data:image/png;base64...) ![empty](data:image/png;base64...) | | |  | ![empty](data:image/png;base64...) ![RFCM](data:image/gif;base64...) | |
+| [![Информационное агентство "ФК-Новости"](data:image/png;base64...)](http://www.fcinfo.ru/) | |  |  | | --- | --- | | ![empty](data:image/png;base64...) ![Прозрачность открывает реальность](data:image/png;base64...) ![empty](data:image/png;base64...) | | |  | ![empty](data:image/png;base64...) [![RFCM](data:image/gif;base64...)](http://www.fcinfo.ru/banner-redirect.asp?Folder=1446&Article=98389&EvtID=32736526&BannerID=175&ProfileID=11&URL=http://www.fcinfo.ru/themes/basic/materials-rfcm-index.asp?folder=2780) | |
 
 |  |  |  |
 | --- | --- | --- |

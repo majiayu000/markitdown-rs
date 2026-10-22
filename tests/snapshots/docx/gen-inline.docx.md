@@ -33,6 +33,6 @@ Deleted text is dropped: inserted
 
 deleted paragraph mark joins the next paragraph
 
-smart tag text
+smart tag textcustom xml is dropped
 
 caps lock **sup bold**

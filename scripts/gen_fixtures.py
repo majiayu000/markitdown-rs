@@ -515,8 +515,44 @@ def robustness():
     # zip entry casing differs from the central directory (issue 1812) is not
     # reproducible with zipfile; keep to package structure quirks instead
     write_docx("gen-robustness.docx", body, styles=styles, rels=rels, parts={"word/media/image1.png": PNG})
-    # unmatched field end: mammoth 1.11 raises IndexError (issue 2646)
+    # unmatched field end: mammoth 1.11 raised IndexError (issue 2646); 1.12.2 ignores it
     write_docx("gen-unmatched-field.docx", p("before ", '<w:r><w:fldChar w:fldCharType="end"/></w:r>', "after"))
+
+
+def mammoth_1_13():
+    """Reader changes in mammoth 1.12-1.13 (markitdown 0.1.9)."""
+    def fld(instr, text):
+        return (f'<w:r><w:fldChar w:fldCharType="begin"/></w:r><w:r><w:instrText xml:space="preserve">{esc(instr)}</w:instrText></w:r>'
+                f'<w:r><w:fldChar w:fldCharType="separate"/></w:r>{r(text)}<w:r><w:fldChar w:fldCharType="end"/></w:r>')
+
+    numbering = (
+        f"{DECL}<w:numbering {NS}>"
+        '<w:abstractNum w:abstractNumId="1"><w:numStyleLink w:val="LoopList"/></w:abstractNum>'
+        '<w:abstractNum w:abstractNumId="2"><w:lvl w:ilvl="0"><w:numFmt w:val="decimal"/></w:lvl></w:abstractNum>'
+        '<w:num w:numId="7"><w:abstractNumId w:val="1"/></w:num>'
+        '<w:num w:numId="8"><w:abstractNumId w:val="2"/></w:num>'
+        "</w:numbering>"
+    )
+    styles = styles_xml(extra=(
+        '<w:style w:type="numbering" w:styleId="LoopList"><w:name w:val="Loop List"/>'
+        '<w:pPr><w:numPr><w:numId w:val="7"/></w:numPr></w:pPr></w:style>'
+    ))
+    body = "".join([
+        p("Moved: ", "<w:moveFrom>" + r("old place ") + "</w:moveFrom>",
+          '<w:moveToRangeStart w:id="1" w:name="move1"/>', "<w:moveTo>" + r("new place") + "</w:moveTo>",
+          '<w:moveToRangeEnd w:id="1"/>'),
+        "<w:moveFrom>" + p("moved-away paragraph") + "</w:moveFrom>",
+        "<w:moveTo>" + p("moved-here paragraph") + "</w:moveTo>",
+        p("Unquoted: ", fld(" HYPERLINK https://example.com/unquoted ", "external")),
+        p("Unquoted internal: ", fld(" HYPERLINK \\l Bookmark1 ", "internal")),
+        p("Quoted after two spaces: ", fld(' HYPERLINK  "https://example.com/two spaces" ', "quoted")),
+        p("Switch first: ", fld(' HYPERLINK \\o "tip" "https://example.com/tip"', "not a link")),
+        p("Stray separator ", '<w:r><w:fldChar w:fldCharType="separate"/></w:r>', "is ignored"),
+        p("Self-linked numbering style", num=("7", "0")),
+        p("Ordinary numbering", num=("8", "0")),
+        "<w:customXml w:element=\"x\">" + p("custom xml paragraph") + "</w:customXml>",
+    ])
+    write_docx("gen-mammoth-1-13.docx", body, styles=styles, numbering=numbering)
 
 
 def main():
@@ -532,6 +568,7 @@ def main():
     math_docs()
     images()
     robustness()
+    mammoth_1_13()
     for f in sorted(OUT.glob("gen-*.docx")):
         print(f.name, f.stat().st_size)
 

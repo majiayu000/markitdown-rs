@@ -1,4 +1,4 @@
-//! PPTX -> Markdown with markitdown 0.1.8's output, reading the package the
+//! PPTX -> Markdown with markitdown 0.1.9's output, reading the package the
 //! way python-pptx 1.0.2 does: shape classes from the shape factory,
 //! placeholder positions inherited from the layout and master for ordering,
 //! `\v` for soft line breaks, chart data from the chart part's caches.

@@ -185,7 +185,7 @@ pub fn remove_scripts(dom: &mut Dom) {
     }
 }
 
-fn parse_bytes(bytes: &[u8], charset: Option<&str>) -> Dom {
+pub(crate) fn parse_bytes(bytes: &[u8], charset: Option<&str>) -> Dom {
     parser::parse(&decode(bytes, charset.unwrap_or("utf-8")))
 }
 
@@ -202,6 +202,8 @@ pub fn convert(bytes: &[u8], charset: Option<&str>, keep_data_uris: bool) -> Str
 }
 
 /// `^https?:\/\/[a-zA-Z]{2,3}\.wikipedia.org\/`
+/// `^https?:\/\/[a-zA-Z]{2,3}(\.m)?\.wikipedia.org\/` (the mobile host
+/// since 0.1.9)
 pub fn is_wikipedia_url(url: &str) -> bool {
     let Some(rest) = url
         .strip_prefix("https://")
@@ -210,11 +212,14 @@ pub fn is_wikipedia_url(url: &str) -> bool {
         return false;
     };
     let lang = rest.bytes().take_while(u8::is_ascii_alphabetic).count();
-    (2..=3).contains(&lang)
-        && rest[lang..].strip_prefix(".wikipedia").is_some_and(|r| {
+    let host = |r: &str| {
+        r.strip_prefix(".wikipedia").is_some_and(|r| {
             let mut it = r.chars();
             it.next().is_some_and(|c| c != '\n') && it.as_str().starts_with("org/")
         })
+    };
+    let rest = &rest[lang..];
+    (2..=3).contains(&lang) && (rest.strip_prefix(".m").is_some_and(host) || host(rest))
 }
 
 pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bool) -> String {
@@ -227,12 +232,21 @@ pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bo
         &mut found,
     );
     let body = found.first().copied();
+    // the title span exists only for plain-text titles; titles with markup
+    // (italic species or film names) are in the first heading
     let mut titles = Vec::new();
     dom.find_all_by(
         ROOT,
         &|d, c| d.name(c) == Some("span") && d.has_class(c, "mw-page-title-main"),
         &mut titles,
     );
+    if titles.is_empty() {
+        dom.find_all_by(
+            ROOT,
+            &|d, c| d.name(c) == Some("h1") && d.attr(c, "id") == Some("firstHeading"),
+            &mut titles,
+        );
+    }
     let mut main_title = dom
         .find(ROOT, "title")
         .and_then(|t| dom.string(t))
@@ -241,7 +255,7 @@ pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bo
         return markdownify(&dom, ROOT, keep_data_uris);
     };
     if let Some(&t) = titles.first() {
-        main_title = dom.string(t).map(str::to_string);
+        main_title = Some(dom.get_text(t, "", false));
     }
     let main_title = main_title
         .map(|t| pystr::strip(&t).to_string())

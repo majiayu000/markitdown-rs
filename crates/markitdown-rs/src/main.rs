@@ -1,5 +1,7 @@
 //! `markitdown` command line, compatible with the Python CLI.
 
+mod fetch;
+
 use markitdown_core::{Options, StreamInfo};
 use std::io::{Read, Write};
 use std::process::ExitCode;
@@ -10,6 +12,7 @@ const USAGE: &str =
 
 Convert various file formats to markdown.
 
+FILENAME can be a path, an http(s):// URL, a file: URI or a data: URI.
 If FILENAME is empty, markitdown reads from stdin.
 
 options:
@@ -63,7 +66,7 @@ fn parse_args() -> Result<Args, String> {
             }
             "-v" | "--version" => {
                 println!(
-                    "markitdown {} (markitdown-rs, compatible with markitdown 0.1.8)",
+                    "markitdown {} (markitdown-rs, compatible with markitdown 0.1.9)",
                     env!("CARGO_PKG_VERSION")
                 );
                 std::process::exit(0);
@@ -99,22 +102,24 @@ fn parse_args() -> Result<Args, String> {
 
 fn run() -> Result<(), String> {
     let args = parse_args()?;
-    let data = match &args.filename {
-        Some(f) => std::fs::read(f).map_err(|e| format!("{f}: {e}"))?,
+    // the source's own stream info (path, URL response or data URI), then
+    // the -x/-m/-c hints on top
+    let (data, mut info) = match &args.filename {
+        Some(f) => match fetch::uri_scheme(f) {
+            Some(scheme) => fetch::load_uri(f, scheme)?,
+            None => (
+                std::fs::read(f).map_err(|e| format!("{f}: {e}"))?,
+                StreamInfo::from_path(f),
+            ),
+        },
         None => {
             let mut buf = Vec::new();
             std::io::stdin()
                 .read_to_end(&mut buf)
                 .map_err(|e| e.to_string())?;
-            buf
+            (buf, StreamInfo::default())
         }
     };
-    // the path's extension, then the -x/-m/-c hints on top
-    let mut info = args
-        .filename
-        .as_deref()
-        .map(StreamInfo::from_path)
-        .unwrap_or_default();
     if let Some(x) = args
         .extension
         .as_deref()

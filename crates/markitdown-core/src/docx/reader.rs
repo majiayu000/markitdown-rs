@@ -1,4 +1,4 @@
-//! WordprocessingML body -> document model, following mammoth 1.11's
+//! WordprocessingML body -> document model, following mammoth 1.13's
 //! `docx/body_xml.py` element by element (including what it ignores).
 
 use super::dingbats::DINGBATS;
@@ -191,10 +191,22 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             "w:tbl" => self.table(e),
             "w:tr" => self.table_row(e),
             "w:tc" => self.table_cell(e),
-            "w:ins" | "w:object" | "w:smartTag" | "w:drawing" | "v:group" | "v:rect"
-            | "v:roundrect" | "v:shape" | "v:textbox" | "w:txbxContent" => {
-                self.read_children(Some(e))
-            }
+            "w:customXml"
+            | "w:ins"
+            | "w:moveFromRangeEnd"
+            | "w:moveFromRangeStart"
+            | "w:moveTo"
+            | "w:moveToRangeEnd"
+            | "w:moveToRangeStart"
+            | "w:object"
+            | "w:smartTag"
+            | "w:drawing"
+            | "v:group"
+            | "v:rect"
+            | "v:roundrect"
+            | "v:shape"
+            | "v:textbox"
+            | "w:txbxContent" => self.read_children(Some(e)),
             "w:pict" => {
                 let r = self.read_children(Some(e));
                 let mut extra = r.extra;
@@ -349,11 +361,11 @@ impl<'a, 'p> BodyReader<'a, 'p> {
                 self.instr_text.clear();
             }
             Some("end") => {
-                // mammoth 1.11 raises IndexError on an unmatched end; skip it instead
+                // an end without a begin is ignored with a warning
                 let field = match self.fields.pop() {
                     Some(Field::Begin(fld)) => self.parse_instr_text(Some(fld)),
                     Some(f) => f,
-                    None => Field::Other,
+                    None => return ReadResult::default(),
                 };
                 if let Field::Checkbox(checked) = field {
                     return ReadResult::one(DocEl::Checkbox(checked));
@@ -362,7 +374,8 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             Some("separate") => {
                 let fld = match self.fields.pop() {
                     Some(Field::Begin(fld)) => Some(fld),
-                    _ => None,
+                    Some(_) => None,
+                    None => return ReadResult::default(),
                 };
                 let field = self.parse_instr_text(fld);
                 self.fields.push(field);
@@ -376,29 +389,15 @@ impl<'a, 'p> BodyReader<'a, 'p> {
         let instr = self.instr_text.concat();
         let ws = pystr::is_space;
         let rest = instr.trim_start_matches(ws);
-        if let Some(r) = rest.strip_prefix("HYPERLINK") {
-            // \s*HYPERLINK "(.*)"
-            if let Some(href) = r.strip_prefix(' ').and_then(quoted_greedy) {
-                return Field::Hyperlink {
-                    href: Some(href),
-                    anchor: None,
-                };
-            }
-            // \s*HYPERLINK\s+\\l\s+"(.*)"
-            let after_ws = |s: &'_ str| -> Option<String> {
-                let t = s.trim_start_matches(ws);
-                (t.len() < s.len()).then(|| t.to_string())
+        if let Some(r) = rest.strip_prefix("HYPERLINK")
+            && let Some((location, internal)) = hyperlink_location(r)
+        {
+            let (href, anchor) = if internal {
+                (None, Some(location))
+            } else {
+                (Some(location), None)
             };
-            let anchor = after_ws(r)
-                .and_then(|t| t.strip_prefix("\\l").map(str::to_string))
-                .and_then(|t| after_ws(&t))
-                .and_then(|t| quoted_greedy(&t));
-            if let Some(anchor) = anchor {
-                return Field::Hyperlink {
-                    href: None,
-                    anchor: Some(anchor),
-                };
-            }
+            return Field::Hyperlink { href, anchor };
         }
         if rest.starts_with("FORMCHECKBOX") {
             let cb = fld_char.and_then(|f| f.path(&["w:ffData", "w:checkBox"]));
@@ -512,6 +511,13 @@ impl<'a, 'p> BodyReader<'a, 'p> {
             Some(d) if !pystr::strip(d).is_empty() => Some(d.to_string()),
             _ => doc_pr.and_then(|d| d.attr("title")).map(str::to_string),
         };
+        // a picture can link somewhere through its document properties
+        let href = doc_pr
+            .and_then(|d| d.child("a:hlinkClick"))
+            .and_then(|h| h.attr("r:id"))
+            .filter(|id| !id.is_empty())
+            .and_then(|id| self.ctx.rels.target(id))
+            .map(str::to_string);
         let mut out = ReadResult::default();
         for graphic in e.children_named("a:graphic") {
             for data in graphic.children_named("a:graphicData") {
@@ -519,8 +525,16 @@ impl<'a, 'p> BodyReader<'a, 'p> {
                     for fill in pic.children_named("pic:blipFill") {
                         for blip in fill.children_named("a:blip") {
                             if let Some(id) = blip.attr("r:embed") {
-                                out.elements
-                                    .extend(self.embedded_image(id, alt.clone()).elements);
+                                let images = self.embedded_image(id, alt.clone()).elements;
+                                match &href {
+                                    Some(h) if !images.is_empty() => out.elements.push(hyperlink(
+                                        images,
+                                        Some(h.clone()),
+                                        None,
+                                        None,
+                                    )),
+                                    _ => out.elements.extend(images),
+                                }
                             }
                             // r:link (external) images are dropped: mammoth runs with
                             // external file access disabled
@@ -624,6 +638,45 @@ fn quoted_greedy(s: &str) -> Option<String> {
     let line = rest.split('\n').next().unwrap_or_default();
     let end = line.rfind('"')?;
     Some(line[..end].to_string())
+}
+
+/// The rest of `^\s*HYPERLINK\s+(\\l\s+)?(?:"(.*)"|([^\\]\S*))` after
+/// "HYPERLINK", with the regex's backtracking: the location and whether
+/// `\l` made it an internal link.
+fn hyperlink_location(r: &str) -> Option<(String, bool)> {
+    let ws = pystr::is_space;
+    let location = |t: &str| -> Option<String> {
+        if let Some(q) = quoted_greedy(t) {
+            return Some(q);
+        }
+        let c = t.chars().next().filter(|&c| c != '\\')?;
+        let tail: String = t[c.len_utf8()..].chars().take_while(|&c| !ws(c)).collect();
+        Some(format!("{c}{tail}"))
+    };
+    // byte offsets after 1..=n leading whitespace characters, longest first
+    let spaces = |t: &str| -> Vec<usize> {
+        let mut ends: Vec<usize> = t
+            .char_indices()
+            .take_while(|(_, c)| ws(*c))
+            .map(|(i, c)| i + c.len_utf8())
+            .collect();
+        ends.reverse();
+        ends
+    };
+    for k in spaces(r) {
+        let after = &r[k..];
+        if let Some(l) = after.strip_prefix("\\l") {
+            for j in spaces(l) {
+                if let Some(loc) = location(&l[j..]) {
+                    return Some((loc, true));
+                }
+            }
+        }
+        if let Some(loc) = location(after) {
+            return Some((loc, false));
+        }
+    }
+    None
 }
 
 fn replace_fragment(uri: &str, fragment: &str) -> String {

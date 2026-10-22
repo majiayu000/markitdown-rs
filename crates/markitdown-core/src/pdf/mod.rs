@@ -1,4 +1,4 @@
-//! PDF to Markdown as markitdown 0.1.8 does it: pdfplumber word
+//! PDF to Markdown as markitdown 0.1.9 does it: pdfplumber word
 //! positions to detect form-like pages (rendered as aligned tables),
 //! otherwise pdfminer.six's `extract_text()` with the default layout
 //! analysis. Both are ported here rather than wrapped.

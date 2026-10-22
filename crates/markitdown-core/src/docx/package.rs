@@ -219,15 +219,21 @@ impl Numbering {
     }
 
     pub fn find_level(&self, num_id: &str, level: &str) -> Option<NumLevel> {
-        self.find_level_depth(Some(num_id), level, 0)
+        self.find_level_seen(Some(num_id), level, &mut Vec::new())
     }
 
-    fn find_level_depth(
-        &self,
-        num_id: Option<&str>,
+    /// Follows numStyleLink; a num id seen before ends the search (mammoth
+    /// 1.12.1).
+    fn find_level_seen<'s>(
+        &'s self,
+        num_id: Option<&'s str>,
         level: &str,
-        depth: usize,
+        seen: &mut Vec<Option<&'s str>>,
     ) -> Option<NumLevel> {
+        if seen.contains(&num_id) {
+            return None;
+        }
+        seen.push(num_id);
         let abs_id = self.nums.get(&num_id.map(str::to_string))?;
         let (_, abs) = self
             .abstracts
@@ -239,11 +245,10 @@ impl Numbering {
                 .iter()
                 .find(|(k, _)| k.as_deref() == Some(level))
                 .map(|(_, (l, _))| l.clone()),
-            Some(link) if depth < 8 => {
+            Some(link) => {
                 let next = self.num_style_ids.get(link)?.as_deref();
-                self.find_level_depth(next, level, depth + 1)
+                self.find_level_seen(next, level, seen)
             }
-            Some(_) => None,
         }
     }
 

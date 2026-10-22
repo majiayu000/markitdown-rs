@@ -14,3 +14,4 @@ path = "src/main.rs"
 
 [dependencies]
 markitdown-core.workspace = true
+ureq = "3.5"

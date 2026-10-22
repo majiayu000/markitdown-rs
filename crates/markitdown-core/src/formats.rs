@@ -3,7 +3,8 @@
 //! and plain-text ones. Each `accepts` mirrors the Python converter's.
 
 use crate::{
-    Error, Options, StreamInfo, docx, epub, html, media, msg, pdf, plain, pptx, rss, sheet, zipfile,
+    Error, Options, StreamInfo, docx, epub, html, media, msg, pdf, plain, pptx, rss, sheet,
+    youtube, zipfile,
 };
 
 pub struct Converter {
@@ -129,6 +130,11 @@ pub static CONVERTERS: &[Converter] = &[
                 && matches(i, HTML_EXTS, HTML_MIMES)
         },
         convert: |d, i, o| html::convert_bing(d, i, o.keep_data_uris),
+    },
+    Converter {
+        name: "YouTubeConverter",
+        accepts: |_, i| youtube::accepts(i),
+        convert: |d, i, o| Ok(youtube::convert(d, i, o.keep_data_uris)),
     },
     Converter {
         name: "WikipediaConverter",

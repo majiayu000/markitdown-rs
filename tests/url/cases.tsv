@@ -1,0 +1,16 @@
+# Fixtures converted as if fetched from a URL (markitdown's URL-only
+# converters). scripts/gen_url_snapshots.py writes tests/url/<name>.md.
+# name	fixture	url	mimetype	charset
+wikipedia	html/markitdown-test_wikipedia.html	https://en.wikipedia.org/wiki/Microsoft	text/html	utf-8
+wikipedia-mobile	html/markitdown-test_wikipedia.html	https://en.m.wikipedia.org/wiki/Microsoft	text/html	utf-8
+wikipedia-ja	html/wikipedia-Japanese_language.html	https://en.wikipedia.org/wiki/Japanese_language	text/html	utf-8
+wikipedia-rust	html/wikipedia-Rust_programming_language.html	https://en.wikipedia.org/wiki/Rust_(programming_language)	text/html	utf-8
+wikipedia-italic	html/gen-wikipedia-italic.html	https://en.wikipedia.org/wiki/Homo_sapiens	text/html	
+not-wikipedia	html/gen-wikipedia-italic.html	https://simple.wikipedia.org/wiki/Homo_sapiens	text/html	
+bing	html/markitdown-test_serp.html	https://www.bing.com/search?q=microsoft+wikipedia	text/html	utf-8
+youtube	html/gen-youtube.html	https://www.youtube.com/watch?v=5C_HPTJg5ek	text/html	utf-8
+youtube-short-link	html/gen-youtube.html	https://youtu.be/5C_HPTJg5ek	text/html	
+youtube-shorts	html/gen-youtube.html	https://m.youtube.com/shorts/5C_HPTJg5ek	text/html	
+youtube-bare	html/gen-youtube-bare.html	https://www.youtube.com/watch?v=abc	text/html	
+youtube-not-video	html/gen-youtube.html	https://www.youtube.com/feed/trending	text/html	
+youtube-multiline	html/gen-youtube-multiline.html	https://www.youtube.com/watch?v=5C_HPTJg5ek	text/html	utf-8

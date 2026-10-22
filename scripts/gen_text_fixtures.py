@@ -109,6 +109,25 @@ EOF_CASES = {
 }
 
 
+# a YouTube watch page reduced to what markitdown's YouTubeConverter reads
+YOUTUBE = """<!DOCTYPE html><html><head><title>Rust in 100 Seconds - YouTube</title>
+<meta name="title" content="Rust in 100 Seconds">
+<meta property="og:title" content="Rust in 100 Seconds (og)">
+<meta name="description" content="Short description from the meta tag.">
+<meta itemprop="interactionCount" content="2491634">
+<meta name="keywords" content="rust, programming, tutorial">
+<meta itemprop="duration" content="PT2M29S">
+<meta name="empty" content="">
+<meta charset="utf-8">
+</head><body>
+<script>var ytcfg = {};</script>
+<script>var ytInitialData = {"contents":{"twoColumn":{"results":[{"videoSecondaryInfoRenderer":{"attributedDescriptionBodyText":{"content":"Rust is a memory-safe systems language.\\nLinks: https://www.rust-lang.org"}}}]}}};</script>
+<script>var ytInitialData = {"attributedDescriptionBodyText":{"content":"second script is never read"}};</script>
+<div id="content"><p>Fallback body text</p></div>
+</body></html>
+"""
+
+
 def html_fixtures():
     write("html/gen-markdownify.html", MARKDOWNIFY)
     write("html/gen-malformed.html", MALFORMED)
@@ -120,6 +139,14 @@ def html_fixtures():
     write("html/gen-utf8-bom.html", "﻿<html><body><p>BOM ✓</p></body></html>")
     write("html/gen-utf16.html", "<html><body><p>UTF-16 文字</p></body></html>".encode("utf-16"))
     write("html/gen-nested-lists.html", "<ul>" + "".join(f"<li>level {i}<ul>" for i in range(8)) + "<li>leaf</li>" + "</ul></li>" * 8 + "</ul>")
+    write("html/gen-wikipedia-italic.html",
+          '<html><head><title>Homo sapiens - Wikipedia</title></head><body>'
+          '<h1 id="firstHeading" class="firstHeading"><i>Homo</i> <i>sapiens</i> (species)</h1>'
+          '<div id="mw-content-text"><p><b><i>Homo sapiens</i></b> is the only extant human species.</p></div>'
+          '</body></html>')
+    write("html/gen-youtube.html", YOUTUBE)
+    write("html/gen-youtube-multiline.html", YOUTUBE.replace("language.\\nLinks", "language.\nLinks"))
+    write("html/gen-youtube-bare.html", "<html><head><title></title></head><body><p>No metadata here.</p></body></html>")
     write("html/gen-deep-divs.html", "<html><body>" + "<div>" * 120 + "deep" + "</div>" * 120 + "</body></html>")
     for name, data in EOF_CASES.items():
         write(f"html/gen-{name}.html", data)

@@ -8,7 +8,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 uv sync --project oracle --frozen --quiet
 export PYTHONUTF8=1
-if [ $# -eq 0 ]; then set -- tests/fixtures/*/*.docx tests/fixtures/*/*.pptx; fi
+if [ $# -eq 0 ]; then set -- tests/fixtures/*/*; fi
 for f in "$@"; do
   rel=${f#tests/fixtures/}
   out=tests/snapshots/$rel

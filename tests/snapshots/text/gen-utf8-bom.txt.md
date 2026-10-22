@@ -1,0 +1,3 @@
+﻿BOM first line
+second
+

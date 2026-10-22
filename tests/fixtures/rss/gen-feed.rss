@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xml:base="https://example.com/blog/">
+<channel>
+  <title>
+    RSS extension
+  </title>
+  <link>https://example.com/</link>
+  <description>A blog about <b>things</b> &amp; stuff</description>
+  <item>
+    <title>First post</title>
+    <link>https://example.com/blog/first</link>
+    <pubDate>Mon, 05 Jan 2026 10:00:00 GMT</pubDate>
+    <description>&lt;p&gt;Hello &lt;a href="second"&gt;relative link&lt;/a&gt; and &lt;img src="/img/a.png" alt="pic"&gt;&lt;/p&gt;</description>
+    <content:encoded><![CDATA[<h2>Full content</h2><p>With <em>markup</em> and a <a href="../about">link</a>.</p><ul><li>one</li><li>two</li></ul>]]></content:encoded>
+  </item>
+  <item xml:base="https://other.example/news/">
+    <title>Second post with base</title>
+    <description><![CDATA[<p>See <a href="item">this</a> and <a href="">empty</a>.</p>]]></description>
+  </item>
+  <item>
+    <description>Plain text description, no markup.</description>
+  </item>
+  <item>
+    <title>Only a title</title>
+  </item>
+  <item>
+    <title>Unicode — 中文 ✓</title>
+    <description>&lt;p&gt;Ünïcödé &amp;amp; entities&lt;/p&gt;</description>
+  </item>
+</channel>
+</rss>

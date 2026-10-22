@@ -5,7 +5,7 @@
 //! `<name>.md` (the Python CLI's stdout) or `<name>.py-error` when Python
 //! fails on the file, in which case we only require that we do not panic.
 
-use markitdown_core::{Format, Options, convert};
+use markitdown_core::{Options, StreamInfo, convert};
 use std::path::{Path, PathBuf};
 
 fn root() -> PathBuf {
@@ -34,7 +34,7 @@ fn known_diffs() -> Vec<String> {
         .collect()
 }
 
-fn check_format(dir: &str, format: Format) {
+fn check_format(dir: &str) {
     let known = known_diffs();
     let fixtures = root().join("tests/fixtures").join(dir);
     let snapshots = root().join("tests/snapshots").join(dir);
@@ -48,7 +48,7 @@ fn check_format(dir: &str, format: Format) {
     for f in &files {
         let name = f.file_name().unwrap().to_string_lossy().to_string();
         let data = std::fs::read(f).unwrap();
-        let got = convert(&data, format, &Options::default());
+        let got = convert(&data, &StreamInfo::from_path(&name), &Options::default());
         let md_snapshot = snapshots.join(format!("{name}.md"));
         let err_snapshot = snapshots.join(format!("{name}.py-error"));
         let is_known = known.contains(&format!("{dir}/{name}"));
@@ -80,12 +80,54 @@ fn check_format(dir: &str, format: Format) {
     );
 }
 
-#[test]
-fn docx_matches_python() {
-    check_format("docx", Format::Docx);
+macro_rules! parity {
+    ($($name:ident => $dir:literal),* $(,)?) => {
+        $(#[test]
+        fn $name() {
+            check_format($dir);
+        })*
+    };
 }
 
+parity! {
+    docx_matches_python => "docx",
+    pptx_matches_python => "pptx",
+    html_matches_python => "html",
+    text_matches_python => "text",
+    csv_matches_python => "csv",
+    ipynb_matches_python => "ipynb",
+    rss_matches_python => "rss",
+}
+
+/// Every input of html5lib-tests' tokenizer suite through the HTML
+/// converter (tests/snapshots/html-cases.json, scripts/gen_html_cases.py).
 #[test]
-fn pptx_matches_python() {
-    check_format("pptx", Format::Pptx);
+fn html5lib_tokenizer_inputs_match_python() {
+    let path = root().join("tests/snapshots/html-cases.json");
+    let cases: Vec<serde_json::Value> =
+        serde_json::from_str(&std::fs::read_to_string(path).unwrap()).unwrap();
+    let info = StreamInfo {
+        extension: Some(".html".into()),
+        ..Default::default()
+    };
+    let mut failures = Vec::new();
+    for case in &cases {
+        let input = case["input"].as_str().unwrap();
+        let got = convert(input.as_bytes(), &info, &Options::default())
+            .unwrap_or_else(|e| format!("ERROR {e}"));
+        let want = case["output"].as_str().unwrap_or("<python error>");
+        if got != want {
+            failures.push(format!(
+                "{}: {input:?}\n  python: {want:?}\n  rust:   {got:?}",
+                case["source"]
+            ));
+        }
+    }
+    assert!(
+        failures.is_empty(),
+        "{} of {} cases differ:\n{}",
+        failures.len(),
+        cases.len(),
+        failures[..failures.len().min(25)].join("\n")
+    );
 }

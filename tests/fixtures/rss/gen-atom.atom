@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="https://example.org/feed/">
+  <title type="html">Feed &lt;em&gt;title&lt;/em&gt;</title>
+  <subtitle>
+      Indented subtitle
+      second line
+  </subtitle>
+  <updated>2026-02-01T00:00:00Z</updated>
+  <entry>
+    <title>Plain summary</title>
+    <updated>2026-02-02T00:00:00Z</updated>
+    <summary>First line
+        indented continuation
+          deeper
+        back</summary>
+  </entry>
+  <entry xml:base="entries/">
+    <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">XHTML <b>title</b></div></title>
+    <summary type="html">&lt;p&gt;HTML &lt;a href="one"&gt;summary&lt;/a&gt;&lt;/p&gt;</summary>
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml" xml:base="nested/">
+        <p>XHTML content with <a href="link">a link</a> &amp; <img src="i.png" alt="img"/>.</p>
+        <br/>
+      </div>
+    </content>
+  </entry>
+  <entry>
+    <title>Media types</title>
+    <content type="text/html">&lt;h3&gt;text/html content&lt;/h3&gt;</content>
+  </entry>
+  <entry>
+    <title>Binary content is dropped</title>
+    <summary>But the summary stays.</summary>
+    <content type="image/png">iVBORw0KGgo=</content>
+  </entry>
+  <entry>
+    <title>Other text type</title>
+    <content type="text/plain">   plain *text* content   </content>
+  </entry>
+  <entry>
+    <title type="text">  </title>
+    <content type="application/atom+xml"><x xmlns="urn:x">inline xml <y>node</y></x></content>
+  </entry>
+</feed>

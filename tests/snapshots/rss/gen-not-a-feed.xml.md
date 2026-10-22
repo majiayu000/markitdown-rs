@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<catalog>
+  <book id="1">  <title>Not a feed</title>  </book>
+</catalog>
+

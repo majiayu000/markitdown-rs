@@ -3,3 +3,4 @@
 #
 # <format>/<fixture>: <reason>
 docx/mammoth-embedded-style-map.docx: custom style maps embedded by mammoth (the mammoth/style-map part) are not applied
+text/gen-latin1.txt: legacy 8-bit text without a declared charset: charset_normalizer picks cp1250 for this short sample, markitdown-rs picks windows-1252

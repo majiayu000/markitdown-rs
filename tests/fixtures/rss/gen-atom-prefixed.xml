@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<a:feed xmlns:a="http://www.w3.org/2005/Atom" xmlns:other="urn:other">
+  <a:title>Prefixed feed</a:title>
+  <other:title>ignored, other namespace</other:title>
+  <a:entry><a:title>Entry</a:title><a:summary type="html">&lt;b&gt;bold&lt;/b&gt;</a:summary></a:entry>
+</a:feed>

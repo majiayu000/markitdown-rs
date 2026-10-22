@@ -24,6 +24,8 @@ pub struct Element {
     pub name: Rc<str>,
     pub attrs: Vec<(Rc<str>, String)>,
     pub children: Vec<Node>,
+    /// namespace URI, only recorded with `ParseOptions::raw_names`
+    pub ns: Option<Rc<str>>,
 }
 
 impl Element {
@@ -32,6 +34,7 @@ impl Element {
             name: name.into(),
             attrs: Vec::new(),
             children,
+            ns: None,
         }
     }
 
@@ -85,6 +88,9 @@ pub struct ParseOptions<'a> {
     /// Apply XML whitespace normalisation after entity expansion instead of
     /// before, as happens when a part has been re-serialised by lxml first.
     pub normalize_after_unescape: bool,
+    /// minidom's view: names as written (prefix:local), the namespace URI in
+    /// `Element::ns`, and xmlns declarations kept as attributes
+    pub raw_names: bool,
 }
 
 /// Converters walk the tree recursively; Python markitdown hits its recursion
@@ -135,6 +141,15 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
                     let s = std::str::from_utf8(t.as_ref()).map_err(|e| err(&e))?;
                     push_text(parent, &normalize_eol(s));
                 }
+            }
+            Event::DocType(t)
+                if opts.raw_names
+                    && std::ops::Deref::deref(&t)
+                        .windows(8)
+                        .any(|w| w == b"<!ENTITY") =>
+            {
+                // defusedxml refuses entity declarations
+                return Err(Error::Xml("entity declarations are forbidden".into()));
             }
             Event::Eof => break,
             _ => {}
@@ -199,16 +214,53 @@ fn start_element(
     names: &mut HashSet<Rc<str>>,
 ) -> Result<Element, Error> {
     let (ns, local) = reader.resolve_element(e.name());
-    let name = intern(names, canonical(opts, ns, local.as_ref())?);
+    let (name, ns_uri) = if opts.raw_names {
+        let uri = match ns {
+            ResolveResult::Bound(u) => Some(intern(
+                names,
+                String::from_utf8_lossy(u.as_ref()).into_owned(),
+            )),
+            ResolveResult::Unbound => None,
+            ResolveResult::Unknown(p) => {
+                return Err(Error::Xml(format!(
+                    "unbound prefix {}",
+                    String::from_utf8_lossy(&p)
+                )));
+            }
+        };
+        (
+            intern(
+                names,
+                String::from_utf8_lossy(e.name().as_ref()).into_owned(),
+            ),
+            uri,
+        )
+    } else {
+        (intern(names, canonical(opts, ns, local.as_ref())?), None)
+    };
     let mut attrs = Vec::new();
     for a in e.attributes() {
         let a = a.map_err(|e| Error::Xml(e.to_string()))?;
         let key = a.key.as_ref();
-        if key == b"xmlns" || key.starts_with(b"xmlns:") {
+        let is_xmlns = key == b"xmlns" || key.starts_with(b"xmlns:");
+        if is_xmlns && !opts.raw_names {
             continue;
         }
-        let (ans, local) = reader.resolve_attribute(QName(key));
-        let k = intern(names, canonical(opts, ans, local.as_ref())?);
+        let k = if opts.raw_names {
+            if !is_xmlns {
+                let (ans, _) = reader.resolve_attribute(QName(key));
+                if let ResolveResult::Unknown(p) = ans {
+                    return Err(Error::Xml(format!(
+                        "unbound prefix {}",
+                        String::from_utf8_lossy(&p)
+                    )));
+                }
+            }
+            intern(names, String::from_utf8_lossy(key).into_owned())
+        } else {
+            let (ans, local) = reader.resolve_attribute(QName(key));
+            intern(names, canonical(opts, ans, local.as_ref())?)
+        };
         let raw = std::str::from_utf8(&a.value).map_err(|e| Error::Xml(e.to_string()))?;
         attrs.push((k, attr_value(raw, opts)?));
     }
@@ -217,6 +269,7 @@ fn start_element(
         name,
         attrs,
         children: Vec::new(),
+        ns: ns_uri,
     })
 }
 

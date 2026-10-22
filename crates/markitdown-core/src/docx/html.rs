@@ -3,7 +3,7 @@
 //! mammoth's empty-element stripping and collapsing of adjacent elements.
 
 use super::reader::{BreakKind, DocEl, Link, NumLevel, Run, VertAlign};
-use crate::markdownify::Dom;
+use crate::dom::Dom;
 
 pub struct Note {
     pub note_type: &'static str,

@@ -1,56 +1,56 @@
-//! Convert Office documents to Markdown with the exact output of Python
+//! Convert documents to Markdown with the exact output of Python
 //! [markitdown](https://github.com/microsoft/markitdown) 0.1.8.
 //!
 //! ```no_run
+//! use markitdown_core::{StreamInfo, convert};
 //! let data = std::fs::read("report.docx")?;
-//! let md = markitdown_core::convert(&data, markitdown_core::Format::Docx, &Default::default())?;
+//! let md = convert(&data, &StreamInfo::from_path("report.docx"), &Default::default())?;
 //! # Ok::<(), Box<dyn std::error::Error>>(())
 //! ```
 
 mod base64;
+mod convert;
+mod detect;
 mod docx;
+mod dom;
+mod formats;
+mod html;
 mod markdownify;
+mod plain;
 mod pptx;
 mod pystr;
+mod pyurl;
+mod rss;
+mod text;
 mod xml;
 mod zip;
 
 use std::fmt;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum Format {
-    Docx,
-    Pptx,
+/// What is known about the input besides its bytes, as markitdown's
+/// `StreamInfo`: the format is decided from these hints and the content.
+#[derive(Debug, Clone, Default, PartialEq)]
+pub struct StreamInfo {
+    /// with the leading dot, e.g. ".docx"
+    pub extension: Option<String>,
+    pub mimetype: Option<String>,
+    pub charset: Option<String>,
+    /// the source URL; Wikipedia and Bing pages are only recognised by it
+    pub url: Option<String>,
 }
 
-impl Format {
-    /// From a file extension (with or without the leading dot) or MIME type.
-    pub fn from_hint(hint: &str) -> Option<Format> {
-        let h = hint.trim().trim_start_matches('.').to_ascii_lowercase();
-        if h == "docx"
-            || h.starts_with(
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            )
-        {
-            Some(Format::Docx)
-        } else if h == "pptx"
-            || h.starts_with("application/vnd.openxmlformats-officedocument.presentationml")
-        {
-            Some(Format::Pptx)
-        } else {
-            None
-        }
-    }
-
-    /// Guess from the package contents.
-    pub fn sniff(data: &[u8]) -> Option<Format> {
-        let archive = zip::Archive::new(data).ok()?;
-        if archive.contains("word/document.xml") {
-            Some(Format::Docx)
-        } else if archive.contains("ppt/presentation.xml") {
-            Some(Format::Pptx)
-        } else {
-            None
+impl StreamInfo {
+    /// Hints from a file name or path (its extension).
+    pub fn from_path(path: &str) -> Self {
+        let name = path.rsplit(['/', '\\']).next().unwrap_or(path);
+        // os.path.splitext: leading dots do not start an extension
+        let stem_start = name.len() - name.trim_start_matches('.').len();
+        let extension = name[stem_start..]
+            .rfind('.')
+            .map(|i| name[stem_start + i..].to_string());
+        StreamInfo {
+            extension,
+            ..Default::default()
         }
     }
 }
@@ -68,6 +68,10 @@ pub enum Error {
     Xml(String),
     /// A part the format requires is missing from the package.
     MissingPart(String),
+    /// No converter accepts the input.
+    Unsupported(String),
+    /// Every converter that accepted the input failed.
+    Conversion(String),
 }
 
 impl fmt::Display for Error {
@@ -76,17 +80,16 @@ impl fmt::Display for Error {
             Error::Zip(e) => write!(f, "invalid zip package: {e}"),
             Error::Xml(e) => write!(f, "invalid XML: {e}"),
             Error::MissingPart(p) => write!(f, "missing part: {p}"),
+            Error::Unsupported(e) => write!(f, "unsupported input: {e}"),
+            Error::Conversion(e) => write!(f, "conversion failed: {e}"),
         }
     }
 }
 
 impl std::error::Error for Error {}
 
-/// Convert a document to Markdown, as `MarkItDown().convert(...).markdown`.
-pub fn convert(data: &[u8], format: Format, opts: &Options) -> Result<String, Error> {
-    let md = match format {
-        Format::Docx => docx::convert(data, opts)?,
-        Format::Pptx => pptx::convert(data, opts)?,
-    };
+/// Convert a document to Markdown, as `MarkItDown().convert_stream(...)`.
+pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String, Error> {
+    let md = convert::convert(data, info, opts)?;
     Ok(pystr::normalize_output(&md))
 }

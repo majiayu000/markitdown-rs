@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html><head><title>All the tags</title><style>p { color: red }</style>
+<script>var x = "</p><b>not markup</b>";</script></head>
+<body>
+<h1>Heading <em>one</em></h1><h2>Two</h2><h3>Three</h3><h4>Four</h4><h5>Five</h5><h6>Six</h6><h7>Seven?</h7>
+<h2>  Spaced
+   heading  </h2>
+<p>Plain <b>bold</b> <strong>strong</strong> <i>italic</i> <em>em</em> <u>under</u> <s>s</s> <del>del</del>
+<strike>strike</strike> H<sub>2</sub>O x<sup>2</sup> <code>code `tick`</code> <kbd>Ctrl</kbd> <samp>out</samp>
+<q>quoted</q> <mark>mark</mark> <span>span</span> <abbr title="t">abbr</abbr></p>
+<p>Escapes: a_b *star* 1. not a list # not heading [brackets] &lt;tag&gt; &amp; &copy; &nbsp;x &#169; &#x263A; &bogus;</p>
+<p>Line<br>break<br/>and<br />more</p>
+<p>  leading and trailing whitespace  </p>
+<p></p><p>   </p>
+<pre>  preformatted
+    <b>bold in pre</b> *stars* _under_
+</pre>
+<pre><code class="language-python">def f():
+    return 1
+</code></pre>
+<blockquote><p>Quote para one</p><p>Quote para two</p><blockquote>Nested quote</blockquote></blockquote>
+<ul><li>one</li><li>two<ul><li>two.a</li><li>two.b<ol><li>deep</li></ol></li></ul></li><li><p>para in li</p><p>second</p></li><li></li></ul>
+<ol start="7"><li>seven</li><li>eight</li></ol>
+<ol start="x"><li>bad start</li></ol>
+<dl><dt>Term</dt><dd>Definition one</dd><dd>Definition
+two</dd><dt>Term 2</dt></dl>
+<table><caption>Caption</caption>
+<thead><tr><th>A</th><th colspan="2">B and C</th></tr></thead>
+<tbody><tr><td>1</td><td>2 | pipe</td><td><a href="/x">link</a></td></tr>
+<tr><td colspan="x">bad colspan</td><td>multi<br>line</td><td><p>p in td</p></td></tr></tbody></table>
+<table><tr><td>no header</td><td>row</td></tr><tr><td>second</td><td>row</td></tr></table>
+<table><tr><th>only</th><th>th</th></tr><tr><td>x</td><td>y</td></tr></table>
+<figure><img src="fig.png" alt="figure alt"><figcaption>Figure caption</figcaption></figure>
+<hr>
+<p><img src="a.png" alt="alt text" title="a &quot;title&quot;"> <img src="data:image/png;base64,iVBORw0KGgo=" alt="data">
+<img data-src="real.png" src="data:image/gif;base64,R0lGOD" alt="lazy"> <img alt="no src"></p>
+<p><a href="https://example.com/a b">space</a> <a href="https://example.com">https://example.com</a>
+<a href="javascript:alert(1)">js</a> <a href="mailto:a@b.c">mail</a> <a href="#frag">frag</a>
+<a href="https://example.com/%E4%B8%AD/中">mixed</a> <a href="rel/path?q=1#f" title="T">titled</a>
+<a href="http://[bad">bad ipv6</a> <a>no href</a> <a href=""> empty href </a> <a href="https://x.y/a_b">https://x.y/a_b</a></p>
+<p><input type="checkbox" checked> done <input type="checkbox"> todo <input type="text" value="x"></p>
+<video src="v.mp4" poster="p.png">Video text</video> <video><source src="s.webm">Fallback</video>
+<div>div text<div>nested div</div></div><section>section</section><article>article</article>
+<h3><a href="/h">Link in heading</a> <img src="i.png" alt="img in heading"></h3>
+<p>Nested <b>bold <i>bold italic</i> bold</b> and <b> spaced bold </b> and <b></b>empty</p>
+<noscript>noscript text</noscript>
+<!-- a comment -->
+<p>After comment</p>
+<p>Text<!-- inline comment -->split</p>
+</body></html>

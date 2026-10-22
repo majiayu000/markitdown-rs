@@ -8,7 +8,8 @@ mod math;
 mod package;
 mod reader;
 
-use crate::markdownify::{self, Dom};
+use crate::dom::Dom;
+use crate::markdownify;
 use crate::xml::{self, Element, Node, ParseOptions};
 use crate::zip::Archive;
 use crate::{Error, Options, pystr};
@@ -119,6 +120,7 @@ impl Package<'_> {
             namespaces: NAMESPACES,
             cdata_as_text: false,
             normalize_after_unescape: false,
+            raw_names: false,
         };
         if !PREPROCESSED.contains(&name) {
             let mut root = xml::parse(&bytes, &minidom)?;

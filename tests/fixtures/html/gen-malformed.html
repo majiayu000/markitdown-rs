@@ -1,0 +1,21 @@
+<html><body>
+<p>unclosed paragraph
+<p>another <b>unclosed bold
+<div>div after</b> stray end</i></div>
+<table><tr><td>cell<tr><td>implicit row</table>
+<ul><li>one<li>two</ul>
+<p>Attributes: <a href=unquoted>u</a> <a HREF='single'>s</a> <a href="x" href="y">dup</a>
+<a href = "spaced" >sp</a> <img src=a.png alt=bare/value> <img/src="weird.png"></p>
+<br></br><p/>self-closing p<p>
+</div></div></span>
+<title>late <b>title</b> &amp; tags</title>
+<textarea>  <p>not a tag</p> &amp; </textarea>
+<script>if (a < b && c > d) { document.write("</div>"); }</script>
+<style>a > b { }</style>
+<![CDATA[cdata <text>]]> <?php echo "pi" ?> <!DOCTYPE again> <!bogus comment> <!-- unterminated -- comment --> <!---->
+<p>Entities: &AMP; &amp &ampx &notin; &notit; &#0; &#128; &#x110000; &#xD800; &#65 &#x41g; &;</p>
+<p>Lone &lt; and < followed by space and <3 and a < b</p>
+<p>Uppercase <B>BOLD</B> <EM>EM</EM> <BR> after BR</p>
+<p>Weird tags <foo:bar>ns</foo:bar> <my-element>custom</my-element> <x y="1"z="2">x</x></p>
+<p>tabs	and
+windowslines</p>

@@ -1,0 +1,1308 @@
+[Jump to content](#bodyContent)
+
+[ ]
+
+Main menu
+
+Main menu
+
+move to sidebar
+hide
+
+Navigation
+
+* [Main page](/wiki/Main_Page "Visit the main page [z]")
+* [Contents](/wiki/Wikipedia%3AContents "Guides to browsing Wikipedia")
+* [Current events](/wiki/Portal%3ACurrent_events "Articles related to current events")
+* [Random article](/wiki/Special%3ARandom "Visit a randomly selected article [x]")
+* [About Wikipedia](/wiki/Wikipedia%3AAbout "Learn about Wikipedia and how it works")
+* [Contact us](//en.wikipedia.org/wiki/Wikipedia%3AContact_us "How to contact Wikipedia")
+
+Contribute
+
+* [Help](/wiki/Help%3AContents "Guidance on how to use and edit Wikipedia")
+* [Learn to edit](/wiki/Help%3AIntroduction "Learn how to edit Wikipedia")
+* [Community portal](/wiki/Wikipedia%3ACommunity_portal "The hub for editors")
+* [Recent changes](/wiki/Special%3ARecentChanges "A list of recent changes to Wikipedia [r]")
+* [Upload file](/wiki/Wikipedia%3AFile_upload_wizard "Add images or other media for use on Wikipedia")
+* [Special pages](/wiki/Special%3ASpecialPages "A list of all special pages [q]")
+
+[![](/static/images/icons/enwiki-25.svg)
+
+![Wikipedia](/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg)
+![The Free Encyclopedia](/static/images/mobile/copyright/wikipedia-tagline-en-25.svg)](/wiki/Main_Page)
+
+[Search](/wiki/Special%3ASearch "Search Wikipedia [f]")
+
+Search
+
+[ ]
+
+Appearance
+
+* [Donate](https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=en.wikipedia.org&uselang=en)
+* [Create account](/w/index.php?title=Special:CreateAccount&returnto=Japanese+language "You are encouraged to create an account and log in; however, it is not mandatory")
+* [Log in](/w/index.php?title=Special:UserLogin&returnto=Japanese+language "You're encouraged to log in; however, it's not mandatory. [o]")
+
+[ ]
+
+Personal tools
+
+* [Donate](https://donate.wikimedia.org/?wmf_source=donate&wmf_medium=sidebar&wmf_campaign=en.wikipedia.org&uselang=en)
+* [Create account](/w/index.php?title=Special:CreateAccount&returnto=Japanese+language "You are encouraged to create an account and log in; however, it is not mandatory")
+* [Log in](/w/index.php?title=Special:UserLogin&returnto=Japanese+language "You're encouraged to log in; however, it's not mandatory. [o]")
+
+## Contents
+
+move to sidebar
+hide
+
+* (Top)
+* [1
+  History](#History)
+
+  Toggle History subsection
+  + [1.1
+    Prehistory](#Prehistory)
+  + [1.2
+    Old Japanese](#Old_Japanese)
+  + [1.3
+    Early Middle Japanese](#Early_Middle_Japanese)
+  + [1.4
+    Late Middle Japanese](#Late_Middle_Japanese)
+  + [1.5
+    Modern Japanese](#Modern_Japanese)
+* [2
+  Geographic distribution](#Geographic_distribution)
+
+  Toggle Geographic distribution subsection
+  + [2.1
+    Official status](#Official_status)
+  + [2.2
+    Dialects and mutual intelligibility](#Dialects_and_mutual_intelligibility)
+* [3
+  Classification](#Classification)
+* [4
+  Phonology](#Phonology)
+
+  Toggle Phonology subsection
+  + [4.1
+    Vowels](#Vowels)
+  + [4.2
+    Consonants](#Consonants)
+* [5
+  Writing system](#Writing_system)
+
+  Toggle Writing system subsection
+  + [5.1
+    History](#History_2)
+  + [5.2
+    Hiragana](#Hiragana)
+  + [5.3
+    Katakana](#Katakana)
+* [6
+  Grammar](#Grammar)
+
+  Toggle Grammar subsection
+  + [6.1
+    Sentence structure](#Sentence_structure)
+  + [6.2
+    Inflection and conjugation](#Inflection_and_conjugation)
+  + [6.3
+    Politeness](#Politeness)
+* [7
+  Vocabulary](#Vocabulary)
+* [8
+  Gender in the Japanese language](#Gender_in_the_Japanese_language)
+
+  Toggle Gender in the Japanese language subsection
+  + [8.1
+    Kogal slang](#Kogal_slang)
+* [9
+  Non-native study](#Non-native_study)
+* [10
+  Example text](#Example_text)
+* [11
+  See also](#See_also)
+* [12
+  Notes](#Notes)
+* [13
+  References](#References)
+
+  Toggle References subsection
+  + [13.1
+    Citations](#Citations)
+  + [13.2
+    Works cited](#Works_cited)
+* [14
+  Further reading](#Further_reading)
+* [15
+  External links](#External_links)
+
+[ ]
+
+Toggle the table of contents
+
+# Japanese language
+
+[ ]
+
+239 languages
+
+* [Аԥсшәа](https://ab.wikipedia.org/wiki/%D0%90%D0%B8%D0%B0%D0%BF%D0%BE%D0%BD_%D0%B1%D1%8B%D0%B7%D1%88%D3%99%D0%B0 "Аиапон бызшәа – Abkhazian")
+* [Acèh](https://ace.wikipedia.org/wiki/Bahsa_Jeupang "Bahsa Jeupang – Acehnese")
+* [Адыгабзэ](https://ady.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%8B%D0%B1%D0%B7%D1%8D "Японыбзэ – Adyghe")
+* [Afrikaans](https://af.wikipedia.org/wiki/Japannees "Japannees – Afrikaans")
+* [Alemannisch](https://als.wikipedia.org/wiki/Japanische_Sprache "Japanische Sprache – Alemannic")
+* [አማርኛ](https://am.wikipedia.org/wiki/%E1%8C%83%E1%8D%93%E1%8A%95%E1%8A%9B "ጃፓንኛ – Amharic")
+* [Pangcah](https://ami.wikipedia.org/wiki/Sowal_no_dipong "Sowal no dipong – Amis")
+* [Aragonés](https://an.wikipedia.org/wiki/Idioma_chapon%C3%A9s "Idioma chaponés – Aragonese")
+* [Ænglisc](https://ang.wikipedia.org/wiki/Iapanisc_spr%C7%A3c "Iapanisc sprǣc – Old English")
+* [अंगिका](https://anp.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Angika")
+* [العربية](https://ar.wikipedia.org/wiki/%D8%A7%D9%84%D9%84%D8%BA%D8%A9_%D8%A7%D9%84%D9%8A%D8%A7%D8%A8%D8%A7%D9%86%D9%8A%D8%A9 "اللغة اليابانية – Arabic")
+* [ܐܪܡܝܐ](https://arc.wikipedia.org/wiki/%DC%A0%DC%AB%DC%A2%DC%90_%DC%9D%DC%A6%DC%A2%DC%9D%DC%90 "ܠܫܢܐ ܝܦܢܝܐ – Aramaic")
+* [الدارجة](https://ary.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D9%88%D9%86%D9%8A%D8%A9 "جاپونية – Moroccan Arabic")
+* [مصرى](https://arz.wikipedia.org/wiki/%D9%84%D8%BA%D9%87_%D9%8A%D8%A7%D8%A8%D8%A7%D9%86%D9%89 "لغه يابانى – Egyptian Arabic")
+* [অসমীয়া](https://as.wikipedia.org/wiki/%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A6%BE%E0%A6%A8%E0%A7%80_%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE "জাপানী ভাষা – Assamese")
+* [Asturianu](https://ast.wikipedia.org/wiki/Idioma_Xapon%C3%A9s "Idioma Xaponés – Asturian")
+* [अवधी](https://awa.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Awadhi")
+* [Azərbaycanca](https://az.wikipedia.org/wiki/Yapon_dili "Yapon dili – Azerbaijani")
+* [تۆرکجه](https://azb.wikipedia.org/wiki/%DA%98%D8%A7%D9%BE%D9%88%D9%86_%D8%AF%DB%8C%D9%84%DB%8C "ژاپون دیلی – South Azerbaijani")
+* [Башҡортса](https://ba.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%82%D0%B5%D0%BB%D0%B5 "Япон теле – Bashkir")
+* [Basa Bali](https://ban.wikipedia.org/wiki/Basa_Jepang "Basa Jepang – Balinese")
+* [Boarisch](https://bar.wikipedia.org/wiki/Japanische_Sproch "Japanische Sproch – Bavarian")
+* [Žemaitėška](https://bat-smg.wikipedia.org/wiki/Japuonu_kalba "Japuonu kalba – Samogitian")
+* [Bikol Central](https://bcl.wikipedia.org/wiki/Tataramon_na_Hapones "Tataramon na Hapones – Central Bikol")
+* [Беларуская (тарашкевіца)](https://be-tarask.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B2%D0%B0 "Японская мова – Belarusian (Taraškievica orthography)")
+* [Беларуская](https://be.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BC%D0%BE%D0%B2%D0%B0 "Японская мова – Belarusian")
+* [Betawi](https://bew.wikipedia.org/wiki/Basa_Jepang "Basa Jepang – Betawi")
+* [Български](https://bg.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B8_%D0%B5%D0%B7%D0%B8%D0%BA "Японски език – Bulgarian")
+* [भोजपुरी](https://bh.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Bhojpuri")
+* [Banjar](https://bjn.wikipedia.org/wiki/Basa_Japang "Basa Japang – Banjar")
+* [বাংলা](https://bn.wikipedia.org/wiki/%E0%A6%9C%E0%A6%BE%E0%A6%AA%E0%A6%BE%E0%A6%A8%E0%A6%BF_%E0%A6%AD%E0%A6%BE%E0%A6%B7%E0%A6%BE "জাপানি ভাষা – Bangla")
+* [བོད་ཡིག](https://bo.wikipedia.org/wiki/%E0%BD%89%E0%BD%B2%E0%BC%8B%E0%BD%A7%E0%BD%BC%E0%BD%84%E0%BC%8B%E0%BD%A6%E0%BE%90%E0%BD%91%E0%BC%8D "ཉི་ཧོང་སྐད། – Tibetan")
+* [Brezhoneg](https://br.wikipedia.org/wiki/Japaneg "Japaneg – Breton")
+* [Bosanski](https://bs.wikipedia.org/wiki/Japanski_jezik "Japanski jezik – Bosnian")
+* [Batak Mandailing](https://btm.wikipedia.org/wiki/Saro_Jepang "Saro Jepang – Batak Mandailing")
+* [Буряад](https://bxr.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%85%D1%8D%D0%BB%D1%8D%D0%BD "Япон хэлэн – Russia Buriat")
+* [Català](https://ca.wikipedia.org/wiki/Japon%C3%A8s "Japonès – Catalan")
+* [閩東語 / Mìng-dĕ̤ng-ngṳ̄](https://cdo.wikipedia.org/wiki/N%C4%ADk-bu%C5%8Dng-ng%E1%B9%B3%CC%84 "Nĭk-buōng-ngṳ̄ – Mindong")
+* [Нохчийн](https://ce.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D0%B8%D0%B9%D0%BD_%D0%BC%D0%BE%D1%82%D1%82 "Японийн мотт – Chechen")
+* [Cebuano](https://ceb.wikipedia.org/wiki/Hinapones "Hinapones – Cebuano")
+* [Tsetsêhestâhese](https://chy.wikipedia.org/wiki/%C3%93eta%27xa%C3%A9n%C3%A9hetse "Óeta'xaénéhetse – Cheyenne")
+* [کوردی](https://ckb.wikipedia.org/wiki/%D8%B2%D9%85%D8%A7%D9%86%DB%8C_%DA%98%D8%A7%D9%BE%DB%86%D9%86%DB%8C "زمانی ژاپۆنی – Central Kurdish")
+* [Qırımtatarca](https://crh.wikipedia.org/wiki/Yapon_tili "Yapon tili – Crimean Tatar")
+* [Čeština](https://cs.wikipedia.org/wiki/Japon%C5%A1tina "Japonština – Czech")
+* [Kaszëbsczi](https://csb.wikipedia.org/wiki/Jap%C3%B3%C5%84sczi_j%C3%A3z%C3%ABk "Japóńsczi jãzëk – Kashubian")
+* [Словѣньскъ / ⰔⰎⰑⰂⰡⰐⰠⰔⰍⰟ](https://cu.wikipedia.org/wiki/%EA%99%96%D0%BF%D1%A1%D0%BD%D1%8C%D1%81%D0%BA%D1%8A_%D1%A9%EA%99%81%EA%99%91%D0%BA%D1%8A "Ꙗпѡньскъ ѩꙁꙑкъ – Church Slavic")
+* [Чӑвашла](https://cv.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%87%C4%95%D0%BB%D1%85%D0%B8 "Япон чĕлхи – Chuvash")
+* [Cymraeg](https://cy.wikipedia.org/wiki/Japaneg "Japaneg – Welsh")
+* [Dansk](https://da.wikipedia.org/wiki/Japansk_%28sprog%29 "Japansk (sprog) – Danish")
+* [Deutsch](https://de.wikipedia.org/wiki/Japanische_Sprache "Japanische Sprache – German")
+* [Zazaki](https://diq.wikipedia.org/wiki/Japonki "Japonki – Dimli")
+* [Dolnoserbski](https://dsb.wikipedia.org/wiki/Japa%C5%84%C5%A1%C4%87ina "Japańšćina – Lower Sorbian")
+* [Kadazandusun](https://dtp.wikipedia.org/wiki/Boros_Jipun "Boros Jipun – Central Dusun")
+* [ދިވެހިބަސް](https://dv.wikipedia.org/wiki/%DE%96%DE%A6%DE%95%DE%A7%DE%82%DE%A9 "ޖަޕާނީ – Divehi")
+* [Ελληνικά](https://el.wikipedia.org/wiki/%CE%99%CE%B1%CF%80%CF%89%CE%BD%CE%B9%CE%BA%CE%AE_%CE%B3%CE%BB%CF%8E%CF%83%CF%83%CE%B1 "Ιαπωνική γλώσσα – Greek")
+* [Esperanto](https://eo.wikipedia.org/wiki/Japana_lingvo "Japana lingvo – Esperanto")
+* [Español](https://es.wikipedia.org/wiki/Idioma_japon%C3%A9s "Idioma japonés – Spanish")
+* [Eesti](https://et.wikipedia.org/wiki/Jaapani_keel "Jaapani keel – Estonian")
+* [Euskara](https://eu.wikipedia.org/wiki/Japoniera "Japoniera – Basque")
+* [Estremeñu](https://ext.wikipedia.org/wiki/Lengua_japonesa "Lengua japonesa – Extremaduran")
+* [فارسی](https://fa.wikipedia.org/wiki/%D8%B2%D8%A8%D8%A7%D9%86_%DA%98%D8%A7%D9%BE%D9%86%DB%8C "زبان ژاپنی – Persian")
+* [Suomi](https://fi.wikipedia.org/wiki/Japanin_kieli "Japanin kieli – Finnish")
+* [Võro](https://fiu-vro.wikipedia.org/wiki/Jaapani_kiil "Jaapani kiil – Võro")
+* [Føroyskt](https://fo.wikipedia.org/wiki/Japanskt_m%C3%A1l "Japanskt mál – Faroese")
+* [Français](https://fr.wikipedia.org/wiki/Japonais "Japonais – French")
+* [Arpetan](https://frp.wikipedia.org/wiki/Japon%C3%AAs "Japonês – Arpitan")
+* [Nordfriisk](https://frr.wikipedia.org/wiki/Japoonsk_spriak "Japoonsk spriak – Northern Frisian")
+* [Frysk](https://fy.wikipedia.org/wiki/Japansk "Japansk – Western Frisian")
+* [Gaeilge](https://ga.wikipedia.org/wiki/An_tSeap%C3%A1inis "An tSeapáinis – Irish")
+* [Gagauz](https://gag.wikipedia.org/wiki/Yapon_dili "Yapon dili – Gagauz")
+* [贛語](https://gan.wikipedia.org/wiki/%E6%97%A5%E8%AF%AD "日语 – Gan")
+* [Kriyòl gwiyannen](https://gcr.wikipedia.org/wiki/Japon%C3%A8 "Japonè – Guianan Creole")
+* [Gàidhlig](https://gd.wikipedia.org/wiki/Iapanais "Iapanais – Scottish Gaelic")
+* [Galego](https://gl.wikipedia.org/wiki/Lingua_xaponesa "Lingua xaponesa – Galician")
+* [Avañe'ẽ](https://gn.wikipedia.org/wiki/Hap%C3%B5%C3%B1e%E2%80%99%E1%BA%BD "Hapõñe’ẽ – Guarani")
+* [Gaelg](https://gv.wikipedia.org/wiki/Shapaanish "Shapaanish – Manx")
+* [Hausa](https://ha.wikipedia.org/wiki/Harshen_Japan "Harshen Japan – Hausa")
+* [客家語 / Hak-kâ-ngî](https://hak.wikipedia.org/wiki/Ngi%CC%8Dt-p%C3%BAn-ng%C3%AE "Ngi̍t-pún-ngî – Hakka Chinese")
+* [Hawaiʻi](https://haw.wikipedia.org/wiki/%CA%BB%C5%8Clelo_I%C4%81pana "ʻŌlelo Iāpana – Hawaiian")
+* [עברית](https://he.wikipedia.org/wiki/%D7%99%D7%A4%D7%A0%D7%99%D7%AA "יפנית – Hebrew")
+* [हिन्दी](https://hi.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Hindi")
+* [Fiji Hindi](https://hif.wikipedia.org/wiki/Japanese_bhasa "Japanese bhasa – Fiji Hindi")
+* [Hrvatski](https://hr.wikipedia.org/wiki/Japanski_jezik "Japanski jezik – Croatian")
+* [Hornjoserbsce](https://hsb.wikipedia.org/wiki/Japan%C5%A1%C4%87ina "Japanšćina – Upper Sorbian")
+* [Kreyòl ayisyen](https://ht.wikipedia.org/wiki/Lang_japon%C3%A8 "Lang japonè – Haitian Creole")
+* [Magyar](https://hu.wikipedia.org/wiki/Jap%C3%A1n_nyelv "Japán nyelv – Hungarian")
+* [Հայերեն](https://hy.wikipedia.org/wiki/%D5%83%D5%A1%D5%BA%D5%B8%D5%B6%D5%A5%D6%80%D5%A5%D5%B6 "Ճապոներեն – Armenian")
+* [Արեւմտահայերէն](https://hyw.wikipedia.org/wiki/%D5%83%D5%A1%D6%83%D5%B8%D5%B6%D5%A5%D6%80%D5%A7%D5%B6 "Ճափոներէն – Western Armenian")
+* [Interlingua](https://ia.wikipedia.org/wiki/Lingua_japonese "Lingua japonese – Interlingua")
+* [Jaku Iban](https://iba.wikipedia.org/wiki/Jaku_Jipun "Jaku Jipun – Iban")
+* [Bahasa Indonesia](https://id.wikipedia.org/wiki/Bahasa_Jepang "Bahasa Jepang – Indonesian")
+* [Ilokano](https://ilo.wikipedia.org/wiki/Pagsasao_a_Hapon "Pagsasao a Hapon – Iloko")
+* [ГӀалгӀай](https://inh.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D0%B8%D0%B9_%D0%BC%D0%BE%D1%82%D1%82 "Японий мотт – Ingush")
+* [Ido](https://io.wikipedia.org/wiki/Japoniana_linguo "Japoniana linguo – Ido")
+* [Íslenska](https://is.wikipedia.org/wiki/Japanska "Japanska – Icelandic")
+* [Medžuslovjansky](https://isv.wikipedia.org/wiki/Japonsky_jezyk "Japonsky jezyk – Interslavic")
+* [Italiano](https://it.wikipedia.org/wiki/Lingua_giapponese "Lingua giapponese – Italian")
+* [日本語](https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E8%AA%9E "日本語 – Japanese")
+* [Patois](https://jam.wikipedia.org/wiki/Japaniiz_languij "Japaniiz languij – Jamaican Creole English")
+* [La .lojban.](https://jbo.wikipedia.org/wiki/ponbau "ponbau – Lojban")
+* [Jawa](https://jv.wikipedia.org/wiki/Basa_Jepang "Basa Jepang – Javanese")
+* [ქართული](https://ka.wikipedia.org/wiki/%E1%83%98%E1%83%90%E1%83%9E%E1%83%9D%E1%83%9C%E1%83%A3%E1%83%A0%E1%83%98_%E1%83%94%E1%83%9C%E1%83%90 "იაპონური ენა – Georgian")
+* [Qaraqalpaqsha](https://kaa.wikipedia.org/wiki/Yapon_tili "Yapon tili – Kara-Kalpak")
+* [Taqbaylit](https://kab.wikipedia.org/wiki/Tajapunit "Tajapunit – Kabyle")
+* [Адыгэбзэ](https://kbd.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%8B%D0%B1%D0%B7%D1%8D "Японыбзэ – Kabardian")
+* [Kabɩyɛ](https://kbp.wikipedia.org/wiki/Sap%C9%94%C5%8B_k%CA%8An%CA%8A%C5%8B "Sapɔŋ kʊnʊŋ – Kabiye")
+* [Tyap](https://kcg.wikipedia.org/wiki/Ja%CC%B1pan_%28a%CC%B1lyem%29 "Ja̱pan (a̱lyem) – Tyap")
+* [Kumoring](https://kge.wikipedia.org/wiki/Basa_Jopang "Basa Jopang – Komering")
+* [Қазақша](https://kk.wikipedia.org/wiki/%D0%96%D0%B0%D0%BF%D0%BE%D0%BD_%D1%82%D1%96%D0%BB%D1%96 "Жапон тілі – Kazakh")
+* [ភាសាខ្មែរ](https://km.wikipedia.org/wiki/%E1%9E%97%E1%9E%B6%E1%9E%9F%E1%9E%B6%E1%9E%87%E1%9E%94%E1%9F%89%E1%9E%BB%E1%9E%93 "ភាសាជប៉ុន – Khmer")
+* [ಕನ್ನಡ](https://kn.wikipedia.org/wiki/%E0%B2%9C%E0%B2%AA%E0%B2%BE%E0%B2%A8%E0%B2%BF_%E0%B2%AD%E0%B2%BE%E0%B2%B7%E0%B3%86 "ಜಪಾನಿ ಭಾಷೆ – Kannada")
+* [Yerwa Kanuri](https://knc.wikipedia.org/wiki/Japanese "Japanese – Central Kanuri")
+* [한국어](https://ko.wikipedia.org/wiki/%EC%9D%BC%EB%B3%B8%EC%96%B4 "일본어 – Korean")
+* [Къарачай-малкъар](https://krc.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%82%D0%B8%D0%BB "Япон тил – Karachay-Balkar")
+* [کٲشُر](https://ks.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D9%B2%D9%86%D8%A0_%D8%B2%D9%8E%D8%A8%D8%A7%D9%86 "جاپٲنؠ زَبان – Kashmiri")
+* [Kurdî](https://ku.wikipedia.org/wiki/Ziman%C3%AA_japon%C3%AE "Zimanê japonî – Kurdish")
+* [Коми](https://kv.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D0%BA%D1%8B%D0%B2 "Япон кыв – Komi")
+* [Kernowek](https://kw.wikipedia.org/wiki/Nihonek "Nihonek – Cornish")
+* [Кыргызча](https://ky.wikipedia.org/wiki/%D0%96%D0%B0%D0%BF%D0%BE%D0%BD_%D1%82%D0%B8%D0%BB%D0%B8 "Жапон тили – Kyrgyz")
+* [Latina](https://la.wikipedia.org/wiki/Lingua_Iaponica "Lingua Iaponica – Latin")
+* [Ladino](https://lad.wikipedia.org/wiki/Lingua_japoneza "Lingua japoneza – Ladino")
+* [Lëtzebuergesch](https://lb.wikipedia.org/wiki/Japanesch "Japanesch – Luxembourgish")
+* [Лакку](https://lbe.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D0%B8%D1%8F%D0%BD%D0%B0%D0%BB_%D0%BC%D0%B0%D0%B7 "Япониянал маз – Lak")
+* [Лезги](https://lez.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%87%D3%80%D0%B0%D0%BB "Япон чӀал – Lezghian")
+* [Lingua Franca Nova](https://lfn.wikipedia.org/wiki/Nion_%28lingua%29 "Nion (lingua) – Lingua Franca Nova")
+* [Limburgs](https://li.wikipedia.org/wiki/Japans "Japans – Limburgish")
+* [Ladin](https://lld.wikipedia.org/wiki/Lingaz_iapanesc "Lingaz iapanesc – Ladin")
+* [Lombard](https://lmo.wikipedia.org/wiki/Lengua_giapponesa "Lengua giapponesa – Lombard")
+* [Lingála](https://ln.wikipedia.org/wiki/Lizap%C9%94%CC%81 "Lizapɔ́ – Lingala")
+* [ລາວ](https://lo.wikipedia.org/wiki/%E0%BA%9E%E0%BA%B2%E0%BA%AA%E0%BA%B2%E0%BA%8D%E0%BA%B5%E0%BB%88%E0%BA%9B%E0%BA%B8%E0%BB%88%E0%BA%99 "ພາສາຍີ່ປຸ່ນ – Lao")
+* [Lietuvių](https://lt.wikipedia.org/wiki/Japon%C5%B3_kalba "Japonų kalba – Lithuanian")
+* [Latviešu](https://lv.wikipedia.org/wiki/Jap%C4%81%C5%86u_valoda "Japāņu valoda – Latvian")
+* [Madhurâ](https://mad.wikipedia.org/wiki/Bh%C3%A2sa_Jeppang "Bhâsa Jeppang – Madurese")
+* [मगही](https://mag.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानीभाषा – Magahi")
+* [मैथिली](https://mai.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Maithili")
+* [Basa Banyumasan](https://map-bms.wikipedia.org/wiki/Basa_Jepang "Basa Jepang – Banyumasan")
+* [Мокшень](https://mdf.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D0%BE%D0%BD%D1%8C_%D0%BA%D1%8F%D0%BB%D1%8C "Япононь кяль – Moksha")
+* [Malagasy](https://mg.wikipedia.org/wiki/Fiteny_jap%C3%B4ney "Fiteny japôney – Malagasy")
+* [Олык марий](https://mhr.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D0%B9%D1%8B%D0%BB%D0%BC%D0%B5 "Япон йылме – Eastern Mari")
+* [Māori](https://mi.wikipedia.org/wiki/Reo_Hapani "Reo Hapani – Māori")
+* [Minangkabau](https://min.wikipedia.org/wiki/Bahaso_Japang "Bahaso Japang – Minangkabau")
+* [Македонски](https://mk.wikipedia.org/wiki/%D0%88%D0%B0%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B8_%D1%98%D0%B0%D0%B7%D0%B8%D0%BA "Јапонски јазик – Macedonian")
+* [മലയാളം](https://ml.wikipedia.org/wiki/%E0%B4%9C%E0%B4%BE%E0%B4%AA%E0%B5%8D%E0%B4%AA%E0%B4%A8%E0%B5%80%E0%B4%B8%E0%B5%8D_%E0%B4%AD%E0%B4%BE%E0%B4%B7 "ജാപ്പനീസ് ഭാഷ – Malayalam")
+* [Монгол](https://mn.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%85%D1%8D%D0%BB "Япон хэл – Mongolian")
+* [ꯃꯤꯇꯩ ꯂꯣꯟ](https://mni.wikipedia.org/wiki/%EA%AF%96%EA%AF%84%EA%AF%A5%EA%AF%85%EA%AF%A4%EA%AF%81_%EA%AF%82%EA%AF%A3%EA%AF%9F "ꯖꯄꯥꯅꯤꯁ ꯂꯣꯟ – Manipuri")
+* [मराठी](https://mr.wikipedia.org/wiki/%E0%A4%9C%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जपानी भाषा – Marathi")
+* [Bahasa Melayu](https://ms.wikipedia.org/wiki/Bahasa_Jepun "Bahasa Jepun – Malay")
+* [Mirandés](https://mwl.wikipedia.org/wiki/Lh%C3%A9ngua_japonesa "Lhéngua japonesa – Mirandese")
+* [မြန်မာဘာသာ](https://my.wikipedia.org/wiki/%E1%80%82%E1%80%BB%E1%80%95%E1%80%94%E1%80%BA%E1%80%98%E1%80%AC%E1%80%9E%E1%80%AC%E1%80%85%E1%80%80%E1%80%AC%E1%80%B8 "ဂျပန်ဘာသာစကား – Burmese")
+* [Эрзянь](https://myv.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D0%BE%D0%BD%D1%8C_%D0%BA%D0%B5%D0%BB%D1%8C "Япононь кель – Erzya")
+* [مازِرونی](https://mzn.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D9%88%D9%86%DB%8C_%D8%B2%D9%88%D9%88%D9%86 "جاپونی زوون – Mazanderani")
+* [Nedersaksies](https://nds-nl.wikipedia.org/wiki/Japans "Japans – Low Saxon")
+* [Plattdüütsch](https://nds.wikipedia.org/wiki/Japaansche_Spraak "Japaansche Spraak – Low German")
+* [नेपाली](https://ne.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Nepali")
+* [नेपाल भाषा](https://new.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Newari")
+* [Nederlands](https://nl.wikipedia.org/wiki/Japans "Japans – Dutch")
+* [Norsk nynorsk](https://nn.wikipedia.org/wiki/Japansk "Japansk – Norwegian Nynorsk")
+* [Norsk bokmål](https://no.wikipedia.org/wiki/Japansk "Japansk – Norwegian Bokmål")
+* [Novial](https://nov.wikipedia.org/wiki/Japanum "Japanum – Novial")
+* [Sesotho sa Leboa](https://nso.wikipedia.org/wiki/Sejapane "Sejapane – Northern Sotho")
+* [Occitan](https://oc.wikipedia.org/wiki/Japon%C3%A9s "Japonés – Occitan")
+* [Livvinkarjala](https://olo.wikipedia.org/wiki/Japounien_kieli "Japounien kieli – Livvi-Karelian")
+* [ଓଡ଼ିଆ](https://or.wikipedia.org/wiki/%E0%AC%9C%E0%AC%BE%E0%AC%AA%E0%AC%BE%E0%AC%A8%E0%AD%80_%E0%AC%AD%E0%AC%BE%E0%AC%B7%E0%AC%BE "ଜାପାନୀ ଭାଷା – Odia")
+* [Ирон](https://os.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%B9%D0%BD%D0%B0%D0%B3_%C3%A6%D0%B2%D0%B7%D0%B0%D0%B3 "Япойнаг æвзаг – Ossetic")
+* [ਪੰਜਾਬੀ](https://pa.wikipedia.org/wiki/%E0%A8%9C%E0%A8%AA%E0%A8%BE%E0%A8%A8%E0%A9%80_%E0%A8%AD%E0%A8%BE%E0%A8%B8%E0%A8%BC%E0%A8%BE "ਜਪਾਨੀ ਭਾਸ਼ਾ – Punjabi")
+* [Kapampangan](https://pam.wikipedia.org/wiki/Amanung_Hapones "Amanung Hapones – Pampanga")
+* [Papiamentu](https://pap.wikipedia.org/wiki/Hapones_%28idioma%29 "Hapones (idioma) – Papiamento")
+* [Picard](https://pcd.wikipedia.org/wiki/Japono%C3%A9s "Japonoés – Picard")
+* [Polski](https://pl.wikipedia.org/wiki/J%C4%99zyk_japo%C5%84ski "Język japoński – Polish")
+* [Piemontèis](https://pms.wikipedia.org/wiki/Lenga_giapon%C3%A8isa "Lenga giaponèisa – Piedmontese")
+* [پنجابی](https://pnb.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D8%A7%D9%86%DB%8C "جاپانی – Western Punjabi")
+* [پښتو](https://ps.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D8%A7%D9%86%D9%8A_%DA%98%D8%A8%D9%87 "جاپاني ژبه – Pashto")
+* [Português](https://pt.wikipedia.org/wiki/L%C3%ADngua_japonesa "Língua japonesa – Portuguese")
+* [Runa Simi](https://qu.wikipedia.org/wiki/Hapun_simi "Hapun simi – Quechua")
+* [Română](https://ro.wikipedia.org/wiki/Limba_japonez%C4%83 "Limba japoneză – Romanian")
+* [Tarandíne](https://roa-tara.wikipedia.org/wiki/L%C3%A8nga_giapponese "Lènga giapponese – Tarantino")
+* [Русский](https://ru.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA "Японский язык – Russian")
+* [Русиньскый](https://rue.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%8C%D1%81%D0%BA%D1%8B%D0%B9_%D1%8F%D0%B7%D1%8B%D0%BA "Японьскый язык – Rusyn")
+* [Ikinyarwanda](https://rw.wikipedia.org/wiki/Ikiyapani "Ikiyapani – Kinyarwanda")
+* [संस्कृतम्](https://sa.wikipedia.org/wiki/%E0%A4%9C%E0%A4%BE%E0%A4%AA%E0%A4%BE%E0%A4%A8%E0%A5%80_%E0%A4%AD%E0%A4%BE%E0%A4%B7%E0%A4%BE "जापानी भाषा – Sanskrit")
+* [Саха тыла](https://sah.wikipedia.org/wiki/%D0%94%D1%8C%D0%BE%D0%BF%D0%BF%D1%83%D0%BE%D0%BD_%D1%82%D1%8B%D0%BB%D0%B0 "Дьоппуон тыла – Yakut")
+* [ᱥᱟᱱᱛᱟᱲᱤ](https://sat.wikipedia.org/wiki/%E1%B1%A1%E1%B1%9F%E1%B1%AF%E1%B1%9F%E1%B1%B1%E1%B1%A4%E1%B1%AD%E1%B1%9F%E1%B1%B9_%E1%B1%AF%E1%B1%9F%E1%B1%B9%E1%B1%A8%E1%B1%A5%E1%B1%A4 "ᱡᱟᱯᱟᱱᱤᱭᱟᱹ ᱯᱟᱹᱨᱥᱤ – Santali")
+* [Sardu](https://sc.wikipedia.org/wiki/Limba_giaponesa "Limba giaponesa – Sardinian")
+* [Sicilianu](https://scn.wikipedia.org/wiki/Lingua_giappunisa "Lingua giappunisa – Sicilian")
+* [Scots](https://sco.wikipedia.org/wiki/Japanese_leid "Japanese leid – Scots")
+* [سنڌي](https://sd.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D8%A7%D9%86%D9%8A_%D9%BB%D9%88%D9%84%D9%8A "جاپاني ٻولي – Sindhi")
+* [Davvisámegiella](https://se.wikipedia.org/wiki/Jap%C3%A1nagiella "Japánagiella – Northern Sami")
+* [Srpskohrvatski / српскохрватски](https://sh.wikipedia.org/wiki/Japanski_jezik "Japanski jezik – Serbo-Croatian")
+* [Taclḥit](https://shi.wikipedia.org/wiki/Tutlayt_Tajapunit "Tutlayt Tajapunit – Tachelhit")
+* [සිංහල](https://si.wikipedia.org/wiki/%E0%B6%A2%E0%B6%B4%E0%B6%B1%E0%B7%8A_%E0%B6%B7%E0%B7%8F%E0%B7%82%E0%B7%8F%E0%B7%80 "ජපන් භාෂාව – Sinhala")
+* [Simple English](https://simple.wikipedia.org/wiki/Japanese_language "Japanese language – Simple English")
+* [Slovenčina](https://sk.wikipedia.org/wiki/Japon%C4%8Dina "Japončina – Slovak")
+* [Slovenščina](https://sl.wikipedia.org/wiki/Japon%C5%A1%C4%8Dina "Japonščina – Slovenian")
+* [Gagana Samoa](https://sm.wikipedia.org/wiki/Fa%CA%BBa_Iapani "Faʻa Iapani – Samoan")
+* [ChiShona](https://sn.wikipedia.org/wiki/Chijapani "Chijapani – Shona")
+* [Shqip](https://sq.wikipedia.org/wiki/Gjuha_japoneze "Gjuha japoneze – Albanian")
+* [Српски / srpski](https://sr.wikipedia.org/wiki/%D0%88%D0%B0%D0%BF%D0%B0%D0%BD%D1%81%D0%BA%D0%B8_%D1%98%D0%B5%D0%B7%D0%B8%D0%BA "Јапански језик – Serbian")
+* [Sunda](https://su.wikipedia.org/wiki/Basa_Jepang "Basa Jepang – Sundanese")
+* [Svenska](https://sv.wikipedia.org/wiki/Japanska "Japanska – Swedish")
+* [Kiswahili](https://sw.wikipedia.org/wiki/Kijapani "Kijapani – Swahili")
+* [Ślůnski](https://szl.wikipedia.org/wiki/Jap%C5%AF%C5%84sko_godka "Japůńsko godka – Silesian")
+* [தமிழ்](https://ta.wikipedia.org/wiki/%E0%AE%9A%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%BE%E0%AE%A9%E0%AE%BF%E0%AE%AF_%E0%AE%AE%E0%AF%8A%E0%AE%B4%E0%AE%BF "சப்பானிய மொழி – Tamil")
+* [ತುಳು](https://tcy.wikipedia.org/wiki/%E0%B2%9C%E0%B2%AA%E0%B2%BE%E0%B2%A8%E0%B2%BF_%E0%B2%AC%E0%B2%BE%E0%B2%B8%E0%B3%86 "ಜಪಾನಿ ಬಾಸೆ – Tulu")
+* [తెలుగు](https://te.wikipedia.org/wiki/%E0%B0%9C%E0%B0%AA%E0%B0%A8%E0%B1%80%E0%B0%B8%E0%B1%8D_%E0%B0%AD%E0%B0%BE%E0%B0%B7 "జపనీస్ భాష – Telugu")
+* [Тоҷикӣ](https://tg.wikipedia.org/wiki/%D0%97%D0%B0%D0%B1%D0%BE%D0%BD%D0%B8_%D2%B7%D0%BE%D0%BF%D0%BE%D0%BD%D3%A3 "Забони ҷопонӣ – Tajik")
+* [ไทย](https://th.wikipedia.org/wiki/%E0%B8%A0%E0%B8%B2%E0%B8%A9%E0%B8%B2%E0%B8%8D%E0%B8%B5%E0%B9%88%E0%B8%9B%E0%B8%B8%E0%B9%88%E0%B8%99 "ภาษาญี่ปุ่น – Thai")
+* [Türkmençe](https://tk.wikipedia.org/wiki/%C3%9Dapon_dili "Ýapon dili – Turkmen")
+* [Tagalog](https://tl.wikipedia.org/wiki/Wikang_Hapones "Wikang Hapones – Tagalog")
+* [Tolışi](https://tly.wikipedia.org/wiki/Japoni_zyvon "Japoni zyvon – Talysh")
+* [Toki pona](https://tok.wikipedia.org/wiki/toki_Nijon "toki Nijon – Toki Pona")
+* [Tok Pisin](https://tpi.wikipedia.org/wiki/Tokples_Siapan "Tokples Siapan – Tok Pisin")
+* [Türkçe](https://tr.wikipedia.org/wiki/Japonca "Japonca – Turkish")
+* [Seediq](https://trv.wikipedia.org/wiki/Kari_Tanah_Tunux "Kari Tanah Tunux – Taroko")
+* [Татарча / tatarça](https://tt.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D1%82%D0%B5%D0%BB%D0%B5 "Япон теле – Tatar")
+* [Reo tahiti](https://ty.wikipedia.org/wiki/Reo_T%C4%81p%C5%8Dn%C4%93 "Reo Tāpōnē – Tahitian")
+* [Тыва дыл](https://tyv.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D0%B4%D1%8B%D0%BB "Япон дыл – Tuvinian")
+* [Удмурт](https://udm.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD_%D0%BA%D1%8B%D0%BB "Япон кыл – Udmurt")
+* [ئۇيغۇرچە / Uyghurche](https://ug.wikipedia.org/wiki/%D9%8A%D8%A7%D9%BE%D9%88%D9%86%DA%86%DB%95 "ياپونچە – Uyghur")
+* [Українська](https://uk.wikipedia.org/wiki/%D0%AF%D0%BF%D0%BE%D0%BD%D1%81%D1%8C%D0%BA%D0%B0_%D0%BC%D0%BE%D0%B2%D0%B0 "Японська мова – Ukrainian")
+* [اردو](https://ur.wikipedia.org/wiki/%D8%AC%D8%A7%D9%BE%D8%A7%D9%86%DB%8C_%D8%B2%D8%A8%D8%A7%D9%86 "جاپانی زبان – Urdu")
+* [Oʻzbekcha / ўзбекча](https://uz.wikipedia.org/wiki/Yapon_tili "Yapon tili – Uzbek")
+* [Vèneto](https://vec.wikipedia.org/wiki/%C5%81%C3%A9ngua_japoneza "Łéngua japoneza – Venetian")
+* [Vepsän kel’](https://vep.wikipedia.org/wiki/Japonan_kel%27 "Japonan kel' – Veps")
+* [Tiếng Việt](https://vi.wikipedia.org/wiki/Ti%E1%BA%BFng_Nh%E1%BA%ADt "Tiếng Nhật – Vietnamese")
+* [Volapük](https://vo.wikipedia.org/wiki/Yap%C3%A4nap%C3%BCk "Yapänapük – Volapük")
+* [Walon](https://wa.wikipedia.org/wiki/Djapon%C3%A8s_%28lingaedje%29 "Djaponès (lingaedje) – Walloon")
+* [Winaray](https://war.wikipedia.org/wiki/Hinapon "Hinapon – Waray")
+* [吴语](https://wuu.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E9%97%B2%E8%AF%9D "日本闲话 – Wu")
+* [Хальмг](https://xal.wikipedia.org/wiki/%D0%9D%D0%B8%D0%BF%D0%BE%D0%BD%D0%BC%D1%83%D0%B4%D0%BD_%D0%BA%D0%B5%D0%BB%D0%BD "Нипонмудн келн – Kalmyk")
+* [მარგალური](https://xmf.wikipedia.org/wiki/%E1%83%98%E1%83%90%E1%83%9E%E1%83%9D%E1%83%9C%E1%83%A3%E1%83%A0%E1%83%98_%E1%83%9C%E1%83%98%E1%83%9C%E1%83%90 "იაპონური ნინა – Mingrelian")
+* [ייִדיש](https://yi.wikipedia.org/wiki/%D7%99%D7%90%D7%A4%D7%90%D7%A0%D7%99%D7%A9 "יאפאניש – Yiddish")
+* [Yorùbá](https://yo.wikipedia.org/wiki/%C3%88d%C3%A8_Japan%C3%AD "Èdè Japaní – Yoruba")
+* [Vahcuengh](https://za.wikipedia.org/wiki/Vah_Nyiedbonj "Vah Nyiedbonj – Zhuang")
+* [ⵜⴰⵎⴰⵣⵉⵖⵜ ⵜⴰⵏⴰⵡⴰⵢⵜ](https://zgh.wikipedia.org/wiki/%E2%B5%9C%E2%B5%93%E2%B5%9C%E2%B5%8D%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%9C%E2%B4%B0%E2%B5%8F%E2%B5%89%E2%B4%B1%E2%B5%93%E2%B5%8F%E2%B5%9C "ⵜⵓⵜⵍⴰⵢⵜ ⵜⴰⵏⵉⴱⵓⵏⵜ – Standard Moroccan Tamazight")
+* [文言](https://zh-classical.wikipedia.org/wiki/%E6%97%A5%E8%AA%9E "日語 – Literary Chinese")
+* [閩南語 / Bân-lâm-gí](https://zh-min-nan.wikipedia.org/wiki/Ji%CC%8Dt-p%C3%BAn-g%C3%AD "Ji̍t-pún-gí – Minnan")
+* [粵語](https://zh-yue.wikipedia.org/wiki/%E6%97%A5%E6%96%87 "日文 – Cantonese")
+* [中文](https://zh.wikipedia.org/wiki/%E6%97%A5%E8%AF%AD "日语 – Chinese")
+* [IsiZulu](https://zu.wikipedia.org/wiki/IsiJapani "IsiJapani – Zulu")
+
+[Edit links](https://www.wikidata.org/wiki/Special%3AEntityPage/Q5287#sitelinks-wikipedia "Edit interlanguage links")
+
+* [Article](/wiki/Japanese_language "View the content page [c]")
+* [Talk](/wiki/Talk%3AJapanese_language "Discuss improvements to the content page [t]")
+
+[ ]
+English
+
+* [Read](/wiki/Japanese_language)
+* [View source](/w/index.php?title=Japanese_language&action=edit "This page is protected.
+  You can view its source [e]")
+* [View history](/w/index.php?title=Japanese_language&action=history "Past revisions of this page [h]")
+
+[ ]
+
+Tools
+
+Tools
+
+move to sidebar
+hide
+
+Actions
+
+* [Read](/wiki/Japanese_language)
+* [View source](/w/index.php?title=Japanese_language&action=edit "This page is protected.
+  You can view its source [e]")
+* [View history](/w/index.php?title=Japanese_language&action=history "Past revisions of this page [h]")
+
+General
+
+* [What links here](/wiki/Special%3AWhatLinksHere/Japanese_language "List of all English Wikipedia pages containing links to this page [j]")
+* [Related changes](/wiki/Special%3ARecentChangesLinked/Japanese_language "Recent changes in pages linked from this page [k]")
+* [Upload file](//en.wikipedia.org/wiki/Wikipedia%3AFile_Upload_Wizard "Upload files [u]")
+* [Permanent link](/w/index.php?title=Japanese_language&oldid=1381018959 "Permanent link to this revision of this page")
+* [Page information](/w/index.php?title=Japanese_language&action=info "More information about this page")
+* [Cite this page](/w/index.php?title=Special:CiteThisPage&page=Japanese_language&id=1381018959&wpFormIdentifier=titleform "Information on how to cite this page")
+* [Get shortened URL](/w/index.php?title=Special:UrlShortener&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FJapanese_language)
+* [Switch to legacy parser](/w/index.php?title=Japanese_language&useparsoid=0)
+
+Print/export
+
+* [Download as PDF](/w/index.php?title=Special:DownloadAsPdf&page=Japanese_language&action=show-download-screen "Download this page as a PDF file")
+* Printable version
+
+In other projects
+
+* [Abstract Wikipedia](https://abstract.wikipedia.org/wiki/Q5287)
+* [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category%3AJapanese_language)
+* [Wikibooks](https://en.wikibooks.org/wiki/Japanese)
+* [Wikifunctions](https://www.wikifunctions.org/wiki/Z1830)
+* [Wikiquote](https://en.wikiquote.org/wiki/Japanese_language)
+* [Wikiversity](https://en.wikiversity.org/wiki/Portal%3AJapanese)
+* [Wikivoyage](https://en.wikivoyage.org/wiki/Japanese_phrasebook)
+* [Wikidata item](https://www.wikidata.org/wiki/Special%3AEntityPage/Q5287 "Structured data on this page hosted by Wikidata [g]")
+
+Appearance
+
+move to sidebar
+hide
+
+[![Page semi-protected](//thumb.wikimedia.org/wikipedia/en/thumb/1/1b/Semi-protection-shackle.svg/20px-Semi-protection-shackle.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/Wikipedia%3AProtection_policy#semi "This article is semi-protected due to vandalism")
+
+From Wikipedia, the free encyclopedia
+
+(Redirected from [日本語](/w/index.php?title=%E6%97%A5%E6%9C%AC%E8%AA%9E&redirect=no "日本語"))
+
+Japonic language
+
+"Nihongo" redirects here; not to be confused with [Nihonga](https://en.wikipedia.org/wiki/Nihonga "Nihonga").
+
+| Japanese | |
+| --- | --- |
+| 日本語 (*Nihongo*) | |
+| [![](//thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Nihongo.svg/120px-Nihongo.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3ANihongo.svg) The *[kanji](https://en.wikipedia.org/wiki/Kanji "Kanji")* for "Japanese language" (read *nihongo*) | |
+| Pronunciation | [[ɲihoŋɡo]](https://en.wikipedia.org/wiki/Help%3AIPA/Japanese "Help:IPA/Japanese") [ⓘ](/wiki/File%3AJa-nihongo.ogg "File:Ja-nihongo.ogg") |
+| Native to | [Japan](https://en.wikipedia.org/wiki/Japan "Japan") |
+| Ethnicity | [Japanese](https://en.wikipedia.org/wiki/Japanese_people "Japanese people") ([Yamato](https://en.wikipedia.org/wiki/Yamato_people "Yamato people")) |
+| Native speakers | 123 million (2020)[[1]](#cite_note-e27-1) |
+| [Language family](https://en.wikipedia.org/wiki/Language_family "Language family") | [Japonic](https://en.wikipedia.org/wiki/Japonic_languages "Japonic languages")  * [Insular](https://en.wikipedia.org/wiki/Insular_Japonic_languages "Insular Japonic languages")   + **Japanese** |
+| Early forms | [Proto-Japonic](https://en.wikipedia.org/wiki/Proto-Japonic "Proto-Japonic")  * [Old Japanese](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese")   + [Early Middle Japanese](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese")     - [Late Middle Japanese](https://en.wikipedia.org/wiki/Late_Middle_Japanese "Late Middle Japanese")       * [Early Modern Japanese](https://en.wikipedia.org/wiki/Early_Modern_Japanese "Early Modern Japanese") |
+| Dialects | * [Eastern](https://en.wikipedia.org/wiki/Eastern_Japanese "Eastern Japanese") * [Western](https://en.wikipedia.org/wiki/Western_Japanese "Western Japanese") * [Kyūshū](https://en.wikipedia.org/wiki/Ky%C5%ABsh%C5%AB_Japanese "Kyūshū Japanese") * [Hachijō](https://en.wikipedia.org/wiki/Hachij%C5%8D_language "Hachijō language") |
+| [Writing system](https://en.wikipedia.org/wiki/Writing_system "Writing system") | * [Mixed scripts](https://en.wikipedia.org/wiki/Japanese_writing_system "Japanese writing system") of [kanji](https://en.wikipedia.org/wiki/Kanji "Kanji") ([Chinese characters](https://en.wikipedia.org/wiki/Chinese_characters "Chinese characters")) and [kana](https://en.wikipedia.org/wiki/Kana "Kana") ([hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana"), [katakana](https://en.wikipedia.org/wiki/Katakana "Katakana")) * [Japanese Braille](https://en.wikipedia.org/wiki/Japanese_Braille "Japanese Braille") |
+| [Signed forms](https://en.wikipedia.org/wiki/Manually_coded_language "Manually coded language") | [Signed Japanese](https://en.wikipedia.org/wiki/Signed_Japanese "Signed Japanese") |
+| Official status | |
+| Official language in | [Palau](https://en.wikipedia.org/wiki/Palau "Palau") (on [Angaur Island](https://en.wikipedia.org/wiki/Angaur_Island "Angaur Island")) |
+| Language codes | |
+| [ISO 639-1](https://en.wikipedia.org/wiki/ISO_639-1 "ISO 639-1") | `[ja](https://www.loc.gov/standards/iso639-2/php/langcodes-keyword.php?SearchType=iso_639_1&SearchTerm=ja)` |
+| [ISO 639-2](https://en.wikipedia.org/wiki/ISO_639-2 "ISO 639-2") | `[jpn](https://www.loc.gov/standards/iso639-2/php/langcodes_name.php?code_ID=216)` |
+| [ISO 639-3](https://en.wikipedia.org/wiki/ISO_639-3 "ISO 639-3") | `[jpn](https://iso639-3.sil.org/code/jpn "iso639-3:jpn")` |
+| *[Glottolog](https://en.wikipedia.org/wiki/Glottolog "Glottolog")* | `[nucl1643](https://glottolog.org/resource/languoid/id/nucl1643)`  excluding [Hachijo](https://en.wikipedia.org/wiki/Hachijo_language "Hachijo language"), [Tsugaru](https://en.wikipedia.org/wiki/Tsugaru_dialect "Tsugaru dialect"), and [Kagoshima](https://en.wikipedia.org/wiki/Kagoshima_dialect "Kagoshima dialect") `[japa1256](https://glottolog.org/resource/languoid/id/japa1256)` |
+| [Linguasphere](https://en.wikipedia.org/wiki/Linguasphere_Observatory "Linguasphere Observatory") | `[45-CAA-a](http://www.hortensj-garden.org/index.php?tnc=1&tr=lsr&nid=45-CAA-a)` |
+| **This article contains [IPA](https://en.wikipedia.org/wiki/International_Phonetic_Alphabet "International Phonetic Alphabet") phonetic symbols.** Without proper [rendering support](https://en.wikipedia.org/wiki/Help%3AIPA#Rendering_issues "Help:IPA"), you may see [question marks, boxes, or other symbols](https://en.wikipedia.org/wiki/Specials_%28Unicode_block%29#Replacement_character "Specials (Unicode block)") instead of [Unicode](https://en.wikipedia.org/wiki/Unicode "Unicode") characters. For an introductory guide on IPA symbols, see [Help:IPA](https://en.wikipedia.org/wiki/Help%3AIPA "Help:IPA"). | |
+
+**Japanese** (日本語, *Nihongo, Nippon-*; [[ɲ̟ì.hó̞ŋ́.ɡó̞, ɲ̟ìp̚.pó̞ŋ́-, -ŋó̞]](https://en.wikipedia.org/wiki/Help%3AIPA/Japanese "Help:IPA/Japanese") [ⓘ](/wiki/File%3AJa-nihongo.ogg "File:Ja-nihongo.ogg")[[2]](#cite_note-2)[[3]](#cite_note-3)[[4]](#cite_note-4)) is the principal language of the [Japonic language family](https://en.wikipedia.org/wiki/Japonic_languages "Japonic languages") spoken by the [Japanese people](https://en.wikipedia.org/wiki/Japanese_people "Japanese people"). It has around 123 million speakers, primarily in [Japan](https://en.wikipedia.org/wiki/Japan "Japan"), the only country where it is the [national language](https://en.wikipedia.org/wiki/National_language "National language"), and within the [Japanese diaspora](https://en.wikipedia.org/wiki/Japanese_diaspora "Japanese diaspora") worldwide.
+
+The Japonic family also includes the [Ryukyuan languages](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") and the variously classified [Hachijō language](https://en.wikipedia.org/wiki/Hachij%C5%8D_language "Hachijō language"). There have been many [attempts to group the Japonic languages](https://en.wikipedia.org/wiki/Classification_of_the_Japonic_languages "Classification of the Japonic languages") with other families such as [Ainu](https://en.wikipedia.org/wiki/Ainu_languages "Ainu languages"), [Austronesian](https://en.wikipedia.org/wiki/Austronesian_languages "Austronesian languages"), [Koreanic](https://en.wikipedia.org/wiki/Koreanic_languages "Koreanic languages"), and the now discredited [Altaic](https://en.wikipedia.org/wiki/Altaic_languages "Altaic languages"), but none of these proposals have gained any widespread acceptance.
+
+Little is known of the language's prehistory, or when it first appeared in Japan. Chinese documents from the 3rd century AD recorded a few Japanese words, but substantial [Old Japanese](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese") texts did not appear until the 8th century. From the [Heian period](https://en.wikipedia.org/wiki/Heian_period "Heian period") (794–1185), extensive waves of [Sino-Japanese vocabulary](https://en.wikipedia.org/wiki/Sino-Japanese_vocabulary "Sino-Japanese vocabulary") entered the language, affecting the [phonology](https://en.wikipedia.org/wiki/Phonology "Phonology") of [Early Middle Japanese](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese"). [Late Middle Japanese](https://en.wikipedia.org/wiki/Late_Middle_Japanese "Late Middle Japanese") (1185–1600) saw extensive grammatical changes and the first appearance of [European loanwords](https://en.wikipedia.org/wiki/Gairaigo "Gairaigo"). The basis of the [standard dialect](https://en.wikipedia.org/wiki/Standard_Japanese "Standard Japanese") moved from the [Kansai](https://en.wikipedia.org/wiki/Kansai "Kansai") region to the [Edo](https://en.wikipedia.org/wiki/Edo_%28Tokyo%29 "Edo (Tokyo)") region (modern [Tokyo](https://en.wikipedia.org/wiki/Tokyo "Tokyo")) in the [Early Modern Japanese](https://en.wikipedia.org/wiki/Early_Modern_Japanese "Early Modern Japanese") period (early 17th century–mid 19th century). Following the end of [Japan's self-imposed isolation](https://en.wikipedia.org/wiki/Sakoku "Sakoku") in 1853, the flow of [loanwords](https://en.wikipedia.org/wiki/Loanword "Loanword") from European languages increased significantly, and [words from English roots](https://en.wikipedia.org/wiki/Wasei-eigo "Wasei-eigo") have proliferated.
+
+Japanese is an [agglutinative](https://en.wikipedia.org/wiki/Agglutinative_language "Agglutinative language"), [mora](https://en.wikipedia.org/wiki/Mora_%28linguistics%29#Japanese "Mora (linguistics)")-timed language with relatively simple [phonotactics](https://en.wikipedia.org/wiki/Phonotactics "Phonotactics"), a [pure vowel](https://en.wikipedia.org/wiki/Monophthong "Monophthong") system, [phonemic vowel](https://en.wikipedia.org/wiki/Vowel_length#Phonemic_vowel_length "Vowel length") and [consonant](https://en.wikipedia.org/wiki/Gemination "Gemination") length, and a lexically significant [pitch-accent](https://en.wikipedia.org/wiki/Japanese_pitch_accent "Japanese pitch accent"). Word order is normally [subject–object–verb](https://en.wikipedia.org/wiki/Subject%E2%80%93object%E2%80%93verb "Subject–object–verb") with [particles](https://en.wikipedia.org/wiki/Japanese_particles "Japanese particles") marking the [grammatical function](https://en.wikipedia.org/wiki/Grammatical_function "Grammatical function") of words, and sentence structure is [topic–comment](https://en.wikipedia.org/wiki/Topic%E2%80%93comment "Topic–comment"). [Sentence-final particles](https://en.wikipedia.org/wiki/Sentence-final_particle "Sentence-final particle") are used to add emotional or emphatic impact, or form questions. Nouns have no [grammatical number](https://en.wikipedia.org/wiki/Grammatical_number "Grammatical number") or [gender](https://en.wikipedia.org/wiki/Grammatical_gender "Grammatical gender"), and there are no [articles](https://en.wikipedia.org/wiki/Article_%28grammar%29 "Article (grammar)"). Verbs are [conjugated](https://en.wikipedia.org/wiki/Japanese_verb_conjugation "Japanese verb conjugation"), primarily for [tense](https://en.wikipedia.org/wiki/Grammatical_tense "Grammatical tense") and [voice](https://en.wikipedia.org/wiki/Voice_%28grammar%29 "Voice (grammar)"), but not [person](https://en.wikipedia.org/wiki/Grammatical_person "Grammatical person"). [Japanese adjectives](https://en.wikipedia.org/wiki/Japanese_adjectives "Japanese adjectives") are also conjugated. Japanese has [a complex system of honorifics](https://en.wikipedia.org/wiki/Honorific_speech_in_Japanese "Honorific speech in Japanese"), with verb forms and vocabulary to indicate the relative status of the speaker, the listener, and persons mentioned.
+
+The [Japanese writing system](https://en.wikipedia.org/wiki/Japanese_writing_system "Japanese writing system") combines [Chinese characters](https://en.wikipedia.org/wiki/Chinese_characters "Chinese characters"), known as *[kanji](https://en.wikipedia.org/wiki/Kanji "Kanji")* (漢字, '[Han](https://en.wikipedia.org/wiki/Han_dynasty "Han dynasty") characters'), with two unique [syllabaries](https://en.wikipedia.org/wiki/Syllabary "Syllabary") (or [moraic](https://en.wikipedia.org/wiki/Mora_%28linguistics%29 "Mora (linguistics)") scripts) derived by the Japanese from the more complex Chinese characters: *[hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana")* (ひらがな or 平仮名, 'simple characters') and *[katakana](https://en.wikipedia.org/wiki/Katakana "Katakana")* (カタカナ or 片仮名, 'partial characters'). [Latin script](https://en.wikipedia.org/wiki/Romanization_of_Japanese "Romanization of Japanese") (*rōmaji* ローマ字) is also used in a limited fashion (such as for imported acronyms) in Japanese writing. The [numeral system](https://en.wikipedia.org/wiki/Japanese_numerals "Japanese numerals") uses mostly [Arabic numerals](https://en.wikipedia.org/wiki/Arabic_numerals "Arabic numerals"), but also traditional [Chinese numerals](https://en.wikipedia.org/wiki/Chinese_numerals "Chinese numerals").
+
+## History
+
+Further information: [Japanese writing system § History of the Japanese script](https://en.wikipedia.org/wiki/Japanese_writing_system#History_of_the_Japanese_script "Japanese writing system")
+
+### Prehistory
+
+[Proto-Japonic](https://en.wikipedia.org/wiki/Proto-Japonic_language "Proto-Japonic language"), the common ancestor of the Japanese and [Ryukyuan languages](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages"), is thought to have been brought to Japan by settlers coming from the Korean peninsula sometime in the early- to mid-4th century BC (the [Yayoi period](https://en.wikipedia.org/wiki/Yayoi_period "Yayoi period")), replacing the languages of the original [Jōmon](https://en.wikipedia.org/wiki/J%C5%8Dmon_people "Jōmon people") inhabitants,[[5]](#cite_note-5) including the ancestor of the modern [Ainu language](https://en.wikipedia.org/wiki/Ainu_language "Ainu language"). Because writing had yet to be introduced from China, there is no direct evidence, and anything that can be discerned about this period must be based on internal reconstruction from [Old Japanese](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese"), or [comparison](https://en.wikipedia.org/wiki/Comparative_method "Comparative method") with the Ryukyuan languages and [Japanese dialects](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects").[[6]](#cite_note-FOOTNOTEFrellesvigWhitman2008[httpsbooksgooglecombooksidaun8BRHTDEACpgPA1_1]-6)
+
+### Old Japanese
+
+Main article: [Old Japanese](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese")
+
+[![Page from the Man'yōshū](//thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Genryaku_Manyosyu.JPG/250px-Genryaku_Manyosyu.JPG?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AGenryaku_Manyosyu.JPG)
+
+A page from the *[Man'yōshū](https://en.wikipedia.org/wiki/Man%27y%C5%8Dsh%C5%AB "Man'yōshū")*, the oldest anthology of classical [Japanese poetry](https://en.wikipedia.org/wiki/Japanese_poetry "Japanese poetry")
+
+The [Chinese writing system](https://en.wikipedia.org/wiki/Chinese_character "Chinese character") was imported to Japan from [Baekje](https://en.wikipedia.org/wiki/Baekje "Baekje") around the start of the fifth century, alongside Buddhism.[[7]](#cite_note-FOOTNOTEFrellesvig201011-7) The earliest texts were written in [Classical Chinese](https://en.wikipedia.org/wiki/Classical_Chinese "Classical Chinese"), although some of these were likely intended to be read as Japanese using the *[kanbun](https://en.wikipedia.org/wiki/Kanbun "Kanbun")* method, and show influences of Japanese grammar such as Japanese word order.[[8]](#cite_note-FOOTNOTESeeley199125–31-8) The earliest text, the *[Kojiki](https://en.wikipedia.org/wiki/Kojiki "Kojiki")*, dates to the early eighth century, and was written entirely in Chinese characters, which are used to represent, at different times, Chinese, *kanbun*, and Old Japanese.[[9]](#cite_note-FOOTNOTEFrellesvig201024-9) As in other texts from this period, the Old Japanese sections are written in [Man'yōgana](https://en.wikipedia.org/wiki/Man%27y%C5%8Dgana "Man'yōgana"), which uses *[kanji](https://en.wikipedia.org/wiki/Kanji "Kanji")* for their phonetic as well as semantic values.
+
+Based on the Man'yōgana system, Old Japanese can be reconstructed as having 88 distinct [morae](https://en.wikipedia.org/wiki/Mora_%28linguistics%29#Japanese "Mora (linguistics)"). Texts written with Man'yōgana use two different sets of *kanji* for each of the morae now pronounced き (*ki*), ひ (*hi*), み (*mi*), け (*ke*), へ (*he*), め (*me*), こ (*ko*), そ (*so*), と (*to*), の (*no*), も (*mo*), よ (*yo*) and ろ (*ro*).[[10]](#cite_note-10) (The *Kojiki* has 88, but all later texts have 87. The distinction between mo1 and mo2 apparently was lost immediately following its composition.) This set of morae shrank to 67 in [Early Middle Japanese](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese"), though some were added through Chinese influence. Man'yōgana also has a symbol for /je/, which merges with /e/ before the end of the period.
+
+Several fossilizations of Old Japanese grammatical elements remain in the modern language – the genitive particle *tsu* (superseded by modern *no*) is preserved in words such as *matsuge* ("eyelash", lit. "hair of the eye"); modern *mieru* ("to be visible") and *kikoeru* ("to be audible") retain a [mediopassive](https://en.wikipedia.org/wiki/Mediopassive_voice "Mediopassive voice") suffix -*yu(ru)* (*kikoyu* → *kikoyuru* (the attributive form, which slowly replaced the plain form starting in the late Heian period) → *kikoeru* (all verbs with the *shimo-nidan* conjugation pattern underwent this same shift in [Early Modern Japanese](https://en.wikipedia.org/wiki/Early_Modern_Japanese "Early Modern Japanese")); and the genitive particle *ga* remains in intentionally archaic speech.
+
+### Early Middle Japanese
+
+Main article: [Early Middle Japanese](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese")
+
+[![Genji Monogatari emaki scroll](//thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Genji_emaki_01003_001.jpg/250px-Genji_emaki_01003_001.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AGenji_emaki_01003_001.jpg)
+
+A 12th-century [emaki](https://en.wikipedia.org/wiki/Emaki "Emaki") scroll of *[The Tale of Genji](https://en.wikipedia.org/wiki/The_Tale_of_Genji "The Tale of Genji")* from the 11th century
+
+Early Middle Japanese is the Japanese of the [Heian period](https://en.wikipedia.org/wiki/Heian_period "Heian period"), from 794 to 1185. It formed the basis for the [literary standard](https://en.wikipedia.org/wiki/Literary_language "Literary language") of [Classical Japanese](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese"), which remained in common use until the early 20th century.
+
+During this time, Japanese underwent numerous [phonological](https://en.wikipedia.org/wiki/Phonology "Phonology") developments, in many cases instigated by an influx of [Chinese loanwords](https://en.wikipedia.org/wiki/Sino-Japanese_vocabulary "Sino-Japanese vocabulary"). These included phonemic length distinction for both [consonants](https://en.wikipedia.org/wiki/Gemination "Gemination") and [vowels](https://en.wikipedia.org/wiki/Vowel_length "Vowel length"), palatal consonants (e.g. *kya*) and labial consonant clusters (e.g. *kwa*), and [closed syllables](https://en.wikipedia.org/wiki/Syllable#Open_and_closed "Syllable").[[11]](#cite_note-Frel-11)[[12]](#cite_note-12) This changed Japanese into a [mora-timed](https://en.wikipedia.org/wiki/Isochrony#Mora_timing "Isochrony") language.[[11]](#cite_note-Frel-11)
+
+### Late Middle Japanese
+
+Main article: [Late Middle Japanese](https://en.wikipedia.org/wiki/Late_Middle_Japanese "Late Middle Japanese")
+
+Late Middle Japanese covers the years from 1185 to 1600, and is normally divided into two sections, roughly equivalent to the [Kamakura period](https://en.wikipedia.org/wiki/Kamakura_period "Kamakura period") and the [Muromachi period](https://en.wikipedia.org/wiki/Muromachi_period "Muromachi period"), respectively. The later forms of Late Middle Japanese are the first to be described by non-native sources, in this case the [Jesuit](https://en.wikipedia.org/wiki/Jesuits "Jesuits") and [Franciscan](https://en.wikipedia.org/wiki/Franciscans "Franciscans") missionaries; and thus there is better documentation of Late Middle Japanese phonology than for previous forms (for instance, the *[Arte da Lingoa de Iapam](https://en.wikipedia.org/wiki/Arte_da_Lingoa_de_Iapam "Arte da Lingoa de Iapam")*). Among other sound changes, the sequence /au/ merges to /ɔː/, in contrast with /oː/; /p/ is reintroduced from Chinese; and /we/ merges with /je/. Some forms rather more familiar to Modern Japanese speakers begin to appear – the continuative ending -*te* begins to reduce onto the verb (e.g. *yonde* for earlier *yomite*), the -k- in the final mora of adjectives drops out (*shiroi* for earlier *shiroki*); and some forms exist where modern standard Japanese has retained the earlier form (e.g. *hayaku* > *hayau* > *hayɔɔ*, where modern Japanese just has *hayaku*, though the alternative form is preserved in the standard greeting *o-hayō gozaimasu* "good morning"; this ending is also seen in *o-medetō* "congratulations", from *medetaku*).
+
+Late Middle Japanese has the first loanwords from European languages – now-common words borrowed into Japanese in this period include *pan* ("bread") and *tabako* ("tobacco", now "cigarette"), both from [Portuguese](https://en.wikipedia.org/wiki/Portuguese_language "Portuguese language").
+
+### Modern Japanese
+
+"Standard Japanese" redirects here. For other dialects, see [Japanese dialects](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects").
+
+Modern Japanese is considered to begin with the [Edo period](https://en.wikipedia.org/wiki/Edo_period "Edo period") (which spanned from 1603 to 1867). Although the capital moved to Edo (now Tokyo) during the Edo period, standard Japanese continued from that of the elites of Kyoto, with only minor influence from the Edo dialect.[[13]](#cite_note-FOOTNOTEFrellesvig2010378–379-13) Since the end of [Japan's self-imposed isolation](https://en.wikipedia.org/wiki/Sakoku "Sakoku") in 1853, the flow of loanwords from European languages has increased significantly. The period since 1945 has seen many words borrowed from other languages—such as German (e.g. *arubaito* 'temporary job', *wakuchin* 'vaccine'), Portuguese (*kasutera* 'sponge cake') and English.[[14]](#cite_note-14) Many English loan words especially relate to technology—for example, *pasokon* 'personal computer', *intānetto* 'internet', and *kamera* 'camera'. Due to the large quantity of English loanwords, modern Japanese has developed a distinction between [tɕi] and [ti], and [dʑi] and [di], with the latter in each pair only found in loanwords, e.g. *paati* for party or *dizunii* for [Disney](https://en.wikipedia.org/wiki/The_Walt_Disney_Company "The Walt Disney Company").[[15]](#cite_note-15)
+
+## Geographic distribution
+
+Although Japanese is spoken almost exclusively in Japan, it has also been spoken outside of the country. Before and during [World War II](https://en.wikipedia.org/wiki/World_War_II "World War II"), through Japanese annexation of [Taiwan](https://en.wikipedia.org/wiki/Taiwan "Taiwan") and [Korea](https://en.wikipedia.org/wiki/Korea "Korea"), as well as partial occupation of [China](https://en.wikipedia.org/wiki/China "China"), the [Philippines](https://en.wikipedia.org/wiki/Philippines "Philippines"), and various Pacific islands,[[16]](#cite_note-16) locals in [those countries](https://en.wikipedia.org/wiki/Greater_East_Asia_Co-Prosperity_Sphere "Greater East Asia Co-Prosperity Sphere") learned Japanese as the language of the empire. As a result, many elderly people in these countries can still speak Japanese.
+
+[Japanese emigrant communities](https://en.wikipedia.org/wiki/Japanese_diaspora "Japanese diaspora") (the largest of which are to be found in [Brazil](https://en.wikipedia.org/wiki/Brazil "Brazil"),[[17]](#cite_note-IBGE_traça_perfil_dos_imigrantes-17) with 1.4 million to 1.5 million Japanese immigrants and descendants, according to Brazilian [IBGE](https://en.wikipedia.org/wiki/Brazilian_Institute_of_Geography_and_Statistics "Brazilian Institute of Geography and Statistics") data, more than the 1.2 million of the [United States](https://en.wikipedia.org/wiki/United_States "United States"))[[18]](#cite_note-18)[*[new archival link needed](https://en.wikipedia.org/wiki/Help%3AArchiving_a_source "Help:Archiving a source")*] sometimes employ Japanese as their primary language. Approximately 12% of [Hawaii](https://en.wikipedia.org/wiki/Hawaii "Hawaii") residents speak Japanese,[[19]](#cite_note-19) with an estimated 12.6% of the population of Japanese ancestry in 2008. Japanese emigrants can also be found in [Peru](https://en.wikipedia.org/wiki/Peru "Peru"), [Argentina](https://en.wikipedia.org/wiki/Argentina "Argentina"), [Australia](https://en.wikipedia.org/wiki/Australia "Australia") (especially in the eastern states), [Canada](https://en.wikipedia.org/wiki/Canada "Canada") (especially in [Vancouver](https://en.wikipedia.org/wiki/Vancouver "Vancouver"), where 1.4% of the population has Japanese ancestry),[[20]](#cite_note-20) the United States (notably in Hawaii, where 16.7% of the population has Japanese ancestry,[[21]](#cite_note-21)[*[clarification needed](https://en.wikipedia.org/wiki/Wikipedia%3APlease_clarify "Wikipedia:Please clarify")*] and [California](https://en.wikipedia.org/wiki/California "California")), and the [Philippines](https://en.wikipedia.org/wiki/Philippines "Philippines") (particularly in [Davao Region](https://en.wikipedia.org/wiki/Davao_Region "Davao Region") and the [Province of Laguna](https://en.wikipedia.org/wiki/Laguna_%28province%29 "Laguna (province)")).[[22]](#cite_note-22)[[23]](#cite_note-23)[[24]](#cite_note-24)
+
+### Official status
+
+Japanese has no [official status](https://en.wikipedia.org/wiki/Official_language "Official language") in Japan,[[25]](#cite_note-25) but is the *de facto* [national language](https://en.wikipedia.org/wiki/National_language "National language") of the country. There is a form of the language considered [standard](https://en.wikipedia.org/wiki/Standard_language "Standard language"): *hyōjungo* (標準語), meaning 'standard Japanese', or *kyōtsūgo* (共通語), 'common language', or even 'Tokyo dialect' at times.[[26]](#cite_note-:2-26) The meanings of the two terms (hyōjungo and kyōtsūgo) are almost the same. *Hyōjungo* or *kyōtsūgo* is a conception that forms the counterpart of dialect. This normative language was born after the [Meiji Restoration](https://en.wikipedia.org/wiki/Meiji_Restoration "Meiji Restoration") (明治維新, *meiji ishin*; 1868) from the language spoken in the higher-class areas of Tokyo (see [Yamanote](https://en.wikipedia.org/wiki/Yamanote_and_Shitamachi "Yamanote and Shitamachi")). *Hyōjungo* is taught in schools and used on television and in official communications.[[27]](#cite_note-27) It is the version of Japanese discussed in this article.
+
+*[Bungo](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese")* (文語; '[literary language](https://en.wikipedia.org/wiki/Literary_language "Literary language")') used in formal texts, is different compared to the [colloquial language](https://en.wikipedia.org/wiki/Colloquialism "Colloquialism") (口語, *[kōgo](https://en.wikipedia.org/wiki/K%C5%8Dgo_%28Japanese_language%29?action=edit&redlink=1 "Kōgo (Japanese language) (page does not exist)")*), used in everyday speech.[[28]](#cite_note-28) The two systems have different rules of grammar and some variance in vocabulary. *Bungo* was the main method of writing Japanese until about 1900; since then *kōgo* gradually extended its influence and the two methods were both used in writing until the 1940s. *Bungo* still has some relevance for historians, literary scholars, and lawyers (many Japanese laws that survived [World War II](https://en.wikipedia.org/wiki/World_War_II "World War II") are still written in *bungo*, although there are ongoing efforts to modernize their language). *Kōgo* is the dominant method of both speaking and writing Japanese today, although *bungo* grammar and vocabulary are occasionally used in modern Japanese for effect.
+
+Japanese is, along with [Palauan](https://en.wikipedia.org/wiki/Palauan_language "Palauan language") and English, an official language of [Angaur](https://en.wikipedia.org/wiki/Angaur "Angaur"), Palau according to the 1982 state constitution.[[29]](#cite_note-const-29) At the time it was written, many of the elders participating in the process had been educated in Japanese during the [South Seas Mandate](https://en.wikipedia.org/wiki/South_Seas_Mandate "South Seas Mandate") over the island,[[30]](#cite_note-30) as shown by the 1958 census of the Trust Territory of the Pacific which found that 89% of Palauans born between 1914 and 1933 could speak and read Japanese.[[31]](#cite_note-1958_Census_of_the_Trust_Territory_of_the_Pacific_Islands-31) However, as of the 2005 Palau census, no residents of Angaur were reported to speak Japanese at home.[[32]](#cite_note-2005census-32)
+
+### Dialects and mutual intelligibility
+
+Main article: [Japanese dialects](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects")
+
+[![](//thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Japanese_dialects-en.png/250px-Japanese_dialects-en.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AJapanese_dialects-en.png)
+
+Map of Japanese dialects and Japonic languages
+
+Japanese dialects typically differ in terms of [pitch accent](https://en.wikipedia.org/wiki/Japanese_pitch_accent "Japanese pitch accent"), inflectional [morphology](https://en.wikipedia.org/wiki/Morphology_%28linguistics%29 "Morphology (linguistics)"), [vocabulary](https://en.wikipedia.org/wiki/Vocabulary "Vocabulary"), and particle usage. Some even differ in [vowel](https://en.wikipedia.org/wiki/Vowel "Vowel") and [consonant](https://en.wikipedia.org/wiki/Consonant "Consonant") inventories, although this is less common.
+
+In terms of [mutual intelligibility](https://en.wikipedia.org/wiki/Mutual_intelligibility "Mutual intelligibility"), a survey in 1967 found that the four most unintelligible dialects (excluding [Ryūkyūan languages](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") and [Tōhoku dialects](https://en.wikipedia.org/wiki/T%C5%8Dhoku_dialect "Tōhoku dialect")) to students from Greater Tokyo were the [Kiso](https://en.wikipedia.org/wiki/Kiso%2C_Nagano_%28town%29 "Kiso, Nagano (town)") dialect (in the deep mountains of [Nagano Prefecture](https://en.wikipedia.org/wiki/Nagano_Prefecture "Nagano Prefecture")), the [Himi](https://en.wikipedia.org/wiki/Himi%2C_Toyama "Himi, Toyama") dialect (in [Toyama Prefecture](https://en.wikipedia.org/wiki/Toyama_Prefecture "Toyama Prefecture")), the [Kagoshima dialect](https://en.wikipedia.org/wiki/Kagoshima_dialect "Kagoshima dialect") and the [Maniwa](https://en.wikipedia.org/wiki/Maniwa "Maniwa") dialect (in [Okayama Prefecture](https://en.wikipedia.org/wiki/Okayama_Prefecture "Okayama Prefecture")).[[33]](#cite_note-Dialect_Intelligibility_1967-33) The survey was based on 12- to 20-second-long recordings of 135 to 244 [phonemes](https://en.wikipedia.org/wiki/Phoneme "Phoneme"), which 42 students listened to and translated word-for-word. The listeners were all [Keio University](https://en.wikipedia.org/wiki/Keio_University "Keio University") students who grew up in the [Kantō region](https://en.wikipedia.org/wiki/Kant%C5%8D_region "Kantō region").[[33]](#cite_note-Dialect_Intelligibility_1967-33)
+
+Intelligibility to students from Tokyo and [Kantō region](https://en.wikipedia.org/wiki/Kant%C5%8D_region "Kantō region") (1967)[[33]](#cite_note-Dialect_Intelligibility_1967-33)
+
+|  |  |  |  |  |  |  |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Dialect | [Kyoto City](https://en.wikipedia.org/wiki/Kyoto "Kyoto") | [Ōgata, Kōchi](https://en.wikipedia.org/wiki/%C5%8Cgata%2C_K%C5%8Dchi "Ōgata, Kōchi") | [Tatsuta, Aichi](https://en.wikipedia.org/wiki/Tatsuta%2C_Aichi "Tatsuta, Aichi") | [Kumamoto City](https://en.wikipedia.org/wiki/Kumamoto "Kumamoto") | [Osaka City](https://en.wikipedia.org/wiki/Osaka "Osaka") | [Kanagi, Shimane](https://en.wikipedia.org/wiki/Kanagi%2C_Shimane "Kanagi, Shimane") | [Maniwa, Okayama](https://en.wikipedia.org/wiki/Maniwa "Maniwa") | [Kagoshima City](https://en.wikipedia.org/wiki/Kagoshima "Kagoshima") | [Kiso, Nagano](https://en.wikipedia.org/wiki/Kiso%2C_Nagano_%28town%29 "Kiso, Nagano (town)") | [Himi, Toyama](https://en.wikipedia.org/wiki/Himi%2C_Toyama "Himi, Toyama") |
+| Percentage | 67.1 | 45.5 | 44.5 | 38.6 | 26.4 | 24.8 | 24.7 | 17.6 | 13.3 | 4.1 |
+
+There are some [language islands](https://en.wikipedia.org/wiki/Language_island "Language island") in mountain villages or isolated islands[*[clarification needed](https://en.wikipedia.org/wiki/Wikipedia%3APlease_clarify "Wikipedia:Please clarify")*] such as [Hachijō-jima island](https://en.wikipedia.org/wiki/Hachij%C5%8D-jima "Hachijō-jima"), whose dialects are descended from [Eastern Old Japanese](https://en.wikipedia.org/wiki/Eastern_Old_Japanese "Eastern Old Japanese"). Dialects of the [Kansai region](https://en.wikipedia.org/wiki/Kansai_region "Kansai region") are spoken or known by many Japanese, and [Osaka](https://en.wikipedia.org/wiki/Osaka "Osaka") dialect in particular is associated with comedy (see [Kansai dialect](https://en.wikipedia.org/wiki/Kansai_dialect "Kansai dialect")). Dialects of Tōhoku and North [Kantō](https://en.wikipedia.org/wiki/Kant%C5%8D_region "Kantō region") are associated with typical farmers.
+
+The Ryūkyūan languages, spoken in [Okinawa](https://en.wikipedia.org/wiki/Okinawa_Prefecture "Okinawa Prefecture") and the [Amami Islands](https://en.wikipedia.org/wiki/Amami_Islands "Amami Islands") (administratively part of [Kagoshima](https://en.wikipedia.org/wiki/Kagoshima_Prefecture "Kagoshima Prefecture")), are distinct enough to be considered a separate branch of the [Japonic](https://en.wikipedia.org/wiki/Japonic_languages "Japonic languages") family; not only is each language unintelligible to Japanese speakers, but most are unintelligible to those who speak other Ryūkyūan languages. However, in contrast to linguists, many ordinary Japanese people tend to consider the Ryūkyūan languages as dialects of Japanese.
+
+The imperial court also seems to have spoken an unusual variant of the Japanese of the time,[[34]](#cite_note-34) most likely the spoken form of [Classical Japanese](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese"), a writing style that was prevalent during the [Heian period](https://en.wikipedia.org/wiki/Heian_period "Heian period"), but began to decline during the late [Meiji period](https://en.wikipedia.org/wiki/Meiji_era "Meiji era").[[35]](#cite_note-35) The Ryūkyūan languages are classified by [UNESCO](https://en.wikipedia.org/wiki/UNESCO "UNESCO") as 'endangered', as young people mostly use Japanese and cannot understand the languages. [Okinawan Japanese](https://en.wikipedia.org/wiki/Okinawan_Japanese "Okinawan Japanese") is a variant of Standard Japanese influenced by the Ryūkyūan languages, and is the primary dialect spoken among young people in the [Ryukyu Islands](https://en.wikipedia.org/wiki/Ryukyu_Islands "Ryukyu Islands").[[36]](#cite_note-ryukyuan-tongue-36)
+
+Modern Japanese has become prevalent nationwide (including the Ryūkyū islands) due to [education](https://en.wikipedia.org/wiki/Education "Education"), [mass media](https://en.wikipedia.org/wiki/Mass_media "Mass media"), and an increase in mobility within Japan, as well as economic integration.
+
+## Classification
+
+Main article: [Classification of the Japonic languages](https://en.wikipedia.org/wiki/Classification_of_the_Japonic_languages "Classification of the Japonic languages")
+
+Japanese is a member of the [Japonic language](https://en.wikipedia.org/wiki/Japonic_language "Japonic language") family, which also includes the [Ryukyuan languages](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") spoken in the [Ryukyu Islands](https://en.wikipedia.org/wiki/Ryukyu_Islands "Ryukyu Islands"). As these closely related languages are commonly treated as dialects of the same language, Japanese is sometimes called a [language isolate](https://en.wikipedia.org/wiki/Language_isolate "Language isolate").[[37]](#cite_note-37)
+
+According to [Martine Robbeets](https://en.wikipedia.org/wiki/Martine_Robbeets "Martine Robbeets"), Japanese has been subject to more attempts to show its relation to other languages than any other language in the world. Since Japanese first gained the consideration of linguists in the late 19th century, attempts have been made to show its genealogical relation to languages or language families such as [Ainu](https://en.wikipedia.org/wiki/Ainu_languages "Ainu languages"), [Korean](https://en.wikipedia.org/wiki/Korean_language "Korean language"), [Chinese](https://en.wikipedia.org/wiki/Chinese_language "Chinese language"), [Tibeto-Burman](https://en.wikipedia.org/wiki/Tibeto-Burman_languages "Tibeto-Burman languages"), [Uralic](https://en.wikipedia.org/wiki/Uralic_languages "Uralic languages"), [Altaic](https://en.wikipedia.org/wiki/Altaic_languages "Altaic languages") (or [Ural-Altaic](https://en.wikipedia.org/wiki/Ural-Altaic_languages "Ural-Altaic languages")), [Austroasiatic](https://en.wikipedia.org/wiki/Austroasiatic_languages "Austroasiatic languages"), [Austronesian](https://en.wikipedia.org/wiki/Austronesian_languages "Austronesian languages") and [Dravidian](https://en.wikipedia.org/wiki/Dravidian_languages "Dravidian languages").[[38]](#cite_note-FOOTNOTERobbeets200520-38) At the fringe, some linguists have even suggested a link to [Indo-European languages](https://en.wikipedia.org/wiki/Indo-European_languages "Indo-European languages"), including [Greek](https://en.wikipedia.org/wiki/Greek_language "Greek language"), or to [Sumerian](https://en.wikipedia.org/wiki/Sumerian_language "Sumerian language").[[39]](#cite_note-FOOTNOTEShibatani199094-39) Main modern theories try to link Japanese either to northern Asian languages, like Korean or the proposed larger Altaic family, or to various [Southeast Asian languages](https://en.wikipedia.org/wiki/Classification_of_Southeast_Asian_languages "Classification of Southeast Asian languages"), especially Austronesian. None of these proposals have gained wide acceptance (and the Altaic family itself is now considered controversial).[[40]](#cite_note-FOOTNOTERobbeets2005-40)[[41]](#cite_note-41)[[42]](#cite_note-FOOTNOTEVovin2010-42) As it stands, only the link to Ryukyuan has wide support.[[43]](#cite_note-FOOTNOTEKindaichiHirano197830–31-43)
+
+Other theories view the Japanese language as an early [creole language](https://en.wikipedia.org/wiki/Creole_language "Creole language") formed through inputs from at least two distinct language groups, or as a distinct language of its own that has absorbed various aspects from neighboring languages.[[44]](#cite_note-FOOTNOTEShibatani1990-44)[[45]](#cite_note-45)[[46]](#cite_note-46)
+
+## Phonology
+
+Main article: [Japanese phonology](https://en.wikipedia.org/wiki/Japanese_phonology "Japanese phonology")
+
+Spoken Japanese
+
+### Vowels
+
+[![](//thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Japanese_vowel_chart_II.svg/330px-Japanese_vowel_chart_II.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AJapanese_vowel_chart_II.svg)
+
+The vowels of Standard Japanese on a [vowel diagram](https://en.wikipedia.org/wiki/Vowel_diagram "Vowel diagram"). Adapted from [Okada (1999](#CITEREFOkada1999):117).
+
+|  | [Front](https://en.wikipedia.org/wiki/Front_vowel "Front vowel") | [Central](https://en.wikipedia.org/wiki/Central_vowel "Central vowel") | [Back](https://en.wikipedia.org/wiki/Back_vowel "Back vowel") |
+| --- | --- | --- | --- |
+| [Close](https://en.wikipedia.org/wiki/Close_vowel "Close vowel") | [i](https://en.wikipedia.org/wiki/Close_front_unrounded_vowel "Close front unrounded vowel") |  | [u](https://en.wikipedia.org/wiki/Close_back_unrounded_vowel "Close back unrounded vowel") |
+| [Mid](https://en.wikipedia.org/wiki/Mid_vowel "Mid vowel") | [e](https://en.wikipedia.org/wiki/Mid_front_unrounded_vowel "Mid front unrounded vowel") |  | [o](https://en.wikipedia.org/wiki/Mid_back_rounded_vowel "Mid back rounded vowel") |
+| [Open](https://en.wikipedia.org/wiki/Open_vowel "Open vowel") |  | [a](https://en.wikipedia.org/wiki/Open_central_unrounded_vowel "Open central unrounded vowel") |  |
+
+Japanese has five vowels, and [vowel length](https://en.wikipedia.org/wiki/Vowel_length "Vowel length") is phonemic, with each having both a short and a long version. Elongated vowels are usually denoted with a [macron](https://en.wikipedia.org/wiki/Macron_%28diacritic%29 "Macron (diacritic)") in [rōmaji](https://en.wikipedia.org/wiki/Romanization_of_Japanese "Romanization of Japanese"), a repeated vowel character in [hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana"), or a [chōonpu](https://en.wikipedia.org/wiki/Ch%C5%8Donpu "Chōonpu") succeeding the vowel in [katakana](https://en.wikipedia.org/wiki/Katakana "Katakana"). /u/ ([listen](//upload.wikimedia.org/wikipedia/commons/transcoded/4/4c/Ja-U.oga/Ja-U.oga.mp3 "Play audio")[ⓘ](/wiki/File%3AJa-U.oga "File:Ja-U.oga")) is [compressed rather than protruded](https://en.wikipedia.org/wiki/Roundedness "Roundedness"), or simply unrounded.
+
+### Consonants
+
+|  | [Bilabial](https://en.wikipedia.org/wiki/Bilabial_consonant "Bilabial consonant") | [Alveolar](https://en.wikipedia.org/wiki/Alveolar_consonant "Alveolar consonant") | [Palatal](https://en.wikipedia.org/wiki/Palatal_consonant "Palatal consonant") | [Velar](https://en.wikipedia.org/wiki/Velar_consonant "Velar consonant") | [Glottal](https://en.wikipedia.org/wiki/Glottal_consonant "Glottal consonant") |
+| --- | --- | --- | --- | --- | --- |
+| [Nasal](https://en.wikipedia.org/wiki/Nasal_consonant "Nasal consonant") | [m](https://en.wikipedia.org/wiki/Voiced_bilabial_nasal "Voiced bilabial nasal") | [n](https://en.wikipedia.org/wiki/Voiced_alveolar_nasal "Voiced alveolar nasal") |  |  |  |
+| [Stop](https://en.wikipedia.org/wiki/Plosive "Plosive") | [p](https://en.wikipedia.org/wiki/Voiceless_bilabial_plosive "Voiceless bilabial plosive")  [b](https://en.wikipedia.org/wiki/Voiced_bilabial_plosive "Voiced bilabial plosive") | [t](https://en.wikipedia.org/wiki/Voiceless_alveolar_plosive "Voiceless alveolar plosive")[[a]](#cite_note-titu-47)  [d](https://en.wikipedia.org/wiki/Voiced_alveolar_plosive "Voiced alveolar plosive")[[b]](#cite_note-dzidzu-48) |  | [k](https://en.wikipedia.org/wiki/Voiceless_velar_plosive "Voiceless velar plosive")  [ɡ](https://en.wikipedia.org/wiki/Voiced_velar_plosive "Voiced velar plosive") |  |
+| [Fricative](https://en.wikipedia.org/wiki/Fricative "Fricative") |  | [s](https://en.wikipedia.org/wiki/Voiceless_alveolar_fricative "Voiceless alveolar fricative")[[c]](#cite_note-si-49)  [z](https://en.wikipedia.org/wiki/Voiced_alveolar_fricative "Voiced alveolar fricative")[[b]](#cite_note-dzidzu-48) |  |  | [h](https://en.wikipedia.org/wiki/Voiceless_glottal_fricative "Voiceless glottal fricative")[[d]](#cite_note-hihu-50) |
+| [Sonorant](https://en.wikipedia.org/wiki/Sonorant "Sonorant") |  | r[[e]](#cite_note-rrr-51) | [j](https://en.wikipedia.org/wiki/Voiced_palatal_approximant "Voiced palatal approximant") | [w](https://en.wikipedia.org/wiki/Voiced_labial%E2%80%93velar_approximant "Voiced labial–velar approximant") |  |
+| Special moras | [/N/](https://en.wikipedia.org/wiki/Japanese_phonology#Moraic_nasal "Japanese phonology"), [/Q/](https://en.wikipedia.org/wiki/Japanese_phonology#Moraic_obstruent "Japanese phonology") | | | | | | |
+
+1. [↑](#cite_ref-titu_47-0) /t/ is realized as an affricate [[t͡ɕ](https://en.wikipedia.org/wiki/Voiceless_alveolo-palatal_affricate "Voiceless alveolo-palatal affricate")] and [[t͡s](https://en.wikipedia.org/wiki/Voiceless_alveolar_affricate "Voiceless alveolar affricate")] before /i/ and /u/ respectively.
+2. [1](#cite_ref-dzidzu_48-0) [2](#cite_ref-dzidzu_48-1) /d/ and /z/ merge and are realized as affricates [[d͡ʑ](https://en.wikipedia.org/wiki/Voiced_alveolo-palatal_affricate "Voiced alveolo-palatal affricate")] and [[d͡z](https://en.wikipedia.org/wiki/Voiced_alveolar_affricate "Voiced alveolar affricate")] before /i/ and /u/ respectively.
+3. [↑](#cite_ref-si_49-0) /s/ is realized as an alveolo-palatal [[ɕ](https://en.wikipedia.org/wiki/Voiceless_alveolo-palatal_fricative "Voiceless alveolo-palatal fricative")] before /i/.
+4. [↑](#cite_ref-hihu_50-0) /h/ is realized as [[ç](https://en.wikipedia.org/wiki/Voiceless_palatal_fricative "Voiceless palatal fricative")] and [[ɸ](https://en.wikipedia.org/wiki/Voiceless_bilabial_fricative "Voiceless bilabial fricative")] before /i/ and /u/ respectively.
+5. [↑](#cite_ref-rrr_51-0) Realizations vary.
+
+A number of Japanese consonants have several [allophones](https://en.wikipedia.org/wiki/Allophone "Allophone"), which may give the impression of a larger inventory of sounds. However, some of these allophones have since become phonemic. For example, in the Japanese language up to and including the first half of the 20th century, the phonemic sequence /ti/ was [palatalized](https://en.wikipedia.org/wiki/Palatalization_%28sound_change%29 "Palatalization (sound change)") and realized phonetically as [tɕi], approximately *chi* ([listen](//upload.wikimedia.org/wikipedia/commons/transcoded/5/5a/Ja-Chi_2.oga/Ja-Chi_2.oga.mp3 "Play audio")[ⓘ](/wiki/File%3AJa-Chi_2.oga "File:Ja-Chi 2.oga")); however, now [ti] and [tɕi] are distinct, as evidenced by words like *tī* [tiː] "Western-style tea" and *chii* [tɕii] "social status".
+
+The "r" of the Japanese language is of particular interest, ranging between an [apical](https://en.wikipedia.org/wiki/Apical_consonant "Apical consonant") [median](https://en.wikipedia.org/wiki/Median_consonant "Median consonant") [tap](https://en.wikipedia.org/wiki/Tap_and_flap_consonants "Tap and flap consonants") and a [lateral approximant](https://en.wikipedia.org/wiki/Lateral_consonant#Approximants "Lateral consonant"). The "g" is also notable; unless it starts a sentence, it may be pronounced [[ŋ](https://en.wikipedia.org/wiki/Voiced_velar_nasal "Voiced velar nasal")], in the Kanto prestige dialect and in other eastern dialects.
+
+The [phonotactics](https://en.wikipedia.org/wiki/Phonotactics "Phonotactics") of Japanese are relatively simple. The syllable structure is (C)(G)V(C),[[47]](#cite_note-52) that is, a core vowel surrounded by an optional onset consonant, a glide /j/ and either the first part of a [geminate consonant](https://en.wikipedia.org/wiki/Gemination "Gemination") (っ/ッ, represented as Q) or a [moraic nasal](https://en.wikipedia.org/wiki/Japanese_phonology#Moraic_nasal "Japanese phonology") in the coda (ん/ン, represented as N).
+
+The alveolar nasal is sensitive to its phonetic environment and [assimilates](https://en.wikipedia.org/wiki/Assimilation_%28phonology%29 "Assimilation (phonology)") to the following phoneme, with pronunciations including [ɴ, m, n, ɲ, ŋ, ɰ̃]. Onset-glide clusters only occur at the start of syllables but clusters across syllables are allowed as long as the two consonants are the moraic nasal followed by a [homorganic consonant](https://en.wikipedia.org/wiki/Homorganic_consonant "Homorganic consonant").
+
+Japanese also has a [pitch accent](https://en.wikipedia.org/wiki/Japanese_pitch_accent "Japanese pitch accent"), which is not represented in moraic writing; for example [haꜜ.ɕi] ("chopsticks") and [ha.ɕiꜜ] ("bridge") are both spelled はし (*hashi*), and are only differentiated by the pitch contour.[[26]](#cite_note-:2-26) However, Japanese is not a [tonal language](https://en.wikipedia.org/wiki/Tonal_language "Tonal language").
+
+## Writing system
+
+Main articles: [Japanese writing system](https://en.wikipedia.org/wiki/Japanese_writing_system "Japanese writing system") and [Japanese Braille](https://en.wikipedia.org/wiki/Japanese_Braille "Japanese Braille")
+
+|  |
+| --- |
+| Part of [a series](https://en.wikipedia.org/wiki/Category%3ACalligraphy "Category:Calligraphy") on |
+| [Calligraphy](https://en.wikipedia.org/wiki/Calligraphy "Calligraphy") |
+| [![](//thumb.wikimedia.org/wikipedia/commons/thumb/d/d2/KeitenAijin.jpg/250px-KeitenAijin.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AKeitenAijin.jpg) |
+| By script  * [Arabic](https://en.wikipedia.org/wiki/Arabic_script "Arabic script")   + [Arabic](https://en.wikipedia.org/wiki/Arabic_calligraphy "Arabic calligraphy")   + [Islamic](https://en.wikipedia.org/wiki/Islamic_calligraphy "Islamic calligraphy")   + [Turkish](https://en.wikipedia.org/wiki/Turkish_calligraphy "Turkish calligraphy")   + [Persian](https://en.wikipedia.org/wiki/Persian_calligraphy "Persian calligraphy") * [Brahmic](https://en.wikipedia.org/wiki/Brahmic_scripts "Brahmic scripts")   + [Indian](https://en.wikipedia.org/wiki/Indian_calligraphy "Indian calligraphy")   + [Tibetan](https://en.wikipedia.org/wiki/Tibetan_calligraphy "Tibetan calligraphy") * [Cyrillic](https://en.wikipedia.org/wiki/Cyrillic_script "Cyrillic script")   + [Serbian](https://en.wikipedia.org/wiki/Serbian_calligraphy "Serbian calligraphy")   + [Vyaz](https://en.wikipedia.org/wiki/Vyaz_%28Cyrillic_calligraphy%29 "Vyaz (Cyrillic calligraphy)") * [Georgian](https://en.wikipedia.org/wiki/Georgian_calligraphy "Georgian calligraphy") * [East Asian](https://en.wikipedia.org/wiki/Chinese_characters "Chinese characters")   + [Chinese](https://en.wikipedia.org/wiki/Chinese_calligraphy "Chinese calligraphy")   + [Japanese](https://en.wikipedia.org/wiki/Japanese_calligraphy "Japanese calligraphy")   + [Korean](https://en.wikipedia.org/wiki/Korean_calligraphy "Korean calligraphy") * [Mongolian](https://en.wikipedia.org/wiki/Mongolian_calligraphy "Mongolian calligraphy") * [Latin](https://en.wikipedia.org/wiki/Latin_script "Latin script")   + [Western](https://en.wikipedia.org/wiki/Western_calligraphy "Western calligraphy")   + [Vietnamese](https://en.wikipedia.org/wiki/Vietnamese_calligraphy "Vietnamese calligraphy") |
+| * [v](https://en.wikipedia.org/wiki/Template%3ACalligraphy "Template:Calligraphy") * [t](https://en.wikipedia.org/wiki/Template_talk%3ACalligraphy "Template talk:Calligraphy") * [e](https://en.wikipedia.org/wiki/Special%3AEditPage/Template%3ACalligraphy "Special:EditPage/Template:Calligraphy") |
+
+### History
+
+Literacy was introduced to Japan in the form of the [Chinese writing system](https://en.wikipedia.org/wiki/Written_Chinese "Written Chinese"), by way of [Baekje](https://en.wikipedia.org/wiki/Baekje "Baekje") before the 5th century AD.[[48]](#cite_note-53)[[49]](#cite_note-54)[[50]](#cite_note-55)[[51]](#cite_note-56) Using this script, the Japanese king [Bu](https://en.wikipedia.org/wiki/Five_kings_of_Wa "Five kings of Wa") presented a petition to [Emperor Shun of Song](https://en.wikipedia.org/wiki/Emperor_Shun_of_Song "Emperor Shun of Song") in AD 478.[[a]](#cite_note-57) After the ruin of Baekje, Japan invited scholars from China to learn more of the Chinese writing system. Japanese emperors gave an official rank to Chinese scholars (続守言/薩弘恪/[[b]](#cite_note-58)[[c]](#cite_note-59)袁晋卿[[d]](#cite_note-60)) and spread the use of Chinese characters during the 7th and 8th centuries.
+
+[![](//thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Nihongo_ichiran_01-converted.svg/250px-Nihongo_ichiran_01-converted.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3ANihongo_ichiran_01-converted.svg)
+
+Table of Kana (including [Yōon](https://en.wikipedia.org/wiki/Y%C5%8Don "Yōon")): [Hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana") top, [Katakana](https://en.wikipedia.org/wiki/Katakana "Katakana") in the center and Romanized equivalents at the bottom
+
+At first, the Japanese wrote in [Classical Chinese](https://en.wikipedia.org/wiki/Classical_Chinese "Classical Chinese"), with Japanese names represented by characters used for their meanings and not their sounds. Later, during the 7th century AD, the Chinese-sounding phoneme principle was used to write pure Japanese poetry and prose, but some Japanese words were still written with characters for their meaning and not the original Chinese sound. This was the beginning of Japanese as a written language in its own right. By this time, the Japanese language was already very distinct from the [Ryukyuan languages](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages").[[52]](#cite_note-61)
+
+An example of this mixed style is the *[Kojiki](https://en.wikipedia.org/wiki/Kojiki "Kojiki")*, which was written in AD 712. Japanese writers then started to use Chinese characters to write Japanese in a style known as *man'yōgana*, a syllabic script which used Chinese characters for their sounds in order to transcribe the words of Japanese speech mora by mora.
+
+Over time, a writing system evolved. [Chinese characters](https://en.wikipedia.org/wiki/Chinese_characters "Chinese characters") ([kanji](https://en.wikipedia.org/wiki/Kanji "Kanji")) were used to write either words borrowed from Chinese, or Japanese words with the same or similar meanings. Chinese characters were also used to write grammatical elements; these were simplified, and eventually became two moraic scripts: [hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana") and [katakana](https://en.wikipedia.org/wiki/Katakana "Katakana") which were developed based on [Man'yōgana](https://en.wikipedia.org/wiki/Man%27y%C5%8Dgana "Man'yōgana"). Some scholars claim that Manyogana originated from Baekje, but this hypothesis is denied by mainstream Japanese scholars.[[53]](#cite_note-62)[[54]](#cite_note-63)
+
+Hiragana and katakana were first simplified from kanji. Hiragana, emerging somewhere around the 9th century,[[55]](#cite_note-64) was mainly used by women. It was seen as an informal language, whereas katakana and kanji were considered more formal and were typically used by men and in official settings. However, because of hiragana's accessibility, more and more people began using it. Eventually, by the 10th century, hiragana was used by everyone.[[56]](#cite_note-65)
+
+Modern Japanese is written in a mixture of three main systems: kanji, characters of Chinese origin used to represent both Chinese [loanwords](https://en.wikipedia.org/wiki/Loanword "Loanword") into Japanese and a number of native Japanese [morphemes](https://en.wikipedia.org/wiki/Morpheme "Morpheme"); and two [syllabaries](https://en.wikipedia.org/wiki/Syllabary "Syllabary"): hiragana and katakana. The [Latin script](https://en.wikipedia.org/wiki/Latin_script "Latin script") (or *rōmaji* in Japanese) is used to a certain extent, such as for imported acronyms and to transcribe Japanese names and in other instances where non-Japanese speakers need to know how to pronounce a word (such as "ramen" at a restaurant). Arabic numerals are much more common than the kanji numerals when used in counting, but kanji numerals are still used in compounds, such as 統一 (*tōitsu*, "unification").
+
+Historically, attempts to limit the number of kanji in use commenced in the mid-19th century, but government did not intervene until after Japan's defeat in the Second World War. During the post-war occupation (and influenced by the views of some U.S. officials), various schemes including the complete abolition of kanji and exclusive use of rōmaji were considered. The *[jōyō kanji](https://en.wikipedia.org/wiki/J%C5%8Dy%C5%8D_kanji "Jōyō kanji")* ("common use kanji"), originally called *[tōyō kanji](https://en.wikipedia.org/wiki/T%C5%8Dy%C5%8D_kanji "Tōyō kanji")* (kanji for general use) scheme arose as a compromise solution.
+
+Japanese students begin to learn kanji from their first year at elementary school. A guideline created by the Japanese Ministry of Education, the list of *[kyōiku kanji](https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji "Kyōiku kanji")* ("education kanji", a subset of *[jōyō kanji](https://en.wikipedia.org/wiki/J%C5%8Dy%C5%8D_kanji "Jōyō kanji")*), specifies the 1,006 simple characters a child is to learn by the end of sixth grade. Children continue to study another 1,130 characters in junior high school, covering in total 2,136 *jōyō kanji*. The official list of *jōyō kanji* has been revised several times, but the total number of officially sanctioned characters has remained largely unchanged.
+
+As for kanji for personal names, the circumstances are somewhat complicated. *Jōyō kanji* and *[jinmeiyō kanji](https://en.wikipedia.org/wiki/Jinmeiy%C5%8D_kanji "Jinmeiyō kanji")* (an appendix of additional characters for names) are approved for registering personal names. Names containing unapproved characters are denied registration. However, as with the list of *jōyō kanji*, criteria for inclusion were often arbitrary and led to many common and popular characters being disapproved for use. Under popular pressure and following a court decision holding the exclusion of common characters unlawful, the list of *jinmeiyō kanji* was substantially extended from 92 in 1951 (the year it was first decreed) to 983 in 2004. Furthermore, families whose names are not on these lists were permitted to continue using the older forms.
+
+### Hiragana
+
+*[Hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana")* are used for words without kanji representation, for words no longer written in kanji, for replacement of rare kanji that may be unfamiliar to intended readers, and also following kanji to show conjugational endings. Because of the way verbs (and adjectives) in Japanese are [conjugated](https://en.wikipedia.org/wiki/Japanese_conjugation "Japanese conjugation"), kanji alone cannot fully convey Japanese tense and mood, as kanji cannot be subject to variation when written without losing their meaning. For this reason, hiragana are appended to kanji to show verb and adjective conjugations. Hiragana used in this way are called [okurigana](https://en.wikipedia.org/wiki/Okurigana "Okurigana"). Hiragana can also be written in a superscript called [furigana](https://en.wikipedia.org/wiki/Furigana "Furigana") above or beside a kanji to show the proper reading. This is done to facilitate learning, as well as to clarify particularly old or obscure (or sometimes invented) readings.
+
+### Katakana
+
+*[Katakana](https://en.wikipedia.org/wiki/Katakana "Katakana")*, like hiragana, constitute a [syllabary](https://en.wikipedia.org/wiki/Syllabary "Syllabary"); katakana are primarily used to write foreign words, plant and animal names, and for emphasis. For example, "Australia" has been adapted as *Ōsutoraria* (オーストラリア), and "supermarket" has been adapted and shortened into *sūpā* (スーパー).
+
+## Grammar
+
+Main article: [Japanese grammar](https://en.wikipedia.org/wiki/Japanese_grammar "Japanese grammar")
+
+|  |  |
+| --- | --- |
+| ![](//thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Text_document_with_red_question_mark.svg/40px-Text_document_with_red_question_mark.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail) | This section includes a [list of references](https://en.wikipedia.org/wiki/Wikipedia%3ACiting_sources "Wikipedia:Citing sources"), [related reading](https://en.wikipedia.org/wiki/Wikipedia%3AFurther_reading "Wikipedia:Further reading"), or [external links](https://en.wikipedia.org/wiki/Wikipedia%3AExternal_links "Wikipedia:External links"), **but its sources remain unclear because it lacks [inline citations](https://en.wikipedia.org/wiki/Wikipedia%3ACiting_sources#Inline_citations "Wikipedia:Citing sources")**. Please help [improve](https://en.wikipedia.org/w/index.php?title=Japanese_language&action=edit) this section by [introducing](https://en.wikipedia.org/wiki/Wikipedia%3AWhen_to_cite "Wikipedia:When to cite") more precise citations. *(November 2013)* *([Learn how and when to remove this message](https://en.wikipedia.org/wiki/Help%3AMaintenance_template_removal "Help:Maintenance template removal"))* |
+
+### Sentence structure
+
+Japanese word order is classified as [subject–object–verb](https://en.wikipedia.org/wiki/Subject%E2%80%93object%E2%80%93verb_word_order "Subject–object–verb word order"). Unlike many [Indo-European languages](https://en.wikipedia.org/wiki/Indo-European_languages "Indo-European languages"), the only strict rule of word order is that the verb must be placed at the end of a sentence (possibly followed by sentence-end particles). This is because Japanese sentence elements are marked with [particles](https://en.wikipedia.org/wiki/Japanese_particles "Japanese particles") that identify their grammatical functions.
+
+The basic sentence structure is [topic–comment](https://en.wikipedia.org/wiki/Topic_and_comment "Topic and comment"). Once the topic has been stated using the particle *wa* (は), it is normally omitted in subsequent sentences, and the next use of *wa* will change the topic. For instance, someone may begin a conversation with a sentence that includes *Tanaka-san wa...* (田中さんは..., "As for Mx. Tanaka, ..."). Each person may say a number of comments regarding Tanaka as the topic, and someone could change the topic to Naoko with a sentence including *Naoko-san wa...* (直子さんは..., "As for Mx. Naoko, ...").
+
+As these example translations illustrate, a sentence may include a topic, but the topic may not be part of the sentence's core statement. Japanese is often called a [topic-prominent language](https://en.wikipedia.org/wiki/Topic-prominent_language "Topic-prominent language") because of its strong tendency to indicate the topic separately from the subject, and the two do not always coincide. That is, a sentence might not involve the topic directly at all. To replicate this effect in English, consider "As for Naoko, people are rude." The topic, "Naoko," provides context to the comment about the subject, "people," and the sentence as a whole indicates that "people are rude" is a statement relevant to Naoko. However, the sentence's comment does not describe Naoko directly at all, and whatever the sentence indicates about Naoko is an inference. The topic is not the core of the sentence; the core of the sentence is always the comment.
+
+In a basic comment, the subject is marked with the particle *ga* (が), and the rest of the comment describes the subject. For example, in *Zou ga doubutsu da* (象が動物だ), *ga* indicates that "elephant" is the subject of the sentence. Context determines whether the speaker means a single elephant or elephants plural. The [copula](https://en.wikipedia.org/wiki/Copula_%28linguistics%29 "Copula (linguistics)") *da* (だ, the verb "is") ends the sentence, indicating that the subject is equivalent to the rest of the comment. Here, *doubutsu* means *animal*. Therefore, the sentence means "[The] elephant is [an] animal" or "Elephants are animals." A basic comment can end in three ways: with the copula *da*, with a different verb, or with an adjective ending in the kana *i* (い). A sentence ending might also be decorated with particles that alter the way the sentence is meant to be interpreted, as in *Zou ga doubutsu da yo* (象が動物だよ, "Elephants are animals, you know."). This is also why *da* is replaced with *desu* (です) when the speaker is talking to someone they do not know well: it makes the sentence more polite.
+
+Often, *ga* implies distinction of the subject within the topic, so the previous example comment would make the most sense within a topic where not all of the relevant subjects were animals. For example, in *Kono ganbutsu wa zou ga doubutsu da* (この贋物は象が動物だ), the particle *wa* indicates the topic is *kono ganbutsu* ("this toy" or "these toys"). In English, if there are many toys and one is an elephant, this could mean "Among these toys, [the] elephant is [an] animal." That said, if the subject is clearly a subtopic, this differentiation effect may or may not be relevant, such as in *nihongo wa bunpo ga yasashii* (日本語は文法が優しい). The equivalent sentence, "As for the Japanese language, grammar is easy," might be a general statement that Japanese grammar is easy or a statement that grammar is an especially easy feature of the Japanese language. Context should reveal which.
+
+Because *ga* marks the subject of the sentence but the sentence overall is intended to be relevant to the topic indicated by *wa*, translations of Japanese into English often elide the difference between these particles. For example, the phrase *watashi wa zou ga suki da* literally means "As for myself, elephants are likeable." The sentence about myself describes elephants as having a likeable quality. From this, it is clear that I like elephants, and this sentence is often translated into English as "I like elephants." However, to do so changes the subject of the sentence (from "Elephant" to "I") and the verb (from "is" to "like"); it does not reflect Japanese grammar.
+
+Japanese grammar tends toward brevity; the subject or object of a sentence need not be stated and [pronouns](https://en.wikipedia.org/wiki/Pronoun "Pronoun") may be omitted if they can be inferred from context. In the example above, *zou ga doubutsu da* would mean "[the] elephant is [an] animal", while *doubutsu da* by itself would mean "[they] are animals." In especially casual speech, many speakers would omit the copula, leaving the noun *doubutsu* to mean "[they are] animals." A single verb can be a complete sentence: *Yatta!* (やった!, "[I / we / they / etc] did [it]!"). In addition, since adjectives can form the predicate in a Japanese sentence (below), a single adjective can be a complete sentence: *Urayamashii!* (羨ましい!, "[I'm] jealous [about it]!")).
+
+Nevertheless, unlike the topic, the subject is always implied: all sentences which omit a *ga* particle must have an implied subject that could be specified with a *ga* particle. For example, *Kono neko wa Loki da* (この猫はロキだ) means "As for this cat, [it] is Loki." An equivalent sentence might read *kono neko wa kore ga Loki da* (この猫はこれがロキだ), meaning "As for this cat, this is Loki." However, in the same way it is unusual to state the subject twice in the English sentence, it is unusual to specify that redundant subject in Japanese. Rather than replace the redundant subject with a word like "it," the redundant subject is omitted from the Japanese sentence. It is obvious from the context that the first sentence refers to the cat by the name "Loki," and the explicit subject of the second sentence contributes no information.
+
+While the language has some words that are typically translated as pronouns, these are not used as frequently as pronouns in some Indo-European languages, and function differently. In some cases, Japanese relies on special verb forms and auxiliary verbs to indicate the direction of benefit of an action: "down" to indicate the out-group gives a benefit to the in-group, and "up" to indicate the in-group gives a benefit to the out-group. Here, the in-group includes the speaker and the out-group does not, and their boundary depends on context. For example, *oshiete moratta* (教えてもらった; literally, "explaining got" with a benefit from the out-group to the in-group) means "[he/she/they] explained [it] to [me/us]". Similarly, *oshiete ageta* (教えてあげた; literally, "explaining gave" with a benefit from the in-group to the out-group) means "[I/we] explained [it] to [him/her/them]". Such beneficiary auxiliary verbs thus serve a function comparable to that of pronouns and prepositions in Indo-European languages to indicate the actor and the recipient of an action.
+
+[Japanese "pronouns"](https://en.wikipedia.org/wiki/Japanese_pronouns "Japanese pronouns") also function differently from most modern Indo-European pronouns (and more like nouns) in that they can take modifiers as any other noun may. For instance, one does not say in English:
+
+> The amazed he ran down the street. (grammatically incorrect insertion of a pronoun)
+
+But one *can* grammatically say essentially the same thing in Japanese:
+
+> 驚いた彼は道を走っていった。
+> Transliteration: *Odoroita kare wa michi o hashitte itta.* (grammatically correct)
+
+This is partly because these words evolved from regular nouns, such as *kimi* "you" (君 "lord"), *anata* "you" (あなた "that side, yonder"), and *boku* "I" (僕 "servant"). This is why some linguists do not classify Japanese "pronouns" as pronouns, but rather as referential nouns, much like Spanish *usted* (contracted from *vuestra merced*, "your ([majestic plural](https://en.wikipedia.org/wiki/Royal_we "Royal we")) grace") or Portuguese *você* (from *vossa mercê*). Japanese personal pronouns are generally used only in situations requiring special emphasis as to who is doing what to whom.
+
+The choice of words used as pronouns is correlated with the sex of the speaker and the social situation in which they are spoken: men and women alike in a formal situation generally refer to themselves as *watashi* (私; literally "private") or *watakushi* (also 私, hyper-polite form), while men in rougher or intimate conversation are much more likely to use the word *ore* (俺, "oneself", "myself") or *boku*. Similarly, different words such as *anata*, *kimi*, and *omae* (お前, more formally 御前 "the one before me") may refer to a listener depending on the listener's relative social position and the degree of familiarity between the speaker and the listener. When used in different social relationships, the same word may have positive (intimate or respectful) or negative (distant or disrespectful) connotations.
+
+Japanese often use titles of the person referred to where pronouns would be used in English. For example, when speaking to one's teacher, it is appropriate to use *sensei* (先生, "teacher"), but inappropriate to use *anata*. This is because *anata* is used to refer to people of equal or lower status, and one's teacher has higher status.
+
+### Inflection and conjugation
+
+Japanese nouns have no grammatical number, gender or article aspect. The noun *hon* (本) may refer to a single book or several books; *hito* (人) can mean "person" or "people", and *ki* (木) can be "tree" or "trees". Where number is important, it can be indicated by providing a quantity (often with a [counter word](https://en.wikipedia.org/wiki/Japanese_counter_word "Japanese counter word")) or (rarely) by adding a suffix,  or sometimes by duplication (e.g. 人人, *hitobito*, usually written with an iteration mark as 人々). Words for people are usually understood as singular. Thus *Tanaka-san* usually means *Mx Tanaka*. Words that refer to people and animals can be made to indicate a group of individuals through the addition of a collective suffix (a noun suffix that indicates a group), such as *-tachi*, but this is not a true plural: the meaning is closer to the English phrase "and company". A group described as *Tanaka-san-tachi* may include people not named Tanaka. Some Japanese nouns are effectively plural, such as *hitobito* "people" and *wareware* "we/us", while the word *tomodachi* "friend" is considered singular, although plural in form.
+
+Verbs are [conjugated](https://en.wikipedia.org/wiki/Japanese_conjugation "Japanese conjugation") to show tenses, of which there are two: past and non-past, which is used for the present and the future. For verbs that represent an ongoing process, the *-te iru* form indicates a continuous (or progressive) [aspect](https://en.wikipedia.org/wiki/Grammatical_aspect "Grammatical aspect"), similar to the suffix *ing* in English. For others that represent a change of state, the *-te iru* form indicates a perfect aspect. For example, *kite iru* means "They have come (and are still here)", but *tabete iru* means "They are eating".
+
+Questions (both with an interrogative pronoun and yes/no questions) have the same structure as affirmative sentences, but with intonation rising at the end. In the formal register, the question particle *-ka* is added. For example, *ii desu* (いいです, "It is OK") becomes *ii desu-ka* (いいですか。, "Is it OK?"). In a more informal tone sometimes the particle *-no* (の) is added instead to show a personal interest of the speaker: *Dōshite konai-no?* "Why aren't (you) coming?". Some simple queries are formed simply by mentioning the topic with an interrogative intonation to call for the hearer's attention: *Kore wa?* "(What about) this?"; *O-namae wa?* (お名前は？) "(What's your) name?".
+
+Negatives are formed by inflecting the verb. For example, *Pan o taberu* (パンを食べる。, "I will eat bread" or "I eat bread") becomes *Pan o tabenai* (パンを食べない。, "I will not eat bread" or "I do not eat bread"). Plain negative forms are *i*-adjectives (see below) and inflect as such, e.g. *Pan o tabenakatta* (パンを食べなかった。, "I did not eat bread").
+
+The so-called *-te* verb form is used for a variety of purposes: either progressive or perfect aspect (see above); combining verbs in a temporal sequence (*Asagohan o tabete sugu dekakeru* (朝ごはんを食べてすぐ出かける。) "I'll eat breakfast and leave at once"), simple commands, conditional statements and permissions (*Dekakete-mo ii?* (出かけてもいい？) "May I go out?"), etc.
+
+The word *da* (plain), *desu* (polite) is the [copula](https://en.wikipedia.org/wiki/Copula_%28linguistics%29#Japanese "Copula (linguistics)") verb. It corresponds to the English verb *is* and marks tense when the verb is conjugated into its past form *datta* (plain), *deshita* (polite). This comes into use because only *i*-adjectives and verbs can carry tense in Japanese. Two additional common verbs are used to indicate existence ("there is") or, in some contexts, property: *aru* (negative *nai*) and *iru* (negative *inai*), for inanimate and animate things, respectively. For example, *Neko ga iru* (猫がいる。) "There's a cat", *Ii kangae-ga nai* (いい考えがない。) "[I] haven't got a good idea".
+
+The verb "to do" (*suru*, polite form *shimasu*) is often used to make verbs from nouns (*ryōri suru* "to cook", *benkyō suru* "to study", etc.) and has been productive in creating modern slang words. Japanese also has a huge number of compound verbs to express concepts that are described in English using a verb and an adverbial particle (e.g. *tobidasu* "to fly out, to flee", from *tobu* "to fly, to jump" + *dasu* "to put out, to emit").
+
+There are three types of adjectives (see [Japanese adjectives](https://en.wikipedia.org/wiki/Japanese_adjectives "Japanese adjectives")):
+
+1. 形容詞 *keiyōshi*, or *i* adjectives, which have a [conjugating](https://en.wikipedia.org/wiki/Japanese_conjugation "Japanese conjugation") ending *i* (い). An example of this is 暑い (*atsui*, "to be hot"), which can become past (暑かった *atsukatta* "it was hot"), or negative (暑くない *atsuku nai* "it is not hot"). *nai* is also an *i* adjective, which can become past (i.e., 暑くなかった *atsuku nakatta* "it was not hot").
+
+   :   暑い日 *atsui hi* "a hot day".
+2. 形容動詞 *keiyōdōshi*, or *na* adjectives, which are followed by a form of the [copula](https://en.wikipedia.org/wiki/Copula_%28linguistics%29 "Copula (linguistics)"), usually *na*. For example, *hen* (strange)
+
+   :   変な人 *hen na hito* "a strange person".
+3. 連体詞 *rentaishi*, also called true adjectives, such as *ano* "that"
+
+   :   あの山 *ano yama* "that mountain".
+
+Both *keiyōshi* and *keiyōdōshi* may [predicate](https://en.wikipedia.org/wiki/Predicate_%28grammar%29 "Predicate (grammar)") sentences. For example,
+
+> ご飯が熱い。 *Gohan ga atsui.* "The rice is hot."
+> 彼は変だ。 *Kare wa hen da.* "He's strange."
+
+Both inflect, though they do not show the full range of conjugation found in true verbs.
+The *rentaishi* in Modern Japanese are few in number, and unlike the other words, are limited to directly modifying nouns. They never predicate sentences. Examples include *ookina* "big", *kono* "this", *iwayuru* "so-called" and *taishita* "amazing".
+
+Both *keiyōdōshi* and *keiyōshi* form [adverbs](https://en.wikipedia.org/wiki/Adverb "Adverb"), by following with *ni* in the case of *keiyōdōshi*:
+
+> 変になる *hen ni naru* "become strange",
+
+and by changing *i* to *ku* in the case of *keiyōshi*:
+
+> 熱くなる *atsuku naru* "become hot".
+
+The grammatical function of nouns is indicated by [postpositions](https://en.wikipedia.org/wiki/Adposition "Adposition"), also called [particles](https://en.wikipedia.org/wiki/Japanese_particles "Japanese particles"). These include for example:
+
+* **が *ga*** for the [nominative case](https://en.wikipedia.org/wiki/Nominative_case "Nominative case").
+
+:   **彼が**やった。 ***Kare ga** yatta.* "He did it."
+
+* **を *o*** for the [accusative case](https://en.wikipedia.org/wiki/Accusative_case "Accusative case").
+
+:   **何を**食べますか。 ***Nani o** tabemasu ka?* "**What** will (you) eat?"
+
+* **に *ni*** for the [dative case](https://en.wikipedia.org/wiki/Dative_case "Dative case").
+
+:   **田中さんに**あげて下さい。 ***Tanaka-san ni** agete kudasai* "Please give it **to Mx Tanaka**."
+:   It is also used for the [lative case](https://en.wikipedia.org/wiki/Lative_case "Lative case"), indicating a motion to a location.
+:   **日本に**行きたい。 ***Nihon ni** ikitai* "I want to go **to Japan**."
+
+* However, **へ *e*** is more commonly used for the lative case.
+
+:   **パーティーへ**行かないか。 ***pātī e** ikanai ka?* "Won't you go **to the party**?"
+
+* **の *no*** for the [genitive case](https://en.wikipedia.org/wiki/Genitive_case "Genitive case"),[[57]](#cite_note-66) or nominalizing phrases.
+
+:   **私の**カメラ。 ***watashi no** kamera* "**my** camera"
+:   スキーに行く**の**が好きです。 *Sukī-ni iku **no** ga suki desu* "(I) like go**ing** skiing."
+
+* **は *wa*** for the topic. It can co-exist with the case markers listed above, and it overrides *ga* and (in most cases) *o*.
+
+:   **私は**寿司がいいです。 ***Watashi wa** sushi ga ii desu.* (literally) "**As for me**, sushi is good." The nominative marker *ga* after *watashi* is hidden under *wa*.
+
+Note: The subtle difference between ***wa*** and ***ga*** in Japanese cannot be derived from the English language as such, because the distinction between sentence topic and subject is not made there. While *wa* indicates the topic, which the rest of the sentence describes or acts upon, it carries the implication that the subject indicated by *wa* is not unique, or may be part of a larger group.
+
+> *Ikeda-san **wa** yonjū-ni sai da.* "As for Mx Ikeda, they are forty-two years old." Others in the group may also be of that age.
+
+Absence of *wa* often means the subject is the [focus](https://en.wikipedia.org/wiki/Focus_%28linguistics%29 "Focus (linguistics)") of the sentence.
+
+> *Ikeda-san **ga** yonjū-ni sai da.* "It is Mx Ikeda who is forty-two years old." This is a reply to an implicit or explicit question, such as "who in this group is forty-two years old?"
+
+### Politeness
+
+Main article: [Honorific speech in Japanese](https://en.wikipedia.org/wiki/Honorific_speech_in_Japanese "Honorific speech in Japanese")
+
+Japanese has an extensive grammatical system to express politeness and formality. This reflects the hierarchical nature of Japanese society.[[58]](#cite_note-67)
+
+The Japanese language can express differing levels of social status. The differences in social position are determined by a variety of factors including job, age, experience, or even psychological state (e.g., a person asking a favour tends to do so politely). The person in the lower position is expected to use a polite form of speech, whereas the other person might use a plainer form. Strangers will also speak to each other politely. Japanese children begin learning and using polite speech in basic forms from an early age, but their use of more formal and sophisticated polite speech becomes more common and expected as they enter their teenage years and start engaging in more adult-like social interactions. See *[uchi–soto](https://en.wikipedia.org/wiki/Uchi%E2%80%93soto "Uchi–soto")*.
+
+Whereas *teineigo* (丁寧語, polite language) is commonly an [inflectional](https://en.wikipedia.org/wiki/Inflection "Inflection") system, *sonkeigo* (尊敬語, respectful language) and *kenjōgo* (謙譲語, humble language) often employ many special honorific and humble alternate verbs: *iku* "go" becomes *ikimasu* in polite form, but is replaced by *irassharu* in honorific speech and *ukagau* or *mairu* in humble speech.
+
+The difference between honorific and humble speech is particularly pronounced in the Japanese language. Humble language is used to talk about oneself or one's own group (company, family) whilst honorific language is mostly used when describing the interlocutor and their group. For example, the *-san* suffix ("Mr", "Mrs", "Miss", or "Mx") is an example of honorific language. It is not used to talk about oneself or when talking about someone from one's company to an external person, since the company is the speaker's in-group. When speaking directly to one's superior in one's company or when speaking with other employees within one's company about a superior, a Japanese person will use vocabulary and inflections of the honorific register to refer to the in-group superior and their speech and actions. When speaking to a person from another company (i.e., a member of an out-group), however, a Japanese person will use the plain or the humble register to refer to the speech and actions of their in-group superiors. In short, the register used in Japanese to refer to the person, speech, or actions of any particular individual varies depending on the relationship (either in-group or out-group) between the speaker and listener, as well as depending on the relative status of the speaker, listener, and third-person referents.
+
+Most [nouns](https://en.wikipedia.org/wiki/Noun "Noun") in the Japanese language may be made polite by the addition of *o-* or *go-* as a prefix. *o-* is generally used for words of native Japanese origin, whereas *go-* is affixed to words of Chinese derivation. In some cases, the prefix has become a fixed part of the word, and is included even in regular speech, such as *gohan* 'cooked rice; meal.' Such a construction often indicates deference to either the item's owner or to the object itself. For example, the word *tomodachi* 'friend,' would become *o-tomodachi* when referring to the friend of someone of higher status (though mothers often use this form to refer to their children's friends). On the other hand, a polite speaker may sometimes refer to *mizu* 'water' as *o-mizu* to show politeness.
+
+## Vocabulary
+
+Main articles: [Yamato kotoba](https://en.wikipedia.org/wiki/Yamato_kotoba "Yamato kotoba"), [Sino-Japanese vocabulary](https://en.wikipedia.org/wiki/Sino-Japanese_vocabulary "Sino-Japanese vocabulary"), and [Gairaigo](https://en.wikipedia.org/wiki/Gairaigo "Gairaigo")
+
+There are three main sources of words in the Japanese language: the *yamato kotoba* (大和言葉) or *wago* (和語); *kango* (漢語); and *gairaigo* (外来語).[[59]](#cite_note-68)
+
+The original language of Japan, or at least the original language of a certain population that was ancestral to a significant portion of the historical and present Japanese nation, was the so-called *[yamato kotoba](https://en.wikipedia.org/wiki/Yamato_kotoba "Yamato kotoba")* (大和言葉) or infrequently 大和詞, i.e. "[Yamato](https://en.wikipedia.org/wiki/Yamato_people "Yamato people") words"), which in scholarly contexts is sometimes referred to as *wago* (和語 or rarely 倭語, i.e. the "[Wa](https://en.wikipedia.org/wiki/Wa_%28name_of_Japan%29 "Wa (name of Japan)") language"). In addition to words from this original language, present-day Japanese includes a number of words that were either borrowed from [Chinese](https://en.wikipedia.org/wiki/Chinese_language "Chinese language") or constructed from Chinese roots following Chinese patterns. These words, known as *[kango](https://en.wikipedia.org/wiki/Sino-Japanese_vocabulary "Sino-Japanese vocabulary")* (漢語), entered the language from the 5th century[*[clarification needed](https://en.wikipedia.org/wiki/Wikipedia%3APlease_clarify "Wikipedia:Please clarify")*] onwards by contact with Chinese culture. According to the *Shinsen Kokugo Jiten* (新選国語辞典) [Japanese dictionary](https://en.wikipedia.org/wiki/Japanese_dictionary "Japanese dictionary"), *kango* comprise 49.1% of the total vocabulary, *wago* make up 33.8%, other foreign words or *[gairaigo](https://en.wikipedia.org/wiki/Gairaigo "Gairaigo")* (外来語) account for 8.8%, and the remaining 8.3% constitute hybridized words or *konshugo* (混種語) that draw elements from more than one language.[[60]](#cite_note-69)
+
+There are also a great number of words of [mimetic](https://en.wikipedia.org/wiki/Mimesis "Mimesis") origin in Japanese, with Japanese having a rich collection of [sound symbolism](https://en.wikipedia.org/wiki/Japanese_sound_symbolism "Japanese sound symbolism"), both [onomatopoeia](https://en.wikipedia.org/wiki/Onomatopoeia "Onomatopoeia") for physical sounds, and more [abstract](https://en.wikipedia.org/wiki/Abstraction "Abstraction") words. A small number of words have come into Japanese from the [Ainu language](https://en.wikipedia.org/wiki/Ainu_language "Ainu language"). *Tonakai* ([reindeer](https://en.wikipedia.org/wiki/Reindeer "Reindeer")), *rakko* ([sea otter](https://en.wikipedia.org/wiki/Sea_otter "Sea otter")) and *[shishamo](https://en.wikipedia.org/wiki/Shishamo "Shishamo")* ([smelt](https://en.wikipedia.org/wiki/Smelt_%28fish%29 "Smelt (fish)"), a type of fish) are well-known examples of words of Ainu origin.
+
+Words of different origins occupy different [registers](https://en.wikipedia.org/wiki/Register_%28sociolinguistics%29 "Register (sociolinguistics)") in Japanese. Like Latin-derived words in English, *kango* words are typically perceived as somewhat formal or academic compared to equivalent Yamato words. Indeed, it is generally fair to say that an English word derived from Latin/French roots typically corresponds to a Sino-Japanese word in Japanese, whereas an [Anglo-Saxon word](https://en.wikipedia.org/wiki/Old_English "Old English") would best be translated by a Yamato equivalent.
+
+Incorporating vocabulary from [European languages](https://en.wikipedia.org/wiki/Languages_of_Europe "Languages of Europe"), *gairaigo*, began with [borrowings from Portuguese](https://en.wikipedia.org/wiki/Glossary_of_Japanese_words_of_Portuguese_origin "Glossary of Japanese words of Portuguese origin") in the 16th century, followed by words from [Dutch](https://en.wikipedia.org/wiki/Dutch_language "Dutch language") during Japan's [long isolation](https://en.wikipedia.org/wiki/Sakoku "Sakoku") of the [Edo period](https://en.wikipedia.org/wiki/Edo_period "Edo period"). With the [Meiji Restoration](https://en.wikipedia.org/wiki/Meiji_Restoration "Meiji Restoration") and the reopening of Japan in the 19th century, words were borrowed from [German](https://en.wikipedia.org/wiki/German_language "German language"), [French](https://en.wikipedia.org/wiki/French_language "French language"), and [English](https://en.wikipedia.org/wiki/English_language "English language"). Today most borrowings are from English.
+
+In the Meiji era, the Japanese also coined many neologisms using Chinese roots and morphology to translate European concepts;[*[citation needed](https://en.wikipedia.org/wiki/Wikipedia%3ACitation_needed "Wikipedia:Citation needed")*] these are known as *[wasei-kango](https://en.wikipedia.org/wiki/Wasei-kango "Wasei-kango")* (Japanese-made Chinese words). Many of these were then imported into Chinese, Korean, and Vietnamese via their kanji in the late 19th and early 20th centuries.[*[citation needed](https://en.wikipedia.org/wiki/Wikipedia%3ACitation_needed "Wikipedia:Citation needed")*] For example, *seiji* (政治, "politics"), and *kagaku* (化学, "chemistry") are words derived from Chinese roots that were first created and used by the Japanese, and only later borrowed into Chinese and other East Asian languages. As a result, Japanese, Chinese, Korean, and Vietnamese share a large common corpus of vocabulary in the same way many Greek- and Latin-derived words – both inherited or borrowed into European languages, or modern coinages from Greek or Latin roots – are shared among modern European languages – see [classical compound](https://en.wikipedia.org/wiki/Classical_compound "Classical compound").[*[citation needed](https://en.wikipedia.org/wiki/Wikipedia%3ACitation_needed "Wikipedia:Citation needed")*]
+
+In the past few decades, *[wasei-eigo](https://en.wikipedia.org/wiki/Wasei-eigo "Wasei-eigo")* ("made-in-Japan English") has become a prominent phenomenon. Words such as *wanpatān* ワンパターン (< *one* + *pattern*, "to be in a rut", "to have a one-track mind") and *sukinshippu* スキンシップ (< *skin* + *-ship*, "physical contact"), although coined by compounding English roots, are nonsensical in most non-Japanese contexts; exceptions exist in nearby languages such as Korean however, which often use words such as *skinship* and *rimokon* (remote control) in the same way as in Japanese.
+
+The popularity of many Japanese cultural exports has made some native Japanese words familiar in English, including *[emoji](https://en.wikipedia.org/wiki/Emoji "Emoji"), [futon](https://en.wikipedia.org/wiki/Futon "Futon"), [haiku](https://en.wikipedia.org/wiki/Haiku "Haiku"), [judo](https://en.wikipedia.org/wiki/Judo "Judo"), [kamikaze](https://en.wikipedia.org/wiki/Kamikaze "Kamikaze"), [karaoke](https://en.wikipedia.org/wiki/Karaoke "Karaoke"), [karate](https://en.wikipedia.org/wiki/Karate "Karate"), [ninja](https://en.wikipedia.org/wiki/Ninja "Ninja"), [origami](https://en.wikipedia.org/wiki/Origami "Origami"), [rickshaw](https://en.wikipedia.org/wiki/Pulled_rickshaw "Pulled rickshaw")* (from 人力車 *jinrikisha*), *[samurai](https://en.wikipedia.org/wiki/Samurai "Samurai"), [sayonara](https://en.wikipedia.org/wiki/Sayonara_%28disambiguation%29 "Sayonara (disambiguation)"), [Sudoku](https://en.wikipedia.org/wiki/Sudoku "Sudoku"), [sumo](https://en.wikipedia.org/wiki/Sumo "Sumo"), [sushi](https://en.wikipedia.org/wiki/Sushi "Sushi"), [tofu](https://en.wikipedia.org/wiki/Tofu "Tofu"), [tsunami](https://en.wikipedia.org/wiki/Tsunami "Tsunami"), [tycoon](https://en.wikipedia.org/wiki/Tycoon "Tycoon")*. See [list of English words of Japanese origin](https://en.wikipedia.org/wiki/List_of_English_words_of_Japanese_origin "List of English words of Japanese origin") for more.
+
+## Gender in the Japanese language
+
+Main article: [Gender differences in Japanese](https://en.wikipedia.org/wiki/Gender_differences_in_Japanese "Gender differences in Japanese")
+
+Depending on the speakers’ gender, different linguistic features might be used.[[61]](#cite_note-:0-70) The typical [lect](https://en.wikipedia.org/wiki/Variety_%28linguistics%29 "Variety (linguistics)") used by females is called *joseigo* ([女性語](https://en.wiktionary.org/wiki/%E5%A5%B3%E6%80%A7%E8%AA%9E#Japanese "wikt:女性語")) and the one used by males is called *danseigo* ([男性語](https://en.wiktionary.org/wiki/%E7%94%B7%E6%80%A7%E8%AA%9E#Japanese "wikt:男性語")).[[62]](#cite_note-71) *Joseigo* and *danseigo* are different in various ways, including [first-person pronouns](https://en.wikipedia.org/wiki/Personal_pronoun "Personal pronoun") (such as *watashi* or *atashi* [私](https://en.wiktionary.org/wiki/%E7%A7%81#Japanese#Japanese "wikt:私") for women and *boku* ([僕](https://en.wiktionary.org/wiki/%E5%83%95#Japanese "wikt:僕")) for men) and sentence-final particles (such as *wa* ([わ](https://en.wiktionary.org/wiki/%E3%82%8F "wikt:わ")), *na no* ([なの](https://en.wiktionary.org/wiki/%E3%81%AA%E3%81%AE "wikt:なの")), or *kashira* ([かしら](https://en.wiktionary.org/wiki/%E3%81%8B%E3%81%97%E3%82%89 "wikt:かしら")) for *joseigo*, or *zo* ([ぞ](https://en.wiktionary.org/wiki/%E3%81%9E "wikt:ぞ")), *da* ([だ](https://en.wiktionary.org/wiki/%E3%81%A0 "wikt:だ")), or *yo* ([よ](https://en.wiktionary.org/wiki/%E3%82%88 "wikt:よ")) for *danseigo*).[[61]](#cite_note-:0-70) In addition to these specific differences, expressions and pitch can also be different.[[61]](#cite_note-:0-70) For example, *joseigo* is more gentle, polite, refined, indirect, modest, and exclamatory, and often accompanied by raised pitch.[[61]](#cite_note-:0-70)
+
+### Kogal slang
+
+In the 1990s, the traditional feminine speech patterns and stereotyped behaviors were challenged, and a popular culture of "naughty" teenage girls emerged, called *kogyaru* ([コギャル](https://en.wiktionary.org/wiki/%E3%82%B3%E3%82%AE%E3%83%A3%E3%83%AB "wikt:コギャル")), sometimes referenced in English-language materials as "[kogal](https://en.wikipedia.org/wiki/Kogal "Kogal")".[[63]](#cite_note-:1-72) Their rebellious behaviors, deviant language usage, the particular make-up called *ganguro* ([ガングロ](https://en.wiktionary.org/wiki/%E3%82%AC%E3%83%B3%E3%82%B0%E3%83%AD "wikt:ガングロ")), and the fashion became objects of focus in the mainstream media.[[63]](#cite_note-:1-72) Although kogal slang was not appreciated by older generations, the *kogyaru* continued to create terms and expressions.[[63]](#cite_note-:1-72) Kogal culture also changed Japanese norms of gender and the Japanese language.[[63]](#cite_note-:1-72)
+
+## Non-native study
+
+Main article: [Japanese as a foreign language](https://en.wikipedia.org/wiki/Japanese_as_a_foreign_language "Japanese as a foreign language")
+
+Many major universities throughout the world provide Japanese language courses, and a number of secondary and even primary schools worldwide offer courses in the language. This is a significant increase from before [World War II](https://en.wikipedia.org/wiki/World_War_II "World War II"); in 1940, only 65 Americans not [of Japanese descent](https://en.wikipedia.org/wiki/Japanese_Americans "Japanese Americans") were able to read, write, and understand the language.[[64]](#cite_note-73)
+
+International interest in the Japanese language dates from the 19th century but has become more prevalent following Japan's economic bubble of the 1980s and the global popularity of [Japanese popular culture](https://en.wikipedia.org/wiki/Japanese_popular_culture "Japanese popular culture") (such as [anime](https://en.wikipedia.org/wiki/Anime "Anime") and [video games](https://en.wikipedia.org/wiki/Video_game "Video game")) since the 1990s. As of 2015, more than 3.6 million people studied the language worldwide, primarily in East and Southeast Asia.[[65]](#cite_note-Japanese_as_Foreign_Language-74) Nearly one million Chinese, 745,000 Indonesians, 556,000 South Koreans and 357,000 Australians studied Japanese in lower and higher educational institutions.[[65]](#cite_note-Japanese_as_Foreign_Language-74) Between 2012 and 2015, considerable growth of learners originated in [Australia](https://en.wikipedia.org/wiki/Australia "Australia") (20.5%), [Thailand](https://en.wikipedia.org/wiki/Thailand "Thailand") (34.1%), [Vietnam](https://en.wikipedia.org/wiki/Vietnam "Vietnam") (38.7%) and the [Philippines](https://en.wikipedia.org/wiki/Philippines "Philippines") (54.4%).[[65]](#cite_note-Japanese_as_Foreign_Language-74)
+
+The Japanese government provides standardized tests to measure spoken and written comprehension of Japanese for second language learners; the most prominent is the [Japanese-Language Proficiency Test](https://en.wikipedia.org/wiki/Japanese-Language_Proficiency_Test "Japanese-Language Proficiency Test") (JLPT), which features five levels of exams. The JLPT is offered twice a year.
+
+## Example text
+
+Article 1 of the *[Universal Declaration of Human Rights](https://en.wikipedia.org/wiki/Universal_Declaration_of_Human_Rights "Universal Declaration of Human Rights")* in Japanese:
+
+![](//thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Gnome-mime-sound-openclipart.svg/60px-Gnome-mime-sound-openclipart.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)
+
+[Universal Declaration of Human Rights](https://en.wikipedia.org/wiki/File%3AUniversal_Declaration_of_Human_Rights-jpn-Art1.ogg "File:Universal Declaration of Human Rights-jpn-Art1.ogg")
+
+Recording of the first article of the UN Universal Declaration of Human Rights in Japanese.
+
+---
+
+*Problems playing this file? See [media help](https://en.wikipedia.org/wiki/Help%3AMedia "Help:Media").*
+
+すべて
+
+Subete
+
+の
+
+no
+
+人間
+
+ningen
+
+は、
+
+wa,
+
+生まれながら
+
+umarenagara
+
+に
+
+ni
+
+して
+
+shite
+
+自由
+
+jiyū
+
+で
+
+de
+
+あり、
+
+ari,
+
+かつ、
+
+katsu,
+
+尊厳
+
+songen
+
+と
+
+to
+
+権利
+
+kenri
+
+と
+
+to
+
+に
+
+ni
+
+ついて
+
+tsuite
+
+平等
+
+byōdō
+
+で
+
+de
+
+ある。
+
+aru.
+
+人間
+
+Ningen
+
+は、
+
+wa,
+
+理性
+
+risei
+
+と
+
+to
+
+良心
+
+ryōshin
+
+と
+
+to
+
+を
+
+o
+
+授けられて
+
+sazukerarete
+
+おり、
+
+ori,
+
+互い
+
+tagai
+
+に
+
+ni
+
+同胞
+
+dōhō
+
+の
+
+no
+
+精神
+
+seishin
+
+を
+
+o
+
+もって
+
+motte
+
+行動
+
+kōdō
+
+しなければ
+
+shinakereba
+
+ならない。
+
+naranai.
+
+[[66]](#cite_note-75)
+
+すべて の 人間 は、 生まれながら に して 自由 で あり、 かつ、 尊厳 と 権利 と に ついて 平等 で ある。 人間 は、 理性 と 良心 と を 授けられて おり、 互い に 同胞 の 精神 を もって 行動 しなければ ならない。
+
+Subete no ningen wa, umarenagara ni shite jiyū de ari, katsu, songen to kenri to ni tsuite byōdō de aru. Ningen wa, risei to ryōshin to o sazukerarete ori, tagai ni dōhō no seishin o motte kōdō shinakereba naranai.
+
+All human beings are born free and equal in dignity and rights. They are endowed with reason and conscience and should act towards one another in a spirit of brotherhood.[[67]](#cite_note-76)
+
+## See also
+
+* ![flag](//thumb.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/40px-Flag_of_Japan.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)[Japan portal](https://en.wikipedia.org/wiki/Portal%3AJapan "Portal:Japan")
+* [![icon](//thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Globe_of_letters.svg/40px-Globe_of_letters.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AGlobe_of_letters.svg)[Language portal](https://en.wikipedia.org/wiki/Portal%3ALanguage "Portal:Language")
+
+* [Aizuchi](https://en.wikipedia.org/wiki/Aizuchi "Aizuchi")
+* [Culture of Japan](https://en.wikipedia.org/wiki/Culture_of_Japan "Culture of Japan")
+* [Japanese dictionary](https://en.wikipedia.org/wiki/Japanese_dictionary "Japanese dictionary")
+* [Japanese exonyms](https://en.wikipedia.org/wiki/Japanese_exonyms "Japanese exonyms")
+* [Japanese language and computers](https://en.wikipedia.org/wiki/Japanese_language_and_computers "Japanese language and computers")
+* [Japanese literature](https://en.wikipedia.org/wiki/Japanese_literature "Japanese literature")
+* [Japanese name](https://en.wikipedia.org/wiki/Japanese_name "Japanese name")
+* [Japanese punctuation](https://en.wikipedia.org/wiki/Japanese_punctuation "Japanese punctuation")
+* [Japanese profanity](https://en.wikipedia.org/wiki/Japanese_profanity "Japanese profanity")
+* [Japanese Sign Language family](https://en.wikipedia.org/wiki/Japanese_Sign_Language_family "Japanese Sign Language family")
+* [Japanese words](https://en.wiktionary.org/wiki/Category%3AJapanese%20language "wiktionary:Category:Japanese language") and [words derived from Japanese in other languages](https://en.wiktionary.org/wiki/Category%3AJapanese%20derivations "wiktionary:Category:Japanese derivations") at [Wiktionary](https://en.wikipedia.org/wiki/Wiktionary "Wiktionary"), Wikipedia's sibling project
+* [Classical Japanese](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese")
+* [Romanization of Japanese](https://en.wikipedia.org/wiki/Romanization_of_Japanese "Romanization of Japanese")
+  + [Hepburn romanization](https://en.wikipedia.org/wiki/Hepburn_romanization "Hepburn romanization")
+* [Rendaku](https://en.wikipedia.org/wiki/Rendaku "Rendaku")
+* [Yojijukugo](https://en.wikipedia.org/wiki/Yojijukugo "Yojijukugo")
+* Other:
+  + [History of writing in Vietnam](https://en.wikipedia.org/wiki/History_of_writing_in_Vietnam "History of writing in Vietnam")
+
+## Notes
+
+1. [↑](#cite_ref-57) [Book of Song](https://en.wikipedia.org/wiki/Book_of_Song "Book of Song") 順帝昇明二年，倭王武遣使上表曰：封國偏遠，作藩于外，自昔祖禰，躬擐甲冑，跋渉山川，不遑寧處。東征毛人五十國，西服衆夷六十六國，渡平海北九十五國，王道融泰，廓土遐畿，累葉朝宗，不愆于歳。臣雖下愚，忝胤先緒，驅率所統，歸崇天極，道逕百濟，裝治船舫，而句驪無道，圖欲見吞，掠抄邊隸，虔劉不已，毎致稽滯，以失良風。雖曰進路，或通或不。臣亡考濟實忿寇讎，壅塞天路，控弦百萬，義聲感激，方欲大舉，奄喪父兄，使垂成之功，不獲一簣。居在諒闇，不動兵甲，是以偃息未捷。至今欲練甲治兵，申父兄之志，義士虎賁，文武效功，白刃交前，亦所不顧。若以帝德覆載，摧此強敵，克靖方難，無替前功。竊自假開府儀同三司，其餘咸各假授，以勸忠節。詔除武使持節督倭、新羅、任那、加羅、秦韓六國諸軍事、安東大將軍、倭國王。至齊建元中，及梁武帝時，并來朝貢。
+2. [↑](#cite_ref-58) [Nihon Shoki](https://en.wikipedia.org/wiki/Nihon_Shoki "Nihon Shoki") Chapter 30:持統五年 九月己巳朔壬申。賜音博士大唐続守言。薩弘恪。書博士百済末士善信、銀人二十両。
+3. [↑](#cite_ref-59) [Nihon Shoki](https://en.wikipedia.org/wiki/Nihon_Shoki "Nihon Shoki") Chapter 30:持統六年 十二月辛酉朔甲戌。賜音博士続守言。薩弘恪水田人四町
+4. [↑](#cite_ref-60) [Shoku Nihongi](https://en.wikipedia.org/wiki/Shoku_Nihongi "Shoku Nihongi") 宝亀九年 十二月庚寅。玄蕃頭従五位上袁晋卿賜姓清村宿禰。晋卿唐人也。天平七年随我朝使帰朝。時年十八九。学得文選爾雅音。為大学音博士。於後。歴大学頭安房守。
+
+## References
+
+### Citations
+
+1. [↑](#cite_ref-e27_1-0) [Japanese](https://www.ethnologue.com/language/jpn) at *[Ethnologue](https://en.wikipedia.org/wiki/Ethnologue "Ethnologue")* (27th ed., 2024) [![Closed access icon](//thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Closed_Access_logo_transparent.svg/20px-Closed_Access_logo_transparent.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/Paywall "closed access publication – behind paywall")
+2. [↑](#cite_ref-2) Hirayama, Teruo, ed. (15 September 2010) [30 June 1960]. 全国アクセント辞典 (in Japanese) (31st ed.). [Chiyoda, Tokyo](https://en.wikipedia.org/wiki/Chiyoda%2C_Tokyo "Chiyoda, Tokyo"): Tokyodo Shuppan. pp. 585–586. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-4-490-10023-5](https://en.wikipedia.org/wiki/Special%3ABookSources/978-4-490-10023-5 "Special:BookSources/978-4-490-10023-5").
+3. [↑](#cite_ref-3) [Kindaichi, Haruhiko](https://en.wikipedia.org/wiki/Haruhiko_Kindaichi "Haruhiko Kindaichi"); Akinaga, Kazue, eds. (1 April 2025) [10 April 2014]. 新明解日本語アクセント辞典 (in Japanese) (2nd ed.). [Chiyoda, Tokyo](https://en.wikipedia.org/wiki/Chiyoda%2C_Tokyo "Chiyoda, Tokyo"): [Sanseido](https://en.wikipedia.org/wiki/Sanseido "Sanseido"). pp. 676, 678. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-4-385-13468-0](https://en.wikipedia.org/wiki/Special%3ABookSources/978-4-385-13468-0 "Special:BookSources/978-4-385-13468-0").
+4. [↑](#cite_ref-4) NHK Broadcasting Culture Research Institute, ed. (20 June 2025) [25 May 2016]. NHK日本語発音アクセント新辞典 (in Japanese) (15th ed.). [Shibuya](https://en.wikipedia.org/wiki/Shibuya "Shibuya"), Tokyo: NHK Publishing. p. 1022. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-4-14-011345-5](https://en.wikipedia.org/wiki/Special%3ABookSources/978-4-14-011345-5 "Special:BookSources/978-4-14-011345-5").
+5. [↑](#cite_ref-5) Wade, Nicholas (4 May 2011). ["Finding on Dialects Casts New Light on the Origins of the Japanese People"](https://ghostarchive.org/archive/20220103/https%3A//www.nytimes.com/2011/05/04/world/asia/04language.html). *[The New York Times](https://en.wikipedia.org/wiki/The_New_York_Times "The New York Times")*. Archived from [the original](https://www.nytimes.com/2011/05/04/world/asia/04language.html) on 2022-01-03. Retrieved 7 May 2011.
+6. [↑](#cite_ref-FOOTNOTEFrellesvigWhitman2008[httpsbooksgooglecombooksidaun8BRHTDEACpgPA1_1]_6-0) [Frellesvig & Whitman 2008](#CITEREFFrellesvigWhitman2008), p. [1](https://books.google.com/books?id=aun8BRHTDEAC&pg=PA1).
+7. [↑](#cite_ref-FOOTNOTEFrellesvig201011_7-0) [Frellesvig 2010](#CITEREFFrellesvig2010), p. 11.
+8. [↑](#cite_ref-FOOTNOTESeeley199125–31_8-0) [Seeley 1991](#CITEREFSeeley1991), pp. 25–31.
+9. [↑](#cite_ref-FOOTNOTEFrellesvig201024_9-0) [Frellesvig 2010](#CITEREFFrellesvig2010), p. 24.
+10. [↑](#cite_ref-10) Shinkichi Hashimoto (February 3, 1918)「国語仮名遣研究史上の一発見―石塚龍麿の仮名遣奥山路について」『帝国文学』26–11(1949)『文字及び仮名遣の研究(橋本進吉博士著作集 第3冊)』(岩波書店)。 (in Japanese).
+11. [1](#cite_ref-Frel_11-0) [2](#cite_ref-Frel_11-1) [Frellesvig 2010](#CITEREFFrellesvig2010), p. [184](https://books.google.com/books?id=v1FcAgiAC9IC&pg=PA184)
+12. [↑](#cite_ref-12) Labrune, Laurence (2012). "Consonants". [*The Phonology of Japanese*](https://oxford.universitypressscholarship.com/view/10.1093/acprof%3Aoso/9780199545834.001.0001/acprof-9780199545834). The Phonology of the World's Languages. Oxford University Press. pp. 89–91. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.1093/acprof:oso/9780199545834.003.0003](https://doi.org/10.1093%2Facprof%3Aoso%2F9780199545834.003.0003). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-19-954583-4](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-19-954583-4 "Special:BookSources/978-0-19-954583-4"). [Archived](https://web.archive.org/web/20211027181824/https%3A//oxford.universitypressscholarship.com/view/10.1093/acprof%3Aoso/9780199545834.001.0001/acprof-9780199545834) from the original on 2021-10-27. Retrieved 2021-10-14.
+13. [↑](#cite_ref-FOOTNOTEFrellesvig2010378–379_13-0) [Frellesvig 2010](#CITEREFFrellesvig2010), pp. 378–379.
+14. [↑](#cite_ref-14) Miura, Akira, *English in Japanese*, Weatherhill, 1998.
+15. [↑](#cite_ref-15) Hall, Kathleen Currie (2013). ["Documenting phonological change: A comparison of two Japanese phonemic splits"](https://web.archive.org/web/20191212034227/http%3A//homes.chass.utoronto.ca/~cla-acl/actes2013/Hall-2013.pdf) (PDF). In Luo, Shan (ed.). *Proceedings of the 2013 Annual Conference of the Canadian Linguistic Association*. Archived from [the original](http://homes.chass.utoronto.ca/~cla-acl/actes2013/Hall-2013.pdf) (PDF) on 2019-12-12. Retrieved 2019-06-01.
+16. [↑](#cite_ref-16) Japanese is listed as one of the official languages of [Angaur](https://en.wikipedia.org/wiki/Angaur "Angaur") state, [Palau](https://en.wikipedia.org/wiki/Palau "Palau") (["Palau"](http://www.ethnologue.com/show_country.asp?name=PW). *Ethnologue*. [Archived](https://web.archive.org/web/20071001180034/http%3A//www.ethnologue.com/show_country.asp?name=PW) from the original on 2007-10-01, ["Palau"](https://web.archive.org/web/20210203032225/https%3A//www.cia.gov/the-world-factbook/countries/palau/). *The World Factbook*. CIA. Archived from [the original](https://www.cia.gov/the-world-factbook/countries/palau/) on 2021-02-03). However, very few Japanese speakers were recorded in the ["2005 Census of Population and Housing of the Republic of Palau - Volume I: Basic Tables"](https://web.archive.org/web/20080216045724/http%3A//www.spc.int/prism/country/pw/stats/PalauStats/Publication/2005CENSUS.pdf) (PDF). Office of Planning and Statistics, Republic of Palau. December 2005. Archived from [the original](http://www.spc.int/prism/country/pw/stats/PalauStats/Publication/2005CENSUS.pdf) (PDF) on 2008-02-16 – via Secretariat of the Pacific Community.
+17. [↑](#cite_ref-IBGE_traça_perfil_dos_imigrantes_17-0) ["IBGE traça perfil dos imigrantes"](https://web.archive.org/web/20121119132009/http%3A//madeinjapan.uol.com.br/2008/06/21/ibge-traca-perfil-dos-imigrantes/) (in Portuguese). Made in Japan. 2008-06-21. Archived from [the original](http://madeinjapan.uol.com.br/2008/06/21/ibge-traca-perfil-dos-imigrantes/) on 2012-11-19. Retrieved 2012-11-20.
+18. [↑](#cite_ref-18) ["S0201"](https://web.archive.org/web/20111112230718/http%3A//factfinder.census.gov/servlet/IPTable?_bm=y&-geo_id=01000US&-qr_name=ACS_2005_EST_G00_S0201&-qr_name=ACS_2005_EST_G00_S0201PR&-qr_name=ACS_2005_EST_G00_S0201T&-qr_name=ACS_2005_EST_G00_S0201TPR&-reg=ACS_2005_EST_G00_S0201:041;ACS_2005_EST_G00_S0201PR:041;ACS_2005_EST_G00_S0201T:041;ACS_2005_EST_G00_S0201TPR:041&-ds_name=ACS_2005_EST_G00_&-_lang=en). American FactFinder. Archived from [the original](http://factfinder.census.gov/servlet/IPTable?_bm=y&-geo_id=01000US&-qr_name=ACS_2005_EST_G00_S0201&-qr_name=ACS_2005_EST_G00_S0201PR&-qr_name=ACS_2005_EST_G00_S0201T&-qr_name=ACS_2005_EST_G00_S0201TPR&-reg=ACS_2005_EST_G00_S0201:041;ACS_2005_EST_G00_S0201PR:041;ACS_2005_EST_G00_S0201T:041;ACS_2005_EST_G00_S0201TPR:041&-ds_name=ACS_2005_EST_G00_&-_lang=en) on 2011-11-12. Retrieved 2013-02-01.
+19. [↑](#cite_ref-19) ["Japanese – Source Census 2000, Summary File 3, STP 258"](https://web.archive.org/web/20121221175921/http%3A//www.mla.org/map_data_results%26mode%3Dlang_tops%26SRVY_YEAR%3D2000%26lang_id%3D723). Modern Language Association. Archived from [the original](http://www.mla.org/map_data_results%26mode%3Dlang_tops%26SRVY_YEAR%3D2000%26lang_id%3D723) on 2012-12-21. Retrieved 2012-11-20.
+20. [↑](#cite_ref-20) ["Ethnocultural Portrait of Canada – Data table"](http://www12.statcan.ca/census-recensement/2006/dp-pd/hlt/97-562/pages/page.cfm?Lang=E&Geo=CMA&Code=933&Data=Count&Table=2&StartRec=1&Sort=3&Display=All&CSDFilter=5000). Statistics Canada. 2010-06-10. [Archived](https://web.archive.org/web/20131203011834/http%3A//www12.statcan.ca/census-recensement/2006/dp-pd/hlt/97-562/pages/page.cfm?Lang=E&Geo=CMA&Code=933&Data=Count&Table=2&StartRec=1&Sort=3&Display=All&CSDFilter=5000) from the original on 2013-12-03. Retrieved 2012-11-20.
+21. [↑](#cite_ref-21) ["Census 2000 Summary File 1 (SF 1) 100-Percent Data"](https://www.census.gov). *[United States Census Bureau](https://en.wikipedia.org/wiki/United_States_Census_Bureau "United States Census Bureau")*. [Archived](https://web.archive.org/web/20210701194655/https%3A//www.census.gov/) from the original on 1 July 2021. Retrieved 8 July 2018.
+22. [↑](#cite_ref-22) [The Japanese in Colonial Southeast Asia – Google Books](https://books.google.com/books?id=6mfCzrbOn80C&q=Japanese+immigrants+to+Davao&pg=PA157) [Archived](https://web.archive.org/web/20200114063046/https%3A//books.google.com/books?id=6mfCzrbOn80C&pg=PA157&lpg=PA157#v=onepage&q=Japanese%20immigrants%20to%20Davao) 2020-01-14 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine"). Books.google.com. Retrieved on 2014-06-07.
+23. [↑](#cite_ref-23)  [Archived](https://web.archive.org/web/20141019011022/http%3A//www.seapots.com/home/index.php/production-centers-pottery-groups/philippines) October 19, 2014, at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine")
+24. [↑](#cite_ref-24)  [Archived](https://web.archive.org/web/20120701082957/http%3A//www.philippinealmanac.com/2010/07/528/the-cultural-influences-of-india-china-arabia-and-japan.html) July 1, 2012, at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine")
+25. [↑](#cite_ref-25) [法制執務コラム集「法律と国語・日本語」](http://houseikyoku.sangiin.go.jp/column/column068.htm) (in Japanese). Legislative Bureau of the House of Councillors. [Archived](https://web.archive.org/web/20181225073508/http%3A//houseikyoku.sangiin.go.jp/column/column068.htm) from the original on 25 December 2018. Retrieved 9 November 2012.
+26. [1](#cite_ref-:2_26-0) [2](#cite_ref-:2_26-1) Bullock, Ben. ["What is Japanese pitch accent?"](http://www.sljfaq.org/afaq/pitch-accent.html). Ben Bullock. [Archived](https://web.archive.org/web/20170702173008/http%3A//www.sljfaq.org/afaq/pitch-accent.html) from the original on 2 July 2017. Retrieved 17 July 2017.
+27. [↑](#cite_ref-27) Pulvers, Roger (2006-05-23). ["Opening up to difference: The dialect dialectic"](https://www.japantimes.co.jp/life/2006/05/23/language/opening-up-to-difference-the-dialect-dialectic/). *The Japan Times*. [Archived](https://web.archive.org/web/20200617135203/https%3A//www.japantimes.co.jp/life/2006/05/23/language/opening-up-to-difference-the-dialect-dialectic/) from the original on 2020-06-17. Retrieved 2020-06-17.
+28. [↑](#cite_ref-28) ["A Complete Overview of the Japanese Language"](https://worldschoolbooks.com/languages/overview-of-the-japanese-language/). 2024-09-14. Retrieved 2025-05-30.
+29. [↑](#cite_ref-const_29-0) ["Constitution of the State of Angaur"](http://www.pacificdigitallibrary.org/cgi-bin/pdl?e=d-000off-pdl--00-2--0--010-TE--4-------0-1l--10en-50---20-text-Japanese--00-3-1-00bySR-0-0-000utfZz-8-00&d=HASHa4b7077d472c4cdb9c8ddf.10&p=text). Pacific Digital Library. Article XII. [Archived](https://web.archive.org/web/20150924063100/http%3A//www.pacificdigitallibrary.org/cgi-bin/pdl?e=d-000off-pdl--00-2--0--010-TE--4-------0-1l--10en-50---20-text-Japanese--00-3-1-00bySR-0-0-000utfZz-8-00&d=HASHa4b7077d472c4cdb9c8ddf.10&p=text) from the original on 24 September 2015. Retrieved 4 August 2014. "The traditional Palauan language, particularly the dialect spoken by the people of Angaur State, shall be the language of the State of Angaur. Palauan, English and Japanese shall be the official languages."
+30. [↑](#cite_ref-30) Long, Daniel; Imamura, Keisuke; Tmodrang, Masaharu (2013). [The Japanese Language in Palau](https://www.ninjal.ac.jp/research/cr-project/project/a/creole/files/creole_Palau.pdf) (PDF) (Report). Tokyo, Japan: National Institute for Japanese Language and Linguistics. pp. 85–86. Retrieved July 11, 2022.
+31. [↑](#cite_ref-1958_Census_of_the_Trust_Territory_of_the_Pacific_Islands_31-0) ["1958 Census of the Trust Territory of the Pacific Islands"](https://pacificweb.org/DOCS/cnmi/1958%20Census/1958%20Census%20tables.pdf) (PDF). The Office of the High Commissioner. Retrieved 22 March 2024.
+32. [↑](#cite_ref-2005census_32-0) ["2005 Census of Population & Housing"](http://palaugov.org/wp-content/uploads/2013/10/2005-Census-of-Population-Housing.pdf) (PDF). Bureau of Budget & Planning. [Archived](https://web.archive.org/web/20140424211256/http%3A//palaugov.org/wp-content/uploads/2013/10/2005-Census-of-Population-Housing.pdf) (PDF) from the original on 24 April 2014. Retrieved 4 August 2014.
+33. [1](#cite_ref-Dialect_Intelligibility_1967_33-0) [2](#cite_ref-Dialect_Intelligibility_1967_33-1) [3](#cite_ref-Dialect_Intelligibility_1967_33-2) Yamagiwa, Joseph K. (1967). "On Dialect Intelligibility in Japan". *Anthropological Linguistics*. **9** (1): 4, 5, 18.
+34. [↑](#cite_ref-34) See the comments of George Kizaki in Stuky, Natalie-Kyoko (8 August 2015). ["Exclusive: From Internment Camp to MacArthur's Aide in Rebuilding Japan"](http://www.thedailybeast.com/articles/2015/08/08/from-internment-camp-to-macarthur-s-aide.html). *The Daily Beast*. [Archived](https://web.archive.org/web/20151018091714/http%3A//www.thedailybeast.com/articles/2015/08/08/from-internment-camp-to-macarthur-s-aide.html) from the original on 18 October 2015. Retrieved 4 October 2015.
+35. [↑](#cite_ref-35) Coulmas, Florian (1989). [*Language Adaptation*](https://archive.org/details/languageadaptati0000unse/page/106). Press Syndicate of the University of Cambridge. pp. [106](https://archive.org/details/languageadaptati0000unse/page/106). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-521-36255-9](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-521-36255-9 "Special:BookSources/978-0-521-36255-9").
+36. [↑](#cite_ref-ryukyuan-tongue_36-0) Patrick Heinrich (25 August 2014). ["Use them or lose them: There's more at stake than language in reviving Ryukyuan tongues"](https://web.archive.org/web/20190107141707/https%3A//www.japantimes.co.jp/community/2014/08/25/voices/use-lose-theres-stake-language-reviving-ryukyuan-tongues/). The Japan Times. Archived from [the original](https://www.japantimes.co.jp/community/2014/08/25/voices/use-lose-theres-stake-language-reviving-ryukyuan-tongues/) on 2019-01-07. Retrieved 2019-10-24.
+37. [↑](#cite_ref-37) Kindaichi, Haruhiko (2011-12-20). [*Japanese Language: Learn the Fascinating History and Evolution of the Language Along With Many Useful Japanese Grammar Points*](https://books.google.com/books?id=dAbRAgAAQBAJ&q=japanese+isolated+language&pg=PT17). Tuttle Publishing. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-1-4629-0266-8](https://en.wikipedia.org/wiki/Special%3ABookSources/978-1-4629-0266-8 "Special:BookSources/978-1-4629-0266-8"). [Archived](https://web.archive.org/web/20211115024826/https%3A//books.google.com/books?id=dAbRAgAAQBAJ&q=japanese+isolated+language&pg=PT17) from the original on 2021-11-15. Retrieved 2020-11-12.
+38. [↑](#cite_ref-FOOTNOTERobbeets200520_38-0) [Robbeets 2005](#CITEREFRobbeets2005), p. 20.
+39. [↑](#cite_ref-FOOTNOTEShibatani199094_39-0) [Shibatani 1990](#CITEREFShibatani1990), p. 94.
+40. [↑](#cite_ref-FOOTNOTERobbeets2005_40-0) [Robbeets 2005](#CITEREFRobbeets2005).
+41. [↑](#cite_ref-41) Vovin, Alexander (2008). ["Proto-Japanese beyond the accent system"](https://www.academia.edu/19253123). *Proto-Japanese*. Current Issues in Linguistic Theory. Vol. 294. Amsterdam: John Benjamins Publishing Company. pp. 141–156. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.1075/cilt.294.11vov](https://doi.org/10.1075%2Fcilt.294.11vov). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-90-272-4809-1](https://en.wikipedia.org/wiki/Special%3ABookSources/978-90-272-4809-1 "Special:BookSources/978-90-272-4809-1"). [ISSN](https://en.wikipedia.org/wiki/ISSN_%28identifier%29 "ISSN (identifier)") [0304-0763](https://search.worldcat.org/issn/0304-0763). [Archived](https://web.archive.org/web/20220327115347/https%3A//www.academia.edu/19253123) from the original on 2022-03-27. Retrieved 2017-12-20.
+42. [↑](#cite_ref-FOOTNOTEVovin2010_42-0) [Vovin 2010](#CITEREFVovin2010).
+43. [↑](#cite_ref-FOOTNOTEKindaichiHirano197830–31_43-0) [Kindaichi & Hirano 1978](#CITEREFKindaichiHirano1978), pp. 30–31.
+44. [↑](#cite_ref-FOOTNOTEShibatani1990_44-0) [Shibatani 1990](#CITEREFShibatani1990).
+45. [↑](#cite_ref-45) ["Austronesian influence and Transeurasian ancestry in Japanese: A case of farming/language dispersal"](https://www.researchgate.net/publication/320915864). *ResearchGate*. [Archived](https://web.archive.org/web/20190219015825/https%3A//www.researchgate.net/publication/320915864) from the original on 2019-02-19. Retrieved 2019-03-28.
+46. [↑](#cite_ref-46) Ann Kumar (1996). ["Does Japanese have an Austronesian stratum?"](http://sealang.net/sala/archives/pdf8/kumar1996does.pdf) (PDF). [Archived](https://web.archive.org/web/20211103064933/http%3A//sealang.net/sala/archives/pdf8/kumar1996does.pdf) (PDF) from the original on 2021-11-03. Retrieved 2017-09-28.
+47. [↑](#cite_ref-52) ["Kanji and Homophones Part I – Does Japanese have too few sounds?"](https://kuwashiijapanese.com/2017/01/08/kanji-and-homophones-part-1/). *Kuwashii Japanese*. 8 January 2017. [Archived](https://web.archive.org/web/20210518173010/https%3A//kuwashiijapanese.com/2017/01/08/kanji-and-homophones-part-1/) from the original on 18 May 2021. Retrieved 28 May 2021.
+48. [↑](#cite_ref-53) "[Buddhist Art of Korea & Japan](http://www.asiasocietymuseum.org/buddhist_trade/koreajapan.html)", [Archived](https://web.archive.org/web/20160303233011/http%3A//www.asiasocietymuseum.org/buddhist_trade/koreajapan.html) 2016-03-03 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") Asia Society Museum.
+49. [↑](#cite_ref-54) "[Kanji](http://www.japan-guide.com/e/e2046.html)", [Archived](https://web.archive.org/web/20120510085157/http%3A//www.japan-guide.com/e/e2046.html) 2012-05-10 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") JapanGuide.com.
+50. [↑](#cite_ref-55) "[Pottery](https://encarta.msn.com/encyclopedia_761568150_4/Pottery.html)", [Archived](https://web.archive.org/web/20090501132835/http%3A//encarta.msn.com/encyclopedia_761568150_4/Pottery.html) 2009-05-01 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") MSN Encarta.
+51. [↑](#cite_ref-56) "[History of Japan](http://www.japanvisitor.com/index.php?cID=359&pID=334&cName=Japanese)", [Archived](https://web.archive.org/web/20160304031432/http%3A//www.japanvisitor.com/index.php?cID=359&pID=334&cName=Japanese) 2016-03-04 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") JapanVisitor.com.
+52. [↑](#cite_ref-61) Heinrich, Patrick. ["What leaves a mark should no longer stain: Progressive erasure and reversing language shift activities in the Ryukyu Islands"](http://www.sicri-network.org/ISIC1/j.%20ISIC1P%20Heinrich.pdf), [Archived](https://web.archive.org/web/20110516043839/http%3A//www.sicri-network.org/ISIC1/j.%20ISIC1P%20Heinrich.pdf) 2011-05-16 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") First International Small Island Cultures Conference at [Kagoshima University](https://en.wikipedia.org/wiki/Kagoshima_University "Kagoshima University"), Centre for the Pacific Islands, 7–10 February 2005; citing [Shiro Hattori](https://en.wikipedia.org/wiki/Shiro_Hattori "Shiro Hattori"). (1954) *Gengo nendaigaku sunawachi goi tokeigaku no hoho ni tsuite* ("Concerning the Method of Glottochronology and Lexicostatistics"), *Gengo kenkyu* (*Journal of the Linguistic Society of Japan*), Vols. 26/27.
+53. [↑](#cite_ref-62) Shunpei Mizuno, ed. (2002). [韓国人の日本偽史―日本人はビックリ!](https://books.google.com/books?id=_MMbNwAACAAJ) (in Japanese). Shogakukan. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-4-09-402716-7](https://en.wikipedia.org/wiki/Special%3ABookSources/978-4-09-402716-7 "Special:BookSources/978-4-09-402716-7"). [Archived](https://web.archive.org/web/20201209153804/https%3A//books.google.com/books?id=_MMbNwAACAAJ) from the original on 2020-12-09. Retrieved 2020-08-23.
+54. [↑](#cite_ref-63) Shunpei Mizuno, ed. (2007). [韓vs日「偽史ワールド」](https://books.google.com/books?id=qwBgGQAACAAJ) (in Japanese). Shogakukan. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-4-09-387703-9](https://en.wikipedia.org/wiki/Special%3ABookSources/978-4-09-387703-9 "Special:BookSources/978-4-09-387703-9"). [Archived](https://web.archive.org/web/20210415005814/https%3A//books.google.com/books?id=qwBgGQAACAAJ) from the original on 2021-04-15. Retrieved 2020-08-23.
+55. [↑](#cite_ref-64) Burlock, Ben (2017). ["How did katakana and hiragana originate?"](http://www.sljfaq.org/afaq/originofkana.html). *sci.lang.japan*. [Archived](https://web.archive.org/web/20170705164214/http%3A//www.sljfaq.org/afaq/originofkana.html) from the original on 5 July 2017. Retrieved 26 July 2017.
+56. [↑](#cite_ref-65) Ager, Simon (2017). ["Japanese Hiragana"](http://www.omniglot.com/writing/japanese_hiragana.htm). *Omniglot*. [Archived](https://web.archive.org/web/20161119110207/http%3A//www.omniglot.com/writing/japanese_hiragana.htm) from the original on 19 November 2016. Retrieved 26 July 2017.
+57. [↑](#cite_ref-66) Vance, Timothy J. (April 1993). "Are Japanese Particles Clitics?". *[Journal of the Association of Teachers of Japanese](https://en.wikipedia.org/wiki/Japanese_Language_and_Literature "Japanese Language and Literature")*. **27** (1): 3–33. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.2307/489122](https://doi.org/10.2307%2F489122). [JSTOR](https://en.wikipedia.org/wiki/JSTOR_%28identifier%29 "JSTOR (identifier)") [489122](https://www.jstor.org/stable/489122).
+58. [↑](#cite_ref-67) Miyagawa, Shigeru. ["The Japanese Language"](http://web.mit.edu/jpnet/articles/JapaneseLanguage.html). Massachusetts Institute of Technology. [Archived](https://web.archive.org/web/20090720054510/http%3A//web.mit.edu/jpnet/articles/JapaneseLanguage.html) from the original on July 20, 2009. Retrieved January 16, 2011.
+59. [↑](#cite_ref-68) Koichi (13 September 2011). ["Yamato Kotoba: The REAL Japanese Language"](https://www.tofugu.com/japanese/yamato-kotoba-language/). *Tofugu*. [Archived](https://web.archive.org/web/20160531001918/https%3A//www.tofugu.com/japanese/yamato-kotoba-language/) from the original on 2016-05-31. Retrieved 2016-03-26.
+60. [↑](#cite_ref-69) Kindaichi, Kyōsuke, ed. (2001). *Shinsen Kokugo Jiten* 新選国語辞典 (in Japanese). SHOGAKUKAN. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [4-09-501407-5](https://en.wikipedia.org/wiki/Special%3ABookSources/4-09-501407-5 "Special:BookSources/4-09-501407-5").
+61. [1](#cite_ref-:0_70-0) [2](#cite_ref-:0_70-1) [3](#cite_ref-:0_70-2) [4](#cite_ref-:0_70-3) Okamoto, Shigeko (2004). *Japanese Language, Gender, and Ideology : Cultural Models and Real People*. New York: Oxford University Press.
+62. [↑](#cite_ref-71) Okamono, Shigeko (2021). "Japanese Language and Gender Research: The Last Thirty Years and Beyond". *Gender and Language*. **15** (2): 277–. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.1558/genl.20316](https://doi.org/10.1558%2Fgenl.20316).
+63. [1](#cite_ref-:1_72-0) [2](#cite_ref-:1_72-1) [3](#cite_ref-:1_72-2) [4](#cite_ref-:1_72-3) MILLER, LAURA (2004). "Those Naughty Teenage Girls: Japanese Kogals, Slang, and Media Assessments". *Journal of Linguistic Anthropology*. **14** (2): 225–247. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.1525/jlin.2004.14.2.225](https://doi.org/10.1525%2Fjlin.2004.14.2.225).
+64. [↑](#cite_ref-73) [Beate Sirota Gordon](https://en.wikipedia.org/wiki/Beate_Sirota_Gordon "Beate Sirota Gordon") commencement address at [Mills College](https://en.wikipedia.org/wiki/Mills_College_at_Northeastern_University "Mills College at Northeastern University"), 14 May 2011. ["Sotomayor, Denzel Washington, GE CEO Speak to Graduates"](http://www.c-span.org/Events/Sotomayor-Denzel-Washington-GE-CEO-Speak-to-Graduates/10737421758-10/), [Archived](https://web.archive.org/web/20110623220241/http%3A//www.c-span.org/Events/Sotomayor-Denzel-Washington-GE-CEO-Speak-to-Graduates/10737421758-10/) 2011-06-23 at the [Wayback Machine](https://en.wikipedia.org/wiki/Wayback_Machine "Wayback Machine") C-SPAN (US). 30 May 2011; retrieved 2011-05-30
+65. [1](#cite_ref-Japanese_as_Foreign_Language_74-0) [2](#cite_ref-Japanese_as_Foreign_Language_74-1) [3](#cite_ref-Japanese_as_Foreign_Language_74-2) ["Survey Report on Japanese-Language Education Abroad"](https://www.jpf.go.jp/j/project/japanese/survey/result/dl/survey_2015/Report_all_e.pdf) (PDF). Japan Foundation. 2015. [Archived](https://web.archive.org/web/20190107021017/https%3A//www.jpf.go.jp/j/project/japanese/survey/result/dl/survey_2015/Report_all_e.pdf) (PDF) from the original on 7 January 2019. Retrieved 6 January 2019.
+66. [↑](#cite_ref-75) ["Universal Declaration of Human Rights – Japanese (Nihongo)"](https://www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=jpn). United Nations. [Archived](https://web.archive.org/web/20220107214331/https%3A//www.ohchr.org/EN/UDHR/Pages/Language.aspx?LangID=jpn) from the original on 2022-01-07. Retrieved 2022-01-07.
+67. [↑](#cite_ref-76) ["Universal Declaration of Human Rights"](https://www.un.org/en/about-us/universal-declaration-of-human-rights). United Nations. [Archived](https://web.archive.org/web/20210316050452/https%3A//www.un.org/en/about-us/universal-declaration-of-human-rights) from the original on 2021-03-16. Retrieved 2022-01-07.
+
+### Works cited
+
+* Bloch, Bernard (1946). Studies in colloquial Japanese I: Inflection. *Journal of the American Oriental Society*, *66*, pp. 97–130.
+* Bloch, Bernard (1946). Studies in colloquial Japanese II: Syntax. *Language*, *22*, pp. 200–248.
+* Chafe, William L. (1976). Giveness, contrastiveness, definiteness, subjects, topics, and point of view. In C. Li (Ed.), *Subject and topic* (pp. 25–56). New York: Academic Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-12-447350-4](https://en.wikipedia.org/wiki/Special%3ABookSources/0-12-447350-4 "Special:BookSources/0-12-447350-4").
+* Dalby, Andrew (2004). "Japanese". *Dictionary of Languages: the Definitive Reference to More than 400 Languages*. New York: Columbia University Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-231-11568-1](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-231-11568-1 "Special:BookSources/978-0-231-11568-1"). [OCLC](https://en.wikipedia.org/wiki/OCLC_%28identifier%29 "OCLC (identifier)") [474656178](https://search.worldcat.org/oclc/474656178).
+* Frellesvig, Bjarke (2010). [*A history of the Japanese language*](https://books.google.com/books?id=v1FcAgiAC9IC&pg=PA184). Cambridge: Cambridge University Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-521-65320-6](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-521-65320-6 "Special:BookSources/978-0-521-65320-6"). [Archived](https://web.archive.org/web/20220327115347/https%3A//books.google.com/books?id=v1FcAgiAC9IC&pg=PA184) from the original on 2022-03-27. Retrieved 2021-11-17.
+* Frellesvig, B.; Whitman, J. (2008). [*Proto-Japanese: Issues and Prospects*](https://books.google.com/books?id=aun8BRHTDEAC). Amsterdam studies in the theory and history of linguistic science / 4. John Benjamins Publishing Company. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-90-272-4809-1](https://en.wikipedia.org/wiki/Special%3ABookSources/978-90-272-4809-1 "Special:BookSources/978-90-272-4809-1"). [Archived](https://web.archive.org/web/20220327115348/https%3A//books.google.co.uk/books?id=aun8BRHTDEAC) from the original on 2022-03-27. Retrieved 2022-03-26.
+* Kindaichi, Haruhiko; Hirano, Umeyo (1978). *The Japanese Language*. [Tuttle Publishing](https://en.wikipedia.org/wiki/Tuttle_Publishing "Tuttle Publishing"). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-8048-1579-6](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-8048-1579-6 "Special:BookSources/978-0-8048-1579-6").
+* Kuno, Susumu (1973). *The structure of the Japanese language*. Cambridge, MA: MIT Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-262-11049-0](https://en.wikipedia.org/wiki/Special%3ABookSources/0-262-11049-0 "Special:BookSources/0-262-11049-0").
+* Kuno, Susumu. (1976). "Subject, theme, and the speaker's empathy: A re-examination of relativization phenomena", in Charles N. Li (Ed.), *Subject and topic* (pp. 417–444). New York: Academic Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-12-447350-4](https://en.wikipedia.org/wiki/Special%3ABookSources/0-12-447350-4 "Special:BookSources/0-12-447350-4").
+* McClain, Yoko Matsuoka. (1981). *Handbook of modern Japanese grammar:* 口語日本文法便覧 [*Kōgo Nihon bumpō*]. Tokyo: Hokuseido Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [4-590-00570-0](https://en.wikipedia.org/wiki/Special%3ABookSources/4-590-00570-0 "Special:BookSources/4-590-00570-0"), [0-89346-149-0](https://en.wikipedia.org/wiki/Special%3ABookSources/0-89346-149-0 "Special:BookSources/0-89346-149-0").
+* Miller, Roy (1967). *The Japanese language*. Chicago: University of Chicago Press.
+* Miller, Roy (1980). *Origins of the Japanese language: Lectures in Japan during the academic year, 1977–78*. Seattle: University of Washington Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-295-95766-2](https://en.wikipedia.org/wiki/Special%3ABookSources/0-295-95766-2 "Special:BookSources/0-295-95766-2").
+* Mizutani, Osamu; & Mizutani, Nobuko (1987). *How to be polite in Japanese:* 日本語の敬語 [*Nihongo no keigo*]. Tokyo: [The Japan Times](https://en.wikipedia.org/wiki/The_Japan_Times "The Japan Times"). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [4-7890-0338-8](https://en.wikipedia.org/wiki/Special%3ABookSources/4-7890-0338-8 "Special:BookSources/4-7890-0338-8").
+* Robbeets, Martine Irma (2005). *Is Japanese Related to Korean, Tungusic, Mongolic and Turkic?*. Otto Harrassowitz Verlag. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-3-447-05247-4](https://en.wikipedia.org/wiki/Special%3ABookSources/978-3-447-05247-4 "Special:BookSources/978-3-447-05247-4").
+* Okada, Hideo (1999). "Japanese". *Handbook of the International Phonetic Association*. Cambridge: Cambridge University Press. pp. 117–119.
+* Seeley, Christopher (1991). *A History of Writing in Japan*. Leiden: BRILL. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-90-04-09081-1](https://en.wikipedia.org/wiki/Special%3ABookSources/978-90-04-09081-1 "Special:BookSources/978-90-04-09081-1").
+* Shibamoto, Janet S. (1985). *Japanese women's language*. New York: Academic Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-12-640030-X](https://en.wikipedia.org/wiki/Special%3ABookSources/0-12-640030-X "Special:BookSources/0-12-640030-X"). Graduate Level
+* Shibatani, Masayoshi (1990). *The languages of Japan*. Cambridge: Cambridge University Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-521-36070-6](https://en.wikipedia.org/wiki/Special%3ABookSources/0-521-36070-6 "Special:BookSources/0-521-36070-6"). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-521-36918-5](https://en.wikipedia.org/wiki/Special%3ABookSources/0-521-36918-5 "Special:BookSources/0-521-36918-5") (pbk).
+* Tsujimura, Natsuko (1996). *An introduction to Japanese linguistics*. Cambridge, MA: Blackwell Publishers. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-631-19855-5](https://en.wikipedia.org/wiki/Special%3ABookSources/0-631-19855-5 "Special:BookSources/0-631-19855-5") (hbk); [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-631-19856-3](https://en.wikipedia.org/wiki/Special%3ABookSources/0-631-19856-3 "Special:BookSources/0-631-19856-3") (pbk). Upper Level Textbooks
+* Tsujimura, Natsuko (Ed.) (1999). *The handbook of Japanese linguistics*. Malden, MA: Blackwell Publishers. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-631-20504-7](https://en.wikipedia.org/wiki/Special%3ABookSources/0-631-20504-7 "Special:BookSources/0-631-20504-7"). Readings/Anthologies
+* [Vovin, Alexander](https://en.wikipedia.org/wiki/Alexander_Vovin "Alexander Vovin") (2010). [*Korea-Japonica: A Re-Evaluation of a Common Genetic Origin*](https://books.google.com/books?id=um8O1bp-86EC). [University of Hawaii Press](https://en.wikipedia.org/wiki/University_of_Hawaii_Press "University of Hawaii Press"). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-8248-3278-0](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-8248-3278-0 "Special:BookSources/978-0-8248-3278-0"). [Archived](https://web.archive.org/web/20200823112705/https%3A//books.google.com/books?id=um8O1bp-86EC) from the original on 2020-08-23. Retrieved 2015-10-18.
+
+## Further reading
+
+* Rudolf Lange, Christopher Noss (1903). [*A Text-book of Colloquial Japanese*](https://books.google.com/books?id=BmwwAQAAMAAJ) (English ed.). The Kaneko Press, North Japan College, Sendai: Methodist Publishing House. Retrieved 1 March 2012.
+* Rudolf Lange (1903). Christopher Noss (ed.). [*A text-book of colloquial Japanese: based on the Lehrbuch der japanischen umgangssprache by Dr. Rudolf Lange*](https://books.google.com/books?id=PhVCAAAAIAAJ) (revised English ed.). Tokyo: Methodist publishing house. Retrieved 1 March 2012.
+* Rudolf Lange (1907). Christopher Noss (ed.). [*A text-book of colloquial Japanese*](https://books.google.com/books?id=6SkYAAAAYAAJ) (revised English ed.). Tokyo: Methodist publishing house. Retrieved 1 March 2012.
+* [Martin, Samuel E.](https://en.wikipedia.org/wiki/Samuel_Elmo_Martin "Samuel Elmo Martin") (1975). *A reference grammar of Japanese*. New Haven: Yale University Press. [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [0-300-01813-4](https://en.wikipedia.org/wiki/Special%3ABookSources/0-300-01813-4 "Special:BookSources/0-300-01813-4").
+* Vovin, Alexander (2017). "Origins of the Japanese Language". *Oxford Research Encyclopedia of Linguistics*. Oxford University Press. [doi](https://en.wikipedia.org/wiki/Doi_%28identifier%29 "Doi (identifier)"):[10.1093/acrefore/9780199384655.013.277](https://doi.org/10.1093%2Facrefore%2F9780199384655.013.277). [ISBN](https://en.wikipedia.org/wiki/ISBN_%28identifier%29 "ISBN (identifier)") [978-0-19-938465-5](https://en.wikipedia.org/wiki/Special%3ABookSources/978-0-19-938465-5 "Special:BookSources/978-0-19-938465-5").
+* ["Japanese Language"](http://web.mit.edu/jpnet/articles/JapaneseLanguage.html). MIT. Retrieved 2009-05-13.
+
+## External links
+
+* [National Institute for Japanese Language and Linguistics](https://www.ninjal.ac.jp/english/)
+* [Japanese Language Student's Handbook](https://web.archive.org/web/20100102154433/http%3A//tangorin.com/handbook) (archived 2 January 2010)
+
+**Japanese** at Wikipedia's [sister projects](https://en.wikipedia.org/wiki/Wikipedia%3AWikimedia_sister_projects "Wikipedia:Wikimedia sister projects"):
+
+* [![Wiktionary logo](//thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Wiktionary-logo-en-v2.svg/20px-Wiktionary-logo-en-v2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AWiktionary-logo-en-v2.svg)[**Definitions**](https://en.wiktionary.org/wiki/Category%3AJapanese%20language "wikt:Category:Japanese language") from Wiktionary
+* [![Wikipedia logo](//thumb.wikimedia.org/wikipedia/en/thumb/8/80/Wikipedia-logo-v2.svg/40px-Wikipedia-logo-v2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AWikipedia-logo-v2.svg)[**Japanese edition**](https://ja.wikipedia.org/wiki/ "ja:") of Wikipedia
+
+| * [v](https://en.wikipedia.org/wiki/Template%3AJapanese_language "Template:Japanese language") * [t](https://en.wikipedia.org/wiki/Template_talk%3AJapanese_language "Template talk:Japanese language") * [e](https://en.wikipedia.org/wiki/Special%3AEditPage/Template%3AJapanese_language "Special:EditPage/Template:Japanese language")  [Japanese language](https://en.wikipedia.org/wiki/Japanese_language) | |
+| --- | --- |
+| Earlier forms | * [Old](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese") * [Early Middle](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese") * [Late Middle](https://en.wikipedia.org/wiki/Late_Middle_Japanese "Late Middle Japanese") * [Early Modern](https://en.wikipedia.org/wiki/Early_Modern_Japanese "Early Modern Japanese") |
+| [Dialects](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") | |  |  | | --- | --- | | [Eastern](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") | * [Hokkaidō](https://en.wikipedia.org/wiki/Hokkaido_dialects "Hokkaido dialects") * [**Tōhoku**](https://en.wikipedia.org/wiki/T%C5%8Dhoku_dialect "Tōhoku dialect")   + Northern     - [Nanbu](https://en.wikipedia.org/wiki/Nanbu_dialect "Nanbu dialect")     - [Tsugaru](https://en.wikipedia.org/wiki/Tsugaru_dialect "Tsugaru dialect")     - [Akita](https://en.wikipedia.org/wiki/Akita_dialect "Akita dialect")     - [Matagi](https://en.wikipedia.org/wiki/Matagi_dialect "Matagi dialect")   + Southern     - [Kesen](https://en.wikipedia.org/wiki/Kesen_dialect "Kesen dialect")     - [Nairiku](https://en.wikipedia.org/wiki/Nairiku_dialect "Nairiku dialect") * [**Kantō**](https://en.wikipedia.org/wiki/Kant%C5%8D_dialect "Kantō dialect")   + Western     - [Gunma](https://en.wikipedia.org/wiki/Gunma_dialect "Gunma dialect")     - [Kanagawa](https://en.wikipedia.org/wiki/Kanagawa_dialect "Kanagawa dialect")     - Tokyo   + Eastern     - [Ibaraki](https://en.wikipedia.org/wiki/Ibaraki_dialect "Ibaraki dialect")     - [Tochigi](https://en.wikipedia.org/wiki/Tochigi_dialect "Tochigi dialect")   + [Northern Izu Islands](https://en.wikipedia.org/wiki/Northern_Izu_Archipelago_dialects "Northern Izu Archipelago dialects") * [**Tōkai–Tōsan**](https://en.wikipedia.org/wiki/T%C5%8Dkai%E2%80%93T%C5%8Dsan_dialect "Tōkai–Tōsan dialect")   + Nagano-Yamanashi-Shizuoka     - [Shizuoka](https://en.wikipedia.org/wiki/Shizuoka_dialect "Shizuoka dialect")     - [Narada](https://en.wikipedia.org/wiki/Narada_dialect "Narada dialect")   + Echigo     - [Nagaoka](https://en.wikipedia.org/wiki/Nagaoka_dialect "Nagaoka dialect")   + Gifu-Aichi     - [Nagoya](https://en.wikipedia.org/wiki/Nagoya_dialect "Nagoya dialect")     - [Mikawa](https://en.wikipedia.org/wiki/Mikawa_dialect "Mikawa dialect")     - [Mino](https://en.wikipedia.org/wiki/Mino_dialect "Mino dialect")     - [Hida](https://en.wikipedia.org/wiki/Hida_dialect "Hida dialect") | | [Western](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") | * [**Hokuriku**](https://en.wikipedia.org/wiki/Hokuriku_dialect "Hokuriku dialect")   + [Kaga](https://en.wikipedia.org/wiki/Kaga_dialect "Kaga dialect")     - Kanazawa     - Shiramine * [**Kansai**](https://en.wikipedia.org/wiki/Kansai_dialect "Kansai dialect")   + [Awaji](https://en.wikipedia.org/wiki/Awaji_dialect "Awaji dialect")   + [Banshū](https://en.wikipedia.org/wiki/Bansh%C5%AB_dialect "Banshū dialect")   + [Kishū](https://en.wikipedia.org/wiki/Kish%C5%AB_dialect "Kishū dialect")   + [Okuyoshino](https://en.wikipedia.org/wiki/Okuyoshino_dialect "Okuyoshino dialect") * [**Shikoku**](https://en.wikipedia.org/wiki/Shikoku_dialect "Shikoku dialect")   + [Iyo](https://en.wikipedia.org/wiki/Iyo_dialect "Iyo dialect")   + [Tosa](https://en.wikipedia.org/wiki/Tosa_dialect "Tosa dialect")   + [Sanuki](https://en.wikipedia.org/wiki/Sanuki_dialect "Sanuki dialect") * [**Chūgoku**](https://en.wikipedia.org/wiki/Ch%C5%ABgoku_dialect "Chūgoku dialect")   + San'yō     - [Bingo](https://en.wikipedia.org/wiki/Bingo_dialect "Bingo dialect")   + East San'in     - [Inshū](https://en.wikipedia.org/wiki/Insh%C5%AB_dialect "Inshū dialect") * [**Umpaku**](https://en.wikipedia.org/wiki/Umpaku_dialect "Umpaku dialect") | | [Kyūshū](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") | * [**Hōnichi**](https://en.wikipedia.org/wiki/H%C5%8Dnichi_dialect "Hōnichi dialect")   + [Ōita](https://en.wikipedia.org/wiki/%C5%8Cita_dialect "Ōita dialect") * [**Hichiku**](https://en.wikipedia.org/wiki/Hichiku_dialect "Hichiku dialect")   + [Chikuzen](https://en.wikipedia.org/wiki/Chikuzen_dialect "Chikuzen dialect")     - [Hakata](https://en.wikipedia.org/wiki/Hakata_dialect "Hakata dialect")   + [Kumamoto](https://en.wikipedia.org/wiki/Kumamoto_dialect "Kumamoto dialect")   + [Nagasaki](https://en.wikipedia.org/wiki/Nagasaki_dialect "Nagasaki dialect")   + [Saga](https://en.wikipedia.org/wiki/Saga_dialect "Saga dialect")   + [Tsushima](https://en.wikipedia.org/wiki/Tsushima_dialect "Tsushima dialect") * [**Satsugū**](https://en.wikipedia.org/wiki/Kagoshima_dialect "Kagoshima dialect") | | Other | * [Amami Japanese](https://en.wikipedia.org/wiki/Amami_Japanese "Amami Japanese") * [Okinawan Japanese](https://en.wikipedia.org/wiki/Okinawan_Japanese "Okinawan Japanese") | |
+| [Pidgins and creoles](https://en.wikipedia.org/wiki/Japanese-based_creole_languages "Japanese-based creole languages") | * [Bamboo English](https://en.wikipedia.org/wiki/Bamboo_English "Bamboo English") * [Bonin English](https://en.wikipedia.org/wiki/Bonin_English "Bonin English") * [Hawaiian Creole](https://en.wikipedia.org/wiki/Japanese_loanwords_in_Hawaii "Japanese loanwords in Hawaii") * *[Kyowa-go](https://en.wikipedia.org/wiki/Kyowa-go "Kyowa-go")* * [Pseudo-Chinese](https://en.wikipedia.org/wiki/Pseudo-Chinese "Pseudo-Chinese") * [Yilan Creole Japanese](https://en.wikipedia.org/wiki/Yilan_Creole_Japanese "Yilan Creole Japanese") * [Yokohama Pidgin Japanese](https://en.wikipedia.org/wiki/Yokohama_Pidgin_Japanese "Yokohama Pidgin Japanese") |
+| [Japonic languages](https://en.wikipedia.org/wiki/Japonic_languages "Japonic languages") | |  |  | | --- | --- | | * [Eastern Old Japanese](https://en.wikipedia.org/wiki/Eastern_Old_Japanese "Eastern Old Japanese") * [Hachijō](https://en.wikipedia.org/wiki/Hachij%C5%8D_language "Hachijō language")   + [grammar](https://en.wikipedia.org/wiki/Hachij%C5%8D_grammar "Hachijō grammar") | | | [Ryukyuan](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") | * [Northern](https://en.wikipedia.org/wiki/Northern_Ryukyuan_languages "Northern Ryukyuan languages")   + [Amami Ōshima](https://en.wikipedia.org/wiki/Amami_%C5%8Cshima_language "Amami Ōshima language")   + [Southern Amami Ōshima](https://en.wikipedia.org/wiki/Southern_Amami_%C5%8Cshima_language "Southern Amami Ōshima language")   + [Kikai](https://en.wikipedia.org/wiki/Kikai_language "Kikai language")   + [Kunigami](https://en.wikipedia.org/wiki/Kunigami_language "Kunigami language")   + [Okinawan](https://en.wikipedia.org/wiki/Okinawan_language "Okinawan language")   + [Okinoerabu](https://en.wikipedia.org/wiki/Okinoerabu_language "Okinoerabu language")   + [Tokunoshima](https://en.wikipedia.org/wiki/Tokunoshima_language "Tokunoshima language")   + [Yoron](https://en.wikipedia.org/wiki/Yoron_language "Yoron language") * [Southern](https://en.wikipedia.org/wiki/Southern_Ryukyuan_languages "Southern Ryukyuan languages")   + [Miyako](https://en.wikipedia.org/wiki/Miyakoan_language "Miyakoan language")   + [Tarama](https://en.wikipedia.org/wiki/Tarama_language "Tarama language")   + [Yaeyama](https://en.wikipedia.org/wiki/Yaeyama_language "Yaeyama language")   + [Yonaguni](https://en.wikipedia.org/wiki/Yonaguni_language "Yonaguni language") | |
+| [Writing system](https://en.wikipedia.org/wiki/Japanese_writing_system "Japanese writing system") | |  |  | | --- | --- | | [Logograms](https://en.wikipedia.org/wiki/Logogram "Logogram") | * [Script reform](https://en.wikipedia.org/wiki/Japanese_script_reform "Japanese script reform") * *[Kanbun](https://en.wikipedia.org/wiki/Kanbun "Kanbun")* * *[Kanji](https://en.wikipedia.org/wiki/Kanji "Kanji")*   + [by stroke count](https://en.wikipedia.org/wiki/List_of_kanji_by_stroke_count "List of kanji by stroke count") * *Kanji* radicals   + [by frequency](https://en.wikipedia.org/wiki/List_of_kanji_radicals_by_frequency "List of kanji radicals by frequency")   + [by stroke count](https://en.wikipedia.org/wiki/List_of_kanji_radicals_by_stroke_count "List of kanji radicals by stroke count") * *[Kokuji](https://en.wikipedia.org/wiki/Kokuji "Kokuji")* * *[Ryakuji](https://en.wikipedia.org/wiki/Ryakuji "Ryakuji")* * *[Ateji](https://en.wikipedia.org/wiki/Ateji "Ateji")* | | *[Kana](https://en.wikipedia.org/wiki/Kana "Kana")* | * *[Hiragana](https://en.wikipedia.org/wiki/Hiragana "Hiragana")* * *[Katakana](https://en.wikipedia.org/wiki/Katakana "Katakana")* * *[Furigana](https://en.wikipedia.org/wiki/Furigana "Furigana")* * *[Okurigana](https://en.wikipedia.org/wiki/Okurigana "Okurigana")* * *[Gojūon](https://en.wikipedia.org/wiki/Goj%C5%ABon "Gojūon")* * *[Man'yōgana](https://en.wikipedia.org/wiki/Man%27y%C5%8Dgana "Man'yōgana")* * *[Hentaigana](https://en.wikipedia.org/wiki/Hentaigana "Hentaigana")* * *[Sōgana](https://en.wikipedia.org/wiki/S%C5%8Dgana "Sōgana")* * [Kana ligature](https://en.wikipedia.org/wiki/Kana_ligature "Kana ligature") | | Orthography | * [Braille](https://en.wikipedia.org/wiki/Japanese_Braille "Japanese Braille")   + *[Kanji](https://en.wikipedia.org/wiki/Braille_kanji "Braille kanji")* * [Punctuation](https://en.wikipedia.org/wiki/Japanese_punctuation "Japanese punctuation") * *[Kanazukai](https://en.wikipedia.org/wiki/Kanazukai "Kanazukai")* * [Historical *kana*](https://en.wikipedia.org/wiki/Historical_kana_orthography "Historical kana orthography") * [Modern kana](https://en.wikipedia.org/wiki/Modern_kana_usage "Modern kana usage") * *[Jōdai Tokushu Kanazukai](https://en.wikipedia.org/wiki/J%C5%8Ddai_Tokushu_Kanazukai "Jōdai Tokushu Kanazukai")* * *[Yotsugana](https://en.wikipedia.org/wiki/Yotsugana "Yotsugana")* * [Transcription into Japanese](https://en.wikipedia.org/wiki/Transcription_into_Japanese "Transcription into Japanese") | | Encoding | * [EUC](https://en.wikipedia.org/wiki/Extended_Unix_Code "Extended Unix Code")   + [EUC-JP](https://en.wikipedia.org/wiki/Extended_Unix_Code#EUC-JP "Extended Unix Code") * ISO/IEC   + [2022](https://en.wikipedia.org/wiki/ISO/IEC_2022 "ISO/IEC 2022") * JIS   + [0201](https://en.wikipedia.org/wiki/JIS_X_0201 "JIS X 0201")   + [0208](https://en.wikipedia.org/wiki/JIS_X_0208 "JIS X 0208")   + [0211](https://en.wikipedia.org/wiki/JIS_X_0211 "JIS X 0211")   + [0212](https://en.wikipedia.org/wiki/JIS_X_0212 "JIS X 0212")   + [0213](https://en.wikipedia.org/wiki/JIS_X_0213 "JIS X 0213")   + [Shift JIS](https://en.wikipedia.org/wiki/Shift_JIS "Shift JIS") * Unicode   + [Hiragana](https://en.wikipedia.org/wiki/Hiragana_%28Unicode_block%29 "Hiragana (Unicode block)")   + [Kana Extended-A](https://en.wikipedia.org/wiki/Kana_Extended-A "Kana Extended-A")   + [Kana Extended-B](https://en.wikipedia.org/wiki/Kana_Extended-B "Kana Extended-B")   + [Kana Supplement](https://en.wikipedia.org/wiki/Kana_Supplement "Kana Supplement")   + [Small Kana Extension](https://en.wikipedia.org/wiki/Small_Kana_Extension "Small Kana Extension")   + [Katakana](https://en.wikipedia.org/wiki/Katakana_%28Unicode_block%29 "Katakana (Unicode block)")   + [Katakana Phonetic Extensions](https://en.wikipedia.org/wiki/Katakana_Phonetic_Extensions "Katakana Phonetic Extensions") * Other   + [ARIB STD B24](https://en.wikipedia.org/wiki/ARIB_STD_B24_character_set "ARIB STD B24 character set")   + [Enclosed](https://en.wikipedia.org/wiki/Enclosed_CJK_Letters_and_Months "Enclosed CJK Letters and Months")   + [EIS](https://en.wikipedia.org/wiki/Enclosed_Ideographic_Supplement "Enclosed Ideographic Supplement")   + [Extended *shinjitai*](https://en.wikipedia.org/wiki/Extended_shinjitai "Extended shinjitai")   + [Half/full](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms "Halfwidth and fullwidth forms") | |
+| [Grammar](https://en.wikipedia.org/wiki/Japanese_grammar "Japanese grammar") and vocabulary | * [Verb conjugations](https://en.wikipedia.org/wiki/Japanese_verb_conjugation "Japanese verb conjugation")   + [Kagoshima verb conjugations](https://en.wikipedia.org/wiki/Kagoshima_verb_conjugations "Kagoshima verb conjugations") * [*Godan* and *ichidan* verbs](https://en.wikipedia.org/wiki/Japanese_godan_and_ichidan_verbs "Japanese godan and ichidan verbs") * [Irregular verbs](https://en.wikipedia.org/wiki/Japanese_irregular_verbs "Japanese irregular verbs") * [Pronouns](https://en.wikipedia.org/wiki/Japanese_pronouns "Japanese pronouns") * [Adjectives](https://en.wikipedia.org/wiki/Japanese_adjectives "Japanese adjectives") * [Possessives](https://en.wikipedia.org/wiki/Japanese_possessives "Japanese possessives") * [Particles](https://en.wikipedia.org/wiki/Japanese_particles "Japanese particles")   + [Kagoshima](https://en.wikipedia.org/wiki/Particles_of_the_Kagoshima_dialects "Particles of the Kagoshima dialects")   + [Nagasaki](https://en.wikipedia.org/wiki/Nagasaki_dialect#Particles "Nagasaki dialect")   + [Kinki](https://en.wikipedia.org/wiki/Kansai_dialect#Particles "Kansai dialect") * [Topic marker](https://en.wikipedia.org/wiki/Topic_marker "Topic marker") * [Counter words](https://en.wikipedia.org/wiki/Japanese_counter_word "Japanese counter word") * [Numerals](https://en.wikipedia.org/wiki/Japanese_numerals "Japanese numerals") * [Native words (*yamato kotoba*)](https://en.wikipedia.org/wiki/Yamato_kotoba "Yamato kotoba") * [Sino-Japanese vocabulary](https://en.wikipedia.org/wiki/Sino-Japanese_vocabulary "Sino-Japanese vocabulary") * [Loan words (*gairaigo*)](https://en.wikipedia.org/wiki/Gairaigo "Gairaigo")   + [from Dutch](https://en.wikipedia.org/wiki/Glossary_of_Japanese_words_of_Dutch_origin "Glossary of Japanese words of Dutch origin")   + [from Portuguese](https://en.wikipedia.org/wiki/Glossary_of_Japanese_words_of_Portuguese_origin "Glossary of Japanese words of Portuguese origin") * *[Wasei-eigo](https://en.wikipedia.org/wiki/Wasei-eigo "Wasei-eigo")* * *[Wasei-kango](https://en.wikipedia.org/wiki/Wasei-kango "Wasei-kango")* * [Engrish](https://en.wikipedia.org/wiki/Engrish "Engrish") * [Honorific speech](https://en.wikipedia.org/wiki/Honorific_speech_in_Japanese "Honorific speech in Japanese") * [Honorifics](https://en.wikipedia.org/wiki/Japanese_honorifics "Japanese honorifics") * [Court lady language (*nyōbō kotoba*)](https://en.wikipedia.org/wiki/Ny%C5%8Db%C5%8D_kotoba "Nyōbō kotoba") * [Role language (*yakuwarigo*)](https://en.wikipedia.org/wiki/Yakuwarigo "Yakuwarigo") * [Gender differences](https://en.wikipedia.org/wiki/Gender_differences_in_Japanese "Gender differences in Japanese") * [Dictionaries](https://en.wikipedia.org/wiki/Japanese_dictionary "Japanese dictionary") * Grammar books   + [A Comprehensive Grammar](https://en.wikipedia.org/wiki/Japanese%3A_A_Comprehensive_Grammar "Japanese: A Comprehensive Grammar")   + [A Reference Grammar of Japanese](https://en.wikipedia.org/wiki/A_Reference_Grammar_of_Japanese "A Reference Grammar of Japanese") |
+| [Phonology](https://en.wikipedia.org/wiki/Japanese_phonology "Japanese phonology") | * [Pitch accent](https://en.wikipedia.org/wiki/Japanese_pitch_accent "Japanese pitch accent")   + [affixes](https://en.wikipedia.org/wiki/Japanese_pitch_accent_rules_%28affixes%29 "Japanese pitch accent rules (affixes)")   + [non-common nouns](https://en.wikipedia.org/wiki/Japanese_pitch_accent_rules_%28non-common_nouns%29 "Japanese pitch accent rules (non-common nouns)")   + [numerals and counters](https://en.wikipedia.org/wiki/Japanese_pitch_accent_rules_%28numerals_and_counters%29 "Japanese pitch accent rules (numerals and counters)")   + [verbs and adjectives](https://en.wikipedia.org/wiki/Japanese_pitch_accent_rules_%28verbs_and_adjectives%29 "Japanese pitch accent rules (verbs and adjectives)") * *[Rendaku](https://en.wikipedia.org/wiki/Rendaku "Rendaku")* * [Sound symbolism](https://en.wikipedia.org/wiki/Japanese_sound_symbolism "Japanese sound symbolism") * *Kanji* pronunciation sources   + *[on'yomi](https://en.wikipedia.org/wiki/On%27yomi "On'yomi")*   + *[go-on](https://en.wikipedia.org/wiki/Go-on "Go-on")*   + *[kan-on](https://en.wikipedia.org/wiki/Kan-on "Kan-on")*   + *[tō-on](https://en.wikipedia.org/wiki/T%C5%8D-on "Tō-on")*   + *[kun'yomi](https://en.wikipedia.org/wiki/Kun%27yomi "Kun'yomi")* |
+| Transliteration | * [Romanization](https://en.wikipedia.org/wiki/Romanization_of_Japanese "Romanization of Japanese")   + [Hepburn](https://en.wikipedia.org/wiki/Hepburn_romanization "Hepburn romanization")   + *[Nihon-shiki](https://en.wikipedia.org/wiki/Nihon-shiki "Nihon-shiki")*   + *[Kunrei-shiki](https://en.wikipedia.org/wiki/Kunrei-shiki "Kunrei-shiki")*   + [JSL](https://en.wikipedia.org/wiki/JSL_romanization "JSL romanization")   + *[Wāpuro rōmaji](https://en.wikipedia.org/wiki/W%C4%81puro_r%C5%8Dmaji "Wāpuro rōmaji")*   + [In Esperanto](https://en.wikipedia.org/wiki/Transcription_of_the_Japanese_language_in_Esperanto "Transcription of the Japanese language in Esperanto") * [Cyrillization](https://en.wikipedia.org/wiki/Cyrillization_of_Japanese "Cyrillization of Japanese")   + [Polivanov system](https://en.wikipedia.org/wiki/Polivanov_system "Polivanov system") |
+| [Literature](https://en.wikipedia.org/wiki/Japanese_literature "Japanese literature") | * [Books](https://en.wikipedia.org/wiki/Japanese_books "Japanese books") * [Poetry](https://en.wikipedia.org/wiki/Japanese_poetry "Japanese poetry") * [Writers](https://en.wikipedia.org/wiki/List_of_Japanese_writers "List of Japanese writers")   + [Speculative fiction writers](https://en.wikipedia.org/wiki/List_of_Japanese_speculative_fiction_writers "List of Japanese speculative fiction writers") * [Classical Japanese](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese")   + [texts](https://en.wikipedia.org/wiki/List_of_classical_Japanese_texts "List of classical Japanese texts") |
+| ![flag](//thumb.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/20px-Flag_of_Japan.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail) [Japan portal](https://en.wikipedia.org/wiki/Portal%3AJapan "Portal:Japan") [![icon](//thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Globe_of_letters.svg/20px-Globe_of_letters.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AGlobe_of_letters.svg) [Language portal](https://en.wikipedia.org/wiki/Portal%3ALanguage "Portal:Language") | |
+
+| * [v](https://en.wikipedia.org/wiki/Template%3AJaponic_languages "Template:Japonic languages") * [t](https://en.wikipedia.org/wiki/Template_talk%3AJaponic_languages "Template talk:Japonic languages") * [e](https://en.wikipedia.org/wiki/Special%3AEditPage/Template%3AJaponic_languages "Special:EditPage/Template:Japonic languages")  [Japonic languages](https://en.wikipedia.org/wiki/Japonic_languages "Japonic languages") | | |
+| --- | --- | --- |
+| Japanese | * [Japanese](https://en.wikipedia.org/wiki/Japanese_language)   + [Japanese dialects](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") * [Hachijō](https://en.wikipedia.org/wiki/Hachij%C5%8D_language "Hachijō language") | [![](//thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Japanese_dialects-en.png/250px-Japanese_dialects-en.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://en.wikipedia.org/wiki/File%3AJapanese_dialects-en.png) |
+| [Ryukyuan](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") | |  |  |  |  |  |  | | --- | --- | --- | --- | --- | --- | | [Northern](https://en.wikipedia.org/wiki/Northern_Ryukyuan_languages "Northern Ryukyuan languages") | |  |  | | --- | --- | | [Amami](https://en.wikipedia.org/wiki/Amami_languages "Amami languages") | * [Amami](https://en.wikipedia.org/wiki/Amami_%C5%8Cshima_language "Amami Ōshima language") * [Southern Amami](https://en.wikipedia.org/wiki/Southern_Amami_%C5%8Cshima_language "Southern Amami Ōshima language") * [Kikai](https://en.wikipedia.org/wiki/Kikai_language "Kikai language") * [Tokunoshima](https://en.wikipedia.org/wiki/Tokunoshima_language "Tokunoshima language") * [Okinoerabu](https://en.wikipedia.org/wiki/Okinoerabu_dialect_cluster "Okinoerabu dialect cluster") * [Yoron](https://en.wikipedia.org/wiki/Yoron_language "Yoron language") | | Okinawan | * [Kunigami (Northern Okinawan)](https://en.wikipedia.org/wiki/Kunigami_language "Kunigami language") * [Okinawan](https://en.wikipedia.org/wiki/Okinawan_language "Okinawan language") | | | [Southern](https://en.wikipedia.org/wiki/Southern_Ryukyuan_languages "Southern Ryukyuan languages") | |  |  | | --- | --- | | Miyakoan | * [Miyakoan](https://en.wikipedia.org/wiki/Miyakoan_language "Miyakoan language") ([Kurima dialect](https://en.wikipedia.org/wiki/Kurima_dialect "Kurima dialect"), [Tarama dialect](https://en.wikipedia.org/wiki/Tarama_dialect "Tarama dialect")) | | [Macro-Yaeyama](https://en.wikipedia.org/wiki/Macro-Yaeyama_languages "Macro-Yaeyama languages") | * [Yaeyama](https://en.wikipedia.org/wiki/Yaeyama_language "Yaeyama language") * [Yonaguni](https://en.wikipedia.org/wiki/Yonaguni_language "Yonaguni language") | | |
+| History | * [Proto-Japonic](https://en.wikipedia.org/wiki/Proto-Japonic "Proto-Japonic") * [Peninsular Japonic](https://en.wikipedia.org/wiki/Peninsular_Japonic "Peninsular Japonic") † * [Insular Japonic languages](https://en.wikipedia.org/wiki/Insular_Japonic_languages "Insular Japonic languages") * [Old Japanese](https://en.wikipedia.org/wiki/Old_Japanese "Old Japanese")   + [Eastern Old Japanese](https://en.wikipedia.org/wiki/Eastern_Old_Japanese "Eastern Old Japanese") * [Tamna](https://en.wikipedia.org/wiki/Tamna#Language "Tamna") † * [Hayato](https://en.wikipedia.org/wiki/Hayato_language "Hayato language") † * [Early Middle Japanese](https://en.wikipedia.org/wiki/Early_Middle_Japanese "Early Middle Japanese")   + [Classical Japanese](https://en.wikipedia.org/wiki/Classical_Japanese "Classical Japanese") * [Late Middle Japanese](https://en.wikipedia.org/wiki/Late_Middle_Japanese "Late Middle Japanese") * [Early Modern Japanese](https://en.wikipedia.org/wiki/Early_Modern_Japanese "Early Modern Japanese") |
+
+| * [v](https://en.wikipedia.org/wiki/Template%3ALanguages_of_Japan "Template:Languages of Japan") * [t](https://en.wikipedia.org/wiki/Template_talk%3ALanguages_of_Japan "Template talk:Languages of Japan") * [e](https://en.wikipedia.org/wiki/Special%3AEditPage/Template%3ALanguages_of_Japan "Special:EditPage/Template:Languages of Japan")  [Languages of Japan](https://en.wikipedia.org/wiki/Languages_of_Japan "Languages of Japan") | |
+| --- | --- |
+| National language | * [Japanese](https://en.wikipedia.org/wiki/Japanese_language)   + [Variants](https://en.wikipedia.org/wiki/Japanese_dialects "Japanese dialects") |
+| Indigenous languages | * [Hokkaido Ainu](https://en.wikipedia.org/wiki/Ainu_language "Ainu language") † * [Hachijō](https://en.wikipedia.org/wiki/Hachij%C5%8D_language "Hachijō language") * [Hayato](https://en.wikipedia.org/wiki/Hayato_language "Hayato language") † * [Emishi language](https://en.wikipedia.org/wiki/Ainu_languages#Ainu_on_mainland_Japan "Ainu languages") †   |  |  | | --- | --- | | [Ryukyuan](https://en.wikipedia.org/wiki/Ryukyuan_languages "Ryukyuan languages") | * [Amami Ōshima](https://en.wikipedia.org/wiki/Amami_%C5%8Cshima_language "Amami Ōshima language") * [Kikai](https://en.wikipedia.org/wiki/Kikai_language "Kikai language") * [Kunigami](https://en.wikipedia.org/wiki/Kunigami_language "Kunigami language") * [Miyako](https://en.wikipedia.org/wiki/Miyako_language "Miyako language")   + [Kurima](https://en.wikipedia.org/wiki/Kurima_dialect "Kurima dialect")   + [Tarama](https://en.wikipedia.org/wiki/Tarama_language "Tarama language") * [Okinawan](https://en.wikipedia.org/wiki/Okinawan_language "Okinawan language") * [Okinoerabu](https://en.wikipedia.org/wiki/Okinoerabu_language "Okinoerabu language") * [Southern Amami](https://en.wikipedia.org/wiki/Southern_Amami_%C5%8Cshima_language "Southern Amami Ōshima language") * [Tokunoshima](https://en.wikipedia.org/wiki/Tokunoshima_language "Tokunoshima language") * [Yaeyama](https://en.wikipedia.org/wiki/Yaeyama_language "Yaeyama language") * [Yonaguni](https://en.wikipedia.org/wiki/Yonaguni_language "Yonaguni language") * [Yoron](https://en.wikipedia.org/wiki/Yoron_language "Yoron language") | |
+| Non-Indigenous languages | * [Portuguese](https://en.wikipedia.org/wiki/Brazilian_Portuguese "Brazilian Portuguese") * [Chinese](https://en.wikipedia.org/wiki/Sinitic_languages "Sinitic languages")   + [Cantonese](https://en.wikipedia.org/wiki/Cantonese "Cantonese")   + [Hoochew](https://en.wikipedia.org/wiki/Hoochew_Chinese "Hoochew Chinese")   + [Hokkien](https://en.wikipedia.org/wiki/Hokkien "Hokkien")   + [Mandarin](https://en.wikipedia.org/wiki/Mandarin_Chinese "Mandarin Chinese") * [English](https://en.wikipedia.org/wiki/English_language "English language") * [Russian](https://en.wikipedia.org/wiki/Russian_language "Russian language") * [Esperanto](https://en.wikipedia.org/wiki/Esperanto_in_Japan "Esperanto in Japan") * [Turkish](https://en.wikipedia.org/wiki/Turkish_language "Turkish language") * [Indonesian](https://en.wikipedia.org/wiki/Indonesian_language "Indonesian language") * [Vietnamese](https://en.wikipedia.org/wiki/Vietnamese_language "Vietnamese language") * [Zainichi Korean](https://en.wikipedia.org/wiki/Zainichi_Korean_language "Zainichi Korean language") * [Sakhalin Ainu](https://en.wikipedia.org/wiki/Sakhalin_Ainu_language "Sakhalin Ainu language") † * [Kuril Ainu](https://en.wikipedia.org/wiki/Kuril_Ainu_language "Kuril Ainu language") † |
+| Creole languages | * [Bonin English](https://en.wikipedia.org/wiki/Bonin_English "Bonin English") |
+| Sign languages | * [Nihonshu](https://en.wikipedia.org/wiki/Japanese_Sign_Language "Japanese Sign Language") * [Amami Oshima Sign](https://en.wikipedia.org/wiki/Amami_Oshima_Sign_Language "Amami Oshima Sign Language") * [Miyakubo Sign](https://en.wikipedia.org/wiki/Miyakubo_Sign_Language "Miyakubo Sign Language") |
+
+| * [v](https://en.wikipedia.org/wiki/Template%3AJapan_topics "Template:Japan topics") * [t](https://en.wikipedia.org/wiki/Template_talk%3AJapan_topics "Template talk:Japan topics") * [e](https://en.wikipedia.org/wiki/Special%3AEditPage/Template%3AJapan_topics "Special:EditPage/Template:Japan topics")  [Japan](https://en.wikipedia.org/wiki/Japan "Japan") [articles](https://en.wikipedia.org/wiki/Index_of_Japan-related_articles "Index of Japan-related articles") | |
+| --- | --- |
+| * [Index](https://en.wikipedia.org/wiki/Index_of_Japan-related_articles "Index of Japan-related articles") * [Outline](https://en.wikipedia.org/wiki/Outline_of_Japan "Outline of Japan") | |
+| [History](https://en.wikipedia.org/wiki/History_of_Japan "History of Japan") | |  |  | | --- | --- | | Overviews | * Lists   + [Eras](https://en.wikipedia.org/wiki/Japanese_era_name "Japanese era name")   + [Clans](https://en.wikipedia.org/wiki/Japanese_clans "Japanese clans")   + [Shoguns](https://en.wikipedia.org/wiki/List_of_shoguns "List of shoguns")   + [Wars](https://en.wikipedia.org/wiki/List_of_wars_involving_Japan "List of wars involving Japan") * [Economic](https://en.wikipedia.org/wiki/Economic_history_of_Japan "Economic history of Japan") * [Education](https://en.wikipedia.org/wiki/History_of_education_in_Japan "History of education in Japan") * [Foreign relations](https://en.wikipedia.org/wiki/History_of_Japanese_foreign_relations "History of Japanese foreign relations") * [Military](https://en.wikipedia.org/wiki/Military_history_of_Japan "Military history of Japan")   + [Naval](https://en.wikipedia.org/wiki/Naval_history_of_Japan "Naval history of Japan")   + [Imperial Army](https://en.wikipedia.org/wiki/Imperial_Japanese_Army "Imperial Japanese Army")   + [Imperial Navy](https://en.wikipedia.org/wiki/Imperial_Japanese_Navy "Imperial Japanese Navy") | | Ancient | * [Paleolithic](https://en.wikipedia.org/wiki/Japanese_Paleolithic "Japanese Paleolithic") * [Jōmon period](https://en.wikipedia.org/wiki/J%C5%8Dmon_period "Jōmon period") * [Yayoi period](https://en.wikipedia.org/wiki/Yayoi_period "Yayoi period") * [Kofun period](https://en.wikipedia.org/wiki/Kofun_period "Kofun period") * [Asuka period](https://en.wikipedia.org/wiki/Asuka_period "Asuka period")   + [Taihō Code](https://en.wikipedia.org/wiki/Taih%C5%8D_Code "Taihō Code")   + [Asuka Kiyomihara Code](https://en.wikipedia.org/wiki/Asuka_Kiyomihara_Code "Asuka Kiyomihara Code")   + [Hakuhō period](https://en.wikipedia.org/wiki/Hakuh%C5%8D_period "Hakuhō period") * [Taika Reform](https://en.wikipedia.org/wiki/Taika_Reform "Taika Reform")   + [Monmu period](https://en.wikipedia.org/wiki/Monmu_period "Monmu period") * [Nara period](https://en.wikipedia.org/wiki/Nara_period "Nara period") * [Heian period](https://en.wikipedia.org/wiki/Heian_period "Heian period") | | Post-Classical | * [Genpei War](https://en.wikipedia.org/wiki/Genpei_War "Genpei War") * [Kamakura period](https://en.wikipedia.org/wiki/Kamakura_period "Kamakura period")   + [Kamakura shogunate](https://en.wikipedia.org/wiki/Kamakura_shogunate "Kamakura shogunate") * [Mongol invasions of Japan](https://en.wikipedia.org/wiki/Mongol_invasions_of_Japan "Mongol invasions of Japan") * [Genkō War](https://en.wikipedia.org/wiki/Genk%C5%8D_War "Genkō War") * [Kenmu Restoration](https://en.wikipedia.org/wiki/Kenmu_Restoration "Kenmu Restoration") * [Muromachi period](https://en.wikipedia.org/wiki/Muromachi_period "Muromachi period")   + [Ashikaga shogunate](https://en.wikipedia.org/wiki/Ashikaga_shogunate "Ashikaga shogunate")   + [Nanboku-chō period](https://en.wikipedia.org/wiki/Nanboku-ch%C5%8D_period "Nanboku-chō period") * [Ōnin War](https://en.wikipedia.org/wiki/%C5%8Cnin_War "Ōnin War") * [Sengoku period](https://en.wikipedia.org/wiki/Sengoku_period "Sengoku period")   + [Azuchi–Momoyama period](https://en.wikipedia.org/wiki/Azuchi%E2%80%93Momoyama_period "Azuchi–Momoyama period")   + [Council of Five Elders](https://en.wikipedia.org/wiki/Council_of_Five_Elders "Council of Five Elders") * [Imjin War](https://en.wikipedia.org/wiki/Imjin_War "Imjin War") | | Early Modern | * [Edo period](https://en.wikipedia.org/wiki/Edo_period "Edo period")   + [Tokugawa shogunate](https://en.wikipedia.org/wiki/Tokugawa_shogunate "Tokugawa shogunate") * [Bakumatsu](https://en.wikipedia.org/wiki/Bakumatsu "Bakumatsu") * [Empire of Japan](https://en.wikipedia.org/wiki/Empire_of_Japan "Empire of Japan") * [Meiji era](https://en.wikipedia.org/wiki/Meiji_era "Meiji era")   + [Imperial Constitution (1890–1947)](https://en.wikipedia.org/wiki/Meiji_Constitution "Meiji Constitution")   + [Government](https://en.wikipedia.org/wiki/Government_of_Meiji_Japan "Government of Meiji Japan")   + [Meiji oligarchy](https://en.wikipedia.org/wiki/Meiji_oligarchy "Meiji oligarchy")   + [Meiji Restoration](https://en.wikipedia.org/wiki/Meiji_Restoration "Meiji Restoration")   + [Abolition of the han system](https://en.wikipedia.org/wiki/Abolition_of_the_han_system "Abolition of the han system")   + [Boshin War](https://en.wikipedia.org/wiki/Boshin_War "Boshin War")   + [Satsuma Rebellion](https://en.wikipedia.org/wiki/Satsuma_Rebellion "Satsuma Rebellion") * [Kazoku](https://en.wikipedia.org/wiki/Kazoku "Kazoku") (noble) * [First Sino-Japanese War](https://en.wikipedia.org/wiki/First_Sino-Japanese_War "First Sino-Japanese War") * [Russo-Japanese War](https://en.wikipedia.org/wiki/Russo-Japanese_War "Russo-Japanese War") | | Late Modern | * [Taishō era](https://en.wikipedia.org/wiki/Taish%C5%8D_era "Taishō era")   + [Japan during World War I](https://en.wikipedia.org/wiki/Japan_during_World_War_I "Japan during World War I")   + [1923 Great Kantō earthquake](https://en.wikipedia.org/wiki/1923_Great_Kant%C5%8D_earthquake "1923 Great Kantō earthquake") * [Shōwa era](https://en.wikipedia.org/wiki/Sh%C5%8Dwa_era "Shōwa era")   + [Japan during World War II](https://en.wikipedia.org/wiki/Japan_during_World_War_II "Japan during World War II")   + [Mukden Incident](https://en.wikipedia.org/wiki/Mukden_Incident "Mukden Incident")   + [Second Sino-Japanese War](https://en.wikipedia.org/wiki/Second_Sino-Japanese_War "Second Sino-Japanese War")   + [Pacific War](https://en.wikipedia.org/wiki/Pacific_War "Pacific War")   + [Occupation](https://en.wikipedia.org/wiki/Occupation_of_Japan "Occupation of Japan")   + [Postwar](https://en.wikipedia.org/wiki/Postwar_Japan "Postwar Japan")   + [Economic miracle](https://en.wikipedia.org/wiki/Japanese_economic_miracle "Japanese economic miracle") * [Heisei era](https://en.wikipedia.org/wiki/Heisei_era "Heisei era")   + [Great Hanshin earthquake](https://en.wikipedia.org/wiki/Great_Hanshin_earthquake "Great Hanshin earthquake")   + [2011 Tōhoku earthquake and tsunami](https://en.wikipedia.org/wiki/2011_T%C5%8Dhoku_earthquake_and_tsunami "2011 Tōhoku earthquake and tsunami") | | Contemporary | * [Reiwa era](https://en.wikipedia.org/wiki/Reiwa_era "Reiwa era")   + [2019 imperial transition](https://en.wikipedia.org/wiki/2019_Japanese_imperial_transition "2019 Japanese imperial transition")   + [COVID-19 pandemic](https://en.wikipedia.org/wiki/COVID-19_pandemic_in_Japan "COVID-19 pandemic in Japan") | |
+| [Geography](https://en.wikipedia.org/wiki/Geography_of_Japan "Geography of Japan") | |  |  | | --- | --- | | * [Addresses](https://en.wikipedia.org/wiki/Japanese_addressing_system "Japanese addressing system") * [Archipelago](https://en.wikipedia.org/wiki/Japanese_archipelago "Japanese archipelago") * [Cities](https://en.wikipedia.org/wiki/Cities_of_Japan "Cities of Japan") * [Districts](https://en.wikipedia.org/wiki/Districts_of_Japan "Districts of Japan") * [Earthquakes](https://en.wikipedia.org/wiki/List_of_earthquakes_in_Japan "List of earthquakes in Japan") * [Environment](https://en.wikipedia.org/wiki/Environmental_issues_in_Japan "Environmental issues in Japan") * [Extreme points](https://en.wikipedia.org/wiki/List_of_extreme_points_of_Japan "List of extreme points of Japan") * [Islands](https://en.wikipedia.org/wiki/List_of_islands_of_Japan "List of islands of Japan") * [Lakes](https://en.wikipedia.org/wiki/List_of_lakes_of_Japan "List of lakes of Japan") * [Prefectures](https://en.wikipedia.org/wiki/Prefectures_of_Japan "Prefectures of Japan") * [Regions](https://en.wikipedia.org/wiki/List_of_regions_of_Japan "List of regions of Japan") * [Rivers](https://en.wikipedia.org/wiki/List_of_rivers_of_Japan "List of rivers of Japan") * [Towns](https://en.wikipedia.org/wiki/List_of_towns_in_Japan "List of towns in Japan") * [Villages](https://en.wikipedia.org/wiki/List_of_villages_in_Japan "List of villages in Japan") * [World Heritage Sites](https://en.wikipedia.org/wiki/List_of_World_Heritage_Sites_in_Japan "List of World Heritage Sites in Japan") | | |
+| [Politics](https://en.wikipedia.org/wiki/Politics_of_Japan "Politics of Japan") | |  |  |  |  |  |  | | --- | --- | --- | --- | --- | --- | | |  |  | | --- | --- | | * [Constitution](https://en.wikipedia.org/wiki/Constitution_of_Japan "Constitution of Japan") * [Elections](https://en.wikipedia.org/wiki/Elections_in_Japan "Elections in Japan") * [Emperor](https://en.wikipedia.org/wiki/Emperor_of_Japan "Emperor of Japan")   + [list](https://en.wikipedia.org/wiki/List_of_emperors_of_Japan "List of emperors of Japan") * [Imperial House](https://en.wikipedia.org/wiki/Imperial_House_of_Japan "Imperial House of Japan") * [Foreign relations](https://en.wikipedia.org/wiki/Foreign_relations_of_Japan "Foreign relations of Japan") * [Human rights](https://en.wikipedia.org/wiki/Human_rights_in_Japan "Human rights in Japan")   + [LGBTQ](https://en.wikipedia.org/wiki/LGBTQ_rights_in_Japan "LGBTQ rights in Japan") * [Judiciary](https://en.wikipedia.org/wiki/Judicial_system_of_Japan "Judicial system of Japan")   + [Supreme Court](https://en.wikipedia.org/wiki/Supreme_Court_of_Japan "Supreme Court of Japan") * [Law](https://en.wikipedia.org/wiki/Law_of_Japan "Law of Japan") * [Law enforcement](https://en.wikipedia.org/wiki/Law_enforcement_in_Japan "Law enforcement in Japan") * [National Diet](https://en.wikipedia.org/wiki/National_Diet "National Diet")   + [House of Representatives](https://en.wikipedia.org/wiki/House_of_Representatives_%28Japan%29 "House of Representatives (Japan)")   + [Senate](https://en.wikipedia.org/wiki/Senate_%28Japan%29 "Senate (Japan)")   + [List of members](https://en.wikipedia.org/wiki/List_of_members_of_the_Diet_of_Japan "List of members of the Diet of Japan") * [Political parties](https://en.wikipedia.org/wiki/List_of_political_parties_in_Japan "List of political parties in Japan") * [Self-Defense Forces](https://en.wikipedia.org/wiki/Japan_Self-Defense_Forces "Japan Self-Defense Forces")   + [Ground](https://en.wikipedia.org/wiki/Japan_Ground_Self-Defense_Force "Japan Ground Self-Defense Force")   + [Maritime](https://en.wikipedia.org/wiki/Japan_Maritime_Self-Defense_Force "Japan Maritime Self-Defense Force")   + [Air](https://en.wikipedia.org/wiki/Japan_Air_Self-Defense_Force "Japan Air Self-Defense Force") | | | [Government](https://en.wikipedia.org/wiki/Government_of_Japan "Government of Japan") | * [Cabinet](https://en.wikipedia.org/wiki/Cabinet_of_Japan "Cabinet of Japan")   + [list](https://en.wikipedia.org/wiki/List_of_Japanese_cabinets "List of Japanese cabinets") * [Fiscal policy](https://en.wikipedia.org/wiki/Monetary_and_fiscal_policy_of_Japan "Monetary and fiscal policy of Japan") * [Foreign policy](https://en.wikipedia.org/wiki/Foreign_policy_of_Japan "Foreign policy of Japan") * [Ministries](https://en.wikipedia.org/wiki/Ministries_of_Japan "Ministries of Japan") * [Prime Minister](https://en.wikipedia.org/wiki/Prime_Minister_of_Japan "Prime Minister of Japan")   + [list](https://en.wikipedia.org/wiki/List_of_prime_ministers_of_Japan "List of prime ministers of Japan") * [Deputy Prime Minister](https://en.wikipedia.org/wiki/Deputy_Prime_Minister_of_Japan "Deputy Prime Minister of Japan") | | | |
+| [Economy](https://en.wikipedia.org/wiki/Economy_of_Japan "Economy of Japan") | |  |  | | --- | --- | | * [Agriculture, forestry, fishing](https://en.wikipedia.org/wiki/Agriculture%2C_forestry%2C_and_fishing_in_Japan "Agriculture, forestry, and fishing in Japan") * [Central bank](https://en.wikipedia.org/wiki/Bank_of_Japan "Bank of Japan") * [Labor](https://en.wikipedia.org/wiki/Labor_market_of_Japan "Labor market of Japan") * [Manufacturing](https://en.wikipedia.org/wiki/Manufacturing_in_Japan "Manufacturing in Japan") * [Energy](https://en.wikipedia.org/wiki/Energy_in_Japan "Energy in Japan") * [Science and technology](https://en.wikipedia.org/wiki/Science_and_technology_in_Japan "Science and technology in Japan") * [Telecommunications](https://en.wikipedia.org/wiki/Communications_in_Japan "Communications in Japan") * [Transport](https://en.wikipedia.org/wiki/Transport_in_Japan "Transport in Japan") * [Yen](https://en.wikipedia.org/wiki/Japanese_yen "Japanese yen") | | |
+| [Society](https://en.wikipedia.org/wiki/Category%3ASociety_of_Japan "Category:Society of Japan") | |  |  | | --- | --- | | * [Anti-monarchism](https://en.wikipedia.org/wiki/Anti-monarchism_in_Japan "Anti-monarchism in Japan") * [Censorship](https://en.wikipedia.org/wiki/Censorship_in_Japan "Censorship in Japan") * [Crime](https://en.wikipedia.org/wiki/Crime_in_Japan "Crime in Japan") * [Demographics](https://en.wikipedia.org/wiki/Demographics_of_Japan "Demographics of Japan") * [Education](https://en.wikipedia.org/wiki/Education_in_Japan "Education in Japan") * [Etiquette](https://en.wikipedia.org/wiki/Etiquette_in_Japan "Etiquette in Japan") * [Gambling](https://en.wikipedia.org/wiki/Gambling_in_Japan "Gambling in Japan") * [Health](https://en.wikipedia.org/wiki/Health_in_Japan "Health in Japan")   + [Kanpu masatsu](https://en.wikipedia.org/wiki/Kanpu_masatsu "Kanpu masatsu") * [Housing](https://en.wikipedia.org/wiki/Housing_in_Japan "Housing in Japan")   + [Homelessness](https://en.wikipedia.org/wiki/Homelessness_in_Japan "Homelessness in Japan") * [Languages](https://en.wikipedia.org/wiki/Languages_of_Japan "Languages of Japan")   + [Japanese](https://en.wikipedia.org/wiki/Japanese_language) * [Life expectancy](https://en.wikipedia.org/wiki/List_of_Japanese_prefectures_by_life_expectancy "List of Japanese prefectures by life expectancy") * [People](https://en.wikipedia.org/wiki/Japanese_people "Japanese people") * [Pornography](https://en.wikipedia.org/wiki/Pornography_in_Japan "Pornography in Japan") * [Prostitution](https://en.wikipedia.org/wiki/Prostitution_in_Japan "Prostitution in Japan") * [Religion](https://en.wikipedia.org/wiki/Religion_in_Japan "Religion in Japan") * [Sex trafficking](https://en.wikipedia.org/wiki/Sex_trafficking_in_Japan "Sex trafficking in Japan") * [Sexual minorities](https://en.wikipedia.org/wiki/Sexual_minorities_in_Japan "Sexual minorities in Japan") * [Sexuality](https://en.wikipedia.org/wiki/Sexuality_in_Japan "Sexuality in Japan") * [Smoking](https://en.wikipedia.org/wiki/Smoking_in_Japan "Smoking in Japan") * [Women](https://en.wikipedia.org/wiki/Women_in_Japan "Women in Japan") | | | [Culture](https://en.wikipedia.org/wiki/Culture_of_Japan "Culture of Japan") | * [Aesthetics](https://en.wikipedia.org/wiki/Japanese_aesthetics "Japanese aesthetics") * [Anime](https://en.wikipedia.org/wiki/Anime "Anime") / [Manga](https://en.wikipedia.org/wiki/Manga "Manga") * [Architecture](https://en.wikipedia.org/wiki/Japanese_architecture "Japanese architecture") * [Art](https://en.wikipedia.org/wiki/Japanese_art "Japanese art") * [Bonsai](https://en.wikipedia.org/wiki/Bonsai "Bonsai") * [Cinema](https://en.wikipedia.org/wiki/Cinema_of_Japan "Cinema of Japan") * [Cuisine](https://en.wikipedia.org/wiki/Japanese_cuisine "Japanese cuisine") * [Festivals](https://en.wikipedia.org/wiki/Japanese_festivals "Japanese festivals") * [Flag](https://en.wikipedia.org/wiki/Flag_of_Japan "Flag of Japan") * [Folklore](https://en.wikipedia.org/wiki/Japanese_folklore "Japanese folklore") * [Games](https://en.wikipedia.org/wiki/List_of_traditional_Japanese_games "List of traditional Japanese games") * [Gardens](https://en.wikipedia.org/wiki/Japanese_garden "Japanese garden") * [Geisha](https://en.wikipedia.org/wiki/Geisha "Geisha") * [Hanami](https://en.wikipedia.org/wiki/Hanami "Hanami") * [Kawaii](https://en.wikipedia.org/wiki/Kawaii "Kawaii") * [LGBTQ culture](https://en.wikipedia.org/wiki/LGBTQ_culture_in_Japan "LGBTQ culture in Japan") * [Literature](https://en.wikipedia.org/wiki/Japanese_literature "Japanese literature") * [Martial arts](https://en.wikipedia.org/wiki/Japanese_martial_arts "Japanese martial arts") * [Media](https://en.wikipedia.org/wiki/Mass_media_in_Japan "Mass media in Japan") * [Music](https://en.wikipedia.org/wiki/Music_of_Japan "Music of Japan") * [Mythology](https://en.wikipedia.org/wiki/Japanese_mythology "Japanese mythology") * [Names](https://en.wikipedia.org/wiki/Japanese_name "Japanese name") * [National symbols](https://en.wikipedia.org/wiki/National_symbols_of_Japan "National symbols of Japan") * [Onsen](https://en.wikipedia.org/wiki/Onsen "Onsen") / [Sentō](https://en.wikipedia.org/wiki/Sent%C5%8D "Sentō") * [Origami](https://en.wikipedia.org/wiki/Origami "Origami") * [Popular culture](https://en.wikipedia.org/wiki/Japanese_popular_culture "Japanese popular culture") * [Sport](https://en.wikipedia.org/wiki/Sport_in_Japan "Sport in Japan") * [Shinto](https://en.wikipedia.org/wiki/Shinto "Shinto") * [Tea ceremony](https://en.wikipedia.org/wiki/Japanese_tea_ceremony "Japanese tea ceremony") * [Television](https://en.wikipedia.org/wiki/Television_in_Japan "Television in Japan") * [Theatre](https://en.wikipedia.org/wiki/Theatre_of_Japan "Theatre of Japan") * [Video games](https://en.wikipedia.org/wiki/Video_games_in_Japan "Video games in Japan") * [Zen](https://en.wikipedia.org/wiki/Japanese_Zen "Japanese Zen") | |
+| * ![flag](//thumb.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/20px-Flag_of_Japan.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail) [Japan portal](https://en.wikipedia.org/wiki/Portal%3AJapan "Portal:Japan") * ![](//thumb.wikimedia.org/wikipedia/en/thumb/9/96/Symbol_category_class.svg/20px-Symbol_category_class.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail) [Category](https://en.wikipedia.org/wiki/Category%3AJapan "Category:Japan") | |
+
+| [Authority control databases](https://en.wikipedia.org/wiki/Help%3AAuthority_control "Help:Authority control") [![Edit this at Wikidata](//thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail)](https://www.wikidata.org/wiki/Q5287#identifiers "Edit this at Wikidata") | |
+| --- | --- |
+| International | * [GND](https://d-nb.info/gnd/4114069-2) * [FAST](https://id.worldcat.org/fast/981565) |
+| National | * [United States](https://id.loc.gov/authorities/sh85069643) * [France](https://catalogue.bnf.fr/ark%3A/12148/cb11932171r) * [BnF data](https://data.bnf.fr/ark%3A/12148/cb11932171r) * [Japan](https://id.ndl.go.jp/auth/ndlna/00568376) * [Czech Republic](https://aleph.nkp.cz/F/?func=find-c&local_base=aut&ccl_term=ica=ph121307&CON_LNG=ENG) * [Sweden](https://libris.kb.se/ljx0zm34331cvc3) * [Israel](https://www.nli.org.il/en/authorities/987007531546705171) |
+| Other | * [Yale LUX](https://lux.collections.yale.edu/view/concept/7a1eb4fd-029e-4f0e-87eb-b7f402deaa17) |
+
+![](https://en.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&type=1x1&usesul3=1)
+
+Retrieved from "<https://en.wikipedia.org/w/index.php?title=Japanese_language&oldid=1381018959>"
+
+[Categories](/wiki/Help%3ACategory "Help:Category"):
+
+* [Japanese language](/wiki/Category%3AJapanese_language "Category:Japanese language")
+* [Agglutinative languages](/wiki/Category%3AAgglutinative_languages "Category:Agglutinative languages")
+* [Languages attested since the 8th century](/wiki/Category%3ALanguages_attested_since_the_8th_century "Category:Languages attested since the 8th century")
+* [Languages of Japan](/wiki/Category%3ALanguages_of_Japan "Category:Languages of Japan")
+* [Languages of Palau](/wiki/Category%3ALanguages_of_Palau "Category:Languages of Palau")
+* [Pitch-accent language](/wiki/Category%3APitch-accent_language "Category:Pitch-accent language")
+* [Subject–object–verb languages](/wiki/Category%3ASubject%E2%80%93object%E2%80%93verb_languages "Category:Subject–object–verb languages")
+* [Syllable-timed languages](/wiki/Category%3ASyllable-timed_languages "Category:Syllable-timed languages")
+
+Hidden categories:
+
+* [Articles with short description](/wiki/Category%3AArticles_with_short_description "Category:Articles with short description")
+* [Short description is different from Wikidata](/wiki/Category%3AShort_description_is_different_from_Wikidata "Category:Short description is different from Wikidata")
+* [Wikipedia pages semi-protected against vandalism](/wiki/Category%3AWikipedia_pages_semi-protected_against_vandalism "Category:Wikipedia pages semi-protected against vandalism")
+* [Pages using the Phonos extension](/wiki/Category%3APages_using_the_Phonos_extension "Category:Pages using the Phonos extension")
+* [Language articles citing Ethnologue 27](/wiki/Category%3ALanguage_articles_citing_Ethnologue_27 "Category:Language articles citing Ethnologue 27")
+* [Articles containing Japanese-language text](/wiki/Category%3AArticles_containing_Japanese-language_text "Category:Articles containing Japanese-language text")
+* [Pages with Japanese IPA](/wiki/Category%3APages_with_Japanese_IPA "Category:Pages with Japanese IPA")
+* [Pages including recorded pronunciations](/wiki/Category%3APages_including_recorded_pronunciations "Category:Pages including recorded pronunciations")
+* [Language articles with Linguasphere code](/wiki/Category%3ALanguage_articles_with_Linguasphere_code "Category:Language articles with Linguasphere code")
+* [Articles with unnamed Glottolog code](/wiki/Category%3AArticles_with_unnamed_Glottolog_code "Category:Articles with unnamed Glottolog code")
+* [Languages with ISO 639-2 code](/wiki/Category%3ALanguages_with_ISO_639-2_code "Category:Languages with ISO 639-2 code")
+* [Languages with ISO 639-1 code](/wiki/Category%3ALanguages_with_ISO_639-1_code "Category:Languages with ISO 639-1 code")
+* [ISO language articles citing sources other than Ethnologue](/wiki/Category%3AISO_language_articles_citing_sources_other_than_Ethnologue "Category:ISO language articles citing sources other than Ethnologue")
+* [CS1 uses Japanese-language script (ja)](/wiki/Category%3ACS1_uses_Japanese-language_script_%28ja%29 "Category:CS1 uses Japanese-language script (ja)")
+* [CS1 Japanese-language sources (ja)](/wiki/Category%3ACS1_Japanese-language_sources_%28ja%29 "Category:CS1 Japanese-language sources (ja)")
+* [Pages with plain IPA](/wiki/Category%3APages_with_plain_IPA "Category:Pages with plain IPA")
+* [Articles with Japanese-language sources (ja)](/wiki/Category%3AArticles_with_Japanese-language_sources_%28ja%29 "Category:Articles with Japanese-language sources (ja)")
+* [Articles linking to deprecated archival repositories](/wiki/Category%3AArticles_linking_to_deprecated_archival_repositories "Category:Articles linking to deprecated archival repositories")
+* [Wikipedia articles needing clarification from September 2022](/wiki/Category%3AWikipedia_articles_needing_clarification_from_September_2022 "Category:Wikipedia articles needing clarification from September 2022")
+* [CS1 Portuguese-language sources (pt)](/wiki/Category%3ACS1_Portuguese-language_sources_%28pt%29 "Category:CS1 Portuguese-language sources (pt)")
+* [Webarchive template wayback links](/wiki/Category%3AWebarchive_template_wayback_links "Category:Webarchive template wayback links")
+* [Wikipedia articles needing clarification from March 2024](/wiki/Category%3AWikipedia_articles_needing_clarification_from_March_2024 "Category:Wikipedia articles needing clarification from March 2024")
+* [Articles containing Chinese-language text](/wiki/Category%3AArticles_containing_Chinese-language_text "Category:Articles containing Chinese-language text")
+* [Articles lacking in-text citations from November 2013](/wiki/Category%3AArticles_lacking_in-text_citations_from_November_2013 "Category:Articles lacking in-text citations from November 2013")
+* [All articles lacking in-text citations](/wiki/Category%3AAll_articles_lacking_in-text_citations "Category:All articles lacking in-text citations")
+* [Articles containing Spanish-language text](/wiki/Category%3AArticles_containing_Spanish-language_text "Category:Articles containing Spanish-language text")
+* [Articles containing Portuguese-language text](/wiki/Category%3AArticles_containing_Portuguese-language_text "Category:Articles containing Portuguese-language text")
+* [All articles with unsourced statements](/wiki/Category%3AAll_articles_with_unsourced_statements "Category:All articles with unsourced statements")
+* [Articles with unsourced statements from May 2010](/wiki/Category%3AArticles_with_unsourced_statements_from_May_2010 "Category:Articles with unsourced statements from May 2010")
+* [Articles with hAudio microformats](/wiki/Category%3AArticles_with_hAudio_microformats "Category:Articles with hAudio microformats")
+
+* This page was last edited on 19 October 2026, at 13:50 (UTC).
+* Page was rendered with [Parsoid](https://www.mediawiki.org/wiki/Special%3AMyLanguage/Parsoid "mw:Special:MyLanguage/Parsoid").
+* Text is available under the [Creative Commons Attribution-ShareAlike 4.0 License](/wiki/Wikipedia%3AText_of_the_Creative_Commons_Attribution-ShareAlike_4.0_International_License "Wikipedia:Text of the Creative Commons Attribution-ShareAlike 4.0 International License");
+  additional terms may apply. By using this site, you agree to the [Terms of Use](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Policy%3ATerms_of_Use "foundation:Special:MyLanguage/Policy:Terms of Use") and [Privacy Policy](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Policy%3APrivacy_policy "foundation:Special:MyLanguage/Policy:Privacy policy"). Wikipedia® is a registered trademark of the [Wikimedia Foundation, Inc.](https://wikimediafoundation.org/), a non-profit organization.
+
+* [Privacy policy](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Policy%3APrivacy_policy)
+* [About Wikipedia](/wiki/Wikipedia%3AAbout)
+* [Disclaimers](/wiki/Wikipedia%3AGeneral_disclaimer)
+* [Contact Wikipedia](//en.wikipedia.org/wiki/Wikipedia%3AContact_us)
+* [Legal & safety contacts](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Legal%3AWikimedia_Foundation_Legal_and_Safety_Contact_Information)
+* [Code of Conduct](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Policy%3AUniversal_Code_of_Conduct)
+* [Developers](https://developer.wikimedia.org)
+* [Statistics](https://stats.wikimedia.org/#/en.wikipedia.org)
+* [Cookie statement](https://foundation.wikimedia.org/wiki/Special%3AMyLanguage/Policy%3ACookie_statement)
+* [Mobile view](//en.wikipedia.org/w/index.php?title=Japanese_language&mobileaction=toggle_view_mobile)
+
+* [![Wikimedia Foundation](/static/images/footer/wikimedia.svg)](https://www.wikimedia.org/)
+* [![Powered by MediaWiki](/w/resources/assets/mediawiki_compact.svg)](https://www.mediawiki.org/)
+
+Search
+
+Search
+
+[ ]
+
+Toggle the table of contents
+
+Japanese language
+
+239 languages
+Add topic

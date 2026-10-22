@@ -2,7 +2,7 @@
 //!
 //! cargo run --release -p markitdown-core --example bench -- <N> <files...>
 
-use markitdown_core::{Format, Options, convert};
+use markitdown_core::{Options, StreamInfo, convert};
 use std::time::Instant;
 
 fn main() {
@@ -13,14 +13,13 @@ fn main() {
         .expect("usage: bench <N> <files...>");
     println!("file\tmedian_ms\tmin_ms\tout_chars");
     for f in &args[1..] {
-        let format =
-            Format::from_hint(f.rsplit('.').next().unwrap_or_default()).expect("docx or pptx");
-        let out = convert(&std::fs::read(f).unwrap(), format, &Options::default()).unwrap(); // warm-up
+        let info = StreamInfo::from_path(f);
+        let out = convert(&std::fs::read(f).unwrap(), &info, &Options::default()).unwrap(); // warm-up
         let mut times: Vec<f64> = (0..n)
             .map(|_| {
                 let t = Instant::now();
                 let data = std::fs::read(f).unwrap();
-                std::hint::black_box(convert(&data, format, &Options::default()).unwrap());
+                std::hint::black_box(convert(&data, &info, &Options::default()).unwrap());
                 t.elapsed().as_secs_f64() * 1e3
             })
             .collect();

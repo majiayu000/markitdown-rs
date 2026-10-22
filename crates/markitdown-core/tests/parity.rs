@@ -34,6 +34,7 @@ parity! {
     zip_matches_python => "zip",
     msg_matches_python => "msg",
     media_matches_python => "media",
+    pdf_matches_python => "pdf",
 }
 
 /// Every input of html5lib-tests' tokenizer suite through the HTML

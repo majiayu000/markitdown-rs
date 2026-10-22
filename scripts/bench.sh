@@ -13,7 +13,8 @@ cargo build --release -q -p markitdown-core --example bench
 PY=oracle/.venv/bin/markitdown
 RS=target/release/markitdown
 FILES=(tests/fixtures/docx/markitdown-test.docx bench/corpus/medium.docx bench/corpus/large.docx
-       tests/fixtures/pptx/markitdown-test.pptx bench/corpus/deck.pptx)
+       tests/fixtures/pptx/markitdown-test.pptx bench/corpus/deck.pptx
+       tests/fixtures/pdf/markitdown-test.pdf bench/corpus/report.pdf)
 if [ "$(uname)" = Darwin ]; then
   CPU=$(sysctl -n machdep.cpu.brand_string); TIME=(/usr/bin/time -l); RSS_FIELD="maximum resident set size"
 else
@@ -37,17 +38,19 @@ oracle/.venv/bin/python scripts/bench_inproc_py.py 5 "${FILES[@]}"
 echo "## CLI end to end (new process per run)"
 for f in "${FILES[@]}"; do
   oracle/.venv/bin/python scripts/bench_cli.py "$N" "$f" -- "$RS"
-  runs=$N; [ "$f" = bench/corpus/large.docx ] && runs=3
+  runs=$N; case "$f" in bench/corpus/large.docx|bench/corpus/report.pdf) runs=3 ;; esac
   oracle/.venv/bin/python scripts/bench_cli.py "$runs" "$f" -- "$PY"
 done
 
-echo "## peak RSS in bytes (bench/corpus/large.docx)"
-for cmd in "$RS" "$PY"; do
-  rss=$("${TIME[@]}" "$cmd" bench/corpus/large.docx 2>&1 >/dev/null | grep "$RSS_FIELD" | grep -oE '[0-9]+' | head -1)
-  echo "$cmd $rss"
+echo "## peak RSS in bytes"
+for f in bench/corpus/large.docx bench/corpus/report.pdf; do
+  for cmd in "$RS" "$PY"; do
+    rss=$("${TIME[@]}" "$cmd" "$f" 2>&1 >/dev/null | grep "$RSS_FIELD" | grep -oE '[0-9]+' | head -1)
+    echo "$f $cmd $rss"
+  done
 done
 
 echo "## footprint"
 echo "binary bytes: $(wc -c < "$RS" | tr -d ' ')"
-echo "python venv (markitdown[docx,pptx] + python-docx): $(du -sh oracle/.venv | cut -f1)"
+echo "python venv (markitdown[docx,pptx,xlsx,xls,pdf,outlook] + bench deps): $(du -sh oracle/.venv | cut -f1)"
 echo "# load after: $(uptime | sed 's/.*load average[s]*: //')"

@@ -27,7 +27,12 @@ pub fn identify(data: &[u8]) -> Option<Sniff> {
     if data.is_empty() {
         return None;
     }
-    if data.starts_with(b"%PDF-") {
+    // readers accept the header anywhere in the first 1024 bytes, and so
+    // does magika's model
+    if data[..data.len().min(1024)]
+        .windows(5)
+        .any(|w| w == b"%PDF-")
+    {
         return Some(sniff("application/pdf", &["pdf"], false));
     }
     if data.starts_with(b"PK\x03\x04") {

@@ -3,7 +3,7 @@
 //! and plain-text ones. Each `accepts` mirrors the Python converter's.
 
 use crate::{
-    Error, Options, StreamInfo, docx, epub, html, media, msg, plain, pptx, rss, sheet, zipfile,
+    Error, Options, StreamInfo, docx, epub, html, media, msg, pdf, plain, pptx, rss, sheet, zipfile,
 };
 
 pub struct Converter {
@@ -51,6 +51,11 @@ pub static CONVERTERS: &[Converter] = &[
         name: "OutlookMsgConverter",
         accepts: msg::accepts,
         convert: |d, _, _| msg::convert(d),
+    },
+    Converter {
+        name: "PdfConverter",
+        accepts: pdf::accepts,
+        convert: |d, _, _| pdf::convert(d),
     },
     Converter {
         name: "IpynbConverter",

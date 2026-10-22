@@ -19,6 +19,7 @@ mod html;
 mod markdownify;
 mod media;
 mod msg;
+mod pdf;
 mod plain;
 mod pptx;
 mod pystr;

@@ -1,41 +1,53 @@
-# 2026-10-22 02:21 CST | Apple M2 Max | Darwin 25.5.0
-# Python 3.12.12 markitdown 0.1.8 | rustc 1.97.0 (2d8144b78 2026-07-07)
-# load: 19.65 17.77 16.04
+# 2026-10-22 12:47 CST | Apple M2 Max | Darwin 25.5.0
+# Python 3.12.12 markitdown 0.1.8 | rustc 1.99.1 (58cf8f9c3 2026-10-13)
+# load: 7.63 11.12 10.33
 ## identical output (python CLI vs rust CLI)
 same  tests/fixtures/docx/markitdown-test.docx
 same  bench/corpus/medium.docx
 same  bench/corpus/large.docx
 same  tests/fixtures/pptx/markitdown-test.pptx
 same  bench/corpus/deck.pptx
+same  tests/fixtures/pdf/markitdown-test.pdf
+same  bench/corpus/report.pdf
 ## in-process conversion (file read + convert, warm, median of 10; python: 5)
 file	median_ms	min_ms	out_chars
-tests/fixtures/docx/markitdown-test.docx	1.111	1.066	4651
-bench/corpus/medium.docx	17.112	16.031	125827
-bench/corpus/large.docx	224.107	221.258	2514667
-tests/fixtures/pptx/markitdown-test.pptx	1.469	1.438	2047
-bench/corpus/deck.pptx	54.757	50.461	314107
-# import+init_ms	181.1
+tests/fixtures/docx/markitdown-test.docx	1.319	1.232	4651
+bench/corpus/medium.docx	18.061	17.635	125827
+bench/corpus/large.docx	246.496	244.409	2514667
+tests/fixtures/pptx/markitdown-test.pptx	1.602	1.532	2047
+bench/corpus/deck.pptx	57.629	56.276	314107
+tests/fixtures/pdf/markitdown-test.pdf	2.020	1.928	5194
+bench/corpus/report.pdf	164.948	160.601	378819
+# import+init_ms	401.1
 file	median_ms	min_ms	out_chars
-tests/fixtures/docx/markitdown-test.docx	23.164	22.389	4651
-bench/corpus/medium.docx	502.599	480.465	125827
-bench/corpus/large.docx	12281.717	11840.478	2514667
-tests/fixtures/pptx/markitdown-test.pptx	12.115	11.854	2047
-bench/corpus/deck.pptx	857.122	848.164	314107
+tests/fixtures/docx/markitdown-test.docx	24.183	22.602	4651
+bench/corpus/medium.docx	531.043	505.549	125827
+bench/corpus/large.docx	10183.487	10159.177	2514667
+tests/fixtures/pptx/markitdown-test.pptx	25.619	20.704	2047
+bench/corpus/deck.pptx	1064.962	961.209	314107
+tests/fixtures/pdf/markitdown-test.pdf	124.780	107.406	5194
+bench/corpus/report.pdf	5626.574	5553.263	378819
 ## CLI end to end (new process per run)
-markitdown	markitdown-test.docx	wall_median_ms=4.7	cpu_median_ms=3.4	wall_min_ms=4.3
-markitdown	markitdown-test.docx	wall_median_ms=252.8	cpu_median_ms=300.0	wall_min_ms=246.9
-markitdown	medium.docx	wall_median_ms=21.2	cpu_median_ms=19.7	wall_min_ms=20.9
-markitdown	medium.docx	wall_median_ms=710.2	cpu_median_ms=754.3	wall_min_ms=703.3
-markitdown	large.docx	wall_median_ms=237.2	cpu_median_ms=233.8	wall_min_ms=233.1
-markitdown	large.docx	wall_median_ms=11376.9	cpu_median_ms=11024.8	wall_min_ms=10524.2
-markitdown	markitdown-test.pptx	wall_median_ms=4.7	cpu_median_ms=3.6	wall_min_ms=4.5
-markitdown	markitdown-test.pptx	wall_median_ms=272.4	cpu_median_ms=317.8	wall_min_ms=262.0
-markitdown	deck.pptx	wall_median_ms=59.8	cpu_median_ms=57.9	wall_min_ms=59.0
-markitdown	deck.pptx	wall_median_ms=1148.1	cpu_median_ms=1196.9	wall_min_ms=1128.5
-## peak RSS in bytes (bench/corpus/large.docx)
-target/release/markitdown 117915648
-oracle/.venv/bin/markitdown 455868416
+markitdown	markitdown-test.docx	wall_median_ms=5.2	cpu_median_ms=3.9	wall_min_ms=5.0
+markitdown	markitdown-test.docx	wall_median_ms=512.3	cpu_median_ms=565.4	wall_min_ms=469.4
+markitdown	medium.docx	wall_median_ms=22.3	cpu_median_ms=20.9	wall_min_ms=21.5
+markitdown	medium.docx	wall_median_ms=988.9	cpu_median_ms=1035.3	wall_min_ms=961.9
+markitdown	large.docx	wall_median_ms=255.7	cpu_median_ms=253.0	wall_min_ms=252.6
+markitdown	large.docx	wall_median_ms=13921.7	cpu_median_ms=11395.8	wall_min_ms=11172.2
+markitdown	markitdown-test.pptx	wall_median_ms=5.7	cpu_median_ms=4.3	wall_min_ms=5.3
+markitdown	markitdown-test.pptx	wall_median_ms=546.5	cpu_median_ms=602.7	wall_min_ms=525.3
+markitdown	deck.pptx	wall_median_ms=67.4	cpu_median_ms=65.6	wall_min_ms=66.2
+markitdown	deck.pptx	wall_median_ms=1546.4	cpu_median_ms=1588.5	wall_min_ms=1527.2
+markitdown	markitdown-test.pdf	wall_median_ms=6.4	cpu_median_ms=5.2	wall_min_ms=6.2
+markitdown	markitdown-test.pdf	wall_median_ms=645.0	cpu_median_ms=695.2	wall_min_ms=625.0
+markitdown	report.pdf	wall_median_ms=172.4	cpu_median_ms=170.1	wall_min_ms=169.6
+markitdown	report.pdf	wall_median_ms=5986.9	cpu_median_ms=6011.4	wall_min_ms=5934.0
+## peak RSS in bytes
+bench/corpus/large.docx target/release/markitdown 125714432
+bench/corpus/large.docx oracle/.venv/bin/markitdown 502677504
+bench/corpus/report.pdf target/release/markitdown 44957696
+bench/corpus/report.pdf oracle/.venv/bin/markitdown 152322048
 ## footprint
-binary bytes: 848864
-python venv (markitdown[docx,pptx] + python-docx): 243M
-# load after: 8.81 14.34 14.99
+binary bytes: 3098960
+python venv (markitdown[docx,pptx,xlsx,xls,pdf,outlook] + bench deps): 329M
+# load after: 15.94 17.98 13.87

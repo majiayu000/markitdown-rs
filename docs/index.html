@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>markitdown-rs: convert PDF, Word, Excel and URLs to Markdown in one binary</title>
+<meta name="description" content="markitdown-rs is Microsoft's markitdown rewritten in Rust: a single binary that converts PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown for LLMs and RAG, with byte-identical output, no Python, 23–112× faster.">
+<link rel="canonical" href="https://majiayu000.github.io/markitdown-rs/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
+<meta property="og:description" content="Convert PDF, Word, PowerPoint, Excel, HTML, EPUB and URLs to Markdown. Same output as markitdown, byte for byte. No Python, 23–112× faster.">
+<meta property="og:url" content="https://majiayu000.github.io/markitdown-rs/">
+<meta property="og:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
+<meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Byte-identical to markitdown, no Python, 23–112× faster.">
+<meta name="twitter:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","codeRepository":"https://github.com/majiayu000/markitdown-rs","description":"Single-binary Rust port of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with byte-identical output.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --dim:#59636e; --card:#f6f8fa; --line:#d1d9e0; --accent:#bc4c00; --code:#0d1117; --codefg:#e6edf3; --green:#7ee787; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e6edf3; --dim:#9198a1; --card:#151b23; --line:#3d444d; --accent:#f0883e; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+main { max-width: 920px; margin: 0 auto; padding: 48px 16px 64px; }
+h1 { font-size: 2.6rem; margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { margin-top: 48px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.lead { font-size: 1.25rem; color: var(--dim); margin: 0 0 24px; }
+pre { background: var(--code); color: var(--codefg); padding: 16px; border-radius: 10px; overflow-x: auto; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
+pre .dim { color: #9198a1; } pre .ok { color: var(--green); }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; display: block; overflow-x: auto; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td.num, th.num { text-align: right; }
+.cta { display:flex; gap:12px; flex-wrap:wrap; margin: 24px 0; }
+.cta a { padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: 600; border: 1px solid var(--line); color: var(--fg); background: var(--card); }
+.cta a.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+.card p { margin: 0; color: var(--dim); }
+footer { color: var(--dim); margin-top: 48px; font-size: 0.9rem; }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<h1>markitdown-rs</h1>
+<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> as one Rust binary: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. Same output, byte for byte. No Python. 23–112× faster.</p>
+
+<div class="cta">
+  <a class="primary" href="https://github.com/majiayu000/markitdown-rs/releases/latest">Download a binary</a>
+  <a href="https://github.com/majiayu000/markitdown-rs">GitHub</a>
+  <a href="https://github.com/majiayu000/markitdown-rs/blob/main/docs/comparison.md">Comparison</a>
+</div>
+
+<pre><span class="dim">$</span> cargo install --git https://github.com/majiayu000/markitdown-rs markitdown-rs
+<span class="dim">$</span> markitdown order.pdf
+Purchase order summary
+<span class="ok">| Item     | Qty | Unit price | Total |
+| -------- | --- | ---------- | ----- |
+| Widget 1 | 1   | 1.50       | 1.50  |
+| Widget 2 | 2   | 3.00       | 6.00  |</span>
+<span class="dim">$</span> markitdown https://en.wikipedia.org/wiki/Markdown | head -3
+# Markdown
+
+Plain text markup language</pre>
+
+<h2>Why markitdown-rs</h2>
+<div class="grid">
+  <div class="card"><h3>Drop-in</h3><p>Same command, same flags, same Markdown. Every test file is checked byte for byte against Python markitdown 0.1.9.</p></div>
+  <div class="card"><h3>One small binary</h3><p>A 4.5 MB binary instead of a 328 MB Python environment with pdfminer, pandas, mammoth, magika and onnxruntime.</p></div>
+  <div class="card"><h3>Fast</h3><p>23–112× faster end to end; a 100-page PDF in 0.18 s instead of 5.9 s.</p></div>
+  <div class="card"><h3>Every local format</h3><p>PDF, DOCX, PPTX, XLSX, XLS, HTML, EPUB, Outlook MSG, CSV, ZIP, RSS, Jupyter, text, images and audio metadata, plus http(s) URLs, Wikipedia and YouTube pages.</p></div>
+</div>
+
+<h2>Benchmarks</h2>
+<table>
+<thead><tr><th>File</th><th class="num">Python markitdown</th><th class="num">markitdown-rs</th><th class="num">Speedup</th></tr></thead>
+<tbody>
+<tr><td>markitdown <code>test.docx</code></td><td class="num">572.9 ms</td><td class="num">5.1 ms</td><td class="num">112×</td></tr>
+<tr><td><code>large.docx</code> (1000 sections)</td><td class="num">11,588.9 ms</td><td class="num">374.2 ms</td><td class="num">31×</td></tr>
+<tr><td>markitdown <code>test.pptx</code></td><td class="num">599.6 ms</td><td class="num">5.7 ms</td><td class="num">105×</td></tr>
+<tr><td><code>deck.pptx</code> (300 slides)</td><td class="num">1,573.5 ms</td><td class="num">69.9 ms</td><td class="num">23×</td></tr>
+<tr><td>markitdown <code>test.pdf</code></td><td class="num">649.4 ms</td><td class="num">7.0 ms</td><td class="num">93×</td></tr>
+<tr><td><code>report.pdf</code> (100 pages)</td><td class="num">5,864.0 ms</td><td class="num">180.3 ms</td><td class="num">33×</td></tr>
+</tbody>
+</table>
+<p>CLI wall time, median of repeated runs on an Apple M2 Max. Method and raw numbers: <a href="https://github.com/majiayu000/markitdown-rs#benchmarks">README</a>.</p>
+
+<h2>Compared with</h2>
+<table>
+<thead><tr><th></th><th>markitdown-rs</th><th>microsoft/markitdown</th><th>markitdown (crates.io)</th><th>xberg (kreuzberg)</th></tr></thead>
+<tbody>
+<tr><td>Output identical to markitdown</td><td>yes, tested</td><td>reference</td><td>no</td><td>no (own format)</td></tr>
+<tr><td>Install</td><td>one binary</td><td>pip + Python</td><td>cargo</td><td>pip / cargo / bindings</td></tr>
+<tr><td>Python needed</td><td>no</td><td>yes</td><td>no</td><td>no</td></tr>
+<tr><td>URL input</td><td>yes</td><td>yes</td><td>no</td><td>yes (feature flag)</td></tr>
+</tbody>
+</table>
+<p>Full table: <a href="https://github.com/majiayu000/markitdown-rs/blob/main/docs/comparison.md">docs/comparison.md</a>.</p>
+
+<footer>MIT licensed. An independent reimplementation, not affiliated with Microsoft.</footer>
+</main>
+</body>
+</html>

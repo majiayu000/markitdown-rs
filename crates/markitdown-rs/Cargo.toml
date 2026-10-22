@@ -1,11 +1,15 @@
 [package]
 name = "markitdown-rs"
-description = "Single-binary drop-in replacement for the Python markitdown CLI"
+description = "markitdown CLI in one binary: convert PDF, DOCX, PPTX, XLSX, HTML, EPUB and URLs to Markdown with the same output as Microsoft's markitdown, no Python"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["markdown", "pdf", "docx", "cli", "llm"]
+categories = ["command-line-utilities", "text-processing"]
 authors.workspace = true
 
 [[bin]]

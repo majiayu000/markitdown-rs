@@ -1,11 +1,15 @@
 [package]
 name = "markitdown-core"
-description = "Office documents to Markdown, byte-for-byte compatible with Python markitdown"
+description = "Convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and more to Markdown, byte-for-byte identical to Microsoft's Python markitdown"
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage.workspace = true
+readme = "../../README.md"
+keywords = ["markdown", "pdf", "docx", "xlsx", "llm"]
+categories = ["text-processing", "parser-implementations"]
 authors.workspace = true
 
 [dependencies]

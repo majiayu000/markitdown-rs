@@ -22,6 +22,14 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - run: cargo test --workspace --locked
 
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.88
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo check --workspace --locked
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -43,4 +51,6 @@ jobs:
         with:
           version: "0.9.21"
       - run: scripts/gen_snapshots.sh
-      - run: git status --porcelain tests/snapshots && test -z "$(git status --porcelain tests/snapshots)"
+      - run: uv run --project oracle --frozen python scripts/gen_url_snapshots.py
+      - run: uv run --project oracle --frozen python scripts/gen_html_cases.py
+      - run: git status --porcelain tests && test -z "$(git status --porcelain tests)"

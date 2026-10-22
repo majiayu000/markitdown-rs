@@ -8,6 +8,7 @@ edition = "2024"
 rust-version = "1.88"
 license = "MIT"
 repository = "https://github.com/majiayu000/markitdown-rs"
+homepage = "https://majiayu000.github.io/markitdown-rs/"
 authors = ["majiayu000 <1835304752@qq.com>"]
 
 [workspace.dependencies]

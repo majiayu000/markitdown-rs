@@ -1,22 +1,61 @@
 # markitdown-rs
 
-A single-binary, drop-in replacement for the [markitdown](https://github.com/microsoft/markitdown) CLI.
-It prints the **same bytes** as Python markitdown 0.1.8 for Word, PowerPoint,
-PDF, Excel, HTML, EPUB, Outlook and the other formats markitdown converts
-locally, **23–101×** faster end to end, with no Python runtime.
+[![CI](https://github.com/majiayu000/markitdown-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/majiayu000/markitdown-rs/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/majiayu000/markitdown-rs)](https://github.com/majiayu000/markitdown-rs/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-```console
-$ markitdown report.pdf > report.md        # same command, same output
+**markitdown-rs converts PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook
+and web pages to Markdown for LLMs and RAG pipelines.** It is Microsoft's
+[markitdown](https://github.com/microsoft/markitdown) CLI rewritten in Rust as
+one 4.5 MB binary: the same command and the **same Markdown, byte for byte**,
+without a Python environment, **23–112× faster**.
+
+```bash
+curl -L https://github.com/majiayu000/markitdown-rs/releases/latest/download/markitdown-v0.1.0-aarch64-apple-darwin.tar.gz | tar xz
+./markitdown-v0.1.0-aarch64-apple-darwin/markitdown report.pdf > report.md
 ```
 
-| | Python markitdown 0.1.8 | markitdown-rs |
-|---|---:|---:|
-| `report.pdf` (100 pages), CLI wall time | 5,987 ms | **172 ms** (35×) |
-| `large.docx` (1000 sections), CLI wall time | 13,922 ms | **256 ms** (54×) |
-| Peak memory, `report.pdf` / `large.docx` | 152 MB / 503 MB | **45 MB / 126 MB** |
-| Install size | 329 MB virtualenv | **3.1 MB** binary |
+Builds for macOS (Apple silicon and Intel) and Linux x86_64 are on the
+[releases page](https://github.com/majiayu000/markitdown-rs/releases); with
+Rust installed, `cargo install --git https://github.com/majiayu000/markitdown-rs markitdown-rs`.
 
-Measured on an Apple M2 Max; full numbers and method in [Benchmarks](#benchmarks).
+## Example
+
+A PDF form becomes a Markdown table, exactly as markitdown renders it
+(`tests/fixtures/pdf/gen-form-mixed.pdf`):
+
+```console
+$ markitdown order.pdf
+Purchase order summary
+| Item     | Qty | Unit price | Total |
+| -------- | --- | ---------- | ----- |
+| Widget 1 | 1   | 1.50       | 1.50  |
+| Widget 2 | 2   | 3.00       | 6.00  |
+| Widget 3 | 3   | 4.50       | 13.50 |
+...
+Thank you for your order.
+```
+
+URLs work too, with markitdown's Wikipedia and YouTube handling:
+
+```console
+$ markitdown https://en.wikipedia.org/wiki/Markdown | head -3
+# Markdown
+
+Plain text markup language
+```
+
+## markitdown-rs vs. the alternatives
+
+| | markitdown-rs | [microsoft/markitdown](https://github.com/microsoft/markitdown) | [markitdown (crates.io)](https://github.com/uhobnil/markitdown-rs) | [xberg](https://github.com/xberg-io/xberg) |
+|---|---|---|---|---|
+| Output identical to markitdown | **400 of 405 test files** | reference | 35 of 405 | not a goal |
+| Install | one binary | Python + pip (328 MB venv) | `cargo install` | pip / cargo / npm / ... |
+| Speed (CLI) | **23–112× markitdown** | 1× | – | – |
+| Formats | markitdown's local formats + URLs | all + OCR/LLM plugins, Azure | 9 | 107, OCR, layout models |
+
+Full feature-by-feature table, with how each number was measured:
+[docs/comparison.md](docs/comparison.md).
 
 ## Why
 
@@ -37,18 +76,20 @@ downstream.
 ## Compatibility
 
 Every fixture is converted by both implementations and compared byte for byte
-in `cargo test` (see [Parity testing](#parity-testing)): 402 files, plus the
-6,705 inputs of the html5lib tokenizer suite through the HTML converter.
+in `cargo test` against Python markitdown 0.1.9 (see
+[Parity testing](#parity-testing)): 407 files, the 6,705 inputs of the
+html5lib tokenizer suite through the HTML converter, and 13 pages converted as
+if fetched from Wikipedia, Bing and YouTube URLs.
 
 | Format | Fixtures | Identical to Python |
 |---|---:|---|
-| Word `.docx` | 70 | 67 of 68; 1 known difference; 2 files Python cannot convert |
+| Word `.docx` | 71 | 69 of 70; 1 known difference; 1 file Python cannot convert |
 | PowerPoint `.pptx` | 44 | 44 |
 | PDF | 67 | 67 |
 | Excel `.xlsx` | 50 | 49; 1 file Python cannot convert |
 | Excel `.xls` | 43 | 43 |
 | Outlook `.msg` | 38 | 35; 3 known differences |
-| HTML (and Wikipedia, Bing result pages) | 32 + 6,705 | all |
+| HTML (and Wikipedia, Bing, YouTube pages) | 36 + 6,705 + 13 | all |
 | EPUB | 6 | 6 |
 | ZIP (contents converted recursively) | 3 | 3 |
 | RSS / Atom | 12 | 12 |
@@ -57,11 +98,16 @@ in `cargo test` (see [Parity testing](#parity-testing)): 402 files, plus the
 | Plain text, Markdown, JSON, XML | 15 | 14; 1 known difference |
 | Images, audio (metadata via exiftool) | 7 | 7 |
 
+Sources are files and stdin as in markitdown, plus `http://` / `https://`
+URLs (with markitdown's `Accept` header and stream detection from the
+response), `file:` and `data:` URIs.
+
 What each converter covers:
 
-- **DOCX** follows mammoth: headings, bold/italic/underline/strike, lists,
-  tables with merged and nested cells, hyperlinks, footnotes and endnotes,
-  images, equations (OMML to LaTeX), text boxes, checkboxes and tracked changes.
+- **DOCX** follows mammoth 1.13: headings, bold/italic/underline/strike, lists,
+  tables with merged and nested cells, hyperlinks (including linked
+  pictures), footnotes and endnotes, images, equations (OMML to LaTeX), text
+  boxes, checkboxes and tracked changes.
 - **PPTX** follows python-pptx: titles, text in reading order, groups, tables,
   pictures, charts (bar, line, pie, area, radar, scatter, bubble) and notes.
 - **PDF** is a port of pdfminer.six and the parts of pdfplumber markitdown
@@ -74,8 +120,8 @@ What each converter covers:
 - **XLSX/XLS** follow pandas' `read_excel` (openpyxl/xlrd value conversion,
   dtype inference, `to_html`), one table per sheet.
 - **HTML** ports CPython's `html.parser`, BeautifulSoup's tree builder and
-  markdownify with markitdown's overrides; Wikipedia and Bing SERP pages get
-  their dedicated converters when the input URL says so.
+  markdownify with markitdown's overrides; Wikipedia, Bing and YouTube pages
+  get their dedicated converters when the source URL says so.
 - **MSG** reads the MAPI properties from the OLE container (code pages
   included); **EPUB** walks the OPF spine; **ZIP** converts every member.
 - **Images and audio** print exiftool metadata when exiftool is installed,
@@ -95,19 +141,21 @@ Known differences:
   short legacy 8-bit text and on Outlook messages that declare the wrong code
   page (`tests/known-diffs.txt`).
 - **Style maps embedded by mammoth** (a `mammoth/style-map` part) are ignored.
-- **Files where Python fails.** markitdown-rs converts some documents Python
-  rejects (e.g. a DOCX field-code `end` without a `begin`, [#2646](https://github.com/microsoft/markitdown/issues/2646))
-  and stops at 512 levels of XML nesting where Python hits its recursion limit.
+- **Files where Python fails.** Python hits its recursion limit on tables
+  nested 5000 deep; markitdown-rs stops at 512 levels of XML nesting with an
+  error. Wikipedia answers Python's default `python-requests` User-Agent with
+  HTTP 403; markitdown-rs sends its own and gets the page.
 
-Not supported: audio transcription, YouTube transcripts, fetching URLs (the CLI
-reads files and stdin), LLM image captions (`llm_client`), Azure Document
-Intelligence / Content Understanding (`-d`, `--use-cu`), OCR and other plugins
-(`-p`), and the Python API's `style_map` argument. Like markitdown, legacy
-`.doc` and `.ppt` files are not converted.
+Not supported: YouTube transcripts and audio transcription, LLM image captions
+(`llm_client`), Azure Document Intelligence / Content Understanding (`-d`,
+`--use-cu`), OCR and other plugins (`-p`), and the Python API's `style_map`
+argument. Like markitdown, legacy `.doc` and `.ppt` files are not converted.
 
 ## Install
 
-From source (Rust 1.88+):
+Prebuilt binaries for macOS (arm64, x86_64) and Linux (x86_64) are attached to
+each [release](https://github.com/majiayu000/markitdown-rs/releases), with
+SHA-256 sums. From source (Rust 1.88+):
 
 ```bash
 cargo install --git https://github.com/majiayu000/markitdown-rs markitdown-rs
@@ -119,8 +167,8 @@ or from a checkout:
 cargo install --path crates/markitdown-rs
 ```
 
-Both install a `markitdown` binary. Prebuilt binaries, Homebrew and crates.io
-releases are not published yet.
+Both install a `markitdown` binary. Homebrew and crates.io packages are not
+published yet.
 
 ## Usage
 
@@ -133,6 +181,7 @@ markitdown [filename] [-o OUTPUT] [-x EXTENSION] [-m MIME_TYPE] [-c CHARSET] [--
 ```bash
 markitdown report.pdf                   # Markdown on stdout
 markitdown book.xlsx -o book.md         # write to a file (no trailing newline, like Python)
+markitdown https://example.com/a.docx   # fetch a URL
 cat report.docx | markitdown -x docx    # stdin, with an extension hint
 markitdown --keep-data-uris report.docx # keep images as full base64 data URIs
 ```
@@ -141,7 +190,7 @@ As in markitdown, the format comes from the hints (extension, MIME type,
 charset) and from the file contents, and converters are tried in markitdown's
 order until one succeeds.
 
-As a library:
+As a library (`markitdown-core`, no network code):
 
 ```rust
 use markitdown_core::{StreamInfo, convert};
@@ -151,10 +200,10 @@ let md = convert(&data, &StreamInfo::from_path("report.pdf"), &Default::default(
 
 ## Benchmarks
 
-Python markitdown 0.1.8 (CPython 3.12.12, versions pinned in `oracle/uv.lock`)
+Python markitdown 0.1.9 (CPython 3.12.12, versions pinned in `oracle/uv.lock`)
 against `markitdown-rs` 0.1.0 (release build, rustc 1.99.1) on the same
 machine, run back to back on 2026-10-22: Apple M2 Max, 12 cores, macOS 26.5.
-The machine was shared with other jobs (load average 8–18), so treat wall
+The machine was shared with other jobs (load average 16–47), so treat wall
 times as indicative; CPU times track them closely. Raw output:
 [`bench/results-2026-10-22.txt`](bench/results-2026-10-22.txt).
 
@@ -163,31 +212,31 @@ and `report.pdf`: 3):
 
 | File | Python wall / CPU (ms) | markitdown-rs wall / CPU (ms) | Speedup (wall) |
 |---|---:|---:|---:|
-| markitdown `test.docx` (136 KB) | 512.3 / 565.4 | 5.2 / 3.9 | 98× |
-| `medium.docx` (50 sections) | 988.9 / 1,035.3 | 22.3 / 20.9 | 44× |
-| `large.docx` (1000 sections) | 13,921.7 / 11,395.8 | 255.7 / 253.0 | 54× |
-| markitdown `test.pptx` (278 KB) | 546.5 / 602.7 | 5.7 / 4.3 | 96× |
-| `deck.pptx` (300 slides) | 1,546.4 / 1,588.5 | 67.4 / 65.6 | 23× |
-| markitdown `test.pdf` (93 KB) | 645.0 / 695.2 | 6.4 / 5.2 | 101× |
-| `report.pdf` (100 pages, 20 with tables) | 5,986.9 / 6,011.4 | 172.4 / 170.1 | 35× |
+| markitdown `test.docx` (136 KB) | 572.9 / 632.0 | 5.1 / 3.9 | 112× |
+| `medium.docx` (50 sections) | 1,084.9 / 1,143.5 | 22.3 / 20.8 | 49× |
+| `large.docx` (1000 sections) | 11,588.9 / 11,221.9 | 374.2 / 301.1 | 31× |
+| markitdown `test.pptx` (278 KB) | 599.6 / 627.4 | 5.7 / 4.5 | 105× |
+| `deck.pptx` (300 slides) | 1,573.5 / 1,580.5 | 69.9 / 66.6 | 23× |
+| markitdown `test.pdf` (93 KB) | 649.4 / 686.1 | 7.0 / 5.2 | 93× |
+| `report.pdf` (100 pages, 20 with tables) | 5,864.0 / 5,893.1 | 180.3 / 174.4 | 33× |
 
-In process, warm, excluding Python's 401 ms import (median of 5 Python and 10
+In process, warm, excluding Python's 412 ms import (median of 5 Python and 10
 Rust runs):
 
 | File | Python (ms) | markitdown-rs (ms) | Speedup |
 |---|---:|---:|---:|
-| markitdown `test.docx` | 24.2 | 1.3 | 18× |
-| `medium.docx` | 531.0 | 18.1 | 29× |
-| `large.docx` | 10,183.5 | 246.5 | 41× |
-| markitdown `test.pptx` | 25.6 | 1.6 | 16× |
-| `deck.pptx` | 1,065.0 | 57.6 | 18× |
-| markitdown `test.pdf` | 124.8 | 2.0 | 62× |
-| `report.pdf` | 5,626.6 | 164.9 | 34× |
+| markitdown `test.docx` | 22.9 | 2.1 | 11× |
+| `medium.docx` | 507.9 | 18.1 | 28× |
+| `large.docx` | 12,265.4 | 243.0 | 50× |
+| markitdown `test.pptx` | 13.3 | 1.5 | 9× |
+| `deck.pptx` | 919.2 | 55.2 | 17× |
+| markitdown `test.pdf` | 116.4 | 2.0 | 57× |
+| `report.pdf` | 7,545.4 | 157.1 | 48× |
 
-Peak RSS: `large.docx` Python 502,677,504 bytes, markitdown-rs 125,714,432;
-`report.pdf` Python 152,322,048, markitdown-rs 44,957,696. The `markitdown`
-binary is 3,098,960 bytes; the virtualenv with every markitdown extra used
-here is 329 MB.
+Peak RSS: `large.docx` Python 504,446,976 bytes, markitdown-rs 130,924,544;
+`report.pdf` Python 156,663,808, markitdown-rs 45,023,232. The `markitdown`
+binary is 4,524,288 bytes; the virtualenv with the markitdown extras used here
+is 328 MB.
 
 All benchmark outputs were checked to be byte-identical before timing. To
 reproduce (needs [uv](https://docs.astral.sh/uv/) and Rust):
@@ -201,12 +250,14 @@ the release binary and prints every table above.
 
 ## Parity testing
 
-- `oracle/` is a uv project pinning markitdown 0.1.8 and its dependencies
-  (mammoth 1.11.0, pdfminer.six, pdfplumber, pandas, openpyxl, xlrd,
+- `oracle/` is a uv project pinning markitdown 0.1.9 and its dependencies
+  (mammoth 1.13.0, pdfminer.six, pdfplumber, pandas, openpyxl, xlrd,
   markdownify 1.2.3, python-pptx 1.0.2, ...).
 - `scripts/gen_snapshots.sh` runs the Python CLI on every file in
   `tests/fixtures/` and stores its stdout in `tests/snapshots/` (or the error
   when Python fails, in which case markitdown-rs only has to not crash).
+  `scripts/gen_url_snapshots.py` does the same for `tests/url/cases.tsv`,
+  converting fixtures with the stream info of a URL response.
 - `cargo test` converts every fixture and compares with the snapshot byte for
   byte. Accepted differences are listed with a reason in
   `tests/known-diffs.txt`; the test fails if a listed file starts matching.
@@ -233,8 +284,8 @@ crates/markitdown-core      library
   pdf/                      pdfminer.six (parser, fonts, CMaps, layout) and pdfplumber words
   sheet/                    openpyxl/xlrd values, pandas frames and to_html
   html/, markdownify.rs     html.parser + BeautifulSoup tree, markdownify
-  epub.rs, msg.rs, rss.rs, zipfile.rs, plain.rs, media.rs
-crates/markitdown-rs        the `markitdown` binary
+  youtube.rs, epub.rs, msg.rs, rss.rs, zipfile.rs, plain.rs, media.rs
+crates/markitdown-rs        the `markitdown` binary (URL fetching lives here)
 ```
 
 PDF data tables (glyph names, standard-14 metrics, CJK CMaps) are generated
@@ -249,4 +300,4 @@ pdfplumber (MIT), pandas (BSD-3-Clause), openpyxl (MIT), xlrd (BSD),
 BeautifulSoup (MIT) and CPython (PSF); the OMML conversion follows
 markitdown's adaptation of dwml, and the `w:sym` table is generated from
 mammoth's. The CMap data comes from pdfminer.six, which derives it from
-Adobe's CMap resources (BSD-3-Clause).
+Adobe's CMap resources (BSD-3-Clause). Not affiliated with Microsoft.

@@ -1,4 +1,7 @@
-# Snapshots are compared byte for byte; never convert their line endings.
+# Fixtures, URL cases and snapshots are compared byte for byte; never convert
+# their line endings (generated PDFs are plain ASCII with byte offsets).
+tests/fixtures/** -text
+tests/url/** -text
 tests/snapshots/** -text
 *.docx binary
 *.pptx binary

@@ -60,6 +60,24 @@ fn normalize_charset(c: &str) -> String {
     }
 }
 
+/// Sample 64 KiB, completing a split UTF-8 character with at most three
+/// extra bytes. Leave invalid UTF-8 unchanged for legacy charset detection.
+fn charset_sample(data: &[u8]) -> &[u8] {
+    let sample = &data[..data.len().min(65536)];
+    if let Err(error) = std::str::from_utf8(sample)
+        && error.error_len().is_none()
+    {
+        for end in sample.len() + 1..=data.len().min(sample.len() + 3) {
+            match std::str::from_utf8(&data[error.valid_up_to()..end]) {
+                Ok(_) => return &data[..end],
+                Err(error) if error.error_len().is_some() => break,
+                Err(_) => {}
+            }
+        }
+    }
+    sample
+}
+
 fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
     let mut enhanced = base.clone();
     if base.mimetype.is_none()
@@ -75,9 +93,7 @@ fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
     let Some(s) = detect::identify(data) else {
         return vec![enhanced];
     };
-    let charset = s
-        .is_text
-        .then(|| text::detect(&data[..data.len().min(65536)]));
+    let charset = s.is_text.then(|| text::detect(charset_sample(data)));
     let guessed_ext = s.extensions.first().map(|e| format!(".{e}"));
     let compatible = base.mimetype.as_deref().is_none_or(|m| m == s.mimetype)
         && base
@@ -128,5 +144,61 @@ pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<String,
         ))
     } else {
         Err(Error::Conversion(failures.join("; ")))
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::charset_sample;
+
+    const LIMIT: usize = 65536;
+
+    #[test]
+    fn charset_sample_completes_each_utf8_split() {
+        for ch in ['é', '€', '😀'] {
+            for split in 1..ch.len_utf8() {
+                let mut input = "a".repeat(LIMIT - split);
+                input.push(ch);
+                let end = input.len();
+                // Do not include another character or inspect the whole input.
+                let mut data = input.into_bytes();
+                data.extend_from_slice(b"\xfftail");
+                let sample = charset_sample(&data);
+                assert_eq!(sample, &data[..end], "{ch:?}, split {split}");
+                assert!(std::str::from_utf8(sample).is_ok());
+                assert!(sample.len() <= LIMIT + 3);
+            }
+        }
+    }
+
+    #[test]
+    fn charset_sample_keeps_complete_samples_bounded() {
+        for len in [0, LIMIT - 1, LIMIT, LIMIT + 1] {
+            let data = vec![b'a'; len];
+            assert_eq!(charset_sample(&data), &data[..len.min(LIMIT)]);
+        }
+        let mut data = "a".repeat(LIMIT - 'é'.len_utf8());
+        data.push('é');
+        data.push('€');
+        assert_eq!(charset_sample(data.as_bytes()), &data.as_bytes()[..LIMIT]);
+    }
+
+    #[test]
+    fn charset_sample_preserves_invalid_and_truncated_samples() {
+        // Invalid interior bytes, invalid completion bytes, and EOF before
+        // completion must still reach the existing charset detector unchanged.
+        for (tail, prefix) in [
+            (&b"\xff\xc3\xa9"[..], LIMIT - 2),
+            (&b"\xc3x"[..], LIMIT - 1),
+            (&b"\xf0\x80\x80\x80"[..], LIMIT - 1),
+            (&b"\xed\xa0\x80"[..], LIMIT - 1),
+            (&b"\xe2\x82"[..], LIMIT - 1),
+            (&b"\xf0\x9f\x98"[..], LIMIT - 1),
+            (&b"\xc3"[..], LIMIT - 1),
+        ] {
+            let mut data = vec![b'a'; prefix];
+            data.extend_from_slice(tail);
+            assert_eq!(charset_sample(&data), &data[..data.len().min(LIMIT)]);
+        }
     }
 }

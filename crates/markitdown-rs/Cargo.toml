@@ -17,5 +17,5 @@ name = "markitdown"
 path = "src/main.rs"
 
 [dependencies]
-markitdown-core.workspace = true
-ureq = "3.5"
+markitdown-core = { workspace = true, features = ["fetch"] }
+serde_json = "1"

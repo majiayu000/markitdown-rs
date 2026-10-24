@@ -1,7 +1,8 @@
 //! `markitdown` command line, compatible with the Python CLI.
 
-mod fetch;
+mod mcp;
 
+use markitdown_core::fetch;
 use markitdown_core::{Options, StreamInfo};
 use std::io::{Read, Write};
 use std::process::ExitCode;
@@ -11,6 +12,8 @@ const USAGE: &str =
                   [--keep-data-uris] [filename]
 
 Convert various file formats to markdown.
+
+`markitdown mcp` runs an MCP server on stdio instead (tool: convert_to_markdown).
 
 FILENAME can be a path, an http(s):// URL, a file: URI or a data: URI.
 If FILENAME is empty, markitdown reads from stdin.
@@ -105,13 +108,7 @@ fn run() -> Result<(), String> {
     // the source's own stream info (path, URL response or data URI), then
     // the -x/-m/-c hints on top
     let (data, mut info) = match &args.filename {
-        Some(f) => match fetch::uri_scheme(f) {
-            Some(scheme) => fetch::load_uri(f, scheme)?,
-            None => (
-                std::fs::read(f).map_err(|e| format!("{f}: {e}"))?,
-                StreamInfo::from_path(f),
-            ),
-        },
+        Some(f) => fetch::load(f).map_err(|e| e.to_string())?,
         None => {
             let mut buf = Vec::new();
             std::io::stdin()
@@ -168,7 +165,17 @@ fn run() -> Result<(), String> {
 }
 
 fn main() -> ExitCode {
-    match run() {
+    // `markitdown mcp`, unless a file of that name is meant
+    let mut args = std::env::args().skip(1);
+    let result = if args.next().as_deref() == Some("mcp")
+        && args.next().is_none()
+        && !std::path::Path::new("mcp").exists()
+    {
+        mcp::serve()
+    } else {
+        run()
+    };
+    match result {
         Ok(()) => ExitCode::SUCCESS,
         Err(e) => {
             eprintln!("markitdown: {e}");

@@ -382,6 +382,7 @@ dependencies = [
  "quick-xml 0.37.5",
  "serde_json",
  "sha2",
+ "ureq",
  "zip",
 ]
 
@@ -390,7 +391,7 @@ name = "markitdown-rs"
 version = "0.1.0"
 dependencies = [
  "markitdown-core",
- "ureq",
+ "serde_json",
 ]
 
 [[package]]

@@ -14,6 +14,8 @@ mod detect;
 mod docx;
 mod dom;
 mod epub;
+#[cfg(feature = "fetch")]
+pub mod fetch;
 mod formats;
 mod html;
 mod markdownify;

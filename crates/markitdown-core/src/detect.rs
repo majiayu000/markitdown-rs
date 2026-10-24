@@ -27,6 +27,19 @@ pub fn identify(data: &[u8]) -> Option<Sniff> {
     if data.is_empty() {
         return None;
     }
+    // magika does not run its model on fewer than 8 bytes (after stripping
+    // leading whitespace from the first 4096): UTF-8 is text, else unknown
+    let block = &data[..data.len().min(4096)];
+    let start = block
+        .iter()
+        .position(|&b| !matches!(b, b' ' | b'\t' | b'\n' | b'\r' | 0x0b | 0x0c))
+        .unwrap_or(block.len());
+    if data.len() < 8 || block.len() - start < 8 {
+        let few = if data.len() < 8 { data } else { block };
+        return std::str::from_utf8(few)
+            .is_ok()
+            .then(|| sniff("text/plain", &["txt"], true));
+    }
     // readers accept the header anywhere in the first 1024 bytes, and so
     // does magika's model
     if data[..data.len().min(1024)]

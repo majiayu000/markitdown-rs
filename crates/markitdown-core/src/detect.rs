@@ -49,6 +49,12 @@ pub fn identify(data: &[u8]) -> Option<Sniff> {
         return Some(sniff("application/pdf", &["pdf"], false));
     }
     if data.starts_with(b"PK\x03\x04") {
+        // an unreadable "zip" that is really text is text to magika
+        if Archive::new(data).is_err()
+            && let Some(text) = identify_text(data)
+        {
+            return Some(text);
+        }
         return Some(identify_zip(data));
     }
     if data.starts_with(b"\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1") {

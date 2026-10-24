@@ -3,3 +3,5 @@
 /bench/corpus
 /bench/out
 __pycache__/
+/crates/markitdown-py/.venv
+/crates/markitdown-py/target

@@ -53,6 +53,7 @@ Plain text markup language
 | Install | one binary | Python + pip (328 MB venv) | `cargo install` | pip / cargo / npm / ... |
 | Speed (CLI) | **23–112× markitdown** | 1× | – | – |
 | Formats | markitdown's local formats + URLs | all + OCR/LLM plugins, Azure | 9 | 107, OCR, layout models |
+| MCP server / Python API | `markitdown mcp` / `from markitdown import MarkItDown` | `markitdown-mcp` / yes | no / no | yes / yes |
 
 Full feature-by-feature table, with how each number was measured:
 [docs/comparison.md](docs/comparison.md).
@@ -190,13 +191,50 @@ As in markitdown, the format comes from the hints (extension, MIME type,
 charset) and from the file contents, and converters are tried in markitdown's
 order until one succeeds.
 
-As a library (`markitdown-core`, no network code):
+As a library (`markitdown-core`; URL loading is the optional `fetch` feature):
 
 ```rust
 use markitdown_core::{StreamInfo, convert};
 let data = std::fs::read("report.pdf")?;
 let md = convert(&data, &StreamInfo::from_path("report.pdf"), &Default::default())?;
 ```
+
+### MCP server
+
+`markitdown mcp` serves the [Model Context Protocol](https://modelcontextprotocol.io)
+on stdio with the same tool as microsoft/markitdown-mcp:
+`convert_to_markdown(uri)` for `http:`, `https:`, `file:` and `data:` URIs
+(local paths work too). Logs go to stderr. For Claude Desktop or any MCP
+client:
+
+```json
+{ "mcpServers": { "markitdown": { "command": "markitdown", "args": ["mcp"] } } }
+```
+
+Tool name, input and output schemas, result shape and error messages match
+markitdown-mcp 0.0.1a8; `serverInfo.version` is markitdown-rs's version, and
+argument validation errors leave out pydantic's details. HTTP/SSE transport
+(`--http`) is not implemented.
+
+### Python
+
+`crates/markitdown-py` builds a `markitdown` module with markitdown's API on
+top of the same converters (PyO3 + maturin; not on PyPI yet):
+
+```python
+from markitdown import MarkItDown
+
+result = MarkItDown().convert("report.pdf")   # path, URL, file:/data: URI, stream, requests.Response
+print(result.markdown)                        # or result.text_content
+```
+
+`convert`, `convert_local`, `convert_stream`, `convert_uri`,
+`convert_response`, `StreamInfo` and the exception classes follow
+markitdown 0.1.9; results are byte-identical to the CLI. `result.title` is
+always `None`, HTTP failures raise `markitdown.HTTPError` (an `OSError`)
+instead of `requests.HTTPError`, and plugins, `llm_client` and Azure options
+raise `NotImplementedError`. Build instructions:
+[crates/markitdown-py/README.md](crates/markitdown-py/README.md).
 
 ## Benchmarks
 
@@ -285,7 +323,8 @@ crates/markitdown-core      library
   sheet/                    openpyxl/xlrd values, pandas frames and to_html
   html/, markdownify.rs     html.parser + BeautifulSoup tree, markdownify
   youtube.rs, epub.rs, msg.rs, rss.rs, zipfile.rs, plain.rs, media.rs
-crates/markitdown-rs        the `markitdown` binary (URL fetching lives here)
+crates/markitdown-rs        the `markitdown` binary and `markitdown mcp`
+crates/markitdown-py        the `markitdown` Python module (PyO3, maturin)
 ```
 
 PDF data tables (glyph names, standard-14 metrics, CJK CMaps) are generated

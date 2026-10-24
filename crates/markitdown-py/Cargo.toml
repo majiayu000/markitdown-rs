@@ -1,0 +1,25 @@
+[package]
+name = "markitdown-py"
+description = "Python bindings of markitdown-rs (the `markitdown` module), built with maturin"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT"
+repository = "https://github.com/majiayu000/markitdown-rs"
+publish = false
+
+# Not a member of the root workspace: building it needs Python and maturin.
+[workspace]
+
+[lib]
+name = "_markitdown_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+markitdown-core = { path = "../markitdown-core", features = ["fetch"] }
+pyo3 = { version = "0.27", features = ["extension-module", "abi3-py310"] }
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+strip = true

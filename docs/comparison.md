@@ -44,15 +44,16 @@ CLI and compares with Python markitdown 0.1.9's output byte for byte
 | LLM image captions | no | yes (`llm_client`) | yes (`llm_client`) *README* | yes (VLM backends) | AI cleanup pass |
 | Azure Document Intelligence | no | yes | no | not stated | no |
 | Plugins | no | yes | no | yes (OCR backends) | no |
-| Python API | no (CLI or Rust library) | yes | no | yes | no |
+| Python API | yes: `from markitdown import MarkItDown`, same API (PyO3 build; not on PyPI yet) | yes | no | yes | no |
 | Rust library | yes (`markitdown-core`) | no | yes | yes | no |
-| MCP server | no | yes (`markitdown-mcp`) | no | yes | no |
+| MCP server | yes: `markitdown mcp` (stdio), same tool as markitdown-mcp | yes (`markitdown-mcp`, stdio and HTTP) | no | yes | no |
 | GUI | no | no | no | no | yes |
 
 ## When to use which
 
-- **You call `markitdown` from a shell, CI job, container or non-Python
-  service** and want the same Markdown without shipping Python: markitdown-rs.
+- **You call `markitdown` from a shell, CI job, container, agent (MCP) or
+  Python code** and want the same Markdown without markitdown's dependency
+  stack: markitdown-rs.
 - **You need OCR, LLM captions, Azure or plugins**: Python markitdown (or
   MDFlux for a desktop app with OCR).
 - **You need layout-model PDF parsing, many more formats or bindings in other

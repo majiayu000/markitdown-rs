@@ -1,0 +1,25 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "markitdown-rs"
+description = "Microsoft's markitdown Python API backed by Rust: same `markitdown` module, same Markdown output, no heavy dependencies"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = ["markdown", "pdf", "docx", "llm", "rag"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Rust",
+  "Topic :: Text Processing :: Markup :: Markdown",
+]
+dynamic = ["version"]
+
+[project.urls]
+Source = "https://github.com/majiayu000/markitdown-rs"
+
+[tool.maturin]
+python-source = "python"
+module-name = "markitdown._markitdown_rs"
+features = ["pyo3/extension-module"]

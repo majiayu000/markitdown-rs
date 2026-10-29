@@ -11,7 +11,7 @@ one 4.5 MB binary: the same command and the **same Markdown, byte for byte**,
 without a Python environment, **23–112× faster**.
 
 ```bash
-cargo install markitdown-rs        # installs the `markitdown` binary
+brew install majiayu000/tap/markitdown-rs   # or: cargo install markitdown-rs
 markitdown report.pdf > report.md
 ```
 
@@ -155,6 +155,12 @@ argument. Like markitdown, legacy `.doc` and `.ppt` files are not converted.
 
 ## Install
 
+With Homebrew (macOS, Linux x86_64):
+
+```bash
+brew install majiayu000/tap/markitdown-rs
+```
+
 From [crates.io](https://crates.io/crates/markitdown-rs) (Rust 1.88+):
 
 ```bash
@@ -171,8 +177,7 @@ curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.0/mar
 ```
 
 From a checkout: `cargo install --path crates/markitdown-rs`. All of these
-install a binary named `markitdown`. Homebrew and PyPI packages are not
-published yet.
+install a binary named `markitdown`. The PyPI package is not published yet.
 
 ## Usage
 

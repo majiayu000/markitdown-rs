@@ -170,7 +170,10 @@ mod tests {
     #[test]
     fn errors_read_like_markitdown_mcp() {
         let e = std::io::Error::from_raw_os_error(2);
-        assert_eq!(strerror(&e), "No such file or directory");
+        if cfg!(unix) {
+            assert_eq!(strerror(&e), "No such file or directory");
+        }
+        assert!(!strerror(&e).contains("os error"));
         let r = call_tool(&json!({"name": "nope", "arguments": {}}));
         assert_eq!(r["content"][0]["text"], "Unknown tool: nope");
         assert_eq!(r["isError"], true);

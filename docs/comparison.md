@@ -11,9 +11,9 @@ that was possible, and otherwise taken from its README (marked *README*).
 |---|---|---|---|---|---|
 | What it is | markitdown's CLI and converters in one Rust binary | the reference: Python library + CLI | Rust library + CLI inspired by markitdown | document-intelligence platform with a Rust core | desktop app around Python markitdown |
 | GitHub stars | new | 191,550 | 76 | 9,437 | 568 |
-| Latest release | v0.1.0 | v0.1.9 (2026-10-21) | 0.1.11 (2026-04-22) | v1.3.10 (2026-10-13) | v0.3.0 (2026-08-23) |
+| Latest release | v0.2.0 | v0.1.9 (2026-10-21) | 0.1.11 (2026-04-22) | v1.3.10 (2026-10-13) | v0.3.0 (2026-08-23) |
 | License | MIT | MIT | MIT | MIT | MIT |
-| Install | one binary (or `cargo install`) | `pip install 'markitdown[all]'` + Python 3.10+ | `cargo install markitdown` (needs `--locked` today: unlocked, its `calamine` dependency no longer compiles) | pip, npm, cargo, Go, Java and more; Docker | Windows/Linux zip; sets up its own Python on first run |
+| Install | one binary, or `cargo install markitdown-rs` | `pip install 'markitdown[all]'` + Python 3.10+ | `cargo install markitdown` (needs `--locked` today: unlocked, its `calamine` dependency no longer compiles) | pip, npm, cargo, Go, Java and more; Docker | Windows/Linux zip; sets up its own Python on first run |
 | Runtime dependencies | none | Python 3.10–3.14 and 46 packages for the docx/pptx/xlsx/xls/pdf/outlook extras, incl. magika + onnxruntime (328 MB virtualenv) | none | native library per binding; ONNX models for layout/OCR features | bundled Python + markitdown |
 | Output identical to markitdown | **400 of 405 test files** (5 documented differences) | reference | 35 of 405 (164 files fail to convert) | not a goal (own Markdown) | same engine as markitdown, plus optional cleanup |
 | Speed vs markitdown (CLI) | **23–112× faster** | 1× | not measured | not measured | same engine |

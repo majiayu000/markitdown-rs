@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.majiayu000/markitdown-rs",
+  "title": "markitdown-rs",
+  "description": "Convert PDF, Word, Excel, PowerPoint, HTML, EPUB and URLs to Markdown; markitdown-mcp in Rust",
+  "repository": {
+    "url": "https://github.com/majiayu000/markitdown-rs",
+    "source": "github"
+  },
+  "websiteUrl": "https://majiayu000.github.io/markitdown-rs/",
+  "version": "0.2.0",
+  "packages": [
+    {
+      "registryType": "cargo",
+      "registryBaseUrl": "https://crates.io",
+      "identifier": "markitdown-rs",
+      "version": "0.2.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        }
+      ]
+    }
+  ]
+}

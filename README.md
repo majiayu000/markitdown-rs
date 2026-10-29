@@ -11,13 +11,14 @@ one 4.5 MB binary: the same command and the **same Markdown, byte for byte**,
 without a Python environment, **23–112× faster**.
 
 ```bash
-curl -L https://github.com/majiayu000/markitdown-rs/releases/latest/download/markitdown-v0.1.0-aarch64-apple-darwin.tar.gz | tar xz
-./markitdown-v0.1.0-aarch64-apple-darwin/markitdown report.pdf > report.md
+cargo install markitdown-rs        # installs the `markitdown` binary
+markitdown report.pdf > report.md
 ```
 
-Builds for macOS (Apple silicon and Intel) and Linux x86_64 are on the
-[releases page](https://github.com/majiayu000/markitdown-rs/releases); with
-Rust installed, `cargo install --git https://github.com/majiayu000/markitdown-rs markitdown-rs`.
+Prebuilt binaries for macOS (Apple silicon and Intel) and Linux x86_64 are on
+the [releases page](https://github.com/majiayu000/markitdown-rs/releases).
+It also runs as an MCP server for AI agents (`markitdown mcp`) and has a
+Python module with markitdown's API.
 
 ## Example
 
@@ -154,21 +155,23 @@ argument. Like markitdown, legacy `.doc` and `.ppt` files are not converted.
 
 ## Install
 
+From [crates.io](https://crates.io/crates/markitdown-rs) (Rust 1.88+):
+
+```bash
+cargo install markitdown-rs
+```
+
 Prebuilt binaries for macOS (arm64, x86_64) and Linux (x86_64) are attached to
 each [release](https://github.com/majiayu000/markitdown-rs/releases), with
-SHA-256 sums. From source (Rust 1.88+):
+SHA-256 sums:
 
 ```bash
-cargo install --git https://github.com/majiayu000/markitdown-rs markitdown-rs
+curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.0/markitdown-v0.2.0-aarch64-apple-darwin.tar.gz | tar xz
+./markitdown-v0.2.0-aarch64-apple-darwin/markitdown --version
 ```
 
-or from a checkout:
-
-```bash
-cargo install --path crates/markitdown-rs
-```
-
-Both install a `markitdown` binary. Homebrew and crates.io packages are not
+From a checkout: `cargo install --path crates/markitdown-rs`. All of these
+install a binary named `markitdown`. Homebrew and PyPI packages are not
 published yet.
 
 ## Usage
@@ -204,12 +207,28 @@ let md = convert(&data, &StreamInfo::from_path("report.pdf"), &Default::default(
 `markitdown mcp` serves the [Model Context Protocol](https://modelcontextprotocol.io)
 on stdio with the same tool as microsoft/markitdown-mcp:
 `convert_to_markdown(uri)` for `http:`, `https:`, `file:` and `data:` URIs
-(local paths work too). Logs go to stderr. For Claude Desktop or any MCP
-client:
+(local paths work too). Logs go to stderr, so stdout carries only JSON-RPC.
+
+Claude Code:
+
+```bash
+claude mcp add markitdown -- markitdown mcp
+```
+
+Claude Desktop (`claude_desktop_config.json`) and Cursor (`~/.cursor/mcp.json`,
+or `.cursor/mcp.json` in a project) use the same block:
 
 ```json
-{ "mcpServers": { "markitdown": { "command": "markitdown", "args": ["mcp"] } } }
+{
+  "mcpServers": {
+    "markitdown": { "command": "markitdown", "args": ["mcp"] }
+  }
+}
 ```
+
+Desktop apps may not see your shell's `PATH`; if the server does not start,
+use the full path from `which markitdown` (e.g. `~/.cargo/bin/markitdown`) as
+`command`.
 
 Tool name, input and output schemas, result shape and error messages match
 markitdown-mcp 0.0.1a8; `serverInfo.version` is markitdown-rs's version, and
@@ -218,8 +237,13 @@ argument validation errors leave out pydantic's details. HTTP/SSE transport
 
 ### Python
 
-`crates/markitdown-py` builds a `markitdown` module with markitdown's API on
-top of the same converters (PyO3 + maturin; not on PyPI yet):
+`crates/markitdown-py` builds a Python module with markitdown's API on top of
+the same converters (PyO3 + maturin). **It is not published to PyPI yet**;
+install it from source with maturin
+([crates/markitdown-py/README.md](crates/markitdown-py/README.md)). Its
+import name is `markitdown`, the same as Microsoft's package, so it cannot be
+installed in the same environment as `markitdown` from PyPI: use one or the
+other.
 
 ```python
 from markitdown import MarkItDown
@@ -233,8 +257,7 @@ print(result.markdown)                        # or result.text_content
 markitdown 0.1.9; results are byte-identical to the CLI. `result.title` is
 always `None`, HTTP failures raise `markitdown.HTTPError` (an `OSError`)
 instead of `requests.HTTPError`, and plugins, `llm_client` and Azure options
-raise `NotImplementedError`. Build instructions:
-[crates/markitdown-py/README.md](crates/markitdown-py/README.md).
+raise `NotImplementedError`.
 
 ## Benchmarks
 
@@ -340,3 +363,5 @@ BeautifulSoup (MIT) and CPython (PSF); the OMML conversion follows
 markitdown's adaptation of dwml, and the `w:sym` table is generated from
 mammoth's. The CMap data comes from pdfminer.six, which derives it from
 Adobe's CMap resources (BSD-3-Clause). Not affiliated with Microsoft.
+
+- MCP Registry name: `mcp-name: io.github.majiayu000/markitdown-rs`

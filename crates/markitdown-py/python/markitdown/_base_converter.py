@@ -1,4 +1,4 @@
-# Ported from microsoft/markitdown (MIT): the result type only.
+# Copied from microsoft/markitdown 0.1.9 (MIT).
 from typing import Any, BinaryIO, Optional
 from ._stream_info import StreamInfo
 
@@ -39,3 +39,68 @@ class DocumentConverterResult:
         """Return the converted Markdown text."""
         return self.markdown
 
+
+class DocumentConverter:
+    """Abstract superclass of all DocumentConverters."""
+
+    def accepts(
+        self,
+        file_stream: BinaryIO,
+        stream_info: StreamInfo,
+        **kwargs: Any,  # Options to pass to the converter
+    ) -> bool:
+        """
+        Return a quick determination on if the converter should attempt converting the document.
+        This is primarily based on `stream_info` (typically, `stream_info.mimetype`, `stream_info.extension`).
+        In cases where the data is retrieved via HTTP, the `stream_info.url` might also be referenced to
+        make a determination (e.g., special converters for Wikipedia, YouTube etc).
+        Finally, it is conceivable that the `stream_info.filename` might be used in cases
+        where the filename is well-known (e.g., `Dockerfile`, `Makefile`, etc)
+
+        NOTE: The method signature is designed to match that of the convert() method. This provides some
+        assurance that, if accepts() returns True, the convert() method will also be able to handle the document.
+
+        IMPORTANT: In rare cases, (e.g., OutlookMsgConverter) we need to read more from the stream to make a final
+        determination. Read operations inevitably advance the position in file_stream. In these cases, the position
+        MUST be reset before returning. This is because the convert() method may be called immediately
+        after accepts(), and will expect the file_stream to be at the original position.
+
+        E.g.,
+        cur_pos = file_stream.tell() # Save the current position
+        data = file_stream.read(100) # ... peek at the first 100 bytes, etc.
+        file_stream.seek(cur_pos)    # Reset the position to the original position
+
+        Parameters:
+        - file_stream: The file-like object to convert. Must support seek(), tell(), and read() methods.
+        - stream_info: The StreamInfo object containing metadata about the file (mimetype, extension, charset, etc.)
+        - kwargs: Additional keyword arguments for the converter.
+
+        Returns:
+        - bool: True if the converter can handle the document, False otherwise.
+        """
+        raise NotImplementedError(
+            f"The subclass, {type(self).__name__}, must implement the accepts() method to determine if they can handle the document."
+        )
+
+    def convert(
+        self,
+        file_stream: BinaryIO,
+        stream_info: StreamInfo,
+        **kwargs: Any,  # Options to pass to the converter
+    ) -> DocumentConverterResult:
+        """
+        Convert a document to Markdown text.
+
+        Parameters:
+        - file_stream: The file-like object to convert. Must support seek(), tell(), and read() methods.
+        - stream_info: The StreamInfo object containing metadata about the file (mimetype, extension, charset, etc.)
+        - kwargs: Additional keyword arguments for the converter.
+
+        Returns:
+        - DocumentConverterResult: The result of the conversion, which includes the title and markdown content.
+
+        Raises:
+        - FileConversionException: If the mimetype is recognized, but the conversion fails for some other reason.
+        - MissingDependencyException: If the converter requires a dependency that is not installed.
+        """
+        raise NotImplementedError("Subclasses must implement this method")

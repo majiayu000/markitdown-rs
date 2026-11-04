@@ -7,9 +7,14 @@
 Conversions return the same Markdown as microsoft/markitdown 0.1.9.
 """
 
-from ._markitdown_rs import __version__
-from ._markitdown import MarkItDown, HTTPError
-from ._base_converter import DocumentConverterResult
+from .__about__ import __version__
+from ._markitdown import (
+    MarkItDown,
+    HTTPError,
+    PRIORITY_SPECIFIC_FILE_FORMAT,
+    PRIORITY_GENERIC_FILE_FORMAT,
+)
+from ._base_converter import DocumentConverterResult, DocumentConverter
 from ._stream_info import StreamInfo
 from ._exceptions import (
     MarkItDownException,
@@ -22,6 +27,7 @@ from ._exceptions import (
 __all__ = [
     "__version__",
     "MarkItDown",
+    "DocumentConverter",
     "DocumentConverterResult",
     "MarkItDownException",
     "MissingDependencyException",
@@ -29,5 +35,7 @@ __all__ = [
     "FileConversionException",
     "UnsupportedFormatException",
     "StreamInfo",
+    "PRIORITY_SPECIFIC_FILE_FORMAT",
+    "PRIORITY_GENERIC_FILE_FORMAT",
     "HTTPError",
 ]

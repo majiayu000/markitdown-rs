@@ -5,6 +5,7 @@ markitdown's snapshots. Run from the repository root (see README):
 """
 
 import io
+import os
 import subprocess
 from pathlib import Path
 
@@ -42,9 +43,13 @@ FIXTURES = [
 ]
 
 
+# the snapshots come from a Python environment without exiftool
+NO_EXIFTOOL = {**os.environ, "EXIFTOOL_PATH": ""}
+
+
 @pytest.fixture(scope="module")
 def md():
-    return MarkItDown()
+    return MarkItDown(exiftool_path="")
 
 
 @pytest.fixture(autouse=True)
@@ -53,7 +58,9 @@ def at_root(monkeypatch):
 
 
 def cli(arg: str) -> bytes:
-    return subprocess.run([str(CLI), arg], check=True, capture_output=True).stdout
+    return subprocess.run(
+        [str(CLI), arg], check=True, capture_output=True, env=NO_EXIFTOOL
+    ).stdout
 
 
 @pytest.mark.parametrize("name", FIXTURES)

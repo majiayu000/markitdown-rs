@@ -5,3 +5,5 @@
 __pycache__/
 /crates/markitdown-py/.venv
 /crates/markitdown-py/target
+/crates/markitdown-py/python/markitdown/_markitdown_rs*.so
+/crates/markitdown-py/python/markitdown/_markitdown_rs*.pyd

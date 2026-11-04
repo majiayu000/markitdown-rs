@@ -1,7 +1,7 @@
 //! Plain text, CSV and Jupyter notebooks, as markitdown's PlainTextConverter,
 //! CsvConverter and IpynbConverter.
 
-use crate::{Error, StreamInfo, text};
+use crate::{Document, Error, StreamInfo, text};
 
 /// Decode with the stream charset (strict), else detect it.
 fn decode(data: &[u8], charset: Option<&str>) -> Result<String, Error> {
@@ -273,7 +273,7 @@ pub fn ipynb_accepts(data: &[u8], info: &StreamInfo) -> bool {
     false
 }
 
-pub fn convert_ipynb(data: &[u8], charset: Option<&str>) -> Result<String, Error> {
+pub fn convert_ipynb(data: &[u8], charset: Option<&str>) -> Result<Document, Error> {
     let enc = charset.unwrap_or("utf-8");
     let s = text::decode(data, enc)
         .ok_or_else(|| Error::Conversion(format!("cannot decode notebook as {enc}")))?;
@@ -281,8 +281,11 @@ pub fn convert_ipynb(data: &[u8], charset: Option<&str>) -> Result<String, Error
         .map_err(|e| Error::Conversion(format!("invalid notebook JSON: {e}")))?;
     let bad = || Error::Conversion("Error converting .ipynb file".into());
     let mut parts = Vec::new();
-    let cells = match nb.as_object().ok_or_else(bad)?.get("cells") {
-        None => return Ok(String::new()),
+    let nb = nb.as_object().ok_or_else(bad)?;
+    let mut title = None;
+    let empty = Vec::new();
+    let cells = match nb.get("cells") {
+        None => &empty,
         Some(serde_json::Value::Array(c)) => c,
         Some(_) => return Err(bad()),
     };
@@ -301,6 +304,18 @@ pub fn convert_ipynb(data: &[u8], charset: Option<&str>) -> Result<String, Error
                 .collect::<Result<String, _>>()?,
             Some(_) => return Err(bad()),
         };
+        // the first "# " heading line of a markdown cell (iterating a string
+        // source yields characters, which never match)
+        if cell_type == "markdown"
+            && title.is_none()
+            && let Some(serde_json::Value::Array(lines)) = cell.get("source")
+        {
+            title = lines
+                .iter()
+                .filter_map(|l| l.as_str())
+                .find_map(|l| l.strip_prefix("# "))
+                .map(|t| crate::pystr::strip(t).to_string());
+        }
         match cell_type {
             "markdown" => parts.push(source),
             "code" => parts.push(format!("```python\n{source}\n```")),
@@ -308,5 +323,20 @@ pub fn convert_ipynb(data: &[u8], charset: Option<&str>) -> Result<String, Error
             _ => {}
         }
     }
-    Ok(parts.join("\n\n"))
+    // the notebook metadata's title wins, even when null
+    if let Some(t) = nb
+        .get("metadata")
+        .and_then(|m| m.as_object())
+        .and_then(|m| m.get("title"))
+    {
+        title = match t {
+            serde_json::Value::Null => None,
+            serde_json::Value::String(s) => Some(s.clone()),
+            other => Some(other.to_string()),
+        };
+    }
+    Ok(Document {
+        markdown: parts.join("\n\n"),
+        title,
+    })
 }

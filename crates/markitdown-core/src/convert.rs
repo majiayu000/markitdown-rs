@@ -2,7 +2,7 @@
 //! content sniff), then offer the stream to each converter in markitdown's
 //! priority order until one accepts it and succeeds.
 
-use crate::{Error, Options, StreamInfo, detect, formats, text};
+use crate::{Document, Error, Options, StreamInfo, detect, formats, text};
 
 /// CPython's built-in `mimetypes` table (no system files) for the
 /// extensions the converters look at.
@@ -122,7 +122,7 @@ pub fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
     }
 }
 
-pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<String, Error> {
+pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<Document, Error> {
     let mut failures = Vec::new();
     let mut candidates = guesses(data, base);
     candidates.push(StreamInfo::default());

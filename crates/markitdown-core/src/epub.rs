@@ -3,7 +3,7 @@
 
 use crate::xml::{self, Element, Node, ParseOptions};
 use crate::zip::Archive;
-use crate::{Error, html, pystr, pyurl};
+use crate::{Document, Error, html, pystr, pyurl};
 
 fn parse(bytes: &[u8]) -> Result<Element, Error> {
     let opts = ParseOptions {
@@ -69,7 +69,7 @@ fn normpath(p: &str) -> String {
     }
 }
 
-pub fn convert(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
+pub fn convert(data: &[u8], keep_data_uris: bool) -> Result<Document, Error> {
     let mut zip = Archive::new(data)?;
     let missing = |p: &str| Error::MissingPart(p.to_string());
     let container = parse(
@@ -86,8 +86,9 @@ pub fn convert(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
         .to_string();
     let opf = parse(&zip.read(&opf_path)?.ok_or_else(|| missing(&opf_path))?)?;
     let first = |tag: &str| all_texts(&opf, tag).into_iter().next();
+    let title = first("dc:title");
     let metadata: Vec<(&str, Option<String>)> = vec![
-        ("Title", first("dc:title")),
+        ("Title", title.clone()),
         ("Authors", Some(all_texts(&opf, "dc:creator").join(", "))),
         ("Language", first("dc:language")),
         ("Publisher", first("dc:publisher")),
@@ -142,7 +143,8 @@ pub fn convert(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
     let mut parts = Vec::new();
     for file in spine {
         if let Some(bytes) = zip.read(&file)? {
-            parts.push(pystr::strip(&html::convert(&bytes, None, keep_data_uris)).to_string());
+            let md = html::convert(&bytes, None, keep_data_uris).markdown;
+            parts.push(pystr::strip(&md).to_string());
         }
     }
     let meta: Vec<String> = metadata
@@ -150,5 +152,8 @@ pub fn convert(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
         .filter_map(|(k, v)| v.filter(|v| !v.is_empty()).map(|v| format!("**{k}:** {v}")))
         .collect();
     parts.insert(0, meta.join("\n"));
-    Ok(parts.join("\n\n"))
+    Ok(Document {
+        markdown: parts.join("\n\n"),
+        title,
+    })
 }

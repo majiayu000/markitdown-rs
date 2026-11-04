@@ -70,6 +70,23 @@ impl StreamInfo {
     }
 }
 
+/// A converted document: its Markdown and, for formats that have one, the
+/// title markitdown reports (`DocumentConverterResult.title`).
+#[derive(Debug, Clone, Default, PartialEq)]
+pub struct Document {
+    pub markdown: String,
+    pub title: Option<String>,
+}
+
+impl From<String> for Document {
+    fn from(markdown: String) -> Self {
+        Document {
+            markdown,
+            title: None,
+        }
+    }
+}
+
 /// What a converter asks `Options::image_hook` about an embedded image.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ImageRequest {
@@ -147,8 +164,16 @@ impl std::error::Error for Error {}
 
 /// Convert a document to Markdown, as `MarkItDown().convert_stream(...)`.
 pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String, Error> {
-    let md = convert::convert(data, info, opts)?;
-    Ok(pystr::normalize_output(&md))
+    Ok(convert_document(data, info, opts)?.markdown)
+}
+
+/// `convert`, with the document's title.
+pub fn convert_document(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<Document, Error> {
+    let doc = convert::convert(data, info, opts)?;
+    Ok(Document {
+        markdown: pystr::normalize_output(&doc.markdown),
+        title: doc.title,
+    })
 }
 
 /// The built-in converters by name, in markitdown's trial order.
@@ -181,6 +206,6 @@ pub fn convert_with(
     data: &[u8],
     info: &StreamInfo,
     opts: &Options,
-) -> Result<String, Error> {
+) -> Result<Document, Error> {
     (converter(name)?.convert)(data, info, opts)
 }

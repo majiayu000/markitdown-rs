@@ -460,3 +460,28 @@ def test_markitdown_ocr_plugin(monkeypatch):
     # in presentations the LLM caption comes first and becomes the alt text
     r = md.convert(str(FIXTURES / "pptx/gen-groups-pictures.pptx")).markdown
     assert "![Scanned words image.png](PicturePlaceholder2.jpg)" in r
+
+
+@pytest.mark.parametrize(
+    "fixture,url,title",
+    [
+        ("html/markitdown-test_blog.html", None, "Does Model and Inference Parameter Matter in LLM Applications? - A Case Study for MATH | AutoGen"),
+        ("html/gen-youtube.html", "https://www.youtube.com/watch?v=5C_HPTJg5ek", "Rust in 100 Seconds"),
+        ("html/gen-youtube.html", "https://www.youtube.com/feed/trending", "Rust in 100 Seconds - YouTube"),
+        ("html/markitdown-test_wikipedia.html", "https://en.wikipedia.org/wiki/Microsoft", "Microsoft"),
+        ("html/gen-wikipedia-italic.html", "https://en.wikipedia.org/wiki/Homo_sapiens", "Homo sapiens (species)"),
+        ("html/markitdown-test_serp.html", "https://www.bing.com/search?q=microsoft+wikipedia", "Microsoft wikipedia - Search"),
+        ("rss/markitdown-test_rss.xml", None, "The Official Microsoft Blog"),
+        ("rss/gen-atom.atom", None, "Feed title"),
+        ("epub/markitdown-test.epub", None, "Test EPUB Document"),
+        ("ipynb/markitdown-test_notebook.ipynb", None, "Test Notebook Title"),
+        ("ipynb/gen-cells.ipynb", None, "Notebook title"),
+        ("msg/markitdown-test_outlook_msg.msg", None, "Test Email Message"),
+        ("html/gen-empty.html", None, None),
+        ("docx/markitdown-test.docx", None, None),
+    ],
+)
+def test_titles(fixture, url, title):
+    data = (FIXTURES / fixture).read_bytes()
+    info = StreamInfo(extension="." + fixture.rsplit(".", 1)[1], url=url)
+    assert MarkItDown().convert_stream(io.BytesIO(data), stream_info=info).title == title

@@ -66,10 +66,10 @@ class _NativeConverter(DocumentConverter):
     def _image_hook(self, kwargs: dict):
         return None
 
-    def _native_markdown(
+    def _native_result(
         self, data: bytes, stream_info: StreamInfo, **kwargs: Any
-    ) -> str:
-        status, text = _native.convert_with(
+    ) -> DocumentConverterResult:
+        status, text, title = _native.convert_with(
             self._native_name,
             data,
             _fields(stream_info),
@@ -80,7 +80,12 @@ class _NativeConverter(DocumentConverter):
         )
         if status != "ok":
             raise NativeConversionError(text)
-        return text
+        return DocumentConverterResult(markdown=text, title=title)
+
+    def _native_markdown(
+        self, data: bytes, stream_info: StreamInfo, **kwargs: Any
+    ) -> str:
+        return self._native_result(data, stream_info, **kwargs).markdown
 
     def convert(
         self,
@@ -88,8 +93,7 @@ class _NativeConverter(DocumentConverter):
         stream_info: StreamInfo,
         **kwargs: Any,
     ) -> DocumentConverterResult:
-        markdown = self._native_markdown(_read(file_stream), stream_info, **kwargs)
-        return DocumentConverterResult(markdown=markdown)
+        return self._native_result(_read(file_stream), stream_info, **kwargs)
 
 
 def _native_converter(name: str, doc: str) -> type:
@@ -430,7 +434,8 @@ class YouTubeConverter(_NativeConverter):
         **kwargs: Any,  # Options to pass to the converter
     ) -> DocumentConverterResult:
         data = _read(file_stream)
-        markdown = self._native_markdown(data, stream_info, **kwargs)
+        native = self._native_result(data, stream_info, **kwargs)
+        markdown = native.markdown
         # markitdown-rs gives "# YouTube\n" plus the metadata sections, or
         # the page as HTML when the page has none
         has_metadata = markdown.startswith("# YouTube\n")
@@ -479,9 +484,12 @@ class YouTubeConverter(_NativeConverter):
                 webpage_text += f"\n### Transcript\n{transcript_text}\n"
 
         if not webpage_text:
-            return DocumentConverterResult(markdown=markdown)
+            return native
 
-        return DocumentConverterResult(markdown="# YouTube\n" + webpage_text)
+        return DocumentConverterResult(
+            markdown="# YouTube\n" + webpage_text,
+            title=native.title if has_metadata else "",
+        )
 
     def _retry_operation(self, operation, retries=3, delay=2):
         """Retries the operation if it fails."""

@@ -49,6 +49,8 @@ fn outcome(result: Result<String, Error>) -> (&'static str, String) {
     }
 }
 
+type Outcome = (&'static str, String, Option<String>);
+
 /// Convert bytes with the given stream info (mimetype, extension, charset,
 /// filename, local_path, url) through every built-in converter. Returns
 /// ("ok", markdown), ("unsupported", message) or ("failed", message).
@@ -124,8 +126,8 @@ fn image_hook(hook: Py<PyAny>, raised: Arc<Mutex<Option<PyErr>>>) -> ImageHook {
     }))
 }
 
-/// Run one built-in converter: ("ok", markdown) or ("failed", message).
-/// An exception from `image_hook` is raised as is.
+/// Run one built-in converter: ("ok", markdown, title) or ("failed",
+/// message, None). An exception from `image_hook` is raised as is.
 #[pyfunction]
 #[pyo3(signature = (name, data, info, keep_data_uris=false, exiftool_path=None, image_hook=None))]
 fn convert_with(
@@ -136,7 +138,7 @@ fn convert_with(
     keep_data_uris: bool,
     exiftool_path: Option<String>,
     image_hook: Option<Py<PyAny>>,
-) -> PyResult<(&'static str, String)> {
+) -> PyResult<Outcome> {
     let info = stream_info(info);
     let raised = Arc::new(Mutex::new(None));
     let opts = Options {
@@ -148,7 +150,13 @@ fn convert_with(
     if let Some(e) = raised.lock().unwrap().take() {
         return Err(e);
     }
-    Ok(outcome(result))
+    Ok(match result {
+        Ok(doc) => ("ok", doc.markdown, doc.title),
+        Err(e) => {
+            let (status, message) = outcome(Err(e));
+            (status, message, None)
+        }
+    })
 }
 
 /// Read an http(s), file: or data: URI: (bytes, stream info dict). Raises

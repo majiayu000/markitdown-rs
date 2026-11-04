@@ -3,14 +3,14 @@
 //! and plain-text ones. Each `accepts` mirrors the Python converter's.
 
 use crate::{
-    Error, Options, StreamInfo, docx, epub, html, media, msg, pdf, plain, pptx, rss, sheet,
-    youtube, zipfile,
+    Document, Error, Options, StreamInfo, docx, epub, html, media, msg, pdf, plain, pptx, rss,
+    sheet, youtube, zipfile,
 };
 
 pub struct Converter {
     pub name: &'static str,
     pub accepts: fn(&[u8], &StreamInfo) -> bool,
-    pub convert: fn(&[u8], &StreamInfo, &Options) -> Result<String, Error>,
+    pub convert: fn(&[u8], &StreamInfo, &Options) -> Result<Document, Error>,
 }
 
 /// extension in `exts` or mimetype starting with one of `mimes`
@@ -31,7 +31,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "CsvConverter",
         accepts: |_, i| matches(i, &[".csv"], &["text/csv", "application/csv"]),
-        convert: |d, i, _| plain::convert_csv(d, i.charset.as_deref()),
+        convert: |d, i, _| plain::convert_csv(d, i.charset.as_deref()).map(Document::from),
     },
     Converter {
         name: "EpubConverter",
@@ -56,7 +56,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "PdfConverter",
         accepts: pdf::accepts,
-        convert: |d, _, _| pdf::convert(d),
+        convert: |d, _, _| pdf::convert(d).map(Document::from),
     },
     Converter {
         name: "IpynbConverter",
@@ -66,7 +66,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "ImageConverter",
         accepts: |_, i| matches(i, &[".jpg", ".jpeg", ".png"], &["image/jpeg", "image/png"]),
-        convert: |d, _, o| media::convert_image(d, o.exiftool_path.as_deref()),
+        convert: |d, _, o| media::convert_image(d, o.exiftool_path.as_deref()).map(Document::from),
     },
     Converter {
         name: "AudioConverter",
@@ -77,7 +77,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["audio/x-wav", "audio/mpeg", "video/mp4"],
             )
         },
-        convert: |d, _, o| media::convert_audio(d, o.exiftool_path.as_deref()),
+        convert: |d, _, o| media::convert_audio(d, o.exiftool_path.as_deref()).map(Document::from),
     },
     Converter {
         name: "PptxConverter",
@@ -88,7 +88,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["application/vnd.openxmlformats-officedocument.presentationml"],
             )
         },
-        convert: |d, _, o| pptx::convert(d, o),
+        convert: |d, _, o| pptx::convert(d, o).map(Document::from),
     },
     Converter {
         name: "XlsConverter",
@@ -99,7 +99,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["application/vnd.ms-excel", "application/excel"],
             )
         },
-        convert: |d, _, o| sheet::convert_xls(d, o.keep_data_uris),
+        convert: |d, _, o| sheet::convert_xls(d, o.keep_data_uris).map(Document::from),
     },
     Converter {
         name: "XlsxConverter",
@@ -110,7 +110,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
             )
         },
-        convert: |d, _, o| sheet::convert_xlsx(d, o),
+        convert: |d, _, o| sheet::convert_xlsx(d, o).map(Document::from),
     },
     Converter {
         name: "DocxConverter",
@@ -121,7 +121,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["application/vnd.openxmlformats-officedocument.wordprocessingml.document"],
             )
         },
-        convert: |d, _, o| docx::convert(d, o),
+        convert: |d, _, o| docx::convert(d, o).map(Document::from),
     },
     Converter {
         name: "BingSerpConverter",
@@ -154,7 +154,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "ZipConverter",
         accepts: |_, i| matches(i, &[".zip"], &["application/zip"]),
-        convert: zipfile::convert,
+        convert: |d, i, o| zipfile::convert(d, i, o).map(Document::from),
     },
     Converter {
         name: "PlainTextConverter",
@@ -166,6 +166,6 @@ pub static CONVERTERS: &[Converter] = &[
                     &["text/", "application/json", "application/markdown"],
                 )
         },
-        convert: |d, i, _| plain::convert_text(d, i.charset.as_deref()),
+        convert: |d, i, _| plain::convert_text(d, i.charset.as_deref()).map(Document::from),
     },
 ];

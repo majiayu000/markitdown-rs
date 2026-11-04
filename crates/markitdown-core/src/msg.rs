@@ -1,7 +1,7 @@
 //! Outlook .msg files, as markitdown's OutlookMsgConverter: sender,
 //! recipients and subject from the MAPI string properties, then the body.
 
-use crate::{Error, StreamInfo, pystr, text};
+use crate::{Document, Error, StreamInfo, pystr, text};
 use std::io::{Cursor, Read};
 
 type Ole<'a> = cfb::CompoundFile<Cursor<&'a [u8]>>;
@@ -115,7 +115,7 @@ pub fn accepts(data: &[u8], info: &StreamInfo) -> bool {
             .any(|n| n.contains("__recip_version1.0_#00000000"))
 }
 
-pub fn convert(data: &[u8]) -> Result<String, Error> {
+pub fn convert(data: &[u8]) -> Result<Document, Error> {
     let mut ole = cfb::CompoundFile::open(Cursor::new(data))
         .map_err(|e| Error::Conversion(format!("not an OLE file: {e}")))?;
     let props = long_properties(&mut ole);
@@ -126,14 +126,22 @@ pub fn convert(data: &[u8]) -> Result<String, Error> {
     let header_enc = message.clone().or(internet.clone());
     let body_enc = internet.or(message);
     let mut md = String::from("# Email Message\n\n");
+    let mut subject = None;
     for (key, tag) in [("From", "0C1F"), ("To", "0E04"), ("Subject", "0037")] {
-        if let Some(v) = property(&mut ole, tag, header_enc.as_deref()).filter(|v| !v.is_empty()) {
+        let value = property(&mut ole, tag, header_enc.as_deref());
+        if let Some(v) = value.as_ref().filter(|v| !v.is_empty()) {
             md.push_str(&format!("**{key}:** {v}\n"));
+        }
+        if key == "Subject" {
+            subject = value;
         }
     }
     md.push_str("\n## Content\n\n");
     if let Some(body) = property(&mut ole, "1000", body_enc.as_deref()) {
         md.push_str(&body);
     }
-    Ok(pystr::strip(&md).to_string())
+    Ok(Document {
+        markdown: pystr::strip(&md).to_string(),
+        title: subject,
+    })
 }

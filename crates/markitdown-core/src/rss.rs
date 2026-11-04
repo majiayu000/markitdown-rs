@@ -4,7 +4,7 @@
 
 use crate::dom::{Dom, Kind, ROOT};
 use crate::xml::{self, Element, Node, ParseOptions};
-use crate::{Error, StreamInfo, html, markdownify, pystr, pyurl, text};
+use crate::{Document, Error, StreamInfo, html, markdownify, pystr, pyurl, text};
 
 const ATOM_NS: &str = "http://www.w3.org/2005/Atom";
 const XHTML_NS: &str = "http://www.w3.org/1999/xhtml";
@@ -140,7 +140,7 @@ pub fn accepts(data: &[u8], info: &StreamInfo) -> bool {
     false
 }
 
-pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> Result<String, Error> {
+pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> Result<Document, Error> {
     let root = parse(data)?;
     let doc_uri = info.url.clone().unwrap_or_default();
     let ctx = Ctx {
@@ -327,11 +327,12 @@ impl Ctx<'_> {
         md.push_str(&body);
     }
 
-    fn rss(&self) -> Result<String, Error> {
+    fn rss(&self) -> Result<Document, Error> {
         let channel = child(self.root, "channel")
             .ok_or_else(|| Error::Conversion("No channel found in RSS feed".into()))?;
         let mut md = String::new();
-        if let Some(t) = self.flattened(channel, "title", false) {
+        let channel_title = self.flattened(channel, "title", false);
+        if let Some(t) = &channel_title {
             md.push_str(&format!("# {t}\n"));
         }
         if let Some(d) = self.data(channel, "description", ContentKind::Text) {
@@ -356,14 +357,20 @@ impl Ctx<'_> {
             }
             self.body(parts, &mut md);
         }
-        Ok(md)
+        Ok(Document {
+            markdown: md,
+            title: channel_title,
+        })
     }
 
-    fn atom(&self) -> String {
+    fn atom(&self) -> Document {
         let root = self.root;
         let title = self.flattened(root, "title", true);
         let subtitle = self.flattened(root, "subtitle", true);
-        let mut md = title.map(|t| format!("# {t}\n")).unwrap_or_default();
+        let mut md = title
+            .as_ref()
+            .map(|t| format!("# {t}\n"))
+            .unwrap_or_default();
         if let Some(s) = subtitle {
             md.push_str(&format!("{s}\n"));
         }
@@ -391,7 +398,10 @@ impl Ctx<'_> {
             }
             self.body(parts, &mut md);
         }
-        md
+        Document {
+            markdown: md,
+            title,
+        }
     }
 }
 

@@ -6,7 +6,7 @@ mod entities;
 pub mod parser;
 
 use crate::dom::{Dom, ROOT};
-use crate::{markdownify, pystr, text};
+use crate::{Document, markdownify, pystr, text};
 use entities::{HTML5, INVALID_CHARREFS, INVALID_CODEPOINTS};
 
 /// `html.escape(s, quote=True)`
@@ -198,12 +198,22 @@ fn markdownify(dom: &Dom, root: usize, keep_data_uris: bool) -> String {
     markdownify::convert(dom, root, &markdownify::Options { keep_data_uris })
 }
 
+/// `soup.title.string`
+fn title_string(dom: &Dom) -> Option<String> {
+    dom.find(ROOT, "title")
+        .and_then(|t| dom.string(t))
+        .map(str::to_string)
+}
+
 /// markitdown's `HtmlConverter.convert` on raw bytes.
-pub fn convert(bytes: &[u8], charset: Option<&str>, keep_data_uris: bool) -> String {
+pub fn convert(bytes: &[u8], charset: Option<&str>, keep_data_uris: bool) -> Document {
     let mut dom = parse_bytes(bytes, charset);
     remove_scripts(&mut dom);
     let root = dom.find(ROOT, "body").unwrap_or(ROOT);
-    pystr::strip(&markdownify(&dom, root, keep_data_uris)).to_string()
+    Document {
+        markdown: pystr::strip(&markdownify(&dom, root, keep_data_uris)).to_string(),
+        title: title_string(&dom),
+    }
 }
 
 /// `^https?:\/\/[a-zA-Z]{2,3}\.wikipedia.org\/`
@@ -242,7 +252,7 @@ pub fn convert_wikipedia(
     bytes: &[u8],
     charset: Option<&str>,
     keep_data_uris: bool,
-) -> Result<String, crate::Error> {
+) -> Result<Document, crate::Error> {
     let mut dom = parse_bytes(bytes, charset);
     remove_scripts(&mut dom);
     let mut found = Vec::new();
@@ -267,13 +277,13 @@ pub fn convert_wikipedia(
             &mut titles,
         );
     }
-    let mut main_title = dom
-        .find(ROOT, "title")
-        .and_then(|t| dom.string(t))
-        .map(str::to_string);
+    let mut main_title = title_string(&dom);
     let Some(body) = body else {
         check_depth(&dom, ROOT)?;
-        return Ok(markdownify(&dom, ROOT, keep_data_uris));
+        return Ok(Document {
+            markdown: markdownify(&dom, ROOT, keep_data_uris),
+            title: main_title,
+        });
     };
     check_depth(&dom, body)?;
     if let Some(&t) = titles.first() {
@@ -282,15 +292,21 @@ pub fn convert_wikipedia(
     let main_title = main_title
         .map(|t| pystr::strip(&t).to_string())
         .filter(|t| !t.is_empty());
-    let head = main_title.map(|t| format!("# {t}\n\n")).unwrap_or_default();
-    Ok(head + &markdownify(&dom, body, keep_data_uris))
+    let head = main_title
+        .as_ref()
+        .map(|t| format!("# {t}\n\n"))
+        .unwrap_or_default();
+    Ok(Document {
+        markdown: head + &markdownify(&dom, body, keep_data_uris),
+        title: main_title,
+    })
 }
 
 pub fn convert_bing(
     bytes: &[u8],
     info: &crate::StreamInfo,
     keep_data_uris: bool,
-) -> Result<String, crate::Error> {
+) -> Result<Document, crate::Error> {
     let url = info.url.as_deref().unwrap_or_default();
     let query = crate::pyurl::urlparse(url, "")
         .ok()
@@ -355,10 +371,13 @@ pub fn convert_bing(
             .collect();
         results.push(lines.join("\n"));
     }
-    Ok(format!(
-        "## A Bing search for '{query}' found the following results:\n\n{}",
-        results.join("\n\n")
-    ))
+    Ok(Document {
+        markdown: format!(
+            "## A Bing search for '{query}' found the following results:\n\n{}",
+            results.join("\n\n")
+        ),
+        title: title_string(&dom),
+    })
 }
 
 /// `HtmlConverter.convert_string`, used by converters that build HTML.

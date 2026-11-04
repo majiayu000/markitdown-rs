@@ -3,7 +3,7 @@
 //! description, or the generic HTML conversion when it has none.
 
 use crate::dom::{Dom, Kind, ROOT};
-use crate::{StreamInfo, html, pyurl};
+use crate::{Document, StreamInfo, html, pyurl};
 
 /// `_get_video_id`: youtu.be/ID, youtube.com/watch?v=ID, /shorts/ID, /embed/ID.
 fn video_id(url: &str) -> Option<String> {
@@ -135,7 +135,7 @@ fn metadata(dom: &Dom) -> Vec<(String, String)> {
     meta
 }
 
-pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> String {
+pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> Document {
     let dom = html::parse_bytes(data, Some(info.charset.as_deref().unwrap_or("utf-8")));
     let meta = metadata(&dom);
     let get = |keys: &[&str]| {
@@ -143,7 +143,10 @@ pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> String {
             .find_map(|k| meta.iter().find(|(mk, _)| mk == k).map(|(_, v)| v.as_str()))
     };
     let mut text = String::new();
-    if let Some(title) = get(&["title", "og:title", "name"]).filter(|t| !t.is_empty()) {
+    let title = get(&["title", "og:title", "name"])
+        .unwrap_or_default()
+        .to_string();
+    if !title.is_empty() {
         text += &format!("\n## {title}\n");
     }
     let mut stats = String::new();
@@ -165,5 +168,8 @@ pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> String {
     if text.is_empty() {
         return html::convert(data, info.charset.as_deref(), keep_data_uris);
     }
-    format!("# YouTube\n{text}")
+    Document {
+        markdown: format!("# YouTube\n{text}"),
+        title: Some(title),
+    }
 }

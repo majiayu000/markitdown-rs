@@ -30,7 +30,7 @@ pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String,
         match crate::convert::convert(&bytes, &member, opts) {
             Ok(text) => {
                 md.push_str(&format!("## File: {name}\n\n"));
-                md.push_str(&crate::pystr::normalize_output(&text));
+                md.push_str(&crate::pystr::normalize_output(&text.markdown));
                 md.push_str("\n\n");
             }
             Err(Error::Unsupported(_) | Error::Conversion(_)) => {}

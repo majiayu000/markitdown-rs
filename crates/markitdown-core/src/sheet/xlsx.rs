@@ -4,7 +4,7 @@
 use super::{Cell, DateTime, Time, epoch_days};
 use crate::xml::{self, Element, Node, ParseOptions};
 use crate::zip::Archive;
-use crate::{Error, pystr};
+use crate::{Error, StreamInfo, pystr};
 
 const NAMESPACES: &[(&str, &str)] = &[
     (
@@ -23,6 +23,15 @@ const NAMESPACES: &[(&str, &str)] = &[
     (
         "rel",
         "http://schemas.openxmlformats.org/package/2006/relationships",
+    ),
+    (
+        "xdr",
+        "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing",
+    ),
+    ("a", "http://schemas.openxmlformats.org/drawingml/2006/main"),
+    (
+        "ct",
+        "http://schemas.openxmlformats.org/package/2006/content-types",
     ),
 ];
 
@@ -344,7 +353,117 @@ fn row_of(r: &str) -> Option<usize> {
         .ok()
 }
 
-pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
+/// markitdown's `_XlsxImages`: the embedded drawing images of a worksheet,
+/// in openpyxl's anchor order (absolute, one-cell, then two-cell anchors).
+fn sheet_images(
+    zip: &mut Archive,
+    sheet_part: &str,
+    sheet: &Element,
+    content_types: &Element,
+) -> Result<Vec<(Vec<u8>, StreamInfo)>, Error> {
+    let mut images = Vec::new();
+    let drawings: Vec<&Element> = sheet.children_named("s:drawing").collect();
+    if drawings.is_empty() {
+        return Ok(images);
+    }
+    let sheet_rels = rels(zip, sheet_part)?;
+    for drawing in drawings {
+        let Some((_, _, drawing_part)) = drawing.attr("r:id").and_then(|id| {
+            sheet_rels
+                .iter()
+                .find(|(i, t, _)| i == id && t.ends_with("/drawing"))
+        }) else {
+            continue;
+        };
+        let image_rels = rels(zip, drawing_part)?;
+        let Some(bytes) = zip.read(drawing_part)? else {
+            continue;
+        };
+        let root = parse(&bytes)?;
+        for kind in [
+            "xdr:absoluteAnchor",
+            "xdr:oneCellAnchor",
+            "xdr:twoCellAnchor",
+        ] {
+            for anchor in root.children_named(kind) {
+                let mut blips = Vec::new();
+                find_all(anchor, "a:blip", &mut blips);
+                for blip in blips {
+                    // linked images are not package content
+                    let Some(rel) = blip.attr("r:embed") else {
+                        continue;
+                    };
+                    let Some((_, _, part)) = image_rels
+                        .iter()
+                        .find(|(i, t, _)| i == rel && t.ends_with("/image"))
+                    else {
+                        continue;
+                    };
+                    let Some(data) = zip.read(part)? else {
+                        continue;
+                    };
+                    let name = part.rsplit('/').next().unwrap_or(part);
+                    let extension = name
+                        .rfind('.')
+                        .map(|i| name[i..].to_lowercase())
+                        .unwrap_or_default();
+                    let mimetype = content_type(content_types, part, &extension);
+                    images.push((
+                        data,
+                        StreamInfo {
+                            mimetype,
+                            extension: Some(extension),
+                            filename: Some(name.to_string()),
+                            ..Default::default()
+                        },
+                    ));
+                }
+            }
+        }
+    }
+    Ok(images)
+}
+
+fn find_all<'e>(e: &'e Element, name: &str, out: &mut Vec<&'e Element>) {
+    for c in e.elements() {
+        if &*c.name == name {
+            out.push(c);
+        }
+        find_all(c, name, out);
+    }
+}
+
+/// The part's `[Content_Types].xml` override, else its extension's default,
+/// else Python's `mimetypes.guess_type`.
+fn content_type(types: &Element, part: &str, extension: &str) -> Option<String> {
+    let over = types
+        .children_named("ct:Override")
+        .find(|o| o.attr("PartName").map(|p| p.trim_start_matches('/')) == Some(part))
+        .and_then(|o| o.attr("ContentType"));
+    let default = || {
+        types
+            .children_named("ct:Default")
+            .find(|d| {
+                d.attr("Extension").map(str::to_lowercase).as_deref()
+                    == Some(extension.trim_start_matches('.'))
+            })
+            .and_then(|d| d.attr("ContentType"))
+    };
+    let guessed = || match extension {
+        ".png" => Some("image/png"),
+        ".jpg" | ".jpeg" => Some("image/jpeg"),
+        ".gif" => Some("image/gif"),
+        ".bmp" => Some("image/bmp"),
+        ".tif" | ".tiff" => Some("image/tiff"),
+        ".svg" => Some("image/svg+xml"),
+        ".webp" => Some("image/webp"),
+        _ => None,
+    };
+    over.or_else(default).or_else(guessed).map(str::to_string)
+}
+
+/// The worksheets, with their drawing images when `with_images`.
+pub fn read(data: &[u8], with_images: bool) -> Result<Vec<super::Sheet>, Error> {
     let mut zip = Archive::new(data)?;
     let root_rels = rels(&mut zip, "")?;
     let wb_path = root_rels
@@ -377,6 +496,13 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
             .collect(),
         None => Vec::new(),
     };
+    let content_types = match with_images {
+        true => match zip.read("[Content_Types].xml")? {
+            Some(b) => Some(parse(&b)?),
+            None => None,
+        },
+        false => None,
+    };
     let mut sheets = Vec::new();
     for sheet in wb
         .child("s:sheets")
@@ -394,11 +520,18 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
         if !typ.ends_with("/worksheet") {
             continue;
         }
-        let rows = match zip.read(path)? {
-            Some(bytes) => sheet_rows(&parse(&bytes)?, &shared, &styles, date1904)?,
-            None => Vec::new(),
+        let (rows, images) = match zip.read(path)? {
+            Some(bytes) => {
+                let root = parse(&bytes)?;
+                let images = match &content_types {
+                    Some(types) => sheet_images(&mut zip, path, &root, types)?,
+                    None => Vec::new(),
+                };
+                (sheet_rows(&root, &shared, &styles, date1904)?, images)
+            }
+            None => (Vec::new(), Vec::new()),
         };
-        sheets.push(super::Sheet { name, rows });
+        sheets.push(super::Sheet { name, rows, images });
     }
     Ok(sheets)
 }

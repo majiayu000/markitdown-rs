@@ -66,7 +66,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "ImageConverter",
         accepts: |_, i| matches(i, &[".jpg", ".jpeg", ".png"], &["image/jpeg", "image/png"]),
-        convert: |d, _, _| media::convert_image(d),
+        convert: |d, _, o| media::convert_image(d, o.exiftool_path.as_deref()),
     },
     Converter {
         name: "AudioConverter",
@@ -77,7 +77,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["audio/x-wav", "audio/mpeg", "video/mp4"],
             )
         },
-        convert: |d, _, _| media::convert_audio(d),
+        convert: |d, _, o| media::convert_audio(d, o.exiftool_path.as_deref()),
     },
     Converter {
         name: "PptxConverter",
@@ -110,7 +110,7 @@ pub static CONVERTERS: &[Converter] = &[
                 &["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"],
             )
         },
-        convert: |d, _, o| sheet::convert_xlsx(d, o.keep_data_uris),
+        convert: |d, _, o| sheet::convert_xlsx(d, o),
     },
     Converter {
         name: "DocxConverter",

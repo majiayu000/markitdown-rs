@@ -3,7 +3,8 @@
 //! mammoth's empty-element stripping and collapsing of adjacent elements.
 
 use super::reader::{BreakKind, DocEl, Link, NumLevel, Run, VertAlign};
-use crate::dom::Dom;
+use crate::dom::{Dom, Kind};
+use crate::{EmbeddedImage, Error, ImageHook, ImageRequest, StreamInfo};
 
 pub struct Note {
     pub note_type: &'static str,
@@ -15,6 +16,8 @@ enum HNode {
     El(Box<HEl>),
     Text(String),
     ForceWrite,
+    /// HTML from the image hook, in place of an image
+    Fragment(String),
 }
 
 struct HEl {
@@ -142,6 +145,9 @@ pub struct Converter<'a> {
     note_refs: Vec<(&'static str, String)>,
     keep_data_uris: bool,
     image_data: &'a dyn Fn(&str) -> Option<Vec<u8>>,
+    image_hook: Option<&'a ImageHook>,
+    /// the first image hook failure, which fails the conversion
+    hook_error: Option<Error>,
 }
 
 impl<'a> Converter<'a> {
@@ -149,17 +155,20 @@ impl<'a> Converter<'a> {
         notes: &'a [Note],
         keep_data_uris: bool,
         image_data: &'a dyn Fn(&str) -> Option<Vec<u8>>,
+        image_hook: Option<&'a ImageHook>,
     ) -> Self {
         Converter {
             notes,
             note_refs: Vec::new(),
             keep_data_uris,
             image_data,
+            image_hook,
+            hook_error: None,
         }
     }
 
     /// Convert the document body (plus referenced notes) into `dom`'s root.
-    pub fn convert_document(mut self, body: Vec<DocEl>, dom: &mut Dom) {
+    pub fn convert_document(mut self, body: Vec<DocEl>, dom: &mut Dom) -> Result<(), Error> {
         let mut nodes = self.visit_all(body, false);
         let refs = self.note_refs.clone();
         let mut items = Vec::new();
@@ -169,8 +178,16 @@ impl<'a> Converter<'a> {
             }
         }
         nodes.push(element(&["ol"], Vec::new(), items));
+        if let Some(e) = self.hook_error {
+            return Err(e);
+        }
         let nodes = collapse(strip_empty(nodes));
-        write_dom(nodes, dom, crate::markdownify::ROOT);
+        let mut fragments = Vec::new();
+        write_dom(nodes, dom, crate::markdownify::ROOT, &mut fragments);
+        for fragment in fragments {
+            lift_fragment(dom, &fragment);
+        }
+        Ok(())
     }
 
     fn visit_all(&mut self, els: Vec<DocEl>, header: bool) -> Vec<HNode> {
@@ -274,9 +291,12 @@ impl<'a> Converter<'a> {
             }
             DocEl::Break(BreakKind::Line) => wrap(&[el(&["br"], true)], Vec::new()),
             DocEl::Break(_) => Vec::new(),
-            DocEl::Image(img) => {
-                self.visit_image(img.alt.as_deref(), img.content_type.as_deref(), &img.path)
-            }
+            DocEl::Image(img) => match self.image_html(img.content_type.as_deref(), &img.path) {
+                Some(html) => vec![HNode::Fragment(html)],
+                None => {
+                    self.visit_image(img.alt.as_deref(), img.content_type.as_deref(), &img.path)
+                }
+            },
             DocEl::NoteRef { note_type, id } => {
                 self.note_refs.push((note_type, id.clone()));
                 let n = self.note_refs.len();
@@ -321,6 +341,35 @@ impl<'a> Converter<'a> {
             nodes = wrap(&[p], nodes);
         }
         nodes
+    }
+
+    /// markitdown's `_DocxImages.convert_image`: the hook's HTML for an image.
+    fn image_html(&mut self, content_type: Option<&str>, path: &str) -> Option<String> {
+        let hook = self.image_hook?;
+        if self.hook_error.is_some() {
+            return None;
+        }
+        let Some(data) = (self.image_data)(path) else {
+            self.hook_error = Some(Error::Conversion(format!(
+                "_image_to_html failed: missing image {path}"
+            )));
+            return None;
+        };
+        let image = EmbeddedImage {
+            data: &data,
+            info: StreamInfo {
+                mimetype: content_type.map(str::to_string),
+                extension: content_type.and_then(guess_extension).map(str::to_string),
+                ..Default::default()
+            },
+        };
+        match hook.ask(ImageRequest::Html, &image) {
+            Ok(html) => html,
+            Err(e) => {
+                self.hook_error = Some(e);
+                None
+            }
+        }
     }
 
     fn visit_image(&self, alt: Option<&str>, content_type: Option<&str>, path: &str) -> Vec<HNode> {
@@ -415,15 +464,171 @@ fn collapsing_add(out: &mut Vec<HNode>, node: HNode) {
 }
 
 /// What html.parser builds from mammoth's serialised HTML.
-fn write_dom(nodes: Vec<HNode>, dom: &mut Dom, parent: usize) {
+fn write_dom(nodes: Vec<HNode>, dom: &mut Dom, parent: usize, fragments: &mut Vec<Fragment>) {
     for n in nodes {
         match n {
             HNode::Text(t) => dom.text(parent, t),
             HNode::ForceWrite => {}
             HNode::El(e) => {
                 let id = dom.element(parent, e.names[0], e.attrs);
-                write_dom(e.children, dom, id);
+                write_dom(e.children, dom, id, fragments);
+            }
+            HNode::Fragment(html) => {
+                let src = crate::html::parser::parse(&html);
+                let mut fragment = Fragment::default();
+                for &c in src.children(crate::dom::ROOT) {
+                    let id = dom.copy_from(parent, &src, c);
+                    collect_fragment(dom, id, &mut fragment);
+                }
+                fragments.push(fragment);
             }
         }
     }
+}
+
+/// The block elements and links of an inserted fragment, in document order.
+#[derive(Default)]
+struct Fragment {
+    blocks: Vec<usize>,
+    links: Vec<usize>,
+}
+
+/// bs4's `HTMLTreeBuilder.DEFAULT_BLOCK_ELEMENTS` plus markitdown's additions.
+const BLOCK_ELEMENTS: &[&str] = &[
+    "address",
+    "article",
+    "aside",
+    "blockquote",
+    "canvas",
+    "dd",
+    "details",
+    "dialog",
+    "div",
+    "dl",
+    "dt",
+    "fieldset",
+    "figcaption",
+    "figure",
+    "footer",
+    "form",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "header",
+    "hgroup",
+    "hr",
+    "li",
+    "main",
+    "menu",
+    "nav",
+    "noscript",
+    "ol",
+    "output",
+    "p",
+    "pre",
+    "search",
+    "section",
+    "summary",
+    "table",
+    "tfoot",
+    "ul",
+    "video",
+];
+
+const PHRASING_CONTAINERS: &[&str] = &[
+    "a", "abbr", "b", "bdi", "bdo", "cite", "code", "data", "del", "dfn", "em", "i", "ins", "kbd",
+    "label", "mark", "q", "s", "samp", "small", "span", "strong", "sub", "sup", "time", "u", "var",
+    "p", "h1", "h2", "h3", "h4", "h5", "h6", "pre",
+];
+
+fn collect_fragment(dom: &Dom, id: usize, fragment: &mut Fragment) {
+    let mut stack = vec![id];
+    while let Some(n) = stack.pop() {
+        if let Some(name) = dom.name(n) {
+            if BLOCK_ELEMENTS.contains(&name) {
+                fragment.blocks.push(n);
+            }
+            if name == "a" {
+                fragment.links.push(n);
+            }
+            stack.extend(dom.children(n).iter().rev());
+        }
+    }
+}
+
+/// `_DocxImages.replace_images`: generated block content splits the
+/// paragraph or inline wrappers around it (never its table cell or list
+/// item), and a generated link leaves an enclosing link.
+fn lift_fragment(dom: &mut Dom, fragment: &Fragment) {
+    for &block in &fragment.blocks {
+        while let Some(p) = dom.parent(block)
+            && dom
+                .name(p)
+                .is_some_and(|n| PHRASING_CONTAINERS.contains(&n))
+        {
+            lift_out_of_parent(dom, block);
+        }
+    }
+    for &link in &fragment.links {
+        let mut outer = dom.parent(link);
+        while let Some(p) = outer
+            && dom.name(p) != Some("a")
+        {
+            outer = dom.parent(p);
+        }
+        if let Some(outer) = outer {
+            while dom.parent(link) != Some(outer) {
+                lift_out_of_parent(dom, link);
+            }
+            lift_out_of_parent(dom, link);
+        }
+    }
+}
+
+/// `_lift_out_of_parent`: move `node` before its parent, the siblings ahead
+/// of it into a copy of the parent before that.
+fn lift_out_of_parent(dom: &mut Dom, node: usize) {
+    let Some(parent) = dom.parent(node) else {
+        return;
+    };
+    let Kind::Element { name, attrs } = dom.kind(parent).clone() else {
+        return;
+    };
+    let before = dom.new_element(name, attrs);
+    while let Some(&first) = dom.children(parent).first()
+        && first != node
+    {
+        dom.append(before, first);
+    }
+    if !dom.children(before).is_empty() {
+        dom.insert_before(parent, before);
+        dom.remove_attr(parent, "id");
+    }
+    dom.insert_before(parent, node);
+    if dom.children(parent).is_empty() {
+        if let Some(id) = dom.attr(parent, "id").map(str::to_string)
+            && dom.attr(node, "id").is_none()
+        {
+            dom.set_attr(node, "id", id);
+        }
+        dom.remove(parent);
+    }
+}
+
+/// Python's `mimetypes.guess_extension` for image types.
+fn guess_extension(content_type: &str) -> Option<&'static str> {
+    Some(match content_type {
+        "image/png" => ".png",
+        "image/jpeg" => ".jpg",
+        "image/gif" => ".gif",
+        "image/bmp" => ".bmp",
+        "image/tiff" => ".tiff",
+        "image/svg+xml" => ".svg",
+        "image/webp" => ".webp",
+        "image/x-icon" => ".ico",
+        _ => return None,
+    })
 }

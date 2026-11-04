@@ -70,11 +70,53 @@ impl StreamInfo {
     }
 }
 
+/// What a converter asks `Options::image_hook` about an embedded image.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ImageRequest {
+    /// A description for a slide picture's alt text (markitdown's LLM
+    /// caption); PowerPoint only.
+    Caption,
+    /// An HTML fragment to render in place of the image (markitdown's
+    /// `_image_to_html` hook of the DOCX, PPTX and XLSX converters).
+    Html,
+}
+
+/// An image inside a document: its bytes, content type, extension and name.
+pub struct EmbeddedImage<'a> {
+    pub data: &'a [u8],
+    pub info: StreamInfo,
+}
+
+type ImageHookFn =
+    dyn Fn(ImageRequest, &EmbeddedImage) -> Result<Option<String>, String> + Send + Sync;
+
+/// A callback for images embedded in documents. `Ok(None)` (or blank text)
+/// keeps the image as markitdown renders it; an error fails the conversion.
+#[derive(Clone)]
+pub struct ImageHook(pub std::sync::Arc<ImageHookFn>);
+
+impl fmt::Debug for ImageHook {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str("ImageHook")
+    }
+}
+
+impl ImageHook {
+    fn ask(&self, request: ImageRequest, image: &EmbeddedImage) -> Result<Option<String>, Error> {
+        let answer = (self.0)(request, image).map_err(Error::Conversion)?;
+        Ok(answer.filter(|a| !pystr::strip(a).is_empty()))
+    }
+}
+
 #[derive(Debug, Clone, Default)]
 pub struct Options {
     /// Keep images as full base64 data URIs instead of truncating them
     /// (markitdown's `--keep-data-uris`).
     pub keep_data_uris: bool,
+    /// The exiftool to read image and audio metadata with; `None` looks it
+    /// up as markitdown does, an empty path disables it.
+    pub exiftool_path: Option<String>,
+    pub image_hook: Option<ImageHook>,
 }
 
 #[derive(Debug)]
@@ -107,4 +149,38 @@ impl std::error::Error for Error {}
 pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String, Error> {
     let md = convert::convert(data, info, opts)?;
     Ok(pystr::normalize_output(&md))
+}
+
+/// The built-in converters by name, in markitdown's trial order.
+pub fn converter_names() -> impl Iterator<Item = &'static str> {
+    formats::CONVERTERS.iter().map(|c| c.name)
+}
+
+/// The stream-info guesses markitdown tries in turn: the hints, then what
+/// the content sniff says (when it disagrees with them).
+pub fn stream_info_guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
+    convert::guesses(data, base)
+}
+
+fn converter(name: &str) -> Result<&'static formats::Converter, Error> {
+    formats::CONVERTERS
+        .iter()
+        .find(|c| c.name == name)
+        .ok_or_else(|| Error::Unsupported(format!("no converter named {name}")))
+}
+
+/// One built-in converter's `accepts`.
+pub fn converter_accepts(name: &str, data: &[u8], info: &StreamInfo) -> Result<bool, Error> {
+    Ok((converter(name)?.accepts)(data, info))
+}
+
+/// One built-in converter's `convert`, without markitdown's final
+/// whitespace normalization.
+pub fn convert_with(
+    name: &str,
+    data: &[u8],
+    info: &StreamInfo,
+    opts: &Options,
+) -> Result<String, Error> {
+    (converter(name)?.convert)(data, info, opts)
 }

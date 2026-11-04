@@ -31,7 +31,11 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
                 }
             }
         }
-        sheets.push(super::Sheet { name, rows });
+        sheets.push(super::Sheet {
+            name,
+            rows,
+            images: Vec::new(),
+        });
     }
     Ok(sheets)
 }

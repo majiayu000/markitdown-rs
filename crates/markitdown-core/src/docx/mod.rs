@@ -321,7 +321,13 @@ pub fn convert(data: &[u8], opts: &Options) -> Result<String, Error> {
     let zip = std::cell::RefCell::new(pkg.zip);
     let image_data = |path: &str| zip.borrow_mut().read(path).ok().flatten();
     let mut dom = Dom::new("[document]");
-    html::Converter::new(&notes, opts.keep_data_uris, &image_data).convert_document(body, &mut dom);
+    html::Converter::new(
+        &notes,
+        opts.keep_data_uris,
+        &image_data,
+        opts.image_hook.as_ref(),
+    )
+    .convert_document(body, &mut dom)?;
     let md = markdownify::convert(
         &dom,
         markdownify::ROOT,

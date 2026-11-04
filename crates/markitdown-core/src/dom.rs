@@ -4,7 +4,7 @@
 
 use std::borrow::Cow;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum Kind {
     Element {
         name: Cow<'static, str>,
@@ -123,6 +123,60 @@ impl Dom {
         for i in pos + 1..self.nodes[p].children.len() {
             let c = self.nodes[p].children[i];
             self.nodes[c].pos = i;
+        }
+    }
+
+    /// A new element with no parent yet (`soup.new_tag`).
+    pub fn new_element(&mut self, name: Cow<'static, str>, attrs: Vec<(String, String)>) -> usize {
+        self.nodes.push(DNode {
+            kind: Kind::Element { name, attrs },
+            parent: None,
+            children: Vec::new(),
+            pos: 0,
+        });
+        self.nodes.len() - 1
+    }
+
+    /// `Tag.append(node)`: move `id` to the end of `parent`.
+    pub fn append(&mut self, parent: usize, id: usize) {
+        self.remove(id);
+        self.nodes[id].parent = Some(parent);
+        self.nodes[id].pos = self.nodes[parent].children.len();
+        self.nodes[parent].children.push(id);
+    }
+
+    /// `target.insert_before(node)`: move `id` just before `target`.
+    pub fn insert_before(&mut self, target: usize, id: usize) {
+        self.remove(id);
+        let Some(p) = self.nodes[target].parent else {
+            return;
+        };
+        let pos = self.nodes[target].pos;
+        self.nodes[id].parent = Some(p);
+        self.nodes[p].children.insert(pos, id);
+        for i in pos..self.nodes[p].children.len() {
+            let c = self.nodes[p].children[i];
+            self.nodes[c].pos = i;
+        }
+    }
+
+    /// Copy `src`'s node `id` and its descendants under `parent`; the new
+    /// node's id.
+    pub fn copy_from(&mut self, parent: usize, src: &Dom, id: usize) -> usize {
+        let new = self.push(parent, src.nodes[id].kind.clone());
+        let mut stack = vec![(id, new)];
+        while let Some((from, to)) = stack.pop() {
+            for &c in &src.nodes[from].children {
+                let copy = self.push(to, src.nodes[c].kind.clone());
+                stack.push((c, copy));
+            }
+        }
+        new
+    }
+
+    pub fn remove_attr(&mut self, id: usize, key: &str) {
+        if let Kind::Element { attrs, .. } = &mut self.nodes[id].kind {
+            attrs.retain(|(k, _)| k != key);
         }
     }
 

@@ -5,7 +5,7 @@
 
 use crate::xml::{self, Element, Node, ParseOptions};
 use crate::zip::Archive;
-use crate::{Error, Options, pystr};
+use crate::{EmbeddedImage, Error, ImageRequest, Options, StreamInfo, pystr};
 use std::collections::HashMap;
 
 mod chart;
@@ -339,7 +339,8 @@ pub fn convert(data: &[u8], opts: &Options) -> Result<String, Error> {
         }
         slide_parts.push((path.clone(), rels, layout, master, notes));
     }
-    let image_bytes: HashMap<String, Vec<u8>> = if opts.keep_data_uris {
+    let image_bytes: HashMap<String, Vec<u8>> = if opts.keep_data_uris || opts.image_hook.is_some()
+    {
         let mut m = HashMap::new();
         for (_, rels, ..) in &slide_parts {
             for r in rels.iter().filter(|r| r.typ == format!("{RT}image")) {
@@ -443,7 +444,7 @@ impl Ctx<'_, '_> {
     fn shape_content(&self, shape: &Element, md: &mut String) -> Result<(), Error> {
         let name = shape.name.as_ref();
         if self.is_picture(shape) {
-            md.push_str(&self.picture(shape));
+            md.push_str(&self.picture(shape)?);
         }
         let graphic_uri = shape
             .path(&["a:graphic", "a:graphicData"])
@@ -510,14 +511,58 @@ impl Ctx<'_, '_> {
         }
     }
 
-    fn picture(&self, shape: &Element) -> String {
+    /// The picture's bytes and what python-pptx reports about them: the
+    /// part's content type, and a file name only for SVG-only pictures.
+    fn picture_image(&self, shape: &Element) -> Option<EmbeddedImage<'_>> {
+        let (part, svg_only) = match self.blip_part(shape) {
+            Some(p) => (p, false),
+            None => (self.svg_blip_part(shape)?, true),
+        };
+        let data = self.images.get(part)?;
+        let filename = svg_only.then(|| part.rsplit('/').next().unwrap_or(part).to_string());
+        Some(EmbeddedImage {
+            data,
+            info: StreamInfo {
+                mimetype: if svg_only {
+                    Some("image/svg+xml".into())
+                } else {
+                    self.content_type(part)
+                },
+                extension: filename
+                    .as_deref()
+                    .and_then(|f| f.rfind('.').map(|i| f[i..].to_string())),
+                filename,
+                ..Default::default()
+            },
+        })
+    }
+
+    fn picture(&self, shape: &Element) -> Result<String, Error> {
         let c_nv_pr = shape.elements().next().and_then(|nv| nv.child("p:cNvPr"));
         let shape_name = c_nv_pr.and_then(|c| c.attr("name")).unwrap_or_default();
         let descr = c_nv_pr.and_then(|c| c.attr("descr")).unwrap_or_default();
-        let alt = if pystr::strip(descr).is_empty() {
+        let mut caption = None;
+        if let Some(hook) = &self.opts.image_hook
+            && let Some(image) = self.picture_image(shape)
+        {
+            // a failing caption keeps the native alt text, as in markitdown
+            caption = hook.ask(ImageRequest::Caption, &image).ok().flatten();
+            if caption.is_none()
+                && let Some(html) = hook.ask(ImageRequest::Html, &image)?
+            {
+                let md = crate::html::convert_string(&html, self.opts.keep_data_uris);
+                return Ok(format!("\n{md}\n"));
+            }
+        }
+        let joined = [caption.as_deref().unwrap_or_default(), descr]
+            .into_iter()
+            .filter(|t| !pystr::strip(t).is_empty())
+            .collect::<Vec<_>>()
+            .join("\n");
+        let alt = if joined.is_empty() {
             shape_name
         } else {
-            descr
+            &joined
         };
         let alt: String = alt
             .chars()
@@ -549,17 +594,17 @@ impl Ctx<'_, '_> {
                 let ct = part
                     .and_then(|p| self.content_type(p))
                     .unwrap_or_else(|| "image/png".into());
-                return format!(
+                return Ok(format!(
                     "\n![{alt}](data:{ct};base64,{})\n",
                     crate::base64::encode(bytes)
-                );
+                ));
             }
         }
         let filename: String = shape_name
             .chars()
             .filter(|c| c.is_alphanumeric() || *c == '_')
             .collect();
-        format!("\n![{alt}]({filename}.jpg)\n")
+        Ok(format!("\n![{alt}]({filename}.jpg)\n"))
     }
 
     fn content_type(&self, part: &str) -> Option<String> {

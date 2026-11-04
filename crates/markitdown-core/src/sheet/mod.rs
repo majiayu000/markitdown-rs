@@ -7,7 +7,7 @@ mod frame;
 mod xls;
 mod xlsx;
 
-use crate::Error;
+use crate::{EmbeddedImage, Error, ImageHook, ImageRequest, Options, StreamInfo};
 
 /// A cell value as pandas' Excel readers hand it to the parser.
 #[derive(Debug, Clone, PartialEq)]
@@ -149,26 +149,53 @@ fn int_cell(f: f64) -> Cell {
 pub struct Sheet {
     pub name: String,
     pub rows: Vec<Vec<Cell>>,
+    /// embedded drawing images, read only for an image hook
+    pub images: Vec<(Vec<u8>, StreamInfo)>,
 }
 
-fn render(sheets: Vec<Sheet>, keep_data_uris: bool) -> String {
+/// `_XlsxImages.to_html`: the hook's fragments for a sheet's images.
+fn images_html(sheet: Sheet, hook: &ImageHook) -> Result<String, Error> {
+    let mut fragments = String::new();
+    for (data, info) in sheet.images {
+        if let Some(html) = hook.ask(ImageRequest::Html, &EmbeddedImage { data: &data, info })? {
+            fragments.push_str(&format!("<div>{html}</div>"));
+        }
+    }
+    if fragments.is_empty() {
+        return Ok(fragments);
+    }
+    Ok(format!("<h3>Images in this sheet:</h3>{fragments}"))
+}
+
+fn render(sheets: Vec<Sheet>, opts: &Options) -> Result<String, Error> {
+    let convert = |html: &str| {
+        crate::pystr::strip(&crate::html::convert_string(html, opts.keep_data_uris)).to_string()
+    };
     let mut md = String::new();
     for sheet in sheets {
         md.push_str(&format!("## {}\n", sheet.name));
-        let html = frame::to_html(&sheet.rows);
-        md.push_str(crate::pystr::strip(&crate::html::convert_string(
-            &html,
-            keep_data_uris,
-        )));
+        md.push_str(&convert(&frame::to_html(&sheet.rows)));
         md.push_str("\n\n");
+        if let Some(hook) = &opts.image_hook {
+            let html = images_html(sheet, hook)?;
+            if !html.is_empty() {
+                md.push_str(&convert(&html));
+                md.push_str("\n\n");
+            }
+        }
     }
-    crate::pystr::strip(&md).to_string()
+    Ok(crate::pystr::strip(&md).to_string())
 }
 
-pub fn convert_xlsx(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
-    Ok(render(xlsx::read(data)?, keep_data_uris))
+pub fn convert_xlsx(data: &[u8], opts: &Options) -> Result<String, Error> {
+    render(xlsx::read(data, opts.image_hook.is_some())?, opts)
 }
 
+/// markitdown's XlsConverter has no image hook.
 pub fn convert_xls(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
-    Ok(render(xls::read(data)?, keep_data_uris))
+    let opts = Options {
+        keep_data_uris,
+        ..Default::default()
+    };
+    render(xls::read(data)?, &opts)
 }

@@ -78,7 +78,7 @@ fn charset_sample(data: &[u8]) -> &[u8] {
     sample
 }
 
-fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
+pub fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
     let mut enhanced = base.clone();
     if base.mimetype.is_none()
         && let Some(ext) = &base.extension

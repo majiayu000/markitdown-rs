@@ -34,11 +34,15 @@ const AUDIO_FIELDS: &[&str] = &[
     "BitsPerSample",
 ];
 
-/// markitdown's lookup: EXIFTOOL_PATH, else `exiftool` on PATH when it lives
-/// in a well-known directory.
-fn exiftool_path() -> Option<String> {
+/// markitdown's lookup: the configured path, else EXIFTOOL_PATH, else
+/// `exiftool` on PATH when it lives in a well-known directory. An empty path
+/// means no exiftool, as in markitdown.
+fn exiftool_path(configured: Option<&str>) -> Option<String> {
+    if let Some(p) = configured {
+        return (!p.is_empty()).then(|| p.to_string());
+    }
     if let Ok(p) = std::env::var("EXIFTOOL_PATH") {
-        return Some(p);
+        return (!p.is_empty()).then_some(p);
     }
     let path = std::env::var_os("PATH")?;
     let names: &[&str] = if cfg!(windows) {
@@ -72,8 +76,11 @@ fn exiftool_path() -> Option<String> {
     None
 }
 
-fn metadata(data: &[u8]) -> Result<Option<serde_json::Map<String, serde_json::Value>>, Error> {
-    let Some(tool) = exiftool_path() else {
+fn metadata(
+    data: &[u8],
+    exiftool: Option<&str>,
+) -> Result<Option<serde_json::Map<String, serde_json::Value>>, Error> {
+    let Some(tool) = exiftool_path(exiftool) else {
         return Ok(None);
     };
     let fail = |e: String| Error::Conversion(format!("Failed to invoke exiftool at {tool}: {e}"));
@@ -191,9 +198,9 @@ fn py_str(v: &serde_json::Value) -> String {
     }
 }
 
-fn fields(data: &[u8], wanted: &[&str]) -> Result<String, Error> {
+fn fields(data: &[u8], wanted: &[&str], exiftool: Option<&str>) -> Result<String, Error> {
     let mut md = String::new();
-    if let Some(meta) = metadata(data)? {
+    if let Some(meta) = metadata(data, exiftool)? {
         for f in wanted {
             if let Some(v) = meta.get(*f) {
                 md.push_str(&format!("{f}: {}\n", py_str(v)));
@@ -203,10 +210,10 @@ fn fields(data: &[u8], wanted: &[&str]) -> Result<String, Error> {
     Ok(md)
 }
 
-pub fn convert_image(data: &[u8]) -> Result<String, Error> {
-    fields(data, IMAGE_FIELDS)
+pub fn convert_image(data: &[u8], exiftool: Option<&str>) -> Result<String, Error> {
+    fields(data, IMAGE_FIELDS, exiftool)
 }
 
-pub fn convert_audio(data: &[u8]) -> Result<String, Error> {
-    Ok(pystr::strip(&fields(data, AUDIO_FIELDS)?).to_string())
+pub fn convert_audio(data: &[u8], exiftool: Option<&str>) -> Result<String, Error> {
+    Ok(pystr::strip(&fields(data, AUDIO_FIELDS, exiftool)?).to_string())
 }

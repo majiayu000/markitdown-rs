@@ -48,7 +48,14 @@ pub fn check_format(dir: &str) {
         let got = convert(
             &data,
             &StreamInfo::from_path(&format!("tests/fixtures/{dir}/{name}")),
-            &Options::default(),
+            // the snapshots come from a Python environment without exiftool;
+            // exiftool.rs points EXIFTOOL_PATH at a stub
+            &Options {
+                exiftool_path: std::env::var_os("EXIFTOOL_PATH")
+                    .is_none()
+                    .then(String::new),
+                ..Default::default()
+            },
         );
         let md_snapshot = snapshots.join(format!("{name}.md"));
         let err_snapshot = snapshots.join(format!("{name}.py-error"));

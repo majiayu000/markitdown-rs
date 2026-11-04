@@ -71,6 +71,16 @@ fn stdio_round_trip() {
     let r = ask(call("data:text/html;base64,PGgxPkhpPC9oMT4=")).unwrap();
     assert_eq!(r["result"]["content"][0]["text"], "# Hi");
 
+    // 50,000 nested divs: plain text, as markitdown-mcp falls back to, and
+    // the server keeps answering
+    let deep = format!(
+        "data:text/html,<html><body>{}<b>deep</b>{}</body></html>",
+        "<div>".repeat(50_000),
+        "</div>".repeat(50_000)
+    );
+    let r = ask(call(&deep)).unwrap();
+    assert_eq!(r["result"]["content"][0]["text"], "deep");
+
     let missing = root().join("nope.docx");
     let r = ask(call(&format!("file://{}", missing.display()))).unwrap();
     assert_eq!(r["result"]["isError"], true);

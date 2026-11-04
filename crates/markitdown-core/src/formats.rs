@@ -139,13 +139,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "WikipediaConverter",
         accepts: |_, i| url_matches(i, html::is_wikipedia_url) && matches(i, HTML_EXTS, HTML_MIMES),
-        convert: |d, i, o| {
-            Ok(html::convert_wikipedia(
-                d,
-                i.charset.as_deref(),
-                o.keep_data_uris,
-            ))
-        },
+        convert: |d, i, o| html::convert_wikipedia(d, i.charset.as_deref(), o.keep_data_uris),
     },
     Converter {
         name: "RssConverter",

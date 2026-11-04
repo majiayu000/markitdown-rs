@@ -129,7 +129,12 @@ fn charref_at(s: &str, i: usize) -> Option<(usize, String)> {
 pub fn decode(bytes: &[u8], encoding: &str) -> String {
     let (markup, sniffed) = strip_bom(bytes);
     let mut tried: Vec<String> = Vec::new();
-    let mut candidates: Vec<String> = vec![encoding.to_string()];
+    // a UTF-16 byte order mark beats the given encoding: the BOM-less
+    // markup would otherwise decode as UTF-8 with NULs, or with the wrong
+    // byte order
+    let utf16_bom = sniffed.filter(|s| s.starts_with("utf-16"));
+    let mut candidates: Vec<String> = utf16_bom.map(str::to_string).into_iter().collect();
+    candidates.push(encoding.to_string());
     candidates.extend(sniffed.map(str::to_string));
     candidates.extend(declared_encoding(markup));
     candidates.push(text::detect(markup));
@@ -222,7 +227,22 @@ pub fn is_wikipedia_url(url: &str) -> bool {
     (2..=3).contains(&lang) && (rest.strip_prefix(".m").is_some_and(host) || host(rest))
 }
 
-pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bool) -> String {
+/// markitdown's converters other than `HtmlConverter` do not catch a
+/// RecursionError: the conversion fails and the next converter runs.
+fn check_depth(dom: &Dom, root: usize) -> Result<(), crate::Error> {
+    if markdownify::too_deep(dom, root) {
+        return Err(crate::Error::Conversion(
+            "RecursionError: maximum recursion depth exceeded".into(),
+        ));
+    }
+    Ok(())
+}
+
+pub fn convert_wikipedia(
+    bytes: &[u8],
+    charset: Option<&str>,
+    keep_data_uris: bool,
+) -> Result<String, crate::Error> {
     let mut dom = parse_bytes(bytes, charset);
     remove_scripts(&mut dom);
     let mut found = Vec::new();
@@ -252,8 +272,10 @@ pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bo
         .and_then(|t| dom.string(t))
         .map(str::to_string);
     let Some(body) = body else {
-        return markdownify(&dom, ROOT, keep_data_uris);
+        check_depth(&dom, ROOT)?;
+        return Ok(markdownify(&dom, ROOT, keep_data_uris));
     };
+    check_depth(&dom, body)?;
     if let Some(&t) = titles.first() {
         main_title = Some(dom.get_text(t, "", false));
     }
@@ -261,7 +283,7 @@ pub fn convert_wikipedia(bytes: &[u8], charset: Option<&str>, keep_data_uris: bo
         .map(|t| pystr::strip(&t).to_string())
         .filter(|t| !t.is_empty());
     let head = main_title.map(|t| format!("# {t}\n\n")).unwrap_or_default();
-    head + &markdownify(&dom, body, keep_data_uris)
+    Ok(head + &markdownify(&dom, body, keep_data_uris))
 }
 
 pub fn convert_bing(
@@ -324,6 +346,7 @@ pub fn convert_bing(
                 dom.set_attr(a, "href", decoded);
             }
         }
+        check_depth(&dom, result)?;
         let md = markdownify(&dom, result, keep_data_uris);
         let lines: Vec<&str> = pystr::strip(&md)
             .split('\n')

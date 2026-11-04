@@ -10,6 +10,9 @@ use std::io::{BufRead, Write};
 const TOOL: &str = "convert_to_markdown";
 /// The versions the Python MCP SDK negotiates; an unknown request gets the
 /// newest.
+/// Stack for each conversion thread: deeply nested documents need more than
+/// a default thread gets.
+const CONVERT_STACK: usize = 256 << 20;
 const PROTOCOL_VERSIONS: [&str; 4] = ["2024-11-05", "2025-03-26", "2025-06-18", "2025-11-25"];
 
 fn tool_list() -> Value {
@@ -58,7 +61,14 @@ fn tool_body(uri: &str) -> Result<String, String> {
             format!("Could not read the resource: {}.", strerror(&error))
         }
     })?;
-    markitdown_core::convert(&data, &info, &Options::default()).map_err(|e| match e {
+    // a conversion that panics fails this call, not the server
+    let converted = std::thread::Builder::new()
+        .stack_size(CONVERT_STACK)
+        .spawn(move || markitdown_core::convert(&data, &info, &Options::default()))
+        .map_err(|_| "File conversion failed.".to_string())?
+        .join()
+        .map_err(|_| "File conversion failed.".to_string())?;
+    converted.map_err(|e| match e {
         Error::Unsupported(_) => "Could not convert stream to Markdown. No converter attempted a \
                                   conversion, suggesting that the filetype is simply not supported."
             .into(),

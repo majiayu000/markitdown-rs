@@ -62,8 +62,36 @@ pub struct Options {
     pub keep_data_uris: bool,
 }
 
-/// `convert_soup(node)`
+/// Element depth below the converted node at which markdownify's recursion
+/// exceeds Python's default recursion limit under the markitdown CLI.
+const MAX_DEPTH: usize = 493;
+
+/// Whether markdownify would hit a RecursionError on this tree.
+pub fn too_deep(dom: &Dom, root: usize) -> bool {
+    let mut stack = vec![(root, 0)];
+    while let Some((id, depth)) = stack.pop() {
+        if depth >= MAX_DEPTH {
+            return true;
+        }
+        for &c in dom.children(id) {
+            if matches!(dom.kind(c), Kind::Element { .. }) {
+                stack.push((c, depth + 1));
+            }
+        }
+    }
+    false
+}
+
+/// `convert_soup(node)`, falling back to `get_text("\n", strip=True)` for
+/// trees too deep to convert, as markitdown does on a RecursionError.
 pub fn convert(dom: &Dom, root: usize, opts: &Options) -> String {
+    if too_deep(dom, root) {
+        eprintln!(
+            "markitdown: warning: HTML document is too deeply nested for markdown \
+             conversion. Falling back to plain-text extraction."
+        );
+        return dom.get_text(root, "\n", true);
+    }
     Converter { dom, opts }.process_tag(root, Ctx::default())
 }
 

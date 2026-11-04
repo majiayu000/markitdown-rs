@@ -72,6 +72,12 @@ pub fn identify(data: &[u8]) -> Option<Sniff> {
     if data.len() > 12 && data.starts_with(b"RIFF") && &data[8..12] == b"WAVE" {
         return Some(sniff("audio/x-wav", &["wav"], false));
     }
+    // a UTF-16LE byte order mark also looks like an MPEG frame sync
+    if data.starts_with(b"\xFF\xFE")
+        && let Some(text) = identify_text(data)
+    {
+        return Some(text);
+    }
     if data.starts_with(b"ID3") || (data.len() > 1 && data[0] == 0xFF && data[1] & 0xE0 == 0xE0) {
         return Some(sniff("audio/mpeg", &["mp3"], false));
     }
@@ -145,13 +151,20 @@ fn identify_ole(data: &[u8]) -> Option<Sniff> {
 
 fn identify_text(data: &[u8]) -> Option<Sniff> {
     let head = &data[..data.len().min(65536)];
-    let text = match std::str::from_utf8(head) {
-        Ok(t) => t.to_string(),
+    // UTF-16 with a byte order mark is text in that encoding
+    let utf16 = match head {
+        [0xff, 0xfe, a, b, ..] if (*a, *b) != (0, 0) => Some(encoding_rs::UTF_16LE),
+        [0xfe, 0xff, ..] => Some(encoding_rs::UTF_16BE),
+        _ => None,
+    };
+    let text = match (utf16, std::str::from_utf8(head)) {
+        (Some(enc), _) => enc.decode_without_bom_handling(&head[2..]).0.into_owned(),
+        (_, Ok(t)) => t.to_string(),
         // a split character at the sample boundary is still text
-        Err(e) if e.error_len().is_none() => {
+        (_, Err(e)) if e.error_len().is_none() => {
             String::from_utf8_lossy(&head[..e.valid_up_to()]).into_owned()
         }
-        Err(_) => {
+        (_, Err(_)) => {
             // legacy-encoded text: no NUL bytes and mostly printable
             let printable = head
                 .iter()

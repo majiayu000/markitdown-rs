@@ -485,3 +485,35 @@ def test_titles(fixture, url, title):
     data = (FIXTURES / fixture).read_bytes()
     info = StreamInfo(extension="." + fixture.rsplit(".", 1)[1], url=url)
     assert MarkItDown().convert_stream(io.BytesIO(data), stream_info=info).title == title
+
+
+def run_cli(*args, stdin=None):
+    import subprocess
+
+    return subprocess.run(
+        [sys.executable, "-m", "markitdown", *args],
+        input=stdin,
+        capture_output=True,
+        env={**__import__("os").environ, "EXIFTOOL_PATH": ""},
+        cwd=ROOT,
+    )
+
+
+def test_python_cli():
+    snapshot = (ROOT / "tests/snapshots/docx/markitdown-test.docx.md").read_bytes()
+    r = run_cli("tests/fixtures/docx/markitdown-test.docx")
+    assert r.returncode == 0 and r.stdout == snapshot
+    r = run_cli("-x", "docx", stdin=(FIXTURES / "docx/markitdown-test.docx").read_bytes())
+    assert r.stdout == snapshot
+    r = run_cli("--list-plugins")
+    assert r.returncode == 0 and b"Installed MarkItDown 3rd-party Plugins:" in r.stdout
+    r = run_cli("-m", "bogus", stdin=b"x")
+    assert r.returncode == 1 and r.stdout == b"Invalid MIME type: bogus\n"
+    r = run_cli("-d", "tests/fixtures/docx/markitdown-test.docx")
+    assert r.returncode == 1 and b"Document Intelligence Endpoint is required" in r.stdout
+
+
+@rs_only
+def test_python_cli_version():
+    r = run_cli("--version")
+    assert r.stdout.decode().strip() == f"markitdown {markitdown.__version__}"

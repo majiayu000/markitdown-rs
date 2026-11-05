@@ -44,6 +44,9 @@ xls = []
 pdf = []
 outlook = []
 
+[project.scripts]
+markitdown = "markitdown.__main__:main"
+
 [project.urls]
 Source = "https://github.com/majiayu000/markitdown-rs"
 

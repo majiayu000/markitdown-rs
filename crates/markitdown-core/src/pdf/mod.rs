@@ -34,7 +34,10 @@ pub fn accepts(_data: &[u8], info: &StreamInfo) -> bool {
 }
 
 pub fn convert(data: &[u8]) -> Result<String, Error> {
-    let fail = |e: object::PdfError| Error::Conversion(format!("PDF: {e}"));
+    let fail = |e: object::PdfError| match e {
+        object::PdfError::Limit(m) => Error::Limit(m),
+        e => Error::Conversion(format!("PDF: {e}")),
+    };
     let doc = Document::new(data).map_err(fail)?;
     let pages = doc.pages().map_err(fail)?;
     let mut fonts = Fonts::default();

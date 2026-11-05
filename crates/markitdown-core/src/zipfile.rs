@@ -38,7 +38,9 @@ fn convert_members(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<Str
         .or(info.local_path.as_deref())
         .or(info.filename.as_deref())
         .unwrap_or("(unknown)");
-    let mut md = format!("Content from the zip file `{path}`:\n\n");
+    // members' text is kept apart and joined once at the end: a growing
+    // String would hold up to twice its size while it reallocates
+    let mut parts = vec![format!("Content from the zip file `{path}`:\n\n")];
     let mut zip = Archive::new(data)?;
     for (i, name) in zip.names().into_iter().enumerate() {
         let bytes = zip.read_index(i)?;
@@ -56,13 +58,21 @@ fn convert_members(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<Str
         };
         match crate::convert::convert(&bytes, &member, opts) {
             Ok(text) => {
-                md.push_str(&format!("## File: {name}\n\n"));
-                md.push_str(&crate::pystr::normalize_output(&text.markdown));
-                md.push_str("\n\n");
+                parts.push(format!("## File: {name}\n\n"));
+                parts.push(crate::pystr::normalize_output(text.markdown));
+                parts.push("\n\n".into());
             }
             Err(Error::Unsupported(_) | Error::Conversion(_)) => {}
             Err(e) => return Err(e),
         }
     }
-    Ok(crate::pystr::strip(&md).to_string())
+    let mut md = parts.concat();
+    drop(parts);
+    // str.strip(), in place
+    let kept = crate::pystr::strip(&md);
+    let start = kept.as_ptr() as usize - md.as_ptr() as usize;
+    let end = start + kept.len();
+    md.truncate(end);
+    md.drain(..start);
+    Ok(md)
 }

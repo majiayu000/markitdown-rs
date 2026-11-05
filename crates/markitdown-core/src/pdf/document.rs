@@ -411,8 +411,8 @@ impl Document {
         for (f, params) in self.filters(s)? {
             let name = f.name().map(|n| n.to_vec()).unwrap_or_default();
             data = match &name[..] {
-                b"FlateDecode" | b"Fl" => filters::flate(&data),
-                b"LZWDecode" | b"LZW" => filters::lzw(&data)?,
+                b"FlateDecode" | b"Fl" => filters::flate(&data, crate::zip::remaining())?,
+                b"LZWDecode" | b"LZW" => filters::lzw(&data, crate::zip::remaining())?,
                 b"ASCII85Decode" | b"A85" => filters::ascii85(&data)?,
                 b"ASCIIHexDecode" | b"AHx" => filters::ascii_hex(&data)?,
                 b"RunLengthDecode" | b"RL" => filters::run_length(&data)?,
@@ -421,6 +421,14 @@ impl Document {
                 b"Crypt" => return other("/Crypt filter is unsupported"),
                 _ => return other(format!("Unsupported filter: {}", literal_name(&f))),
             };
+            // what the decoding filters produce counts against the
+            // conversion's budget of decompressed bytes
+            if !matches!(
+                &name[..],
+                b"DCTDecode" | b"DCT" | b"JBIG2Decode" | b"JPXDecode"
+            ) {
+                crate::zip::charge(data.len() as u64).map_err(|_| filters::over_budget())?;
+            }
             let predictor = match &params {
                 Obj::Dict(p) => p.get("Predictor").map(|v| (p.clone(), v.clone())),
                 Obj::Array(_) => None,

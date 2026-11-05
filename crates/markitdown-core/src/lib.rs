@@ -196,7 +196,7 @@ pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String,
 pub fn convert_document(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<Document, Error> {
     let doc = zip::with_budget(opts, || convert::convert(data, info, opts))?;
     Ok(Document {
-        markdown: pystr::normalize_output(&doc.markdown),
+        markdown: pystr::normalize_output(doc.markdown),
         title: doc.title,
     })
 }

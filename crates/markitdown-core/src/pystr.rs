@@ -21,31 +21,42 @@ pub fn strip_ascii_ws(s: &str) -> &str {
 }
 
 /// markitdown's final normalisation: right-strip every line and squeeze
-/// runs of three or more newlines down to two.
-pub fn normalize_output(s: &str) -> String {
-    let mut lines = String::with_capacity(s.len());
-    for (i, line) in s.split('\n').enumerate() {
-        if i > 0 {
-            lines.push('\n');
-        }
+/// runs of three or more newlines down to two. In place: it only removes
+/// bytes, so a large output is never held twice.
+pub fn normalize_output(s: String) -> String {
+    let mut bytes = s.into_bytes();
+    let n = bytes.len();
+    let (mut read, mut write, mut newlines) = (0, 0, 0);
+    loop {
+        let end = bytes[read..]
+            .iter()
+            .position(|&b| b == b'\n')
+            .map_or(n, |i| read + i);
         // re.split(r"\r?\n") also eats the '\r' before a '\n'
-        let line = line.strip_suffix('\r').unwrap_or(line);
-        lines.push_str(rstrip(line));
-    }
-    let mut out = String::with_capacity(lines.len());
-    let mut newlines = 0;
-    for c in lines.chars() {
-        if c == '\n' {
-            newlines += 1;
-            if newlines <= 2 {
-                out.push('\n');
-            }
-        } else {
-            newlines = 0;
-            out.push(c);
+        let mut line_end = end;
+        if end < n && line_end > read && bytes[line_end - 1] == b'\r' {
+            line_end -= 1;
         }
+        // the line is whole UTF-8 (split at '\n'), and write <= read
+        let keep = rstrip(std::str::from_utf8(&bytes[read..line_end]).unwrap()).len();
+        if keep > 0 {
+            newlines = 0;
+            bytes.copy_within(read..read + keep, write);
+            write += keep;
+        }
+        if end == n {
+            break;
+        }
+        // re.sub(r"\n{3,}", "\n\n")
+        newlines += 1;
+        if newlines <= 2 {
+            bytes[write] = b'\n';
+            write += 1;
+        }
+        read = end + 1;
     }
-    out
+    bytes.truncate(write);
+    String::from_utf8(bytes).expect("only whole lines and newlines were kept")
 }
 
 /// `str.splitlines()`
@@ -156,5 +167,28 @@ pub fn float_repr(v: f64) -> String {
             if exp < 0 { '-' } else { '+' },
             exp.abs()
         )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn normalize_output_matches_markitdown() {
+        // re.split(r"\r?\n"), rstrip each line, re.sub(r"\n{3,}", "\n\n"),
+        // as Python computes it for these inputs
+        for (input, want) in [
+            ("a  \r\nb\t\n\n\n\nc\u{3000}\n", "a\nb\n\nc\n"),
+            ("\n\n\nx", "\n\nx"),
+            ("x \u{a0}\n \n \n \ny", "x\n\ny"),
+            ("only\r", "only"),
+            ("a\r\r\nb", "a\nb"),
+            ("", ""),
+            ("   ", ""),
+            ("z\n\n", "z\n\n"),
+        ] {
+            assert_eq!(normalize_output(input.to_string()), want, "{input:?}");
+        }
     }
 }

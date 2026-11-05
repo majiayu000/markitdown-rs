@@ -221,7 +221,7 @@ instead of exhausting memory or hanging (environment variables, also
 
 | Variable | Default | |
 |---|---|---|
-| `MARKITDOWN_MAX_UNZIPPED_BYTES` | 1 GiB | decompressed bytes read from ZIP archives and Office packages per conversion |
+| `MARKITDOWN_MAX_UNZIPPED_BYTES` | 1 GiB | decompressed bytes per conversion (ZIP archives, Office packages, PDF streams), and the size of an HTTP response |
 | `MARKITDOWN_MAX_ZIP_DEPTH` | 10 | ZIP archives nested in ZIP archives |
 | `MARKITDOWN_HTTP_TIMEOUT` | 120 | seconds per HTTP request (30 to connect); 0 waits forever |
 

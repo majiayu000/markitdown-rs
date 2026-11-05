@@ -101,6 +101,8 @@ pub enum PdfError {
     NotFound(i64),
     /// anything else, which only ends the conversion
     Other(String),
+    /// the conversion's budget of decompressed bytes is spent
+    Limit(String),
 }
 
 impl fmt::Display for PdfError {
@@ -109,7 +111,7 @@ impl fmt::Display for PdfError {
             PdfError::Eof => f.write_str("Unexpected EOF"),
             PdfError::Syntax { msg, .. } => f.write_str(msg),
             PdfError::NotFound(id) => write!(f, "object {id} not found"),
-            PdfError::Other(m) => f.write_str(m),
+            PdfError::Other(m) | PdfError::Limit(m) => f.write_str(m),
         }
     }
 }

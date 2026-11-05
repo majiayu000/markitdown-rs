@@ -3,43 +3,63 @@
 use flate2::{Decompress, FlushDecompress, Status};
 
 use super::lexer::is_space;
-use super::object::{Result, other};
+use super::object::{PdfError, Result, other};
 
 /// FlateDecode as PDFStream.decode does it: `zlib.decompress`, else
-/// `decompress_corrupted`, else nothing.
-pub fn flate(data: &[u8]) -> Vec<u8> {
-    inflate(data)
-        .or_else(|| decompress_corrupted(data))
-        .unwrap_or_default()
+/// `decompress_corrupted`, else nothing. Output beyond `cap` bytes (what is
+/// left of the conversion's decompression budget) is an error.
+pub fn flate(data: &[u8], cap: u64) -> Result<Vec<u8>> {
+    let cap = usize::try_from(cap).unwrap_or(usize::MAX);
+    Ok(match inflate(data, cap)? {
+        Some(out) => out,
+        None => decompress_corrupted(data, cap)?.unwrap_or_default(),
+    })
+}
+
+/// The conversion's decompression budget is spent.
+pub fn over_budget() -> PdfError {
+    match crate::zip::exceeded() {
+        crate::Error::Limit(m) => PdfError::Limit(m),
+        e => PdfError::Other(e.to_string()),
+    }
 }
 
 /// `zlib.decompress()`: the whole stream must be there and check out.
-fn inflate(data: &[u8]) -> Option<Vec<u8>> {
+fn inflate(data: &[u8], cap: usize) -> Result<Option<Vec<u8>>> {
     let mut d = Decompress::new(true);
-    let mut out = Vec::with_capacity(data.len().saturating_mul(4).max(1024));
+    let mut out = Vec::with_capacity(data.len().saturating_mul(4).clamp(1024, cap.max(1024)));
     loop {
+        if out.len() > cap {
+            return Err(over_budget());
+        }
         if out.capacity() - out.len() < 4096 {
-            out.reserve(out.capacity());
+            // grow by doubling, but never far past the cap
+            let room = cap.saturating_add(1).saturating_sub(out.len());
+            out.reserve_exact(out.capacity().min(room).max(4096));
         }
         let (tin, tout) = (d.total_in(), d.total_out());
-        let st = d
-            .decompress_vec(&data[tin as usize..], &mut out, FlushDecompress::None)
-            .ok()?;
+        let Ok(st) = d.decompress_vec(&data[tin as usize..], &mut out, FlushDecompress::None)
+        else {
+            return Ok(None);
+        };
         if st == Status::StreamEnd {
-            return Some(out);
+            return Ok(Some(out));
         }
         if d.total_in() == tin && d.total_out() == tout {
-            return None;
+            return Ok(None);
         }
     }
 }
 
 /// Feed the stream a byte at a time and keep what decodes; an error well
 /// before the end (not just in the checksum) loses everything.
-fn decompress_corrupted(data: &[u8]) -> Option<Vec<u8>> {
+fn decompress_corrupted(data: &[u8], cap: usize) -> Result<Option<Vec<u8>>> {
     let mut d = Decompress::new(true);
     let mut out = Vec::new();
     for (i, b) in data.iter().enumerate() {
+        if out.len() > cap {
+            return Err(over_budget());
+        }
         let mark = out.len();
         let start = d.total_in();
         loop {
@@ -50,13 +70,13 @@ fn decompress_corrupted(data: &[u8]) -> Option<Vec<u8>> {
             match d.decompress_vec(&[*b][used.min(1)..], &mut out, FlushDecompress::None) {
                 Err(_) => {
                     out.truncate(mark);
-                    return if (i as i64) < data.len() as i64 - 3 {
+                    return Ok(if (i as i64) < data.len() as i64 - 3 {
                         None
                     } else {
                         Some(out)
-                    };
+                    });
                 }
-                Ok(Status::StreamEnd) => return Some(out),
+                Ok(Status::StreamEnd) => return Ok(Some(out)),
                 Ok(_) => {
                     if d.total_in() - start >= 1 && out.len() < out.capacity() {
                         break;
@@ -65,11 +85,13 @@ fn decompress_corrupted(data: &[u8]) -> Option<Vec<u8>> {
             }
         }
     }
-    Some(out)
+    Ok(Some(out))
 }
 
-/// LZWDecode; a bad first code raises IndexError, as in pdfminer.
-pub fn lzw(data: &[u8]) -> Result<Vec<u8>> {
+/// LZWDecode; a bad first code raises IndexError, as in pdfminer. Output
+/// beyond `cap` bytes is an error (one code can stand for 4 KB).
+pub fn lzw(data: &[u8], cap: u64) -> Result<Vec<u8>> {
+    let cap = usize::try_from(cap).unwrap_or(usize::MAX);
     let mut out = Vec::new();
     let mut table: Vec<Option<Vec<u8>>> = Vec::new();
     let mut prevbuf: Option<Vec<u8>> = None;
@@ -93,6 +115,9 @@ pub fn lzw(data: &[u8]) -> Result<Vec<u8>> {
             pos += 1;
             buff = x as u32;
             bpos = 0;
+        }
+        if out.len() > cap {
+            return Err(over_budget());
         }
         let code = v as usize;
         if code == 256 {

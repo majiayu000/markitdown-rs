@@ -321,3 +321,95 @@ fn a_panicking_converter_is_a_conversion_error() {
         "{err}"
     );
 }
+
+/// A one-page PDF whose content stream, after "Hello bomb", decodes to a
+/// long run of spaces.
+fn pdf_with_stream(stream: &[u8], filter: &str) -> Vec<u8> {
+    let objs: Vec<Vec<u8>> = vec![
+        b"<< /Type /Catalog /Pages 2 0 R >>".to_vec(),
+        b"<< /Type /Pages /Kids [3 0 R] /Count 1 >>".to_vec(),
+        b"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>".to_vec(),
+        [
+            format!("<< /Length {} /Filter /{filter} >>\nstream\n", stream.len()).into_bytes(),
+            stream.to_vec(),
+            b"\nendstream".to_vec(),
+        ]
+        .concat(),
+        b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>".to_vec(),
+    ];
+    let mut out = b"%PDF-1.4\n".to_vec();
+    let mut offsets = Vec::new();
+    for (i, o) in objs.iter().enumerate() {
+        offsets.push(out.len());
+        out.extend(format!("{} 0 obj\n", i + 1).bytes());
+        out.extend(o);
+        out.extend(b"\nendobj\n");
+    }
+    let xref = out.len();
+    out.extend(format!("xref\n0 {}\n0000000000 65535 f \n", objs.len() + 1).bytes());
+    for o in offsets {
+        out.extend(format!("{o:010} 00000 n \n").bytes());
+    }
+    out.extend(
+        format!(
+            "trailer\n<< /Size {} /Root 1 0 R >>\nstartxref\n{xref}\n%%EOF\n",
+            objs.len() + 1
+        )
+        .bytes(),
+    );
+    out
+}
+
+/// LZW codes that each extend the previous string by one space.
+fn lzw_spaces(codes: usize) -> Vec<u8> {
+    let (mut out, mut acc, mut nacc) = (Vec::new(), 0u64, 0u32);
+    let mut emit = |code: u64, bits: u32| {
+        acc = (acc << bits) | code;
+        nacc += bits;
+        while nacc >= 8 {
+            nacc -= 8;
+            out.push((acc >> nacc) as u8);
+        }
+    };
+    let (mut next, mut bits) = (258u64, 9u32);
+    emit(256, 9);
+    emit(32, 9);
+    for _ in 0..codes {
+        emit(next, bits);
+        next += 1;
+        if matches!(next, 511 | 1023 | 2047) {
+            bits += 1;
+        }
+        if next >= 4094 {
+            emit(256, bits);
+            bits = 9;
+            emit(32, 9);
+            next = 258;
+        }
+    }
+    emit(0, 7);
+    out
+}
+
+#[test]
+fn pdf_streams_share_the_decompression_budget() {
+    use std::io::Write;
+    let mut z = flate2::write::ZlibEncoder::new(Vec::new(), flate2::Compression::best());
+    z.write_all(b"BT /F1 12 Tf 72 720 Td (Hello bomb) Tj ET\n")
+        .unwrap();
+    z.write_all(&vec![b' '; 4 << 20]).unwrap();
+    let flate = pdf_with_stream(&z.finish().unwrap(), "FlateDecode");
+    // about 7 MB of spaces
+    let lzw = pdf_with_stream(&lzw_spaces(4000), "LZWDecode");
+    let budget = |bytes| markitdown_core::Options {
+        max_unzipped_bytes: Some(bytes),
+        ..Default::default()
+    };
+    let info = || StreamInfo::from_path("bomb.pdf");
+    let ok = convert(&flate, &info(), &budget(16 << 20)).unwrap();
+    assert_eq!(ok.trim_end(), "Hello bomb");
+    for pdf in [&flate, &lzw] {
+        let err = convert(pdf, &info(), &budget(1 << 20)).unwrap_err();
+        assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
+    }
+}

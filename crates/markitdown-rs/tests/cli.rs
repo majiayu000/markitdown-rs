@@ -186,3 +186,25 @@ fn truncated_workbook_fails_cleanly() {
     assert!(stderr.contains("conversion failed"), "{stderr}");
     assert!(!stderr.contains("panicked"), "{stderr}");
 }
+
+#[test]
+fn http_bodies_have_the_decompression_limit() {
+    let base = serve(2, |_| {
+        (
+            "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n".into(),
+            vec![b'a'; 5000],
+        )
+    });
+    let run_with = |limit: &str| {
+        Command::new(env!("CARGO_BIN_EXE_markitdown"))
+            .arg(format!("{base}/big.txt"))
+            .env("MARKITDOWN_MAX_UNZIPPED_BYTES", limit)
+            .output()
+            .unwrap()
+    };
+    let out = run_with("1000");
+    assert!(!out.status.success());
+    let err = String::from_utf8_lossy(&out.stderr);
+    assert!(err.contains("exceeds 1000 bytes"), "{err}");
+    assert!(run_with("10000").status.success());
+}

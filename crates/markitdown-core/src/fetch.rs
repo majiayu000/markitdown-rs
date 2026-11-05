@@ -270,14 +270,26 @@ fn fetch(url: &str) -> Loaded {
         }
     }
     info.url = Some(final_url);
+    // the body is gunzipped on the way in: a response may expand as an
+    // archive can, so it gets the same limit
+    let limit = crate::zip::default_limit();
     let mut data = Vec::new();
     resp.body_mut()
         .as_reader()
+        .take(limit.saturating_add(1))
         .read_to_end(&mut data)
         .map_err(|e| SourceError::Request {
             url: url.to_string(),
             message: e.to_string(),
         })?;
+    if data.len() as u64 > limit {
+        return Err(SourceError::Request {
+            url: url.to_string(),
+            message: format!(
+                "the response exceeds {limit} bytes (raise MARKITDOWN_MAX_UNZIPPED_BYTES to allow more)"
+            ),
+        });
+    }
     Ok((data, info))
 }
 

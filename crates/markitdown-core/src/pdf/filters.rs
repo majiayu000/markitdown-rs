@@ -174,6 +174,7 @@ fn is_re_space(c: u8) -> bool {
 
 /// ASCII85Decode: strip `<~`/`~>` loosely, then `base64.a85decode`.
 pub fn ascii85(data: &[u8]) -> Result<Vec<u8>> {
+    let cap = crate::zip::remaining();
     // ^\s*<?\s*~\s*
     let mut s = 0;
     let skip = |mut i: usize| {
@@ -239,6 +240,10 @@ pub fn ascii85(data: &[u8]) -> Result<Vec<u8>> {
         } else {
             return other("Non-Ascii85 digit found");
         }
+        // The last padded tuple can temporarily hold three extra bytes.
+        if out.len() as u64 > cap.saturating_add(3) {
+            return Err(over_budget());
+        }
     }
     let padding = 4 - curr.len();
     out.truncate(out.len().saturating_sub(padding));
@@ -257,6 +262,9 @@ pub fn ascii_hex(data: &[u8]) -> Result<Vec<u8>> {
     if !d.len().is_multiple_of(2) {
         return other("Odd-length string");
     }
+    if (d.len() / 2) as u64 > crate::zip::remaining() {
+        return Err(over_budget());
+    }
     d.chunks(2)
         .map(|p| {
             std::str::from_utf8(p)
@@ -270,11 +278,20 @@ pub fn ascii_hex(data: &[u8]) -> Result<Vec<u8>> {
 /// RunLengthDecode; running out of data mid-run raises.
 pub fn run_length(data: &[u8]) -> Result<Vec<u8>> {
     let mut out = Vec::new();
+    let cap = crate::zip::remaining();
     let mut it = data.iter().copied();
     loop {
         let length = it.next().unwrap_or(128);
         if length == 128 {
             break;
+        }
+        let count = if length < 128 {
+            u64::from(length) + 1
+        } else {
+            257 - u64::from(length)
+        };
+        if count > cap.saturating_sub(out.len() as u64) {
+            return Err(over_budget());
         }
         if length < 128 {
             for _ in 0..=length {
@@ -340,7 +357,9 @@ pub fn png_predictor(colors: i64, columns: i64, bpc: i64, data: &[u8]) -> Result
         };
     }
     let mut buf = Vec::new();
-    let mut line_above: Vec<u8> = vec![0; columns.max(0) as usize];
+    // Only decoded input bytes can access the previous row. A declared
+    // column count must not cause an allocation larger than that input.
+    let mut line_above: Vec<u8> = vec![0; (columns.max(0) as usize).min(data.len())];
     let idx = |v: &Vec<u8>, i: i64| -> Result<u8> {
         if i < 0 {
             // Python's negative index counts from the end
@@ -414,5 +433,46 @@ fn paeth(left: i32, above: i32, upper_left: i32) -> i32 {
         above
     } else {
         upper_left
+    }
+}
+
+#[cfg(test)]
+mod budget_tests {
+    use super::*;
+
+    #[test]
+    fn run_length_stops_before_decoding_the_rest_of_an_oversized_stream() {
+        let opts = crate::Options {
+            max_unzipped_bytes: Some(64),
+            ..Default::default()
+        };
+        // First run already exceeds the budget; the truncated second run
+        // must never be read (nor may a large suffix be allocated).
+        let result = crate::zip::with_budget(&opts, || run_length(&[129, b' ', 129]));
+        assert!(matches!(result, Err(PdfError::Limit(_))), "{result:?}");
+    }
+
+    #[test]
+    fn empty_png_predictor_does_not_allocate_declared_columns() {
+        assert!(png_predictor(1, i64::MAX, 1, &[]).unwrap().is_empty());
+    }
+
+    #[test]
+    fn text_filters_and_run_length_respect_exact_budget_boundaries() {
+        let opts = crate::Options {
+            max_unzipped_bytes: Some(4),
+            ..Default::default()
+        };
+        crate::zip::with_budget(&opts, || {
+            assert_eq!(ascii85(b"z").unwrap(), [0; 4]);
+            assert!(matches!(ascii85(b"zz~invalid"), Err(PdfError::Limit(_))));
+            assert_eq!(ascii_hex(b"01020304>").unwrap(), [1, 2, 3, 4]);
+            assert!(matches!(ascii_hex(b"0102030405>"), Err(PdfError::Limit(_))));
+            assert_eq!(run_length(&[253, b'x', 128]).unwrap(), b"xxxx");
+            assert!(matches!(
+                run_length(&[252, b'x', 128]),
+                Err(PdfError::Limit(_))
+            ));
+        });
     }
 }

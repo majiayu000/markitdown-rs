@@ -31,6 +31,23 @@ uv venv .venv && VIRTUAL_ENV=$PWD/.venv uv pip install maturin
 VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin build --release
 ```
 
+The optional features take markitdown's extras, by the same names:
+
+```bash
+uv pip install 'target/wheels/markitdown_rs-0.2.0-cp310-abi3-macosx_11_0_arm64.whl[all]'
+```
+
+| Extra | Installs | For |
+|---|---|---|
+| `audio-transcription` | SpeechRecognition, pydub (and audioop-lts on Python 3.13+) | `### Audio Transcript` for wav, mp3, m4a (mp3 and m4a need ffmpeg) |
+| `youtube-transcription` | youtube-transcript-api | `### Transcript` for YouTube pages |
+| `az-doc-intel` | azure-ai-documentintelligence, azure-identity | `docintel_endpoint=` |
+| `az-content-understanding` | azure-ai-contentunderstanding, azure-identity | `cu_endpoint=` |
+| `all` | all of the above | |
+
+`docx`, `pptx`, `xlsx`, `xls`, `pdf` and `outlook` exist but install
+nothing: those converters are built in.
+
 Or install it into a development environment and run the tests:
 
 ```bash

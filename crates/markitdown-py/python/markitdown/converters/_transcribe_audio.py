@@ -1,4 +1,4 @@
-# Copied from microsoft/markitdown 0.1.9 (MIT).
+# Copied from microsoft/markitdown 0.1.9 (MIT); install hints name markitdown-rs.
 import io
 import sys
 from typing import BinaryIO
@@ -35,8 +35,8 @@ def transcribe_audio(
         raise MissingDependencyException(
             "Speech transcription requires installing MarkItDown with the "
             "[audio-transcription] optional dependencies. E.g., "
-            "`pip install 'markitdown[audio-transcription]'` or "
-            "`pip install 'markitdown[all]'`"
+            "`pip install 'markitdown-rs[audio-transcription]'` or "
+            "`pip install 'markitdown-rs[all]'`"
         ) from _dependency_exc_info[
             1
         ].with_traceback(  # type: ignore[union-attr]

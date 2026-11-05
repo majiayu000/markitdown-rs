@@ -1,11 +1,11 @@
-# Copied from microsoft/markitdown 0.1.9 (MIT).
+# Copied from microsoft/markitdown 0.1.9 (MIT); install hints name markitdown-rs.
 from typing import Optional, List, Any
 
 MISSING_DEPENDENCY_MESSAGE = """{converter} recognized the input as a potential {extension} file, but the dependencies needed to read {extension} files have not been installed. To resolve this error, include the optional dependency [{feature}] or [all] when installing MarkItDown. For example:
 
-* pip install 'markitdown[{feature}]'
-* pip install 'markitdown[all]'
-* pip install 'markitdown[{feature}, ...]'
+* pip install 'markitdown-rs[{feature}]'
+* pip install 'markitdown-rs[all]'
+* pip install 'markitdown-rs[{feature}, ...]'
 * etc."""
 
 

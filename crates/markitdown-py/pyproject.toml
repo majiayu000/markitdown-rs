@@ -16,6 +16,34 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+# markitdown 0.1.9's extras that pull in Python packages. Its format extras
+# (docx, pdf, ...) are empty here: those converters are built in.
+[project.optional-dependencies]
+audio-transcription = [
+  "pydub",
+  "speechrecognition",
+  # pydub imports audioop, which Python 3.13 removed
+  "audioop-lts; python_version >= '3.13'",
+]
+youtube-transcription = ["youtube-transcript-api~=1.2.3"]
+az-doc-intel = ["azure-ai-documentintelligence", "azure-identity"]
+az-content-understanding = ["azure-ai-contentunderstanding>=1.2.0b1", "azure-identity"]
+all = [
+  "pydub",
+  "speechrecognition",
+  "audioop-lts; python_version >= '3.13'",
+  "youtube-transcript-api~=1.2.3",
+  "azure-ai-documentintelligence",
+  "azure-ai-contentunderstanding>=1.2.0b1",
+  "azure-identity",
+]
+docx = []
+pptx = []
+xlsx = []
+xls = []
+pdf = []
+outlook = []
+
 [project.urls]
 Source = "https://github.com/majiayu000/markitdown-rs"
 

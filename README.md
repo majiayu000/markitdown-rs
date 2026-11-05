@@ -309,7 +309,11 @@ these work as in markitdown:
   picture captions; `requests_session`; `exiftool_path`; `docintel_*` and
   `cu_*` (markitdown's Azure converters, which need the Azure SDKs).
 - Audio transcription when `speech_recognition` is installed and YouTube
-  transcripts when `youtube-transcript-api` is, as in markitdown.
+  transcripts when `youtube-transcript-api` is, as in markitdown. The
+  wheel has markitdown's extras for them and for Azure
+  (`markitdown-rs[audio-transcription]`, `[youtube-transcription]`,
+  `[az-doc-intel]`, `[az-content-understanding]`, `[all]`); see
+  [crates/markitdown-py/README.md](crates/markitdown-py/README.md).
 
 Differences: unknown keyword arguments raise `TypeError` (unless plugins are
 enabled, since plugins read their own), `style_map` raises

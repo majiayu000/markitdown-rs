@@ -1,4 +1,4 @@
-# Copied from microsoft/markitdown 0.1.9 (MIT).
+# Copied from microsoft/markitdown 0.1.9 (MIT); install hints name markitdown-rs.
 """Azure Content Understanding converter for MarkItDown.
 
 Converts files using Azure Content Understanding (CU) for high-quality,
@@ -6,7 +6,7 @@ multi-modal extraction with structured field output. Supports documents,
 images, audio, and video. Fields are serialized as YAML front matter via
 the CU SDK's ``to_llm_input()`` helper.
 
-Install dependencies: ``pip install 'markitdown[az-content-understanding]'``
+Install dependencies: ``pip install 'markitdown-rs[az-content-understanding]'``
 """
 
 import sys
@@ -475,7 +475,7 @@ class ContentUnderstandingConverter(DocumentConverter):
             raise MissingDependencyException(
                 "ContentUnderstandingConverter requires the optional dependency "
                 "[az-content-understanding] (or [all]) to be installed. "
-                "E.g., `pip install 'markitdown[az-content-understanding]'`"
+                "E.g., `pip install 'markitdown-rs[az-content-understanding]'`"
             ) from _dependency_exc_info[
                 1
             ].with_traceback(  # type: ignore[union-attr]

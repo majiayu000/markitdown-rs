@@ -1,4 +1,4 @@
-# Copied from microsoft/markitdown 0.1.9 (MIT).
+# Copied from microsoft/markitdown 0.1.9 (MIT); install hints name markitdown-rs.
 import sys
 import re
 import os
@@ -166,7 +166,7 @@ class DocumentIntelligenceConverter(DocumentConverter):
         # unless explicitly requested.
         if _dependency_exc_info is not None:
             raise MissingDependencyException(
-                "DocumentIntelligenceConverter requires the optional dependency [az-doc-intel] (or [all]) to be installed. E.g., `pip install 'markitdown[az-doc-intel]'`"
+                "DocumentIntelligenceConverter requires the optional dependency [az-doc-intel] (or [all]) to be installed. E.g., `pip install 'markitdown-rs[az-doc-intel]'`"
             ) from _dependency_exc_info[
                 1
             ].with_traceback(  # type: ignore[union-attr]

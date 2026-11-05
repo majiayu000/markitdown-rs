@@ -220,3 +220,24 @@ fn declared_sizes_are_not_trusted() {
     let err = convert(&bomb, &StreamInfo::from_path("b.zip"), &opts).unwrap_err();
     assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
 }
+
+#[test]
+fn truncated_outlook_message_keeps_what_is_there() {
+    // the first 70% of a message: its FAT names sectors past the end of the
+    // file. markitdown's olefile reads the streams that are still there.
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let msg = std::fs::read(root.join("tests/fixtures/msg/poi-simple_test_msg.msg")).unwrap();
+    let cut = &msg[..msg.len() * 70 / 100];
+    let doc = markitdown_core::convert_document(
+        cut,
+        &StreamInfo::from_path("cut.msg"),
+        &Default::default(),
+    )
+    .unwrap();
+    assert_eq!(
+        doc.markdown,
+        "# Email Message\n\n**From:** travis@overwrittenstack.com\n**To:** travis@overwrittenstack.com\n\n## Content\n\nThis is a test message."
+    );
+    // the subject stream was cut off
+    assert_eq!(doc.title, None);
+}

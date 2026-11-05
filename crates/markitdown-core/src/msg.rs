@@ -1,10 +1,8 @@
 //! Outlook .msg files, as markitdown's OutlookMsgConverter: sender,
 //! recipients and subject from the MAPI string properties, then the body.
 
+use crate::ole::Ole;
 use crate::{Document, Error, StreamInfo, pystr, text};
-use std::io::{Cursor, Read};
-
-type Ole<'a> = cfb::CompoundFile<Cursor<&'a [u8]>>;
 
 /// Windows code pages Python names differently from `cp<N>`.
 fn codepage_codec(cp: u32) -> Option<String> {
@@ -36,18 +34,12 @@ fn codepage_codec(cp: u32) -> Option<String> {
     Some(name.to_string())
 }
 
-fn read_stream(ole: &mut Ole, name: &str) -> Option<Vec<u8>> {
-    let path = format!("/{name}");
-    if !ole.is_stream(&path) {
-        return None;
-    }
-    let mut buf = Vec::new();
-    ole.open_stream(&path).ok()?.read_to_end(&mut buf).ok()?;
-    Some(buf)
+fn read_stream(ole: &Ole, name: &str) -> Option<Vec<u8>> {
+    ole.read_stream(name)
 }
 
 /// PT_LONG values of the top-level property stream, keyed by property id.
-fn long_properties(ole: &mut Ole) -> Vec<(u32, u32)> {
+fn long_properties(ole: &Ole) -> Vec<(u32, u32)> {
     let Some(data) = read_stream(ole, "__properties_version1.0") else {
         return Vec::new();
     };
@@ -68,7 +60,7 @@ fn long_properties(ole: &mut Ole) -> Vec<(u32, u32)> {
 }
 
 /// PT_UNICODE (001F), else PT_STRING8 (001E) in the declared code page.
-fn property(ole: &mut Ole, tag: &str, encoding: Option<&str>) -> Option<String> {
+fn property(ole: &Ole, tag: &str, encoding: Option<&str>) -> Option<String> {
     if let Some(data) = read_stream(ole, &format!("__substg1.0_{tag}001F")) {
         let s = encoding_rs::UTF_16LE
             .decode_without_bom_handling_and_without_replacement(&data)
@@ -105,10 +97,14 @@ pub fn accepts(data: &[u8], info: &StreamInfo) -> bool {
     {
         return true;
     }
-    let Ok(ole) = cfb::CompoundFile::open(Cursor::new(data)) else {
+    // olefile.isOleFile wants at least 1536 bytes
+    if data.len() < 1536 {
+        return false;
+    }
+    let Ok(ole) = Ole::open(data) else {
         return false;
     };
-    let names: Vec<String> = ole.walk().map(|e| e.name().to_string()).collect();
+    let names = ole.stream_paths();
     names.iter().any(|n| n.contains("__properties_version1.0"))
         && names
             .iter()
@@ -116,9 +112,8 @@ pub fn accepts(data: &[u8], info: &StreamInfo) -> bool {
 }
 
 pub fn convert(data: &[u8]) -> Result<Document, Error> {
-    let mut ole = cfb::CompoundFile::open(Cursor::new(data))
-        .map_err(|e| Error::Conversion(format!("not an OLE file: {e}")))?;
-    let props = long_properties(&mut ole);
+    let ole = Ole::open(data).map_err(|e| Error::Conversion(format!("not an OLE file: {e}")))?;
+    let props = long_properties(&ole);
     let prop = |id: u32| props.iter().find(|(k, _)| *k == id).map(|(_, v)| *v);
     let known = |c: Option<String>| c.filter(|name| text::decode(b"", name).is_some());
     let message = known(prop(0x3FFD).and_then(codepage_codec));
@@ -128,7 +123,7 @@ pub fn convert(data: &[u8]) -> Result<Document, Error> {
     let mut md = String::from("# Email Message\n\n");
     let mut subject = None;
     for (key, tag) in [("From", "0C1F"), ("To", "0E04"), ("Subject", "0037")] {
-        let value = property(&mut ole, tag, header_enc.as_deref());
+        let value = property(&ole, tag, header_enc.as_deref());
         if let Some(v) = value.as_ref().filter(|v| !v.is_empty()) {
             md.push_str(&format!("**{key}:** {v}\n"));
         }
@@ -137,7 +132,7 @@ pub fn convert(data: &[u8]) -> Result<Document, Error> {
         }
     }
     md.push_str("\n## Content\n\n");
-    if let Some(body) = property(&mut ole, "1000", body_enc.as_deref()) {
+    if let Some(body) = property(&ole, "1000", body_enc.as_deref()) {
         md.push_str(&body);
     }
     Ok(Document {

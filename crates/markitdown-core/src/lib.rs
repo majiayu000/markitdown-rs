@@ -21,6 +21,7 @@ mod html;
 mod markdownify;
 mod media;
 mod msg;
+mod ole;
 mod pdf;
 mod plain;
 mod pptx;

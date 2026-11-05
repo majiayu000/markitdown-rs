@@ -64,7 +64,7 @@ jobs:
       - run: cargo build --release --locked -p markitdown-rs
       - run: |
           uv venv .venv
-          VIRTUAL_ENV=$PWD/.venv uv pip install maturin pytest
+          VIRTUAL_ENV=$PWD/.venv uv pip install maturin pytest "mammoth==1.13.0" lxml beautifulsoup4 defusedxml
           VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin develop --release --uv
         working-directory: crates/markitdown-py
       - run: crates/markitdown-py/.venv/bin/pytest crates/markitdown-py/tests

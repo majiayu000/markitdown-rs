@@ -174,10 +174,6 @@ class MarkItDown:
             self._llm_prompt = kwargs.get("llm_prompt")
             self._exiftool_path = kwargs.get("exiftool_path")
             self._style_map = kwargs.get("style_map")
-            if self._style_map:
-                raise NotImplementedError(
-                    "markitdown-rs does not support custom mammoth style maps (style_map)"
-                )
 
             if self._exiftool_path is None:
                 self._exiftool_path = os.getenv("EXIFTOOL_PATH")

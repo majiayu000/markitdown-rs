@@ -16,8 +16,8 @@ classifiers = [
 ]
 dynamic = ["version"]
 
-# markitdown 0.1.9's extras that pull in Python packages. Its format extras
-# (docx, pdf, ...) are empty here: those converters are built in.
+# markitdown 0.1.9's extras that pull in Python packages. Its other format
+# extras (pdf, pptx, ...) are empty here: those converters are built in.
 [project.optional-dependencies]
 audio-transcription = [
   "pydub",
@@ -29,6 +29,10 @@ youtube-transcription = ["youtube-transcript-api~=1.2.3"]
 az-doc-intel = ["azure-ai-documentintelligence", "azure-identity"]
 az-content-understanding = ["azure-ai-contentunderstanding>=1.2.0b1", "azure-identity"]
 all = [
+  "mammoth<2,>=1.12.2",
+  "lxml",
+  "beautifulsoup4",
+  "defusedxml",
   "pydub",
   "speechrecognition",
   "audioop-lts; python_version >= '3.13'",
@@ -37,7 +41,8 @@ all = [
   "azure-ai-contentunderstanding>=1.2.0b1",
   "azure-identity",
 ]
-docx = []
+# a style_map runs mammoth in Python, as markitdown does
+docx = ["mammoth<2,>=1.12.2", "lxml", "beautifulsoup4", "defusedxml"]
 pptx = []
 xlsx = []
 xls = []

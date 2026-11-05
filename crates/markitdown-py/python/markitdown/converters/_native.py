@@ -11,7 +11,7 @@ from urllib.parse import parse_qs, urlparse
 from .. import _markitdown_rs as _native
 from .._base_converter import DocumentConverter, DocumentConverterResult
 from .._stream_info import StreamInfo
-from .._exceptions import MissingDependencyException
+from .._exceptions import MISSING_DEPENDENCY_MESSAGE, MissingDependencyException
 from ._llm_caption import llm_caption
 from ._transcribe_audio import transcribe_audio
 
@@ -187,6 +187,9 @@ class _OfficeConverter(_NativeConverter):
         return None
 
 
+_UNDERLINE_STYLE_MAP = "u => u"
+
+
 class DocxConverter(_OfficeConverter):
     """
     Converts DOCX files to Markdown. Style information (e.g., headings) and tables are preserved where possible.
@@ -200,11 +203,70 @@ class DocxConverter(_OfficeConverter):
         stream_info: StreamInfo,
         **kwargs: Any,  # Options to pass to the converter
     ) -> DocumentConverterResult:
+        # a caller's style map takes markitdown's own route: mammoth, then
+        # the HTML converter
         if kwargs.get("style_map"):
-            raise NotImplementedError(
-                "markitdown-rs does not support custom mammoth style maps (style_map)"
-            )
+            return self._convert_with_mammoth(file_stream, stream_info, **kwargs)
         return super().convert(file_stream, stream_info, **kwargs)
+
+    def _convert_with_mammoth(
+        self,
+        file_stream: BinaryIO,
+        stream_info: StreamInfo,
+        **kwargs: Any,
+    ) -> DocumentConverterResult:
+        # markitdown 0.1.9's DocxConverter.convert
+        try:
+            import mammoth
+        except ImportError as exc:
+            raise MissingDependencyException(
+                MISSING_DEPENDENCY_MESSAGE.format(
+                    converter=type(self).__name__,
+                    extension=".docx",
+                    feature="docx",
+                )
+            ) from exc
+        from ..converter_utils.docx.pre_process import pre_process_docx
+
+        pre_process_stream = pre_process_docx(file_stream)
+
+        caller_style_map = kwargs.get("style_map")
+        position = pre_process_stream.tell()
+        pre_process_stream.seek(0)
+        try:
+            embedded_style_map = mammoth.read_embedded_style_map(pre_process_stream)
+        finally:
+            pre_process_stream.seek(position)
+
+        style_map = "\n".join(
+            part
+            for part in (
+                caller_style_map,
+                embedded_style_map,
+                _UNDERLINE_STYLE_MAP,
+            )
+            if part
+        )
+
+        image_adapter = None
+        mammoth_kwargs: dict = {}
+        if type(self)._image_to_html is not DocxConverter._image_to_html:
+            from ..converter_utils.docx._images import _DocxImages
+
+            image_adapter = _DocxImages(self._image_to_html, kwargs)
+            mammoth_kwargs["convert_image"] = image_adapter.convert_image
+
+        html_result = mammoth.convert_to_html(
+            pre_process_stream,
+            style_map=style_map,
+            include_embedded_style_map=False,
+            **mammoth_kwargs,
+        ).value
+
+        if image_adapter is not None:
+            html_result = image_adapter.replace_images(html_result)
+
+        return HtmlConverter().convert_string(html_result, **kwargs)
 
     def _image_to_html(
         self,

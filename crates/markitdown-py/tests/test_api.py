@@ -341,10 +341,26 @@ def test_document_intelligence_needs_its_sdk():
         pytest.skip("the Azure SDK is installed")
 
 
+def test_style_map():
+    pytest.importorskip("mammoth")
+    docx = str(FIXTURES / "docx/markitdown-test.docx")
+    plain = MarkItDown().convert(docx).markdown
+    r = MarkItDown(style_map="p[style-name='Heading 1'] => h2:fresh").convert(docx).markdown
+    assert "\n# Abstract\n" in "\n" + plain and "\n## Abstract\n" in "\n" + r
+    # per call, and a run style: bold becomes underline
+    inline = str(FIXTURES / "docx/gen-inline.docx")
+    assert "**" in MarkItDown().convert(inline).markdown
+    r = MarkItDown().convert(inline, style_map="b => u").markdown
+    assert r.startswith("<u>bold</u> *italic*")
+
+
 @rs_only
-def test_style_map_is_not_supported():
-    with pytest.raises(NotImplementedError, match="style_map"):
-        MarkItDown(style_map="p[style-name='Title'] => h1:fresh")
+def test_style_map_needs_mammoth(monkeypatch):
+    monkeypatch.setitem(sys.modules, "mammoth", None)
+    md = MarkItDown(enable_builtins=False)
+    md.register_converter(markitdown.converters.DocxConverter())
+    with pytest.raises(FileConversionException, match=r"markitdown-rs\[docx\]"):
+        md.convert(str(FIXTURES / "docx/markitdown-test.docx"), style_map="b => u")
 
 
 def test_content_understanding_with_a_mocked_client(monkeypatch):

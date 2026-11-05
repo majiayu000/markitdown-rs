@@ -340,6 +340,30 @@ these work as in markitdown:
   `[az-doc-intel]`, `[az-content-understanding]`, `[all]`); see
   [crates/markitdown-py/README.md](crates/markitdown-py/README.md).
 
+**Installing plugins.** markitdown's plugins (markitdown-ocr and others)
+depend on Microsoft's `markitdown` package, so a plain `pip install
+markitdown-ocr` also installs it, and it overwrites this package's
+`markitdown` module: `import markitdown` then runs Microsoft's code (tens of
+times slower) and uninstalling either package removes shared files. markitdown-rs
+warns about this at start-up, with the fix. Install plugins without that
+dependency instead:
+
+```bash
+pip install 'markitdown-rs[ocr]'          # markitdown-ocr's other dependencies
+pip install --no-deps markitdown-ocr
+```
+
+With uv, drop the dependency for the whole project in `pyproject.toml`:
+
+```toml
+[tool.uv]
+override-dependencies = ["markitdown; sys_platform == 'never'"]
+```
+
+or for one install: `uv pip install markitdown-rs markitdown-ocr --override
+overrides.txt` with that line in `overrides.txt`. If the warning appears,
+`pip uninstall -y markitdown markitdown-rs`, then install as above.
+
 Differences: unknown keyword arguments raise `TypeError` (unless plugins are
 enabled, since plugins read their own), HTTP failures without a
 `requests_session` raise

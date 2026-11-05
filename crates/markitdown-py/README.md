@@ -46,10 +46,16 @@ uv pip install 'target/wheels/markitdown_rs-0.2.0-cp310-abi3-macosx_11_0_arm64.w
 | `az-doc-intel` | azure-ai-documentintelligence, azure-identity | `docintel_endpoint=` |
 | `az-content-understanding` | azure-ai-contentunderstanding, azure-identity | `cu_endpoint=` |
 | `docx` | mammoth, lxml, beautifulsoup4, defusedxml | `style_map=` |
+| `ocr` | markitdown-ocr's dependencies except `markitdown` | then `pip install --no-deps markitdown-ocr` |
 | `all` | all of the above | |
 
 `pptx`, `xlsx`, `xls`, `pdf` and `outlook` exist but install nothing: those
 converters are built in.
+
+Plugins depend on Microsoft's `markitdown`, which would overwrite this
+package's `markitdown` module; install them with `--no-deps` (or, with uv,
+`override-dependencies = ["markitdown; sys_platform == 'never'"]`). The
+package warns at start-up when both are installed.
 
 Or install it into a development environment and run the tests:
 

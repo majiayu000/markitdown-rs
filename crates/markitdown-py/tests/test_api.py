@@ -533,3 +533,26 @@ def test_python_cli():
 def test_python_cli_version():
     r = run_cli("--version")
     assert r.stdout.decode().strip() == f"markitdown {markitdown.__version__}"
+
+
+@rs_only
+def test_guard_detects_microsofts_markitdown(tmp_path, monkeypatch, capsys):
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "markitdown_rs_guard", Path(__file__).parents[1] / "markitdown_rs_guard.py"
+    )
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)  # nothing to report next to the tests
+    (tmp_path / "markitdown_rs-0.2.0.dist-info").mkdir()
+    assert guard.check(str(tmp_path)) is None
+    (tmp_path / "markitdown_ocr-0.1.2.dist-info").mkdir()
+    assert guard.check(str(tmp_path)) is None
+    (tmp_path / "markitdown-0.1.9.dist-info").mkdir()
+    assert guard.check(str(tmp_path)) == "markitdown-0.1.9.dist-info"
+    monkeypatch.setattr(guard, "__file__", str(tmp_path / "markitdown_rs_guard.py"))
+    guard.warn()
+    assert "pip install --no-deps markitdown-ocr" in capsys.readouterr().err
+    monkeypatch.setenv("MARKITDOWN_RS_ALLOW_MARKITDOWN", "1")
+    guard.warn()
+    assert capsys.readouterr().err == ""

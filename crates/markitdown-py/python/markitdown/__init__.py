@@ -7,6 +7,11 @@
 Conversions return the same Markdown as microsoft/markitdown 0.1.9.
 """
 
+try:  # installed by the wheel (and run from markitdown_rs.pth)
+    import markitdown_rs_guard  # noqa: F401
+except ImportError:  # a development install
+    pass
+
 from .__about__ import __version__
 from ._markitdown import (
     MarkItDown,

@@ -157,6 +157,18 @@ fn identify_text(data: &[u8]) -> Option<Sniff> {
         [0xfe, 0xff, ..] => Some(encoding_rs::UTF_16BE),
         _ => None,
     };
+    // UTF-16 without a byte order mark: text, classified by its content
+    // (magika's labels for it are erratic)
+    if utf16.is_none() {
+        let enc = match crate::text::bomless_utf16(head) {
+            Some("utf-16-le") => Some(encoding_rs::UTF_16LE),
+            Some(_) => Some(encoding_rs::UTF_16BE),
+            None => None,
+        };
+        if let Some(enc) = enc {
+            return Some(classify_text(&enc.decode_without_bom_handling(head).0));
+        }
+    }
     let text = match (utf16, std::str::from_utf8(head)) {
         (Some(enc), _) => enc.decode_without_bom_handling(&head[2..]).0.into_owned(),
         (_, Ok(t)) => t.to_string(),
@@ -179,6 +191,12 @@ fn identify_text(data: &[u8]) -> Option<Sniff> {
     if text.contains('\0') {
         return None;
     }
+    Some(classify_text(&text))
+}
+
+/// What decoded text looks like: HTML, XML, JSON, a notebook, CSV,
+/// Markdown or plain text.
+fn classify_text(text: &str) -> Sniff {
     let t = text.trim_start_matches('\u{feff}').trim_start();
     let lower: String = t.chars().take(1024).collect::<String>().to_lowercase();
     if lower.starts_with("<!doctype html")
@@ -186,26 +204,26 @@ fn identify_text(data: &[u8]) -> Option<Sniff> {
         || lower.contains("<head")
         || lower.contains("<body")
     {
-        return Some(sniff("text/html", &["html", "htm", "xhtml", "xht"], true));
+        return sniff("text/html", &["html", "htm", "xhtml", "xht"], true);
     }
     if lower.starts_with("<?xml") || lower.starts_with("<rss") || lower.starts_with("<feed") {
-        return Some(sniff("text/xml", &["xml"], true));
+        return sniff("text/xml", &["xml"], true);
     }
     if (t.starts_with('{') || t.starts_with('['))
-        && serde_json::from_str::<serde_json::Value>(&text).is_ok()
+        && serde_json::from_str::<serde_json::Value>(text).is_ok()
     {
         if t.contains("\"nbformat\"") && t.contains("\"cells\"") {
-            return Some(sniff("application/json", &["ipynb"], true));
+            return sniff("application/json", &["ipynb"], true);
         }
-        return Some(sniff("application/json", &["json"], true));
+        return sniff("application/json", &["json"], true);
     }
     if looks_like_csv(t) {
-        return Some(sniff("text/csv", &["csv"], true));
+        return sniff("text/csv", &["csv"], true);
     }
     if t.starts_with("# ") || t.contains("\n## ") || t.contains("\n# ") {
-        return Some(sniff("text/markdown", &["md", "markdown"], true));
+        return sniff("text/markdown", &["md", "markdown"], true);
     }
-    Some(sniff("text/plain", &["txt"], true))
+    sniff("text/plain", &["txt"], true)
 }
 
 /// At least two lines with the same number (> 0) of commas.

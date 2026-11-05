@@ -186,7 +186,48 @@ fn python_to_whatwg(label: &str) -> String {
 }
 
 /// The charset charset_normalizer would pick, as a Python codec name.
+/// UTF-16 without a byte order mark, as charset_normalizer finds it: an
+/// even length, NUL bytes on one side of the code units only (from spaces,
+/// newlines and other ASCII-range characters), and a clean decode in that
+/// byte order with no control characters.
+pub fn bomless_utf16(bytes: &[u8]) -> Option<&'static str> {
+    if bytes.len() < 4
+        || bytes.len() % 2 == 1
+        || bytes.starts_with(b"\xff\xfe")
+        || bytes.starts_with(b"\xfe\xff")
+    {
+        return None;
+    }
+    let zeros = |parity: usize| {
+        bytes
+            .iter()
+            .skip(parity)
+            .step_by(2)
+            .filter(|&&b| b == 0)
+            .count()
+    };
+    let (even, odd) = (zeros(0), zeros(1));
+    let (high, low, name, enc) = if odd > even {
+        (odd, even, "utf-16-le", encoding_rs::UTF_16LE)
+    } else {
+        (even, odd, "utf-16-be", encoding_rs::UTF_16BE)
+    };
+    // CJK characters can put a NUL in the other half (U+4E00 and so on);
+    // the clean decode below is what rules out binary data
+    if high == 0 || low * 2 > high {
+        return None;
+    }
+    let text = enc.decode_without_bom_handling_and_without_replacement(bytes)?;
+    let control = text
+        .chars()
+        .any(|c| (c as u32) < 0x20 && !matches!(c, '\t' | '\n' | '\r' | '\x0c'));
+    (!control).then_some(name)
+}
+
 pub fn detect(bytes: &[u8]) -> String {
+    if let Some(name) = bomless_utf16(bytes) {
+        return name.into();
+    }
     if std::str::from_utf8(bytes).is_ok() {
         return if bytes.is_ascii() {
             "ascii".into()

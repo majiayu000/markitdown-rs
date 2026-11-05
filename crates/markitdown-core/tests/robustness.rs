@@ -258,3 +258,52 @@ fn bytes_python_leaves_undefined_fail_a_charset_hint() {
     };
     assert_eq!(md(&csv, info) + "\n", want);
 }
+
+#[test]
+fn utf16_without_a_bom_is_decoded_as_markitdown_does() {
+    let enc = |s: &str, be: bool| -> Vec<u8> {
+        s.encode_utf16()
+            .flat_map(|u| if be { u.to_be_bytes() } else { u.to_le_bytes() })
+            .collect()
+    };
+    let page = "<html><body><p>Grüße 你好 café</p></body></html>";
+    let english = "<html><head><title>T</title></head><body><h1>Hello</h1><p>Plain English text here.</p></body></html>";
+    let texts = [
+        "Grüße 你好 café\nsecond line\n",
+        "你好世界，这是一个测试。今天天气很好，我们去公园散步吧。\n第二行文字也是中文。\n",
+        "Привет мир, это тест кодировки без метки порядка байтов.\n",
+        "Smile 😀 and wave 👋 to everyone here today.\n",
+    ];
+    for be in [false, true] {
+        assert_eq!(
+            md(&enc(page, be), StreamInfo::from_path("p.html")),
+            "Grüße 你好 café"
+        );
+        for t in texts {
+            assert_eq!(md(&enc(t, be), StreamInfo::from_path("t.txt")), t, "{t}");
+        }
+    }
+    // markitdown sniffs UTF-16BE HTML as HTML from its content alone
+    let be = enc(english, true);
+    assert_eq!(
+        md(&be, StreamInfo::default()),
+        "# Hello\n\nPlain English text here."
+    );
+    assert_eq!(
+        md(&be, StreamInfo::from_path("e.html")),
+        "# Hello\n\nPlain English text here."
+    );
+    // a CSV without hints becomes a table
+    let csv = enc("name,age\nAnn,30\nBob,25\n", false);
+    assert_eq!(
+        md(&csv, StreamInfo::default()),
+        "| name | age |\n| --- | --- |\n| Ann | 30 |\n| Bob | 25 |"
+    );
+    // legacy 8-bit text is not mistaken for UTF-16
+    let gbk = b"\xd6\xd0\xce\xc4\xb1\xe0\xc2\xeb\xb2\xe2\xca\xd4\n";
+    let info = StreamInfo {
+        charset: Some("gbk".into()),
+        ..StreamInfo::from_path("g.txt")
+    };
+    assert_eq!(md(gbk, info), "中文编码测试\n");
+}

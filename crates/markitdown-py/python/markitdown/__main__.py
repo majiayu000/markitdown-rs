@@ -1,4 +1,5 @@
-# Copied from microsoft/markitdown 0.1.9 (MIT), unchanged: the CLI on markitdown-rs's MarkItDown.
+# Copied from microsoft/markitdown 0.1.9 (MIT): the CLI on markitdown-rs's
+# MarkItDown, plus `markitdown mcp`, which runs markitdown-mcp.
 # SPDX-FileCopyrightText: 2024-present Adam Fourney <adamfo@microsoft.com>
 #
 # SPDX-License-Identifier: MIT
@@ -14,7 +15,24 @@ from .__about__ import __version__
 from ._markitdown import MarkItDown, StreamInfo, DocumentConverterResult
 
 
+def _mcp_main():
+    """`markitdown mcp [--http] [--host] [--port]`: markitdown-mcp."""
+    try:
+        from markitdown_mcp.__main__ import main as mcp_main
+    except ImportError as exc:
+        _exit_with_error(
+            f"The MCP server needs the mcp package ({exc}). "
+            "Install it with: pip install 'markitdown-rs[mcp]'"
+        )
+    sys.argv = ["markitdown-mcp"] + sys.argv[2:]
+    mcp_main()
+
+
 def main():
+    # markitdown-rs: `markitdown mcp`, unless a file of that name is meant
+    if sys.argv[1:2] == ["mcp"] and not os.path.exists("mcp"):
+        return _mcp_main()
+
     parser = argparse.ArgumentParser(
         description="Convert various file formats to markdown.",
         prog="markitdown",

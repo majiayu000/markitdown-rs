@@ -80,6 +80,8 @@ all = [
   "azure-ai-contentunderstanding>=1.2.0b1",
   "azure-identity",
 ]
+# markitdown-mcp (`markitdown mcp`, `markitdown-mcp`), pinned as it pins it
+mcp = ["mcp<3.0.0,>=2.1.1"]
 # a style_map runs mammoth in Python, as markitdown does
 docx = ["mammoth<2,>=1.12.2", "lxml", "beautifulsoup4", "defusedxml"]
 pptx = []
@@ -90,6 +92,7 @@ outlook = []
 
 [project.scripts]
 markitdown = "markitdown.__main__:main"
+markitdown-mcp = "markitdown_mcp.__main__:main"
 
 [project.urls]
 Homepage = "https://majiayu000.github.io/markitdown-rs/"
@@ -101,6 +104,8 @@ Issues = "https://github.com/majiayu000/markitdown-rs/issues"
 [tool.maturin]
 python-source = "python"
 module-name = "markitdown._markitdown_rs"
+# markitdown-mcp's module, alongside markitdown
+python-packages = ["markitdown_mcp"]
 features = ["pyo3/extension-module"]
 # installed next to the markitdown package, where Microsoft's markitdown
 # cannot overwrite them: a check that runs at start-up

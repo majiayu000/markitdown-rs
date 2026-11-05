@@ -384,10 +384,11 @@ class MarkItDown:
         try:
             data, info = _native.load_uri(uri)
         except OSError as exc:
+            # OSError(tag, detail, url) keeps the url as .filename
             if exc.args and exc.args[0] == "http":
-                raise HTTPError(exc.args[1], exc.args[2]) from None
+                raise HTTPError(exc.args[1], exc.filename) from None
             if exc.args and exc.args[0] == "request":
-                raise ConnectionError(f"{exc.args[2]}: {exc.args[1]}") from None
+                raise ConnectionError(f"{exc.filename}: {exc.args[1]}") from None
             raise
         base_guess = StreamInfo(**info)
         if stream_info is not None:

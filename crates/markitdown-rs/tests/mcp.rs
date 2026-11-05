@@ -229,3 +229,23 @@ fn http_transports() {
     assert!(!out.status.success());
     assert!(String::from_utf8_lossy(&out.stderr).contains("only valid when using streamable HTTP"));
 }
+
+#[test]
+fn plugins_are_not_silently_ignored() {
+    let help = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .args(["mcp", "--help"])
+        .output()
+        .unwrap();
+    assert!(String::from_utf8_lossy(&help.stdout).contains("MARKITDOWN_ENABLE_PLUGINS has no"));
+    let mut child = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .arg("mcp")
+        .env("MARKITDOWN_ENABLE_PLUGINS", "true")
+        .stdin(Stdio::piped())
+        .stdout(Stdio::null())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    drop(child.stdin.take());
+    let out = child.wait_with_output().unwrap();
+    assert!(String::from_utf8_lossy(&out.stderr).contains("cannot load them"));
+}

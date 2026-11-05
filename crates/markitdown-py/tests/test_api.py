@@ -562,3 +562,62 @@ def test_truncated_workbook_raises_file_conversion_exception():
     xls = (FIXTURES / "xls/markitdown-test.xls").read_bytes()
     with pytest.raises(FileConversionException):
         MarkItDown().convert_stream(io.BytesIO(xls[: len(xls) * 99 // 100]), stream_info=StreamInfo(extension=".xls"))
+
+
+@pytest.fixture
+def http_404():
+    import http.server
+    import threading
+
+    class NotFound(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(404)
+            self.end_headers()
+
+        def log_message(self, *args):
+            pass
+
+    server = http.server.HTTPServer(("127.0.0.1", 0), NotFound)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    yield f"http://127.0.0.1:{server.server_address[1]}"
+    server.shutdown()
+
+
+@rs_only
+def test_fetch_errors(http_404):
+    with pytest.raises(markitdown.HTTPError) as e:
+        MarkItDown().convert_uri(f"{http_404}/missing.pdf")
+    assert e.value.status == 404 and e.value.url == f"{http_404}/missing.pdf"
+    with pytest.raises(ConnectionError, match="127.0.0.1:9/x.pdf"):
+        MarkItDown().convert_uri("http://127.0.0.1:9/x.pdf")
+
+
+@rs_only
+def test_mcp_tool(http_404, monkeypatch):
+    pytest.importorskip("mcp")
+    import asyncio
+
+    from mcp.server.mcpserver.exceptions import ToolError
+
+    from markitdown_mcp.__main__ import check_plugins_enabled, convert_to_markdown
+
+    call = lambda uri: asyncio.run(convert_to_markdown(uri))
+    assert call("data:text/html,<h1>Hi</h1>") == "# Hi"
+    for uri, message in [
+        (f"{http_404}/missing.pdf", "Fetching the resource failed with HTTP status 404."),
+        ("http://127.0.0.1:9/x.pdf", "Could not fetch the resource."),
+        ((FIXTURES / "nope.docx").as_uri(), "Could not read the resource: No such file or directory."),
+    ]:
+        with pytest.raises(ToolError) as e:
+            call(uri)
+        assert str(e.value) == message
+    monkeypatch.setenv("MARKITDOWN_ENABLE_PLUGINS", "true")
+    assert check_plugins_enabled()
+
+
+def test_markitdown_mcp_subcommand():
+    r = run_cli("mcp", "--help")
+    if b"needs the mcp package" in r.stdout:
+        assert r.returncode == 1 and b"markitdown-rs[mcp]" in r.stdout
+    else:
+        assert r.returncode == 0 and b"usage: markitdown-mcp" in r.stdout

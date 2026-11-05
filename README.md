@@ -277,6 +277,14 @@ transport at `/sse` (messages to `/messages/`), checks `Host` and `Origin`
 against DNS rebinding when bound to localhost, and warns when bound to
 another interface: the server has no authentication.
 
+markitdown plugins are Python code, so this server cannot load them
+(`MARKITDOWN_ENABLE_PLUGINS` has no effect, and it says so). For an MCP
+server with plugins such as markitdown-ocr, use the Python package:
+`pip install 'markitdown-rs[mcp]'` installs markitdown-mcp 0.0.1a8's server
+on the same converters, as `markitdown-mcp` and `markitdown mcp` with its
+flags (`--http`, `--host`, `--port`, `--sse`), honouring
+`MARKITDOWN_ENABLE_PLUGINS=true`.
+
 ### Python
 
 `crates/markitdown-py` builds a Python module with markitdown's API on top of

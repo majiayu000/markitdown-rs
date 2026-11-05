@@ -183,7 +183,10 @@ pub fn main(args: impl Iterator<Item = String>) -> Result<(), String> {
                      --http       Run the server with Streamable HTTP and SSE transport rather than STDIO\n  \
                      --sse        (Deprecated) An alias for --http\n  \
                      --host HOST  Host to bind to (default: 127.0.0.1)\n  \
-                     --port PORT  Port to listen on (default: 3001)"
+                     --port PORT  Port to listen on (default: 3001)\n\n\
+                     markitdown plugins are Python code: MARKITDOWN_ENABLE_PLUGINS has no\n\
+                     effect here. For plugins (e.g. markitdown-ocr), run markitdown-mcp from\n\
+                     the Python package: pip install 'markitdown-rs[mcp]'"
                 );
                 return Ok(());
             }
@@ -195,6 +198,14 @@ pub fn main(args: impl Iterator<Item = String>) -> Result<(), String> {
             "Host and port arguments are only valid when using streamable HTTP or SSE \
                     transport (see: --http)."
                 .into(),
+        );
+    }
+    let plugins = std::env::var("MARKITDOWN_ENABLE_PLUGINS").unwrap_or_default();
+    if matches!(plugins.trim().to_lowercase().as_str(), "true" | "1" | "yes") {
+        eprintln!(
+            "markitdown: warning: MARKITDOWN_ENABLE_PLUGINS is set, but plugins are Python \
+             code and this server cannot load them; run markitdown-mcp from the Python \
+             package (pip install 'markitdown-rs[mcp]') for plugins"
         );
     }
     if http {

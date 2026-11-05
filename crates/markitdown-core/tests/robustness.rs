@@ -481,3 +481,52 @@ fn damaged_cell_positions_fail_without_huge_allocations() {
         "{err}"
     );
 }
+
+#[test]
+fn cjk_utf16_and_utf32_are_told_from_legacy_encodings() {
+    // no newline: the only NUL byte comes from 一 (U+4E00)
+    let zh = "中华人民共和国是一个历史悠久的国家，人口众多，文化灿烂。我们今天讨论文档转换工具的编码识别问题。";
+    let units = |be: bool| -> Vec<u8> {
+        zh.encode_utf16()
+            .flat_map(|u| if be { u.to_be_bytes() } else { u.to_le_bytes() })
+            .collect()
+    };
+    let utf32 = |be: bool, bom: bool| -> Vec<u8> {
+        let mut out = Vec::new();
+        for c in bom.then_some('\u{feff}').into_iter().chain(zh.chars()) {
+            out.extend(if be {
+                (c as u32).to_be_bytes()
+            } else {
+                (c as u32).to_le_bytes()
+            });
+        }
+        out
+    };
+    let txt = || StreamInfo::from_path("t.txt");
+    for be in [false, true] {
+        assert_eq!(md(&units(be), txt()), zh, "utf-16 be={be}");
+    }
+    assert_eq!(md(&utf32(false, true), txt()), zh);
+    assert_eq!(md(&utf32(true, false), txt()), zh);
+    // legacy double-byte text still decodes as itself without a hint
+    for (enc, text) in [
+        (
+            encoding_rs::SHIFT_JIS,
+            "日本語のテキストです。今日はいい天気ですね。東京は大きい都市です。",
+        ),
+        (encoding_rs::GBK, zh),
+        (
+            encoding_rs::BIG5,
+            "中華民國是一個歷史悠久的國家，今天的天氣很好，我們一起去公園散步吧。",
+        ),
+        (
+            encoding_rs::EUC_KR,
+            "한국어 텍스트입니다. 오늘 날씨가 좋네요. 우리는 공원에 갑니다.",
+        ),
+    ] {
+        let (bytes, _, _) = enc.encode(text);
+        assert_eq!(md(&bytes, txt()), text, "{}", enc.name());
+    }
+    // and short ASCII UTF-16 keeps its NUL-based byte order
+    assert_eq!(md(b"H\0i\0", txt()), "Hi");
+}

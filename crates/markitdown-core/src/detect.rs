@@ -157,17 +157,13 @@ fn identify_text(data: &[u8]) -> Option<Sniff> {
         [0xfe, 0xff, ..] => Some(encoding_rs::UTF_16BE),
         _ => None,
     };
-    // UTF-16 without a byte order mark: text, classified by its content
-    // (magika's labels for it are erratic)
-    if utf16.is_none() {
-        let enc = match crate::text::bomless_utf16(head) {
-            Some("utf-16-le") => Some(encoding_rs::UTF_16LE),
-            Some(_) => Some(encoding_rs::UTF_16BE),
-            None => None,
-        };
-        if let Some(enc) = enc {
-            return Some(classify_text(&enc.decode_without_bom_handling(head).0));
-        }
+    // UTF-32, and UTF-16 without a byte order mark: text, classified by
+    // its content (magika's labels for it are erratic)
+    if utf16.is_none()
+        && let Some(name) = crate::text::sniff_unicode(head)
+        && let Some(text) = crate::text::decode_lossy(head, name)
+    {
+        return Some(classify_text(text.trim_start_matches('\u{feff}')));
     }
     let text = match (utf16, std::str::from_utf8(head)) {
         (Some(enc), _) => enc.decode_without_bom_handling(&head[2..]).0.into_owned(),

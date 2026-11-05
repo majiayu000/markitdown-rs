@@ -241,3 +241,20 @@ fn truncated_outlook_message_keeps_what_is_there() {
     // the subject stream was cut off
     assert_eq!(doc.title, None);
 }
+
+#[test]
+fn bytes_python_leaves_undefined_fail_a_charset_hint() {
+    // 0x98 is undefined in Python's cp1251, so a cp1251 hint on Shift-JIS
+    // text fails and markitdown falls through to the sniffed CSV as cp932
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let csv = std::fs::read(root.join("tests/fixtures/csv/markitdown-test_mskanji.csv")).unwrap();
+    let want =
+        std::fs::read_to_string(root.join("tests/snapshots/csv/markitdown-test_mskanji.csv.md"))
+            .unwrap();
+    let info = StreamInfo {
+        extension: Some(".txt".into()),
+        charset: Some("cp1251".into()),
+        ..Default::default()
+    };
+    assert_eq!(md(&csv, info) + "\n", want);
+}

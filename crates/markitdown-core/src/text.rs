@@ -105,6 +105,20 @@ fn decode_with(bytes: &[u8], encoding: &str, lossy: bool) -> Option<String> {
         "utf-16-be" | "utf-16be" => utf16(bytes, encoding_rs::UTF_16BE, lossy),
         _ => {
             let enc = Encoding::for_label(python_to_whatwg(&label).as_bytes())?;
+            let undefined = python_undefined(enc.name());
+            if !undefined.is_empty() && bytes.iter().any(|b| undefined.contains(b)) {
+                if !lossy {
+                    return None;
+                }
+                // single-byte code pages: one character per byte
+                let text = enc.decode_without_bom_handling(bytes).0;
+                return Some(
+                    text.chars()
+                        .zip(bytes)
+                        .map(|(c, b)| if undefined.contains(b) { '\u{fffd}' } else { c })
+                        .collect(),
+                );
+            }
             if lossy {
                 Some(enc.decode_without_bom_handling(bytes).0.into_owned())
             } else {
@@ -112,6 +126,29 @@ fn decode_with(bytes: &[u8], encoding: &str, lossy: bool) -> Option<String> {
                     .map(|c| c.into_owned())
             }
         }
+    }
+}
+
+/// Bytes CPython's Windows code pages leave undefined (the WHATWG tables
+/// encoding_rs follows map them to C1 controls). cp1252 is handled above.
+fn python_undefined(whatwg: &str) -> &'static [u8] {
+    match whatwg {
+        "windows-1250" => &[0x81, 0x83, 0x88, 0x90, 0x98],
+        "windows-1251" => &[0x98],
+        "windows-1253" => &[
+            0x81, 0x88, 0x8A, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x98, 0x9A, 0x9C, 0x9D, 0x9E, 0x9F,
+            0xAA, 0xD2, 0xFF,
+        ],
+        "windows-1254" => &[0x81, 0x8D, 0x8E, 0x8F, 0x90, 0x9D, 0x9E],
+        "windows-1255" => &[
+            0x81, 0x8A, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x9A, 0x9C, 0x9D, 0x9E, 0x9F, 0xCA, 0xD9,
+            0xDA, 0xDB, 0xDC, 0xDD, 0xDE, 0xDF, 0xFB, 0xFC, 0xFF,
+        ],
+        "windows-1257" => &[
+            0x81, 0x83, 0x88, 0x8A, 0x8C, 0x90, 0x98, 0x9A, 0x9C, 0x9F, 0xA1, 0xA5,
+        ],
+        "windows-1258" => &[0x81, 0x8A, 0x8D, 0x8E, 0x8F, 0x90, 0x9A, 0x9D, 0x9E],
+        _ => &[],
     }
 }
 

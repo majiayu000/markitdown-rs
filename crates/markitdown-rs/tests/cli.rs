@@ -144,3 +144,27 @@ fn charset_hint_takes_effect() {
     assert_eq!(run(&["-x", "txt", "-c", "cp1252"]), "café crème\n");
     assert_eq!(run(&["-x", "txt", "-c", "cp1251"]), "cafй crиme\n");
 }
+
+#[test]
+fn http_requests_time_out() {
+    // accepts the connection, never answers
+    let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+    let addr = listener.local_addr().unwrap();
+    std::thread::spawn(move || {
+        let _held: Vec<_> = listener.incoming().take(1).collect();
+        std::thread::sleep(std::time::Duration::from_secs(30));
+    });
+    let start = std::time::Instant::now();
+    let out = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .arg(format!("http://{addr}/slow.html"))
+        .env("MARKITDOWN_HTTP_TIMEOUT", "1")
+        .output()
+        .unwrap();
+    assert!(!out.status.success());
+    assert!(start.elapsed() < std::time::Duration::from_secs(10));
+    assert!(
+        String::from_utf8_lossy(&out.stderr).contains("timeout"),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+}

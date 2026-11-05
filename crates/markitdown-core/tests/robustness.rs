@@ -123,3 +123,34 @@ fn xls_formulas_with_biff4_opcodes_keep_their_values() {
         );
     }
 }
+
+#[test]
+fn youtube_transcript_hook_adds_a_section() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let page = std::fs::read(root.join("tests/fixtures/html/gen-youtube.html")).unwrap();
+    let want = std::fs::read_to_string(root.join("tests/url/youtube.md")).unwrap();
+    let seen = std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
+    let log = seen.clone();
+    let opts = markitdown_core::Options {
+        youtube_transcript: Some(markitdown_core::TranscriptHook(std::sync::Arc::new(
+            move |id: &str| {
+                log.lock().unwrap().push(id.to_string());
+                Some("never gonna give you up".into())
+            },
+        ))),
+        ..Default::default()
+    };
+    let info = StreamInfo {
+        url: Some("https://youtu.be/5C_HPTJg5ek".into()),
+        ..StreamInfo::from_path("watch.html")
+    };
+    let got = convert(&page, &info, &opts).unwrap();
+    assert_eq!(
+        got,
+        format!(
+            "{}\n\n### Transcript\nnever gonna give you up\n",
+            want.trim_end()
+        )
+    );
+    assert_eq!(*seen.lock().unwrap(), ["5C_HPTJg5ek"]);
+}

@@ -134,7 +134,7 @@ pub static CONVERTERS: &[Converter] = &[
     Converter {
         name: "YouTubeConverter",
         accepts: |_, i| youtube::accepts(i),
-        convert: |d, i, o| Ok(youtube::convert(d, i, o.keep_data_uris)),
+        convert: |d, i, o| Ok(youtube::convert(d, i, o)),
     },
     Converter {
         name: "WikipediaConverter",

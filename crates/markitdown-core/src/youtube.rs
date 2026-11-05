@@ -1,9 +1,10 @@
-//! markitdown's YouTubeConverter as it runs without the optional
-//! youtube-transcript-api package: the page's title, metadata and
-//! description, or the generic HTML conversion when it has none.
+//! markitdown's YouTubeConverter: the page's title, metadata and
+//! description, the transcript when `Options::youtube_transcript` can
+//! fetch one (markitdown's optional youtube-transcript-api), or the
+//! generic HTML conversion when there is none of these.
 
 use crate::dom::{Dom, Kind, ROOT};
-use crate::{Document, StreamInfo, html, pyurl};
+use crate::{Document, Options, StreamInfo, html, pyurl};
 
 /// `_get_video_id`: youtu.be/ID, youtube.com/watch?v=ID, /shorts/ID, /embed/ID.
 fn video_id(url: &str) -> Option<String> {
@@ -135,7 +136,7 @@ fn metadata(dom: &Dom) -> Vec<(String, String)> {
     meta
 }
 
-pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> Document {
+pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Document {
     let dom = html::parse_bytes(data, Some(info.charset.as_deref().unwrap_or("utf-8")));
     let meta = metadata(&dom);
     let get = |keys: &[&str]| {
@@ -165,8 +166,14 @@ pub fn convert(data: &[u8], info: &StreamInfo, keep_data_uris: bool) -> Document
     if let Some(d) = get(&["description", "og:description"]).filter(|d| !d.is_empty()) {
         text += &format!("\n### Description\n{d}\n");
     }
+    if let Some(hook) = &opts.youtube_transcript
+        && let Some(id) = video_id(info.url.as_deref().unwrap_or_default())
+        && let Some(transcript) = (hook.0)(&id).filter(|t| !t.is_empty())
+    {
+        text += &format!("\n### Transcript\n{transcript}\n");
+    }
     if text.is_empty() {
-        return html::convert(data, info.charset.as_deref(), keep_data_uris);
+        return html::convert(data, info.charset.as_deref(), opts.keep_data_uris);
     }
     Document {
         markdown: format!("# YouTube\n{text}"),

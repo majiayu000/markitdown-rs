@@ -150,6 +150,7 @@ fn run() -> Result<(), String> {
     }
     let opts = Options {
         keep_data_uris: args.keep_data_uris,
+        youtube_transcript: Some(fetch::transcript_hook()),
         ..Default::default()
     };
     let md = markitdown_core::convert(&data, &info, &opts).map_err(|e| e.to_string())?;

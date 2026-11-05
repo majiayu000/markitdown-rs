@@ -125,6 +125,19 @@ impl ImageHook {
     }
 }
 
+/// Fetches a YouTube video's transcript by video id (markitdown's
+/// youtube-transcript-api step); `None` when there is none.
+#[derive(Clone)]
+pub struct TranscriptHook(pub std::sync::Arc<TranscriptHookFn>);
+
+type TranscriptHookFn = dyn Fn(&str) -> Option<String> + Send + Sync;
+
+impl fmt::Debug for TranscriptHook {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        f.write_str("TranscriptHook")
+    }
+}
+
 #[derive(Debug, Clone, Default)]
 pub struct Options {
     /// Keep images as full base64 data URIs instead of truncating them
@@ -134,6 +147,8 @@ pub struct Options {
     /// up as markitdown does, an empty path disables it.
     pub exiftool_path: Option<String>,
     pub image_hook: Option<ImageHook>,
+    /// Adds a `### Transcript` section to YouTube pages.
+    pub youtube_transcript: Option<TranscriptHook>,
 }
 
 #[derive(Debug)]

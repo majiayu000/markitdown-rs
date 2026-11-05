@@ -64,7 +64,13 @@ fn tool_body(uri: &str) -> Result<String, String> {
     // a conversion that panics fails this call, not the server
     let converted = std::thread::Builder::new()
         .stack_size(CONVERT_STACK)
-        .spawn(move || markitdown_core::convert(&data, &info, &Options::default()))
+        .spawn(move || {
+            let opts = Options {
+                youtube_transcript: Some(fetch::transcript_hook()),
+                ..Default::default()
+            };
+            markitdown_core::convert(&data, &info, &opts)
+        })
         .map_err(|_| "File conversion failed.".to_string())?
         .join()
         .map_err(|_| "File conversion failed.".to_string())?;

@@ -5,6 +5,26 @@
 use crate::StreamInfo;
 use std::fmt;
 use std::io::Read;
+use std::time::Duration;
+
+/// Seconds a request may take before it fails: connecting, waiting for the
+/// response headers, and reading the whole body together. Set
+/// MARKITDOWN_HTTP_TIMEOUT to change it (0 waits forever).
+const DEFAULT_TIMEOUT_SECS: u64 = 120;
+
+fn agent() -> ureq::Agent {
+    let secs = std::env::var("MARKITDOWN_HTTP_TIMEOUT")
+        .ok()
+        .and_then(|s| s.trim().parse::<u64>().ok())
+        .unwrap_or(DEFAULT_TIMEOUT_SECS);
+    let timeout = (secs > 0).then(|| Duration::from_secs(secs));
+    ureq::Agent::config_builder()
+        .max_redirects(30)
+        .timeout_global(timeout)
+        .timeout_connect(timeout.map(|t| t.min(Duration::from_secs(30))))
+        .build()
+        .into()
+}
 
 /// Why a source could not be read, in the classes markitdown's frontends
 /// report differently.
@@ -190,11 +210,7 @@ fn disposition_filename(header: &str) -> Option<String> {
 /// HTTP errors raised.
 fn fetch(url: &str) -> Loaded {
     use ureq::ResponseExt;
-    let agent: ureq::Agent = ureq::Agent::config_builder()
-        .max_redirects(30)
-        .build()
-        .into();
-    let mut resp = agent
+    let mut resp = agent()
         .get(url)
         .header(
             "Accept",
@@ -263,6 +279,147 @@ fn fetch(url: &str) -> Loaded {
             message: e.to_string(),
         })?;
     Ok((data, info))
+}
+
+/// youtube-transcript-api's `YouTubeTranscriptApi().fetch(video_id,
+/// languages)` as markitdown calls it: English, else the language of the
+/// video's first caption track (manual tracks before generated ones), the
+/// snippets joined with spaces.
+pub fn youtube_transcript(video_id: &str) -> Result<Option<String>, String> {
+    let agent = agent();
+    let get = |url: &str| -> Result<String, String> {
+        agent
+            .get(url)
+            .header("Accept-Language", "en-US")
+            .call()
+            .and_then(|mut r| r.body_mut().read_to_string())
+            .map_err(|e| format!("{url}: {e}"))
+    };
+    let watch = format!("https://www.youtube.com/watch?v={video_id}");
+    let page = crate::html::unescape(&get(&watch)?);
+    let key = page
+        .split("\"INNERTUBE_API_KEY\":")
+        .nth(1)
+        .and_then(|rest| rest.trim_start().strip_prefix('"'))
+        .map(|rest| {
+            rest.chars()
+                .take_while(|c| c.is_ascii_alphanumeric() || *c == '_' || *c == '-')
+                .collect::<String>()
+        })
+        .filter(|k| !k.is_empty())
+        .ok_or_else(|| {
+            if page.contains("class=\"g-recaptcha\"") {
+                "YouTube is blocking requests from this IP".to_string()
+            } else {
+                "no INNERTUBE_API_KEY in the video page".to_string()
+            }
+        })?;
+    let player_url = format!("https://www.youtube.com/youtubei/v1/player?key={key}");
+    let body = serde_json::json!({
+        "context": {"client": {"clientName": "ANDROID", "clientVersion": "20.10.38"}},
+        "videoId": video_id,
+    });
+    let player = agent
+        .post(&player_url)
+        .header("Accept-Language", "en-US")
+        .header("Content-Type", "application/json")
+        .send(body.to_string())
+        .and_then(|mut r| r.body_mut().read_to_string())
+        .map_err(|e| format!("{player_url}: {e}"))?;
+    let player: serde_json::Value =
+        serde_json::from_str(&player).map_err(|e| format!("{player_url}: {e}"))?;
+    let status = player["playabilityStatus"]["status"].as_str();
+    if status.is_some_and(|s| s != "OK") {
+        let reason = player["playabilityStatus"]["reason"]
+            .as_str()
+            .unwrap_or_default();
+        return Err(format!("video unplayable: {reason}"));
+    }
+    let Some(tracks) =
+        player["captions"]["playerCaptionsTracklistRenderer"]["captionTracks"].as_array()
+    else {
+        return Ok(None);
+    };
+    let is_generated = |t: &&serde_json::Value| t["kind"].as_str() == Some("asr");
+    let language =
+        |t: &serde_json::Value| t["languageCode"].as_str().unwrap_or_default().to_string();
+    let (generated, manual): (Vec<&serde_json::Value>, Vec<&serde_json::Value>) =
+        tracks.iter().partition(is_generated);
+    let mut languages = vec!["en".to_string()];
+    languages.extend(manual.iter().chain(&generated).next().map(|t| language(t)));
+    let Some(track) = languages.iter().find_map(|code| {
+        manual
+            .iter()
+            .chain(&generated)
+            .find(|t| language(t) == *code)
+    }) else {
+        return Ok(None);
+    };
+    let base = track["baseUrl"]
+        .as_str()
+        .unwrap_or_default()
+        .replace("&fmt=srv3", "");
+    if base.contains("&exp=xpe") {
+        return Err("YouTube requires a PO token for this transcript".into());
+    }
+    let xml = get(&base)?;
+    Ok(Some(transcript_text(&xml)?))
+}
+
+/// `youtube_transcript` as an `Options::youtube_transcript` hook; a
+/// transcript that cannot be fetched is reported on stderr and left out.
+pub fn transcript_hook() -> crate::TranscriptHook {
+    crate::TranscriptHook(std::sync::Arc::new(|id: &str| {
+        youtube_transcript(id).unwrap_or_else(|e| {
+            eprintln!("markitdown: warning: no YouTube transcript for {id}: {e}");
+            None
+        })
+    }))
+}
+
+/// The `<text>` snippets of a timedtext document: entities decoded, tags
+/// removed, joined with spaces.
+fn transcript_text(xml: &str) -> Result<String, String> {
+    let opts = crate::xml::ParseOptions {
+        namespaces: &[],
+        cdata_as_text: true,
+        normalize_after_unescape: false,
+        raw_names: true,
+    };
+    let root = crate::xml::parse(xml.as_bytes(), &opts).map_err(|e| e.to_string())?;
+    let mut parts = Vec::new();
+    for el in root.elements() {
+        // ElementTree's `.text`: the text before the first child
+        let mut text = String::new();
+        let mut any = false;
+        for child in &el.children {
+            match child {
+                crate::xml::Node::Text(t) => {
+                    text.push_str(t);
+                    any = true;
+                }
+                _ => break,
+            }
+        }
+        if !any {
+            continue;
+        }
+        let text = crate::html::unescape(&text);
+        let mut plain = String::new();
+        let mut rest = text.as_str();
+        while let Some(open) = rest.find('<') {
+            match rest[open..].find('>') {
+                Some(close) => {
+                    plain.push_str(&rest[..open]);
+                    rest = &rest[open + close + 1..];
+                }
+                None => break,
+            }
+        }
+        plain.push_str(rest);
+        parts.push(plain);
+    }
+    Ok(parts.join(" "))
 }
 
 /// A local path as `convert_local` reads it.
@@ -368,6 +525,15 @@ mod tests {
             Some("€ rates.docx")
         );
         assert_eq!(disposition_filename("inline").as_deref(), None);
+    }
+
+    #[test]
+    fn timedtext_snippets() {
+        let xml = r#"<?xml version="1.0" encoding="utf-8" ?><transcript><text start="0" dur="1">we&amp;#39;re &lt;b&gt;no&lt;/b&gt; strangers</text><text start="1"></text><text start="2" dur="1">to &amp;lt;love&amp;gt; &amp;amp; more</text></transcript>"#;
+        assert_eq!(
+            transcript_text(xml).unwrap(),
+            "we're no strangers to  & more"
+        );
     }
 
     #[test]

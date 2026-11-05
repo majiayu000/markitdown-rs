@@ -8,10 +8,36 @@ description = "Microsoft's markitdown Python API backed by Rust: same `markitdow
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-keywords = ["markdown", "pdf", "docx", "llm", "rag"]
+keywords = [
+  "markitdown",
+  "markitdown-alternative",
+  "markdown",
+  "pdf-to-markdown",
+  "docx-to-markdown",
+  "document-conversion",
+  "llm",
+  "rag",
+  "mcp",
+]
+# no License classifier: `license` is an SPDX expression (PEP 639), which
+# PyPI does not accept together with one
 classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Operating System :: MacOS",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: POSIX :: Linux",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Rust",
+  "Topic :: Office/Business",
+  "Topic :: Text Processing :: General",
   "Topic :: Text Processing :: Markup :: Markdown",
 ]
 dynamic = ["version"]
@@ -66,7 +92,11 @@ outlook = []
 markitdown = "markitdown.__main__:main"
 
 [project.urls]
+Homepage = "https://majiayu000.github.io/markitdown-rs/"
+Documentation = "https://github.com/majiayu000/markitdown-rs/tree/main/crates/markitdown-py#readme"
+Changelog = "https://github.com/majiayu000/markitdown-rs/releases"
 Source = "https://github.com/majiayu000/markitdown-rs"
+Issues = "https://github.com/majiayu000/markitdown-rs/issues"
 
 [tool.maturin]
 python-source = "python"

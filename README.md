@@ -59,7 +59,7 @@ Plain text markup language
 | MCP server / Python API | `markitdown mcp` (stdio, HTTP) / `from markitdown import MarkItDown` | `markitdown-mcp` / yes | no / no | yes / yes |
 
 Full feature-by-feature table, with how each number was measured:
-[docs/comparison.md](docs/comparison.md).
+[markitdown vs markitdown-rs](https://majiayu000.github.io/markitdown-rs/comparison.html).
 
 ## Why
 

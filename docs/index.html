@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>markitdown-rs: convert PDF, Word, Excel and URLs to Markdown in one binary</title>
-<meta name="description" content="markitdown-rs is Microsoft's markitdown rewritten in Rust: a single binary that converts PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown for LLMs and RAG, with byte-identical output, no Python, usually hundreds of times faster.">
+<title>markitdown-rs: markitdown in Rust, documents to Markdown</title>
+<meta name="description" content="Microsoft's markitdown in Rust: PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and URLs to Markdown for LLMs. Same output, no Python, far faster.">
 <link rel="canonical" href="https://majiayu000.github.io/markitdown-rs/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
@@ -18,7 +18,10 @@
 <meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Byte-identical to markitdown, no Python, usually hundreds of times faster.">
 <meta name="twitter:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","codeRepository":"https://github.com/majiayu000/markitdown-rs","description":"Single-binary Rust port of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with byte-identical output.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","softwareVersion":"0.2.0","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","downloadUrl":"https://github.com/majiayu000/markitdown-rs/releases/latest","codeRepository":"https://github.com/majiayu000/markitdown-rs","programmingLanguage":"Rust","description":"Rust rewrite of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with byte-identical output, as one binary, a Python package with markitdown's API and an MCP server.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is markitdown-rs a drop-in replacement for markitdown?", "acceptedAnswer": {"@type": "Answer", "text": "For conversions, yes: the same command, the same flags and the same Markdown. 401 of the 406 test files, and all 232 real-world files both convert in an independent check, come out byte for byte the same as markitdown 0.1.9; the 5 documented differences are rare PDF layout ties and charset guesses. The Python package keeps the same import, from markitdown import MarkItDown, and the same API."}}, {"@type": "Question", "name": "Does markitdown-rs need Python?", "acceptedAnswer": {"@type": "Answer", "text": "No. The markitdown binary is a single 4.5 MB file with no runtime dependencies. Python is needed only for the optional Python package, which you install instead of Microsoft's markitdown package."}}, {"@type": "Question", "name": "How much faster is markitdown-rs than markitdown?", "acceptedAnswer": {"@type": "Answer", "text": "From the command line, usually hundreds of times faster: a median of 408× over 231 real-world files (14.5× to 1,660×), and about 16× on the largest PDFs and spreadsheets. In process, the Python package is 4.7× to 48× faster. It answers --version in 4 ms; Python markitdown takes 1.9 s to start."}}, {"@type": "Question", "name": "Does markitdown-rs support plugins, OCR and Azure?", "acceptedAnswer": {"@type": "Answer", "text": "In the Python package, yes. markitdown plugins load through the same entry points, and the markitdown-ocr plugin gives the same output as with markitdown (install it with pip install --no-deps markitdown-ocr). LLM image captions, audio transcription and style_map work too. Azure Document Intelligence and Content Understanding run markitdown's own converter code, tested with mocked clients only: they have not been run against a live Azure account. The Rust binary does none of these."}}, {"@type": "Question", "name": "Can I use markitdown-rs as an MCP server?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. markitdown mcp serves the same convert_to_markdown tool as markitdown-mcp over stdio, and markitdown mcp --http serves it over Streamable HTTP and SSE on 127.0.0.1:3001. For Claude Code: claude mcp add markitdown -- markitdown mcp."}}]}
 </script>
 <style>
 :root { --bg:#ffffff; --fg:#1f2328; --dim:#59636e; --card:#f6f8fa; --line:#d1d9e0; --accent:#bc4c00; --code:#0d1117; --codefg:#e6edf3; --green:#7ee787; }
@@ -28,6 +31,7 @@ body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 -apple-sys
 main { max-width: 920px; margin: 0 auto; padding: 48px 16px 64px; }
 h1 { font-size: 2.6rem; margin: 0 0 8px; letter-spacing: -0.02em; }
 h2 { margin-top: 48px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+h3 { margin-bottom: 4px; }
 .lead { font-size: 1.25rem; color: var(--dim); margin: 0 0 24px; }
 pre { background: var(--code); color: var(--codefg); padding: 16px; border-radius: 10px; overflow-x: auto; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; }
 pre .dim { color: #9198a1; } pre .ok { color: var(--green); }
@@ -42,6 +46,7 @@ td.num, th.num { text-align: right; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
 .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
 .card p { margin: 0; color: var(--dim); }
+.faq p { margin-top: 0; }
 footer { color: var(--dim); margin-top: 48px; font-size: 0.9rem; }
 a { color: var(--accent); }
 </style>
@@ -49,15 +54,15 @@ a { color: var(--accent); }
 <body>
 <main>
 <h1>markitdown-rs</h1>
-<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> as one Rust binary: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. Same output, byte for byte. No Python. Usually hundreds of times faster.</p>
+<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> rewritten in Rust: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. The same command and the same Markdown, byte for byte, without a Python environment. From the command line it is usually hundreds of times faster.</p>
 
 <div class="cta">
   <a class="primary" href="https://github.com/majiayu000/markitdown-rs/releases/latest">Download a binary</a>
   <a href="https://github.com/majiayu000/markitdown-rs">GitHub</a>
-  <a href="https://github.com/majiayu000/markitdown-rs/blob/main/docs/comparison.md">Comparison</a>
+  <a href="comparison.html">markitdown vs markitdown-rs</a>
 </div>
 
-<pre><span class="dim">$</span> cargo install markitdown-rs
+<pre><span class="dim">$</span> brew install majiayu000/tap/markitdown-rs   <span class="dim"># or: cargo install markitdown-rs</span>
 <span class="dim">$</span> markitdown order.pdf
 Purchase order summary
 <span class="ok">| Item     | Qty | Unit price | Total |
@@ -71,13 +76,29 @@ Plain text markup language</pre>
 
 <h2>Why markitdown-rs</h2>
 <div class="grid">
-  <div class="card"><h3>Drop-in</h3><p>Same command, same flags, same Markdown. Every test file is checked byte for byte against Python markitdown 0.1.9.</p></div>
+  <div class="card"><h3>Drop-in</h3><p>Same command, same flags, same Markdown. 401 of 406 test files are byte-identical to Python markitdown 0.1.9, checked on every commit.</p></div>
   <div class="card"><h3>One small binary</h3><p>A 4.5 MB binary instead of a 328 MB Python environment with pdfminer, pandas, mammoth, magika and onnxruntime.</p></div>
-  <div class="card"><h3>Fast</h3><p>Median 408× faster from the command line on 231 real-world files, about 15× on the largest; 4–50× in process.</p></div>
-  <div class="card"><h3>Every local format</h3><p>PDF, DOCX, PPTX, XLSX, XLS, HTML, EPUB, Outlook MSG, CSV, ZIP, RSS, Jupyter, text, images and audio metadata, plus http(s) URLs, Wikipedia and YouTube pages.</p></div>
+  <div class="card"><h3>Fast</h3><p>Median 408× faster from the command line on 231 real-world files, about 16× on the largest; 4–48× in process. A quarter to a sixth of the memory.</p></div>
+  <div class="card"><h3>Every format</h3><p>PDF, DOCX, PPTX, XLSX, XLS, HTML, EPUB, Outlook MSG, CSV, ZIP, RSS, Jupyter, text, images and audio metadata, plus URLs, Wikipedia pages and YouTube pages with transcripts.</p></div>
 </div>
 
+<h2>Python package</h2>
+<p>The Python package <code>markitdown-rs</code> has markitdown's API on the same Rust converters. It installs the <code>markitdown</code> module, so existing code keeps <code>from markitdown import MarkItDown</code>; install it instead of Microsoft's package, not next to it. It is not on PyPI yet: build the wheel with maturin from <a href="https://github.com/majiayu000/markitdown-rs/tree/main/crates/markitdown-py">crates/markitdown-py</a>.</p>
+<pre><span class="dim">&gt;&gt;&gt;</span> from markitdown import MarkItDown
+<span class="dim">&gt;&gt;&gt;</span> MarkItDown().convert("report.pdf").markdown</pre>
+<ul>
+  <li><strong>The full markitdown command.</strong> The package installs markitdown 0.1.9's own <code>markitdown</code> command (and <code>python -m markitdown</code>) with all of its flags: <code>-p</code> and <code>--list-plugins</code>, <code>-d</code>/<code>-e</code>, <code>--use-cu</code>. The Rust binary is the fast path; this one is the full-parity path.</li>
+  <li><strong>Plugins.</strong> markitdown plugins load through the same entry points; markitdown-ocr gives the same output as with markitdown. Plugins depend on Microsoft's package, so install them without it: <code>pip install 'markitdown-rs[ocr]'</code>, then <code>pip install --no-deps markitdown-ocr</code>.</li>
+  <li><strong>The rest of markitdown's options.</strong> Custom converters, <code>style_map</code> (through mammoth, as markitdown does), LLM image and slide captions (<code>llm_client</code>), audio transcription, YouTube transcripts, <code>requests_session</code>, <code>exiftool_path</code> and the Azure converters.</li>
+</ul>
+
+<h2>MCP server</h2>
+<p><code>markitdown mcp</code> serves the same <code>convert_to_markdown</code> tool as markitdown-mcp to AI agents over stdio; <code>markitdown mcp --http</code> serves it over Streamable HTTP and SSE.</p>
+<pre><span class="dim">$</span> claude mcp add markitdown -- markitdown mcp
+<span class="dim">$</span> markitdown mcp --http --port 3001</pre>
+
 <h2>Benchmarks</h2>
+<p>On 231 real-world files outside the test set (Apache Tika test documents and arXiv papers), measured on 2026-11-05 on an Apple Silicon Mac: the command line is 14.5× to 1,660× faster, median 408×. Python markitdown needs 1.9 s just to start; markitdown-rs answers <code>--version</code> in 4 ms. The repository's own benchmark corpus:</p>
 <table>
 <thead><tr><th>File</th><th class="num">Python markitdown</th><th class="num">markitdown-rs</th><th class="num">Speedup</th></tr></thead>
 <tbody>
@@ -89,21 +110,36 @@ Plain text markup language</pre>
 <tr><td><code>report.pdf</code> (100 pages)</td><td class="num">5,864.0 ms</td><td class="num">180.3 ms</td><td class="num">33×</td></tr>
 </tbody>
 </table>
-<p>CLI wall time, median of repeated runs on an Apple M2 Max. Method and raw numbers: <a href="https://github.com/majiayu000/markitdown-rs#benchmarks">README</a>.</p>
+<p>CLI wall time, median of repeated runs on an Apple M2 Max (markitdown-rs 0.1.0). Method and raw numbers: <a href="https://github.com/majiayu000/markitdown-rs#benchmarks">README</a>.</p>
 
 <h2>Compared with</h2>
 <table>
-<thead><tr><th></th><th>markitdown-rs</th><th>microsoft/markitdown</th><th>markitdown (crates.io)</th><th>xberg (kreuzberg)</th></tr></thead>
+<thead><tr><th></th><th>markitdown-rs</th><th>microsoft/markitdown</th><th>markitdown (crates.io)</th><th>xberg</th></tr></thead>
 <tbody>
 <tr><td>Output identical to markitdown</td><td>yes, tested</td><td>reference</td><td>no</td><td>no (own format)</td></tr>
-<tr><td>Install</td><td>one binary</td><td>pip + Python</td><td>cargo</td><td>pip / cargo / bindings</td></tr>
+<tr><td>Install</td><td>one binary</td><td>pip and Python</td><td>cargo</td><td>pip / cargo / bindings</td></tr>
 <tr><td>Python needed</td><td>no</td><td>yes</td><td>no</td><td>no</td></tr>
-<tr><td>URL input</td><td>yes</td><td>yes</td><td>no</td><td>yes (feature flag)</td></tr>
+<tr><td>Plugins, OCR, LLM captions</td><td>Python package</td><td>yes</td><td>LLM captions</td><td>yes</td></tr>
+<tr><td>MCP server</td><td>stdio and HTTP</td><td>stdio and HTTP</td><td>no</td><td>yes</td></tr>
 </tbody>
 </table>
-<p>Full table: <a href="https://github.com/majiayu000/markitdown-rs/blob/main/docs/comparison.md">docs/comparison.md</a>.</p>
+<p>The full table, with how each number was measured: <a href="comparison.html">markitdown vs markitdown-rs</a>.</p>
 
-<footer>MIT licensed. An independent reimplementation, not affiliated with Microsoft.</footer>
+<h2>FAQ</h2>
+<div class="faq">
+<h3>Is markitdown-rs a drop-in replacement for markitdown?</h3>
+<p>For conversions, yes: the same command, the same flags and the same Markdown. 401 of the 406 test files, and all 232 real-world files both convert in an independent check, come out byte for byte the same as markitdown 0.1.9; the 5 documented differences are rare PDF layout ties and charset guesses. The Python package keeps the same import, <code>from markitdown import MarkItDown</code>, and the same API.</p>
+<h3>Does markitdown-rs need Python?</h3>
+<p>No. The <code>markitdown</code> binary is a single 4.5 MB file with no runtime dependencies. Python is needed only for the optional Python package, which you install instead of Microsoft's markitdown package.</p>
+<h3>How much faster is markitdown-rs than markitdown?</h3>
+<p>From the command line, usually hundreds of times faster: a median of 408× over 231 real-world files (14.5× to 1,660×), and about 16× on the largest PDFs and spreadsheets. In process, the Python package is 4.7× to 48× faster. It answers <code>--version</code> in 4 ms; Python markitdown takes 1.9 s to start.</p>
+<h3>Does markitdown-rs support plugins, OCR and Azure?</h3>
+<p>In the Python package, yes. markitdown plugins load through the same entry points, and the markitdown-ocr plugin gives the same output as with markitdown (install it with <code>pip install --no-deps markitdown-ocr</code>). LLM image captions, audio transcription and <code>style_map</code> work too. Azure Document Intelligence and Content Understanding run markitdown's own converter code, tested with mocked clients only: they have not been run against a live Azure account. The Rust binary does none of these.</p>
+<h3>Can I use markitdown-rs as an MCP server?</h3>
+<p>Yes. <code>markitdown mcp</code> serves the same <code>convert_to_markdown</code> tool as markitdown-mcp over stdio, and <code>markitdown mcp --http</code> serves it over Streamable HTTP and SSE on 127.0.0.1:3001. For Claude Code: <code>claude mcp add markitdown -- markitdown mcp</code>.</p>
+</div>
+
+<footer>MIT licensed. An independent reimplementation, not affiliated with Microsoft. <a href="comparison.html">Comparison</a> · <a href="https://github.com/majiayu000/markitdown-rs">GitHub</a> · <a href="https://github.com/majiayu000/markitdown-rs/releases">Releases</a></footer>
 </main>
 </body>
 </html>

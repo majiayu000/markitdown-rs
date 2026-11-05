@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>markitdown vs markitdown-rs: a markitdown alternative</title>
+<meta name="description" content="markitdown vs markitdown-rs, the markitdown crate and xberg: output parity, speed, install size, formats, plugins, OCR, Python API and MCP, side by side.">
+<link rel="canonical" href="https://majiayu000.github.io/markitdown-rs/comparison.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="markitdown vs markitdown-rs: a markitdown alternative">
+<meta property="og:description" content="How markitdown-rs compares with Microsoft's markitdown and other document-to-Markdown tools: parity, speed, formats, plugins, Python API, MCP.">
+<meta property="og:url" content="https://majiayu000.github.io/markitdown-rs/comparison.html">
+<meta property="og:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="markitdown vs markitdown-rs: a markitdown alternative">
+<meta name="twitter:description" content="markitdown-rs against Microsoft's markitdown and other Markdown converters: parity, speed, formats, plugins, MCP.">
+<meta name="twitter:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
+<style>
+:root { --bg:#ffffff; --fg:#1f2328; --dim:#59636e; --card:#f6f8fa; --line:#d1d9e0; --accent:#bc4c00; --code:#0d1117; --codefg:#e6edf3; --green:#7ee787; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e6edf3; --dim:#9198a1; --card:#151b23; --line:#3d444d; --accent:#f0883e; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+main { max-width: 1040px; margin: 0 auto; padding: 48px 16px 64px; }
+h1 { font-size: 2.2rem; margin: 0 0 8px; letter-spacing: -0.02em; }
+h2 { margin-top: 48px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.lead { font-size: 1.15rem; color: var(--dim); margin: 0 0 24px; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; display: block; overflow-x: auto; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); min-width: 120px; }
+th:first-child, td:first-child { min-width: 170px; font-weight: 600; }
+nav { margin-bottom: 24px; }
+footer { color: var(--dim); margin-top: 48px; font-size: 0.9rem; }
+a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<nav><a href="./">markitdown-rs</a> / comparison</nav>
+<h1>markitdown vs markitdown-rs</h1>
+<p class="lead">markitdown-rs is a markitdown alternative that keeps markitdown's output: Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> rewritten in Rust as one binary, plus a Python package with the same API. Here is how it compares with markitdown itself and with the other tools people use to turn documents into Markdown for LLMs. Repository numbers were read from the GitHub and crates.io APIs on 2026-10-22; behaviour was checked by running each tool where possible, otherwise taken from its README (marked <em>README</em>).</p>
+
+<h2>At a glance</h2>
+<table>
+<thead><tr><th></th><th>markitdown-rs</th><th><a href="https://github.com/microsoft/markitdown">microsoft/markitdown</a></th><th><a href="https://github.com/uhobnil/markitdown-rs">markitdown on crates.io</a> (uhobnil)</th><th><a href="https://github.com/xberg-io/xberg">xberg</a> (formerly kreuzberg)</th><th><a href="https://github.com/ibrahimqureshae/mdflux">MDFlux</a></th></tr></thead>
+<tbody>
+<tr><td>What it is</td><td>markitdown's CLI and converters in one Rust binary, and its Python API on them</td><td>the reference: Python library and CLI</td><td>Rust library and CLI inspired by markitdown</td><td>document-intelligence platform with a Rust core</td><td>desktop app around Python markitdown</td></tr>
+<tr><td>GitHub stars (2026-10-22)</td><td>new</td><td>191,550</td><td>76</td><td>9,437</td><td>568</td></tr>
+<tr><td>Latest release</td><td>v0.2.0</td><td>v0.1.9 (2026-10-21)</td><td>0.1.11 (2026-04-22)</td><td>v1.3.10 (2026-10-13)</td><td>v0.3.0 (2026-08-23)</td></tr>
+<tr><td>License</td><td>MIT</td><td>MIT</td><td>MIT</td><td>MIT</td><td>MIT</td></tr>
+<tr><td>Install</td><td>one binary (Homebrew, <code>cargo install markitdown-rs</code>, release archives); Python wheel built with maturin (not on PyPI yet)</td><td><code>pip install 'markitdown[all]'</code> and Python 3.10+</td><td><code>cargo install markitdown</code> (needs <code>--locked</code>: unlocked, its calamine dependency no longer compiles)</td><td>pip, npm, cargo, Go, Java and more; Docker</td><td>Windows/Linux zip; sets up its own Python on first run</td></tr>
+<tr><td>Runtime dependencies</td><td>none</td><td>Python and 46 packages for the docx/pptx/xlsx/xls/pdf/outlook extras, incl. magika and onnxruntime (328 MB virtualenv)</td><td>none</td><td>native library per binding; ONNX models for layout and OCR</td><td>bundled Python and markitdown</td></tr>
+<tr><td>Output identical to markitdown</td><td><strong>401 of 406 test files</strong> (5 documented differences)</td><td>reference</td><td>35 of 405 (164 files fail to convert)</td><td>not a goal (own Markdown)</td><td>same engine as markitdown, plus optional cleanup</td></tr>
+<tr><td>Speed vs markitdown (CLI)</td><td><strong>median 408× faster</strong> (15–1,660× on 231 files outside the test set)</td><td>1×</td><td>not measured</td><td>not measured</td><td>same engine</td></tr>
+</tbody>
+</table>
+<p>The "identical" row runs every fixture in the markitdown-rs repository through each tool's CLI and compares with Python markitdown 0.1.9's output byte for byte (406 files with a Python result; the crates.io crate was measured on 405, before one fixture was added). The crates.io crate is <code>markitdown 0.1.11</code>, installed with <code>cargo install --locked</code>.</p>
+
+<h2>Formats and features</h2>
+<table>
+<thead><tr><th></th><th>markitdown-rs</th><th>microsoft/markitdown</th><th>markitdown (crates.io)</th><th>xberg</th><th>MDFlux</th></tr></thead>
+<tbody>
+<tr><td>PDF (text layer)</td><td>yes, pdfminer-identical</td><td>yes (pdfminer and pdfplumber)</td><td>yes (plain text)</td><td>yes, with layout models</td><td>yes (markitdown)</td></tr>
+<tr><td>PDF tables without borders</td><td>yes, markitdown's detection</td><td>yes</td><td>no</td><td>yes (table models)</td><td>yes (markitdown)</td></tr>
+<tr><td>Scanned PDFs and images (OCR)</td><td>Python package, with the markitdown-ocr plugin (needs an LLM)</td><td>plugin (markitdown-ocr, needs an LLM)</td><td>no</td><td>yes (Tesseract, PaddleOCR, ...)</td><td>yes, built in</td></tr>
+<tr><td>Word <code>.docx</code></td><td>yes; custom <code>style_map</code> in the Python package</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>PowerPoint <code>.pptx</code></td><td>yes</td><td>yes</td><td>yes</td><td>yes</td><td>yes</td></tr>
+<tr><td>Excel <code>.xlsx</code> / <code>.xls</code></td><td>yes / yes (Excel 3/4 too)</td><td>yes / yes</td><td>yes / no <em>README</em></td><td>yes</td><td>yes</td></tr>
+<tr><td>HTML, Wikipedia, Bing pages</td><td>yes</td><td>yes</td><td>HTML only</td><td>yes</td><td>HTML</td></tr>
+<tr><td>EPUB</td><td>yes</td><td>yes</td><td>no <em>README</em></td><td>yes</td><td>yes</td></tr>
+<tr><td>Outlook <code>.msg</code></td><td>yes</td><td>yes</td><td>no <em>README</em></td><td>yes (email)</td><td>no <em>README</em></td></tr>
+<tr><td>CSV, JSON, XML, RSS/Atom, Jupyter</td><td>yes</td><td>yes</td><td>CSV, XML, RSS <em>README</em></td><td>yes</td><td>CSV, JSON, XML</td></tr>
+<tr><td>ZIP (converts contents)</td><td>yes, with size and nesting limits</td><td>yes</td><td>yes</td><td>yes, plus tar/7z</td><td>no <em>README</em></td></tr>
+<tr><td>Images, audio</td><td>metadata (exiftool); audio transcription in the Python package</td><td>metadata; audio transcription</td><td>images <em>README</em></td><td>OCR; transcription (feature)</td><td>images, audio</td></tr>
+<tr><td>http(s) URLs</td><td>yes</td><td>yes</td><td>no</td><td>yes (feature)</td><td>no <em>README</em></td></tr>
+<tr><td>YouTube pages</td><td>metadata, description, transcript</td><td>metadata, description, transcript (extra)</td><td>no</td><td>not stated</td><td>no</td></tr>
+<tr><td>LLM image captions</td><td>Python package (<code>llm_client</code>)</td><td>yes (<code>llm_client</code>)</td><td>yes (<code>llm_client</code>) <em>README</em></td><td>yes (VLM backends)</td><td>AI cleanup pass</td></tr>
+<tr><td>Azure Document Intelligence, Content Understanding</td><td>Python package (markitdown's own converters; tested with mocked clients)</td><td>yes</td><td>no</td><td>not stated</td><td>no</td></tr>
+<tr><td>Plugins</td><td>Python package (markitdown-ocr tested)</td><td>yes</td><td>no</td><td>yes (OCR backends)</td><td>no</td></tr>
+<tr><td>Python API</td><td>yes: <code>from markitdown import MarkItDown</code>, same API incl. custom converters</td><td>yes</td><td>no</td><td>yes</td><td>no</td></tr>
+<tr><td>Command line</td><td>Rust binary (fast); the Python package's <code>markitdown</code> with all of 0.1.9's flags</td><td>yes</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td>Rust library</td><td>yes (<code>markitdown-core</code>)</td><td>no</td><td>yes</td><td>yes</td><td>no</td></tr>
+<tr><td>MCP server</td><td>yes: <code>markitdown mcp</code>, stdio and HTTP/SSE, same tool as markitdown-mcp</td><td>yes (<code>markitdown-mcp</code>, stdio and HTTP)</td><td>no</td><td>yes</td><td>no</td></tr>
+<tr><td>GUI</td><td>no</td><td>no</td><td>no</td><td>no</td><td>yes</td></tr>
+</tbody>
+</table>
+
+<h2>When to use which</h2>
+<ul>
+<li><strong>You call markitdown from a shell, CI job, container, agent (MCP) or Python code</strong> and want the same Markdown without markitdown's dependency stack: markitdown-rs.</li>
+<li><strong>You need OCR, LLM captions, Azure or plugins</strong>: Python markitdown, or markitdown-rs's Python package, which runs them on the Rust converters (or MDFlux for a desktop app with OCR).</li>
+<li><strong>You need layout-model PDF parsing, many more formats or bindings in other languages</strong>, and do not need markitdown's exact output: xberg.</li>
+</ul>
+
+<h2>Method</h2>
+<ul>
+<li>Stars and dates: <code>gh api repos/&lt;owner&gt;/&lt;repo&gt;</code> and <code>/releases/latest</code>, crates.io API, 2026-10-22.</li>
+<li>Parity: <code>cargo test</code> in the markitdown-rs repository; for the crates.io crate, the same fixtures through its CLI against the same snapshots.</li>
+<li>Speed: 231 Apache Tika and arXiv files outside the test set (2026-11-05), and <code>scripts/bench.sh</code>; numbers in the <a href="https://github.com/majiayu000/markitdown-rs#benchmarks">README</a>.</li>
+</ul>
+
+<footer><a href="./">markitdown-rs</a> · <a href="https://github.com/majiayu000/markitdown-rs">GitHub</a> · MIT licensed. An independent reimplementation, not affiliated with Microsoft.</footer>
+</main>
+</body>
+</html>

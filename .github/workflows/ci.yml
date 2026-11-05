@@ -68,6 +68,8 @@ jobs:
           VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin develop --release --uv
         working-directory: crates/markitdown-py
       - run: crates/markitdown-py/.venv/bin/pytest crates/markitdown-py/tests
+      # the wheel and a build from the sdist both install the start-up guard
+      - run: scripts/check_python_dist.sh
 
   # The checked-in snapshots must be exactly what the pinned Python
   # markitdown (oracle/uv.lock) prints today.

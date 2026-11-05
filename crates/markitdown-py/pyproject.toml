@@ -74,7 +74,8 @@ module-name = "markitdown._markitdown_rs"
 features = ["pyo3/extension-module"]
 # installed next to the markitdown package, where Microsoft's markitdown
 # cannot overwrite them: a check that runs at start-up
+# (sdist too: there pyproject.toml moves to the root, these paths with it)
 include = [
-  { path = "markitdown_rs.pth", format = "wheel" },
-  { path = "markitdown_rs_guard.py", format = "wheel" },
+  { path = "markitdown_rs.pth", format = ["sdist", "wheel"] },
+  { path = "markitdown_rs_guard.py", format = ["sdist", "wheel"] },
 ]

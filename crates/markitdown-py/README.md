@@ -18,8 +18,10 @@ print(result.markdown)                     # also result.text_content
 the `markitdown.converters` classes), plugins (`enable_plugins=True`, e.g.
 markitdown-ocr), `llm_client` image captions, `requests_session`,
 `exiftool_path` and the Azure `docintel_*` / `cu_*` options behave as in
-markitdown 0.1.9. `style_map` raises `NotImplementedError`; unknown keyword
-arguments raise `TypeError` unless plugins are enabled.
+markitdown 0.1.9, and so does `style_map` (through mammoth, with the
+`docx` extra). Unknown keyword arguments raise `TypeError` unless plugins
+are enabled. The wheel installs markitdown's `markitdown` command too (also
+`python -m markitdown`), with all of 0.1.9's flags.
 The module is named `markitdown`, so install it instead of, not next to, the
 Python package of that name.
 
@@ -43,10 +45,11 @@ uv pip install 'target/wheels/markitdown_rs-0.2.0-cp310-abi3-macosx_11_0_arm64.w
 | `youtube-transcription` | youtube-transcript-api | `### Transcript` for YouTube pages |
 | `az-doc-intel` | azure-ai-documentintelligence, azure-identity | `docintel_endpoint=` |
 | `az-content-understanding` | azure-ai-contentunderstanding, azure-identity | `cu_endpoint=` |
+| `docx` | mammoth, lxml, beautifulsoup4, defusedxml | `style_map=` |
 | `all` | all of the above | |
 
-`docx`, `pptx`, `xlsx`, `xls`, `pdf` and `outlook` exist but install
-nothing: those converters are built in.
+`pptx`, `xlsx`, `xls`, `pdf` and `outlook` exist but install nothing: those
+converters are built in.
 
 Or install it into a development environment and run the tests:
 

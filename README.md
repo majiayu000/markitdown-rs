@@ -146,7 +146,9 @@ Known differences:
   detection uses chardetng instead of charset_normalizer, which disagrees on
   short legacy 8-bit text and on Outlook messages that declare the wrong code
   page (`tests/known-diffs.txt`).
-- **Style maps embedded by mammoth** (a `mammoth/style-map` part) are ignored.
+- **Style maps embedded by mammoth** (a `mammoth/style-map` part) are ignored
+  by the Rust converter; the Python module applies them when given a
+  `style_map` (see [Python](#python)).
 - **Deeply nested input.** HTML nested deeper than Python's recursion limit
   allows (493 elements) falls back to plain text exactly where markitdown
   does, with the same warning, however deep it goes. Word tables nested 5000
@@ -162,8 +164,8 @@ packages or cloud services: audio transcription (markitdown's
 speech_recognition calls Google's unofficial speech API with a key built into
 that library, and needs ffmpeg), LLM image captions, Azure Document
 Intelligence / Content Understanding (`-d`, `--use-cu`) and plugins (`-p`).
-The [Python module](#python) does all of these. Custom mammoth style maps
-(`style_map`) raise `NotImplementedError`. Like markitdown, legacy `.doc` and
+The [Python module](#python) does all of these, and its own `markitdown`
+command has the original's full set of flags. Like markitdown, legacy `.doc` and
 `.ppt` files are not converted.
 
 ## Install
@@ -190,7 +192,8 @@ curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.0/mar
 ```
 
 From a checkout: `cargo install --path crates/markitdown-rs`. All of these
-install a binary named `markitdown`. The PyPI package is not published yet.
+install a binary named `markitdown`. The PyPI package (`markitdown-rs`,
+the Python module) is not published yet.
 
 ## Usage
 
@@ -284,6 +287,25 @@ import name is `markitdown`, the same as Microsoft's package, so it cannot be
 installed in the same environment as `markitdown` from PyPI: use one or the
 other.
 
+The wheel also installs markitdown's command, `markitdown` (and
+`python -m markitdown`): 0.1.9's own `__main__.py` on these converters, with
+all of its flags: `-p` / `--list-plugins`, `-d` / `-e`, `--use-cu` and
+`--cu-*`, and audio transcription with `markitdown-rs[audio-transcription]`.
+So there are two `markitdown` commands with the same output where they
+overlap:
+
+| | Rust binary (brew, cargo, release archives) | `pip install markitdown-rs` |
+|---|---|---|
+| Start-up | 4 ms | the Python interpreter's (~0.1 s) |
+| Flags | markitdown's offline ones, plus `mcp` | all of markitdown 0.1.9's |
+| Plugins, Azure, LLM, audio transcription | no | yes |
+| Needs | nothing | Python 3.10+ |
+
+If both are installed, whichever comes first on `PATH` runs (`which -a
+markitdown` lists them). To pick explicitly, run `python -m markitdown` for
+the Python one, or the binary's full path (e.g. `~/.cargo/bin/markitdown`)
+for the Rust one.
+
 ```python
 from markitdown import MarkItDown
 
@@ -308,6 +330,9 @@ these work as in markitdown:
 - `llm_client` / `llm_model` / `llm_prompt` for image descriptions and slide
   picture captions; `requests_session`; `exiftool_path`; `docintel_*` and
   `cu_*` (markitdown's Azure converters, which need the Azure SDKs).
+- `style_map`: as in markitdown, the document goes through mammoth with
+  the caller's and the embedded style map, then through the HTML converter
+  (`markitdown-rs[docx]` installs mammoth).
 - Audio transcription when `speech_recognition` is installed and YouTube
   transcripts when `youtube-transcript-api` is, as in markitdown. The
   wheel has markitdown's extras for them and for Azure
@@ -316,8 +341,8 @@ these work as in markitdown:
   [crates/markitdown-py/README.md](crates/markitdown-py/README.md).
 
 Differences: unknown keyword arguments raise `TypeError` (unless plugins are
-enabled, since plugins read their own), `style_map` raises
-`NotImplementedError`, HTTP failures without a `requests_session` raise
+enabled, since plugins read their own), HTTP failures without a
+`requests_session` raise
 `markitdown.HTTPError` (an `OSError`) instead of `requests.HTTPError`, and the
 ZIP converter converts members with the built-in converters only.
 `crates/markitdown-py/tests/test_api.py` runs against both implementations.

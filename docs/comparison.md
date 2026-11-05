@@ -15,8 +15,8 @@ that was possible, and otherwise taken from its README (marked *README*).
 | License | MIT | MIT | MIT | MIT | MIT |
 | Install | one binary, or `cargo install markitdown-rs` | `pip install 'markitdown[all]'` + Python 3.10+ | `cargo install markitdown` (needs `--locked` today: unlocked, its `calamine` dependency no longer compiles) | pip, npm, cargo, Go, Java and more; Docker | Windows/Linux zip; sets up its own Python on first run |
 | Runtime dependencies | none | Python 3.10–3.14 and 46 packages for the docx/pptx/xlsx/xls/pdf/outlook extras, incl. magika + onnxruntime (328 MB virtualenv) | none | native library per binding; ONNX models for layout/OCR features | bundled Python + markitdown |
-| Output identical to markitdown | **400 of 405 test files** (5 documented differences) | reference | 35 of 405 (164 files fail to convert) | not a goal (own Markdown) | same engine as markitdown, plus optional cleanup |
-| Speed vs markitdown (CLI) | **23–112× faster** | 1× | not measured | not measured | same engine |
+| Output identical to markitdown | **401 of 406 test files** (5 documented differences) | reference | 35 of 405 (164 files fail to convert) | not a goal (own Markdown) | same engine as markitdown, plus optional cleanup |
+| Speed vs markitdown (CLI) | **median 408× faster** (15–1,660× on 231 files outside the test set) | 1× | not measured | not measured | same engine |
 
 The "identical" row runs every fixture in this repository through each tool's
 CLI and compares with Python markitdown 0.1.9's output byte for byte
@@ -38,15 +38,15 @@ CLI and compares with Python markitdown 0.1.9's output byte for byte
 | Outlook `.msg` | yes | yes | no *README* | yes (email) | no *README* |
 | CSV, JSON, XML, RSS/Atom, Jupyter | yes | yes | CSV, XML, RSS *README* | yes | CSV, JSON, XML |
 | ZIP (converts contents) | yes | yes | yes | yes, plus tar/7z | no *README* |
-| Images, audio | metadata (exiftool) | metadata; audio transcription | images *README* | OCR; transcription (feature) | images, audio |
+| Images, audio | metadata (exiftool); audio transcription in the Python module | metadata; audio transcription | images *README* | OCR; transcription (feature) | images, audio |
 | http(s) URLs | yes | yes | no | yes (feature) | no *README* |
-| YouTube pages | metadata and description | metadata, description, transcript (extra) | no | not stated | no |
-| LLM image captions | no | yes (`llm_client`) | yes (`llm_client`) *README* | yes (VLM backends) | AI cleanup pass |
-| Azure Document Intelligence | no | yes | no | not stated | no |
-| Plugins | no | yes | no | yes (OCR backends) | no |
-| Python API | yes: `from markitdown import MarkItDown`, same API (PyO3 build; not on PyPI yet) | yes | no | yes | no |
+| YouTube pages | metadata, description, transcript | metadata, description, transcript (extra) | no | not stated | no |
+| LLM image captions | Python module (`llm_client`) | yes (`llm_client`) | yes (`llm_client`) *README* | yes (VLM backends) | AI cleanup pass |
+| Azure Document Intelligence | Python module (markitdown's converter) | yes | no | not stated | no |
+| Plugins | Python module (markitdown-ocr tested) | yes | no | yes (OCR backends) | no |
+| Python API | yes: `from markitdown import MarkItDown`, same API incl. custom converters (PyO3 build; not on PyPI yet) | yes | no | yes | no |
 | Rust library | yes (`markitdown-core`) | no | yes | yes | no |
-| MCP server | yes: `markitdown mcp` (stdio), same tool as markitdown-mcp | yes (`markitdown-mcp`, stdio and HTTP) | no | yes | no |
+| MCP server | yes: `markitdown mcp` (stdio and HTTP/SSE), same tool as markitdown-mcp | yes (`markitdown-mcp`, stdio and HTTP) | no | yes | no |
 | GUI | no | no | no | no | yes |
 
 ## When to use which
@@ -54,7 +54,8 @@ CLI and compares with Python markitdown 0.1.9's output byte for byte
 - **You call `markitdown` from a shell, CI job, container, agent (MCP) or
   Python code** and want the same Markdown without markitdown's dependency
   stack: markitdown-rs.
-- **You need OCR, LLM captions, Azure or plugins**: Python markitdown (or
+- **You need OCR, LLM captions, Azure or plugins**: Python markitdown, or
+  markitdown-rs's Python module, which runs them on the Rust converters (or
   MDFlux for a desktop app with OCR).
 - **You need layout-model PDF parsing, many more formats or bindings in other
   languages**, and do not need markitdown's exact output: xberg.
@@ -65,4 +66,5 @@ CLI and compares with Python markitdown 0.1.9's output byte for byte
   crates.io API, 2026-10-22.
 - Parity: `cargo test` in this repository for markitdown-rs; for the crates.io
   crate, the same fixtures through its CLI against the same snapshots.
-- Speed: `scripts/bench.sh`, numbers in the [README](../README.md#benchmarks).
+- Speed: 231 Apache Tika and arXiv files outside the test set (2026-11-05),
+  and `scripts/bench.sh`; numbers in the [README](../README.md#benchmarks).

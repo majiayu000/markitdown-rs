@@ -8,7 +8,9 @@
 and web pages to Markdown for LLMs and RAG pipelines.** It is Microsoft's
 [markitdown](https://github.com/microsoft/markitdown) CLI rewritten in Rust as
 one 4.5 MB binary: the same command and the **same Markdown, byte for byte**,
-without a Python environment, **23–112× faster**.
+without a Python environment. From the command line it is **usually hundreds
+of times faster** (median 408× over 231 real-world files, about 15× on the
+largest PDFs and spreadsheets); in process, 4–50× faster.
 
 ```bash
 brew install majiayu000/tap/markitdown-rs   # or: cargo install markitdown-rs
@@ -17,8 +19,8 @@ markitdown report.pdf > report.md
 
 Prebuilt binaries for macOS (Apple silicon and Intel) and Linux x86_64 are on
 the [releases page](https://github.com/majiayu000/markitdown-rs/releases).
-It also runs as an MCP server for AI agents (`markitdown mcp`) and has a
-Python module with markitdown's API.
+It also runs as an MCP server for AI agents (`markitdown mcp`, stdio or
+HTTP) and has a Python module with markitdown's API, plugins included.
 
 ## Example
 
@@ -50,11 +52,11 @@ Plain text markup language
 
 | | markitdown-rs | [microsoft/markitdown](https://github.com/microsoft/markitdown) | [markitdown (crates.io)](https://github.com/uhobnil/markitdown-rs) | [xberg](https://github.com/xberg-io/xberg) |
 |---|---|---|---|---|
-| Output identical to markitdown | **400 of 405 test files** | reference | 35 of 405 | not a goal |
+| Output identical to markitdown | **401 of 406 test files** | reference | 35 of 405 | not a goal |
 | Install | one binary | Python + pip (328 MB venv) | `cargo install` | pip / cargo / npm / ... |
-| Speed (CLI) | **23–112× markitdown** | 1× | – | – |
-| Formats | markitdown's local formats + URLs | all + OCR/LLM plugins, Azure | 9 | 107, OCR, layout models |
-| MCP server / Python API | `markitdown mcp` / `from markitdown import MarkItDown` | `markitdown-mcp` / yes | no / no | yes / yes |
+| Speed (CLI) | **median 408× markitdown** (15–1,660×) | 1× | – | – |
+| Formats | markitdown's formats + URLs; OCR/LLM plugins and Azure in the Python module | all + OCR/LLM plugins, Azure | 9 | 107, OCR, layout models |
+| MCP server / Python API | `markitdown mcp` (stdio, HTTP) / `from markitdown import MarkItDown` | `markitdown-mcp` / yes | no / no | yes / yes |
 
 Full feature-by-feature table, with how each number was measured:
 [docs/comparison.md](docs/comparison.md).
@@ -79,7 +81,7 @@ downstream.
 
 Every fixture is converted by both implementations and compared byte for byte
 in `cargo test` against Python markitdown 0.1.9 (see
-[Parity testing](#parity-testing)): 407 files, the 6,705 inputs of the
+[Parity testing](#parity-testing)): 408 files, the 6,705 inputs of the
 html5lib tokenizer suite through the HTML converter, and 13 pages converted as
 if fetched from Wikipedia, Bing and YouTube URLs.
 
@@ -89,7 +91,7 @@ if fetched from Wikipedia, Bing and YouTube URLs.
 | PowerPoint `.pptx` | 44 | 44 |
 | PDF | 67 | 67 |
 | Excel `.xlsx` | 50 | 49; 1 file Python cannot convert |
-| Excel `.xls` | 43 | 43 |
+| Excel `.xls` (Excel 3/4 and 97–2003) | 44 | 44 |
 | Outlook `.msg` | 38 | 35; 3 known differences |
 | HTML (and Wikipedia, Bing, YouTube pages) | 36 + 6,705 + 13 | all |
 | EPUB | 6 | 6 |
@@ -128,6 +130,8 @@ What each converter covers:
   included); **EPUB** walks the OPF spine; **ZIP** converts every member.
 - **Images and audio** print exiftool metadata when exiftool is installed,
   as markitdown does.
+- **YouTube pages** get the video's transcript (`### Transcript`), fetched
+  the way markitdown's optional youtube-transcript-api does.
 
 Known differences:
 
@@ -143,15 +147,24 @@ Known differences:
   short legacy 8-bit text and on Outlook messages that declare the wrong code
   page (`tests/known-diffs.txt`).
 - **Style maps embedded by mammoth** (a `mammoth/style-map` part) are ignored.
-- **Files where Python fails.** Python hits its recursion limit on tables
-  nested 5000 deep; markitdown-rs stops at 512 levels of XML nesting with an
-  error. Wikipedia answers Python's default `python-requests` User-Agent with
-  HTTP 403; markitdown-rs sends its own and gets the page.
+- **Deeply nested input.** HTML nested deeper than Python's recursion limit
+  allows (493 elements) falls back to plain text exactly where markitdown
+  does, with the same warning, however deep it goes. Word tables nested 5000
+  deep make Python fail; markitdown-rs stops at 512 levels of XML nesting with
+  an error.
+- **UTF-16 HTML with a byte order mark** is decoded by its BOM. markitdown
+  decodes UTF-16LE but turns UTF-16BE pages into mojibake.
+- Wikipedia answers Python's default `python-requests` User-Agent with HTTP
+  403; markitdown-rs sends its own and gets the page.
 
-Not supported: YouTube transcripts and audio transcription, LLM image captions
-(`llm_client`), Azure Document Intelligence / Content Understanding (`-d`,
-`--use-cu`), OCR and other plugins (`-p`), and the Python API's `style_map`
-argument. Like markitdown, legacy `.doc` and `.ppt` files are not converted.
+The command line does not do what markitdown leaves to optional Python
+packages or cloud services: audio transcription (markitdown's
+speech_recognition calls Google's unofficial speech API with a key built into
+that library, and needs ffmpeg), LLM image captions, Azure Document
+Intelligence / Content Understanding (`-d`, `--use-cu`) and plugins (`-p`).
+The [Python module](#python) does all of these. Custom mammoth style maps
+(`style_map`) raise `NotImplementedError`. Like markitdown, legacy `.doc` and
+`.ppt` files are not converted.
 
 ## Install
 
@@ -199,6 +212,16 @@ As in markitdown, the format comes from the hints (extension, MIME type,
 charset) and from the file contents, and converters are tried in markitdown's
 order until one succeeds.
 
+Limits that markitdown does not have, so that hostile files fail cleanly
+instead of exhausting memory or hanging (environment variables, also
+`Options` fields in the library):
+
+| Variable | Default | |
+|---|---|---|
+| `MARKITDOWN_MAX_UNZIPPED_BYTES` | 1 GiB | decompressed bytes read from ZIP archives and Office packages per conversion |
+| `MARKITDOWN_MAX_ZIP_DEPTH` | 10 | ZIP archives nested in ZIP archives |
+| `MARKITDOWN_HTTP_TIMEOUT` | 120 | seconds per HTTP request (30 to connect); 0 waits forever |
+
 As a library (`markitdown-core`; URL loading is the optional `fetch` feature):
 
 ```rust
@@ -237,8 +260,19 @@ use the full path from `which markitdown` (e.g. `~/.cargo/bin/markitdown`) as
 
 Tool name, input and output schemas, result shape and error messages match
 markitdown-mcp 0.0.1a8; `serverInfo.version` is markitdown-rs's version, and
-argument validation errors leave out pydantic's details. HTTP/SSE transport
-(`--http`) is not implemented.
+argument validation errors leave out pydantic's details.
+
+Over HTTP, as `markitdown-mcp --http`:
+
+```bash
+markitdown mcp --http                      # http://127.0.0.1:3001
+markitdown mcp --http --host 127.0.0.1 --port 8080
+```
+
+It serves Streamable HTTP at `/mcp` (stateless, JSON responses) and the SSE
+transport at `/sse` (messages to `/messages/`), checks `Host` and `Origin`
+against DNS rebinding when bound to localhost, and warns when bound to
+another interface: the server has no authentication.
 
 ### Python
 
@@ -257,16 +291,52 @@ result = MarkItDown().convert("report.pdf")   # path, URL, file:/data: URI, stre
 print(result.markdown)                        # or result.text_content
 ```
 
-`convert`, `convert_local`, `convert_stream`, `convert_uri`,
-`convert_response`, `StreamInfo` and the exception classes follow
-markitdown 0.1.9; results are byte-identical to the CLI. `result.title` is
-always `None`, HTTP failures raise `markitdown.HTTPError` (an `OSError`)
-instead of `requests.HTTPError`, and plugins, `llm_client` and Azure options
-raise `NotImplementedError`.
+The module follows markitdown 0.1.9's own design: the built-in converters
+are `DocumentConverter` classes in `markitdown.converters`, each backed by the
+Rust converter of the same name, tried in markitdown's priority order. So
+these work as in markitdown:
+
+- `convert`, `convert_local`, `convert_stream`, `convert_uri`,
+  `convert_response`, `StreamInfo`, the exception classes and
+  `result.title`; output is byte-identical to the CLI.
+- Custom converters: `register_converter(converter, priority=...)`,
+  `PRIORITY_SPECIFIC_FILE_FORMAT` / `PRIORITY_GENERIC_FILE_FORMAT`,
+  subclasses of the built-ins (with the `_image_to_html` hooks of the DOCX,
+  PPTX and XLSX converters), `enable_builtins=False`.
+- Plugins (`enable_plugins=True`, `markitdown.plugin` entry points); the
+  markitdown-ocr plugin gives the same output as with markitdown.
+- `llm_client` / `llm_model` / `llm_prompt` for image descriptions and slide
+  picture captions; `requests_session`; `exiftool_path`; `docintel_*` and
+  `cu_*` (markitdown's Azure converters, which need the Azure SDKs).
+- Audio transcription when `speech_recognition` is installed and YouTube
+  transcripts when `youtube-transcript-api` is, as in markitdown.
+
+Differences: unknown keyword arguments raise `TypeError` (unless plugins are
+enabled, since plugins read their own), `style_map` raises
+`NotImplementedError`, HTTP failures without a `requests_session` raise
+`markitdown.HTTPError` (an `OSError`) instead of `requests.HTTPError`, and the
+ZIP converter converts members with the built-in converters only.
+`crates/markitdown-py/tests/test_api.py` runs against both implementations.
 
 ## Benchmarks
 
-Python markitdown 0.1.9 (CPython 3.12.12, versions pinned in `oracle/uv.lock`)
+On 231 real-world files that are not part of this repository's fixtures (234
+Apache Tika test documents and 10 arXiv papers, all those both
+implementations convert), measured on 2026-11-05 with markitdown-rs 0.2.0 on
+an Apple Silicon Mac (macOS 26.5, Python 3.12):
+
+- CLI, a new process per file: 14.5× to 1,660× faster, median 408×; 218 of
+  the 231 files are at least 100× faster. The largest inputs are where the
+  gap is smallest: the Llama 2 paper (26.6 s vs 1.6 s) and Tika's
+  `jxl.xls` (18.2 s vs 1.1 s) are 16× faster. Python's start-up alone is
+  1.9 s; markitdown-rs answers `--version` in 4 ms.
+- In process, warm, Python module against Python module: 4.7× (a large HTML
+  page) to 48× (a small XLSX); 29× on the Llama 2 paper, 26× on `jxl.xls`.
+- Peak memory is a quarter to a sixth of Python's: 79 MiB vs 440 MiB on the
+  Llama 2 paper, 157 MiB vs 668 MiB on `jxl.xls`.
+
+The tables below are from the repository's own benchmark corpus, generated by
+`scripts/bench.sh`. Python markitdown 0.1.9 (CPython 3.12.12, versions pinned in `oracle/uv.lock`)
 against `markitdown-rs` 0.1.0 (release build, rustc 1.99.1) on the same
 machine, run back to back on 2026-10-22: Apple M2 Max, 12 cores, macOS 26.5.
 The machine was shared with other jobs (load average 16–47), so treat wall

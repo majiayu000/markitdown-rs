@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>markitdown-rs: convert PDF, Word, Excel and URLs to Markdown in one binary</title>
-<meta name="description" content="markitdown-rs is Microsoft's markitdown rewritten in Rust: a single binary that converts PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown for LLMs and RAG, with byte-identical output, no Python, 23–112× faster.">
+<meta name="description" content="markitdown-rs is Microsoft's markitdown rewritten in Rust: a single binary that converts PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown for LLMs and RAG, with byte-identical output, no Python, usually hundreds of times faster.">
 <link rel="canonical" href="https://majiayu000.github.io/markitdown-rs/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
-<meta property="og:description" content="Convert PDF, Word, PowerPoint, Excel, HTML, EPUB and URLs to Markdown. Same output as markitdown, byte for byte. No Python, 23–112× faster.">
+<meta property="og:description" content="Convert PDF, Word, PowerPoint, Excel, HTML, EPUB and URLs to Markdown. Same output as markitdown, byte for byte. No Python, usually hundreds of times faster.">
 <meta property="og:url" content="https://majiayu000.github.io/markitdown-rs/">
 <meta property="og:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
-<meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Byte-identical to markitdown, no Python, 23–112× faster.">
+<meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Byte-identical to markitdown, no Python, usually hundreds of times faster.">
 <meta name="twitter:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","codeRepository":"https://github.com/majiayu000/markitdown-rs","description":"Single-binary Rust port of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with byte-identical output.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
@@ -49,7 +49,7 @@ a { color: var(--accent); }
 <body>
 <main>
 <h1>markitdown-rs</h1>
-<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> as one Rust binary: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. Same output, byte for byte. No Python. 23–112× faster.</p>
+<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> as one Rust binary: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. Same output, byte for byte. No Python. Usually hundreds of times faster.</p>
 
 <div class="cta">
   <a class="primary" href="https://github.com/majiayu000/markitdown-rs/releases/latest">Download a binary</a>
@@ -73,7 +73,7 @@ Plain text markup language</pre>
 <div class="grid">
   <div class="card"><h3>Drop-in</h3><p>Same command, same flags, same Markdown. Every test file is checked byte for byte against Python markitdown 0.1.9.</p></div>
   <div class="card"><h3>One small binary</h3><p>A 4.5 MB binary instead of a 328 MB Python environment with pdfminer, pandas, mammoth, magika and onnxruntime.</p></div>
-  <div class="card"><h3>Fast</h3><p>23–112× faster end to end; a 100-page PDF in 0.18 s instead of 5.9 s.</p></div>
+  <div class="card"><h3>Fast</h3><p>Median 408× faster from the command line on 231 real-world files, about 15× on the largest; 4–50× in process.</p></div>
   <div class="card"><h3>Every local format</h3><p>PDF, DOCX, PPTX, XLSX, XLS, HTML, EPUB, Outlook MSG, CSV, ZIP, RSS, Jupyter, text, images and audio metadata, plus http(s) URLs, Wikipedia and YouTube pages.</p></div>
 </div>
 

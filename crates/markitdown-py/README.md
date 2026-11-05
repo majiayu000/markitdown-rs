@@ -14,12 +14,24 @@ print(result.markdown)                     # also result.text_content
 ```
 
 `convert`, `convert_local`, `convert_stream`, `convert_uri`, `convert_response`,
-`StreamInfo` and the exception classes behave as in markitdown 0.1.9.
-Plugins, LLM image captions and Azure Document Intelligence are not available.
+`StreamInfo`, the exception classes, custom converters (`register_converter`,
+the `markitdown.converters` classes), plugins (`enable_plugins=True`, e.g.
+markitdown-ocr), `llm_client` image captions, `requests_session`,
+`exiftool_path` and the Azure `docintel_*` / `cu_*` options behave as in
+markitdown 0.1.9. `style_map` raises `NotImplementedError`; unknown keyword
+arguments raise `TypeError` unless plugins are enabled.
 The module is named `markitdown`, so install it instead of, not next to, the
 Python package of that name.
 
-Build from a checkout with uv:
+Build a wheel from a checkout with uv (into `target/wheels/`):
+
+```bash
+cd crates/markitdown-py
+uv venv .venv && VIRTUAL_ENV=$PWD/.venv uv pip install maturin
+VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin build --release
+```
+
+Or install it into a development environment and run the tests:
 
 ```bash
 cd crates/markitdown-py

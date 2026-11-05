@@ -3,6 +3,7 @@
 //! `DataFrame.to_html(index=False)`, which then goes through the HTML
 //! converter.
 
+mod biff4;
 mod frame;
 mod xls;
 mod xlsx;
@@ -197,5 +198,10 @@ pub fn convert_xls(data: &[u8], keep_data_uris: bool) -> Result<String, Error> {
         keep_data_uris,
         ..Default::default()
     };
-    render(xls::read(data)?, &opts)
+    let sheets = if biff4::is_biff34_worksheet(data) {
+        biff4::read(data)?
+    } else {
+        xls::read(data)?
+    };
+    render(sheets, &opts)
 }

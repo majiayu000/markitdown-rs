@@ -16,6 +16,7 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
         .filter(|s| s.typ == SheetType::WorkSheet)
         .map(|s| s.name.clone())
         .collect();
+    let mut old_formulas = super::biff4::biff8_old_formulas(data);
     for name in names {
         let range = wb
             .worksheet_range(&name)
@@ -29,6 +30,22 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
                 for (c, v) in row.iter().enumerate() {
                     rows[r + r0 as usize][c + c0 as usize] = cell(v);
                 }
+            }
+        }
+        // formula cells calamine skips: only where it found nothing
+        for (_, r, c, v) in old_formulas.extract_if(.., |(sheet, ..)| *sheet == name) {
+            if r >= rows.len() {
+                let width = rows.first().map_or(c + 1, Vec::len).max(c + 1);
+                rows.resize(r + 1, vec![Cell::Empty; width]);
+            }
+            if c >= rows[r].len() {
+                let width = c + 1;
+                for row in rows.iter_mut() {
+                    row.resize(width, Cell::Empty);
+                }
+            }
+            if rows[r][c] == Cell::Empty {
+                rows[r][c] = v;
             }
         }
         sheets.push(super::Sheet {
@@ -69,7 +86,7 @@ fn cell(v: &Data) -> Cell {
 
 /// xlrd's `xldate_as_datetime`, then pandas turns dates on the epoch into
 /// times.
-fn xldate(v: f64, date1904: bool) -> Cell {
+pub(super) fn xldate(v: f64, date1904: bool) -> Cell {
     let epoch = if date1904 {
         super::days_from_civil(1904, 1, 1)
     } else if v < 60.0 {

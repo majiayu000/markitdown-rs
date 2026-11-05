@@ -9,6 +9,7 @@ by a script in this repository. The file name prefix says where it came from.
 | `mammoth-` | [mwilliamson/python-mammoth](https://github.com/mwilliamson/python-mammoth) `tests/test-data/` | BSD-2-Clause | f3b7b9f (2026-09-26) |
 | `python-pptx-` | [scanny/python-pptx](https://github.com/scanny/python-pptx) `tests/test_files/` | MIT | 278b47b (2024-08-07) |
 | `poi-` | [apache/poi](https://github.com/apache/poi) `test-data/document/`, `test-data/slideshow/` (files under 400 KB), `test-data/spreadsheet/` (every k-th name, under 300 KB), `test-data/hsmf/` (Outlook messages) | Apache-2.0 | d66b912 (2026-10-21) |
+| `tika-` | [apache/tika](https://github.com/apache/tika) `tika-parsers/.../tika-parser-microsoft-module/src/test/resources/test-documents/` (`testEXCEL_4.xls`, an Excel 4 worksheet) | Apache-2.0 | 48010f8 |
 | `gutenberg-` | Project Gutenberg EPUBs #11 (Alice's Adventures in Wonderland) and #1661 (The Adventures of Sherlock Holmes), no-images editions | public domain in the USA | retrieved 2026-10-22 |
 | `dpbench-` | [DP-Bench](https://huggingface.co/datasets/upstage/dp-bench) single-page PDFs (every third one under 110 KB) as shipped in [opendataloader-bench](https://github.com/opendataloader-project/opendataloader-bench) `pdfs/` | MIT (DP-Bench), Apache-2.0 (opendataloader-bench) | retrieved 2026-10-21 |
 | `wikipedia-` | English Wikipedia articles (Markdown, Rust (programming language), Japanese language), saved HTML | CC BY-SA 4.0 | retrieved 2026-10-22 |

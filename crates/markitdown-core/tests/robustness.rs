@@ -76,3 +76,50 @@ fn deep_html_on_a_wikipedia_url_uses_the_plain_html_fallback() {
     );
     assert_eq!(md(page.as_bytes(), info), "x");
 }
+
+/// The workbook with every FORMULA record written with the BIFF4 opcode
+/// 0x0406, as JExcelApi does for some cells; xlrd reads those the same.
+fn with_biff4_formula_opcodes(xls: &[u8]) -> Vec<u8> {
+    use std::io::{Cursor, Read, Seek, Write};
+    let mut ole = cfb::CompoundFile::open(Cursor::new(xls.to_vec())).unwrap();
+    let mut stream = Vec::new();
+    ole.open_stream("/Workbook")
+        .unwrap()
+        .read_to_end(&mut stream)
+        .unwrap();
+    let mut pos = 0;
+    while pos + 4 <= stream.len() {
+        let rc = u16::from_le_bytes([stream[pos], stream[pos + 1]]);
+        let len = u16::from_le_bytes([stream[pos + 2], stream[pos + 3]]) as usize;
+        if rc == 0x0006 {
+            stream[pos..pos + 2].copy_from_slice(&0x0406u16.to_le_bytes());
+        }
+        pos += 4 + len;
+    }
+    // same length, written over the old bytes
+    let mut workbook = ole.open_stream("/Workbook").unwrap();
+    workbook.seek(std::io::SeekFrom::Start(0)).unwrap();
+    workbook.write_all(&stream).unwrap();
+    workbook.flush().unwrap();
+    drop(workbook);
+    ole.flush().unwrap();
+    ole.into_inner().into_inner()
+}
+
+#[test]
+fn xls_formulas_with_biff4_opcodes_keep_their_values() {
+    for name in ["poi-46368.xls", "poi-27349-vlookupAcrossSheets.xls"] {
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+        let xls = std::fs::read(root.join("tests/fixtures/xls").join(name)).unwrap();
+        let want =
+            std::fs::read_to_string(root.join("tests/snapshots/xls").join(format!("{name}.md")))
+                .unwrap();
+        let patched = with_biff4_formula_opcodes(&xls);
+        assert_ne!(patched, xls);
+        assert_eq!(
+            md(&patched, StreamInfo::from_path(name)) + "\n",
+            want,
+            "{name}"
+        );
+    }
+}

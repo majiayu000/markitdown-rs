@@ -5,7 +5,18 @@ use super::{Cell, DateTime, Time};
 use crate::Error;
 use calamine::{Data, ExcelDateTime, ExcelDateTimeType, Reader, SheetType, Xls};
 
+/// Excel 97-2003 sheets: 65,536 rows of 256 columns.
+const MAX_ROWS: usize = 65_536;
+const MAX_COLS: usize = 256;
+
 pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
+    if let Some((row, col)) = super::biff4::biff8_cell_out_of_range(data) {
+        return Err(Error::Conversion(format!(
+            "cell position out of range (row {}, column {}): the workbook is damaged",
+            row + 1,
+            col + 1
+        )));
+    }
     let mut wb: Xls<_> = Xls::new(std::io::Cursor::new(data))
         .map_err(|e| Error::Conversion(format!("cannot read XLS: {e}")))?;
     let mut sheets = Vec::new();
@@ -25,7 +36,7 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
         if let (Some((r0, c0)), Some((r1, c1))) = (range.start(), range.end()) {
             // xlrd rows start at A1 and are padded to the used width
             let (height, width) = (r1 as usize + 1, c1 as usize + 1);
-            rows = vec![vec![Cell::Empty; width]; height];
+            rows = super::grid(height, width, MAX_ROWS, MAX_COLS)?;
             for (r, row) in range.rows().enumerate() {
                 for (c, v) in row.iter().enumerate() {
                     rows[r + r0 as usize][c + c0 as usize] = cell(v);
@@ -34,6 +45,9 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
         }
         // formula cells calamine skips: only where it found nothing
         for (_, r, c, v) in old_formulas.extract_if(.., |(sheet, ..)| *sheet == name) {
+            if r >= MAX_ROWS || c >= MAX_COLS {
+                continue;
+            }
             if r >= rows.len() {
                 let width = rows.first().map_or(c + 1, Vec::len).max(c + 1);
                 rows.resize(r + 1, vec![Cell::Empty; width]);

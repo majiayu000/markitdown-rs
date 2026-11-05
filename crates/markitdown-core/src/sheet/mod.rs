@@ -147,6 +147,28 @@ fn int_cell(f: f64) -> Cell {
     }
 }
 
+/// An empty `height` x `width` grid of cells, as xlrd pads a sheet from A1.
+/// A position beyond what the format can hold means a damaged file; the
+/// grid's memory counts against the conversion's budget, so a corrupt
+/// position cannot make it allocate without bound.
+pub(crate) fn grid(
+    height: usize,
+    width: usize,
+    max_rows: usize,
+    max_cols: usize,
+) -> Result<Vec<Vec<Cell>>, Error> {
+    if height > max_rows || width > max_cols {
+        return Err(Error::Conversion(format!(
+            "cell position out of range (row {height}, column {width}): the workbook is damaged"
+        )));
+    }
+    let bytes = (height as u64)
+        .saturating_mul(width as u64)
+        .saturating_mul(std::mem::size_of::<Cell>() as u64);
+    crate::zip::charge(bytes)?;
+    Ok(vec![vec![Cell::Empty; width]; height])
+}
+
 pub struct Sheet {
     pub name: String,
     pub rows: Vec<Vec<Cell>>,

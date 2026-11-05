@@ -413,3 +413,71 @@ fn pdf_streams_share_the_decompression_budget() {
         assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
     }
 }
+
+/// The first cell record (NUMBER, LABELSST or RK) of a BIFF stream given a
+/// column no sheet can have; returns the record's offset.
+fn wild_column(stream: &mut [u8], from: usize) -> usize {
+    let mut pos = from;
+    while pos + 8 <= stream.len() {
+        let rc = u16::from_le_bytes([stream[pos], stream[pos + 1]]);
+        let len = u16::from_le_bytes([stream[pos + 2], stream[pos + 3]]) as usize;
+        if matches!(rc, 0x0203 | 0x00fd | 0x027e) {
+            stream[pos + 6..pos + 8].copy_from_slice(&0xF000u16.to_le_bytes());
+            return pos;
+        }
+        pos += 4 + len;
+    }
+    panic!("no cell record");
+}
+
+#[test]
+fn damaged_cell_positions_fail_without_huge_allocations() {
+    use std::io::{Cursor, Read, Seek, Write};
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    // Excel 97: calamine would lay out 4096 x 61440 cells while opening it
+    let xls = std::fs::read(root.join("tests/fixtures/xls/markitdown-test.xls")).unwrap();
+    let mut ole = cfb::CompoundFile::open(Cursor::new(xls)).unwrap();
+    let mut stream = Vec::new();
+    ole.open_stream("/Workbook")
+        .unwrap()
+        .read_to_end(&mut stream)
+        .unwrap();
+    // the first worksheet starts after the workbook globals' EOF record
+    let globals_end = stream
+        .windows(4)
+        .position(|w| w == [0x0a, 0x00, 0x00, 0x00])
+        .unwrap()
+        + 4;
+    wild_column(&mut stream, globals_end);
+    let mut w = ole.open_stream("/Workbook").unwrap();
+    w.seek(std::io::SeekFrom::Start(0)).unwrap();
+    w.write_all(&stream).unwrap();
+    w.flush().unwrap();
+    drop(w);
+    ole.flush().unwrap();
+    let damaged = ole.into_inner().into_inner();
+    let err = convert(
+        &damaged,
+        &StreamInfo::from_path("d.xls"),
+        &Default::default(),
+    )
+    .unwrap_err();
+    assert!(
+        err.to_string().contains("cell position out of range"),
+        "{err}"
+    );
+
+    // Excel 4: the grid would be 16 times the format's size
+    let mut biff4 = std::fs::read(root.join("tests/fixtures/xls/tika-testEXCEL_4.xls")).unwrap();
+    wild_column(&mut biff4, 0);
+    let err = convert(
+        &biff4,
+        &StreamInfo::from_path("d4.xls"),
+        &Default::default(),
+    )
+    .unwrap_err();
+    assert!(
+        err.to_string().contains("cell position out of range"),
+        "{err}"
+    );
+}

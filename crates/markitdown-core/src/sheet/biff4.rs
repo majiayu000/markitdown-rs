@@ -276,7 +276,8 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
     }
     let height = cells.iter().map(|(r, _, _)| r + 1).max().unwrap_or(0);
     let width = cells.iter().map(|(_, c, _)| c + 1).max().unwrap_or(0);
-    let mut rows = vec![vec![Cell::Empty; width]; height];
+    // Excel 3 and 4 sheets: 16,384 rows of 256 columns
+    let mut rows = super::grid(height, width, 16_384, 256)?;
     for (r, c, v) in cells {
         rows[r][c] = v;
     }
@@ -430,4 +431,71 @@ pub fn biff8_old_formulas(data: &[u8]) -> Vec<(String, usize, usize, Cell)> {
         }
     }
     out
+}
+
+const LABELSST: u16 = 0x00fd;
+const RSTRING: u16 = 0x00d6;
+const FORMULA8: u16 = 0x0006;
+const MULRK: u16 = 0x00bd;
+const MULBLANK: u16 = 0x00be;
+
+/// A cell record in an Excel 97 workbook with a column the format cannot
+/// have (past 255), as (row, column). calamine lays every sheet out as one
+/// dense array from its smallest to its largest cell position while
+/// opening the workbook, so a damaged record with a wild column makes it
+/// allocate tens of gigabytes; this scan, with calamine's record framing,
+/// rejects such a file first.
+pub fn biff8_cell_out_of_range(data: &[u8]) -> Option<(usize, usize)> {
+    let ole = crate::ole::Ole::open(data).ok()?;
+    let stream = ole
+        .read_stream("Workbook")
+        .or_else(|| ole.read_stream("Book"))?;
+    let mut sheets = Vec::new();
+    let mut records = Records {
+        data: &stream,
+        pos: 0,
+    };
+    records.next(); // BOF
+    for (rc, d) in records.by_ref() {
+        match rc {
+            EOF => break,
+            BOUNDSHEET if d.len() >= 4 => {
+                sheets.push(u32::from_le_bytes([d[0], d[1], d[2], d[3]]) as usize)
+            }
+            _ => {}
+        }
+    }
+    for offset in sheets {
+        let mut records = Records {
+            data: &stream,
+            pos: offset,
+        };
+        records.next(); // BOF
+        for (rc, d) in records {
+            if rc == EOF {
+                break;
+            }
+            let at = |i: usize| {
+                d.get(i..i + 2)
+                    .map(|b| u16::from_le_bytes([b[0], b[1]]) as usize)
+            };
+            let (row, last_col) = match rc {
+                NUMBER | LABEL | BOOLERR | RK | LABELSST | BLANK | RSTRING | FORMULA8
+                | FORMULA3 | FORMULA4 => match (at(0), at(2)) {
+                    (Some(r), Some(c)) => (r, c),
+                    _ => continue,
+                },
+                // row, first column, ..., last column
+                MULRK | MULBLANK if d.len() >= 6 => match (at(0), at(d.len() - 2)) {
+                    (Some(r), Some(c)) => (r, c),
+                    _ => continue,
+                },
+                _ => continue,
+            };
+            if last_col > 255 {
+                return Some((row, last_col));
+            }
+        }
+    }
+    None
 }

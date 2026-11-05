@@ -88,7 +88,9 @@ def create_starlette_app(
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="Run a MarkItDown MCP server")
+    parser = argparse.ArgumentParser(
+        prog="markitdown-mcp", description="Run a MarkItDown MCP server"
+    )
 
     parser.add_argument(
         "--http",

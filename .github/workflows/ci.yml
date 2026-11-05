@@ -65,7 +65,7 @@ jobs:
       - run: |
           uv venv .venv
           VIRTUAL_ENV=$PWD/.venv uv pip install maturin pytest "mammoth==1.13.0" lxml beautifulsoup4 defusedxml "mcp<3.0.0,>=2.1.1"
-          VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin develop --release --uv
+          VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin develop --release --uv --extras mcp
         working-directory: crates/markitdown-py
       - run: crates/markitdown-py/.venv/bin/pytest crates/markitdown-py/tests
       # the wheel and a build from the sdist both install the start-up guard

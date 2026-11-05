@@ -145,6 +145,7 @@ fn convert_with(
         keep_data_uris,
         exiftool_path,
         image_hook: image_hook.map(|h| self::image_hook(h, raised.clone())),
+        ..Default::default()
     };
     let result = py.detach(|| markitdown_core::convert_with(name, data, &info, &opts));
     if let Some(e) = raised.lock().unwrap().take() {

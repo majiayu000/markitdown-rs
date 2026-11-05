@@ -41,6 +41,34 @@ jobs:
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets --locked -- -D warnings
 
+  # The Python module (crates/markitdown-py) is outside the workspace:
+  # building it needs Python and maturin.
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: ". -> target\ncrates/markitdown-py -> target"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.21"
+      - run: cargo fmt --check
+        working-directory: crates/markitdown-py
+      - run: cargo clippy --locked -- -D warnings
+        working-directory: crates/markitdown-py
+      # the tests compare the module with the CLI
+      - run: cargo build --release --locked -p markitdown-rs
+      - run: |
+          uv venv .venv
+          VIRTUAL_ENV=$PWD/.venv uv pip install maturin pytest
+          VIRTUAL_ENV=$PWD/.venv .venv/bin/maturin develop --release --uv
+        working-directory: crates/markitdown-py
+      - run: crates/markitdown-py/.venv/bin/pytest crates/markitdown-py/tests
+
   # The checked-in snapshots must be exactly what the pinned Python
   # markitdown (oracle/uv.lock) prints today.
   snapshots:

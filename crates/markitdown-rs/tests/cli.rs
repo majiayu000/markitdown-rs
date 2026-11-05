@@ -168,3 +168,21 @@ fn http_requests_time_out() {
         String::from_utf8_lossy(&out.stderr)
     );
 }
+
+#[test]
+fn truncated_workbook_fails_cleanly() {
+    let xls = std::fs::read(root().join("tests/fixtures/xls/markitdown-test.xls")).unwrap();
+    let path = std::env::temp_dir().join(format!("markitdown-cut-{}.xls", std::process::id()));
+    std::fs::write(&path, &xls[..xls.len() * 99 / 100]).unwrap();
+    let (ok, _, stderr) = run(path.to_str().unwrap());
+    let status = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .arg(&path)
+        .output()
+        .unwrap()
+        .status;
+    std::fs::remove_file(&path).unwrap();
+    assert!(!ok);
+    assert_eq!(status.code(), Some(1));
+    assert!(stderr.contains("conversion failed"), "{stderr}");
+    assert!(!stderr.contains("panicked"), "{stderr}");
+}

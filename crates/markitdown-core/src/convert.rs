@@ -3,6 +3,43 @@
 //! priority order until one accepts it and succeeds.
 
 use crate::{Document, Error, Options, StreamInfo, detect, formats, text};
+use std::cell::Cell;
+use std::panic::{self, AssertUnwindSafe};
+use std::sync::Once;
+
+thread_local! {
+    /// a converter is running on this thread
+    static CONVERTING: Cell<bool> = const { Cell::new(false) };
+}
+
+/// Run a converter so that a panic in it (a bug here or in a dependency,
+/// such as calamine on a truncated workbook) is a conversion error, as an
+/// exception is in markitdown, instead of ending the process. The panic is
+/// reported in the error, not by the default hook on stderr.
+pub fn guarded<T>(name: &str, f: impl FnOnce() -> Result<T, Error>) -> Result<T, Error> {
+    static HOOK: Once = Once::new();
+    HOOK.call_once(|| {
+        let previous = panic::take_hook();
+        panic::set_hook(Box::new(move |info| {
+            if !CONVERTING.get() {
+                previous(info);
+            }
+        }));
+    });
+    let outer = CONVERTING.replace(true);
+    let result = panic::catch_unwind(AssertUnwindSafe(f));
+    CONVERTING.set(outer);
+    result.unwrap_or_else(|payload| {
+        let message = payload
+            .downcast_ref::<&str>()
+            .map(|s| s.to_string())
+            .or_else(|| payload.downcast_ref::<String>().cloned())
+            .unwrap_or_default();
+        Err(Error::Conversion(format!(
+            "internal error in {name}: {message}"
+        )))
+    })
+}
 
 /// CPython's built-in `mimetypes` table (no system files) for the
 /// extensions the converters look at.
@@ -90,7 +127,8 @@ pub fn guesses(data: &[u8], base: &StreamInfo) -> Vec<StreamInfo> {
     {
         enhanced.extension = extension_for(m).map(str::to_string);
     }
-    let Some(s) = detect::identify(data) else {
+    let sniffed = guarded("content sniffing", || Ok(detect::identify(data))).unwrap_or(None);
+    let Some(s) = sniffed else {
         return vec![enhanced];
     };
     let charset = s.is_text.then(|| text::detect(charset_sample(data)));
@@ -131,7 +169,7 @@ pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<Documen
             if !(conv.accepts)(data, info) {
                 continue;
             }
-            match (conv.convert)(data, info, opts) {
+            match guarded(conv.name, || (conv.convert)(data, info, opts)) {
                 Ok(md) => return Ok(md),
                 // a safety limit stops the conversion, not just this converter
                 Err(e @ Error::Limit(_)) => return Err(e),

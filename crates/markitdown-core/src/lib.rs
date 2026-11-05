@@ -233,5 +233,7 @@ pub fn convert_with(
     opts: &Options,
 ) -> Result<Document, Error> {
     let convert = converter(name)?.convert;
-    zip::with_budget(opts, || convert(data, info, opts))
+    zip::with_budget(opts, || {
+        convert::guarded(name, || convert(data, info, opts))
+    })
 }

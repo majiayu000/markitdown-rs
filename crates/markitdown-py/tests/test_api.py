@@ -556,3 +556,9 @@ def test_guard_detects_microsofts_markitdown(tmp_path, monkeypatch, capsys):
     monkeypatch.setenv("MARKITDOWN_RS_ALLOW_MARKITDOWN", "1")
     guard.warn()
     assert capsys.readouterr().err == ""
+
+
+def test_truncated_workbook_raises_file_conversion_exception():
+    xls = (FIXTURES / "xls/markitdown-test.xls").read_bytes()
+    with pytest.raises(FileConversionException):
+        MarkItDown().convert_stream(io.BytesIO(xls[: len(xls) * 99 // 100]), stream_info=StreamInfo(extension=".xls"))

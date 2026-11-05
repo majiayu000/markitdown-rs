@@ -118,3 +118,29 @@ fn file_uri() {
     assert!(ok, "{err}");
     assert_eq!(out, snapshot("docx/markitdown-test.docx.md"));
 }
+
+#[test]
+fn charset_hint_takes_effect() {
+    let help = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .arg("--help")
+        .output()
+        .unwrap();
+    assert!(String::from_utf8_lossy(&help.stdout).contains("charset (e.g., UTF-8)."));
+    let run = |args: &[&str]| {
+        let mut child = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+            .args(args)
+            .stdin(std::process::Stdio::piped())
+            .stdout(std::process::Stdio::piped())
+            .spawn()
+            .unwrap();
+        child
+            .stdin
+            .take()
+            .unwrap()
+            .write_all(b"caf\xe9 cr\xe8me")
+            .unwrap();
+        String::from_utf8(child.wait_with_output().unwrap().stdout).unwrap()
+    };
+    assert_eq!(run(&["-x", "txt", "-c", "cp1252"]), "café crème\n");
+    assert_eq!(run(&["-x", "txt", "-c", "cp1251"]), "cafй crиme\n");
+}

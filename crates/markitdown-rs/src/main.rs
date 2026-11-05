@@ -27,7 +27,7 @@ options:
   -m, --mime-type MIME_TYPE
                         Provide a hint about the file's MIME type.
   -c, --charset CHARSET
-                        Provide a hint about the file's charset (accepted for compatibility).
+                        Provide a hint about the file's charset (e.g., UTF-8).
   --keep-data-uris      Keep data URIs (like base64-encoded images) in the output.
 
 Supported formats: see https://github.com/majiayu000/markitdown-rs#compatibility";

@@ -107,3 +107,125 @@ fn stdio_round_trip() {
     assert!(out.stdout.is_empty());
     assert!(String::from_utf8_lossy(&out.stderr).contains("MCP server on stdio"));
 }
+
+/// Send one HTTP request; the status and body.
+fn http(
+    addr: &str,
+    method: &str,
+    path: &str,
+    headers: &[(&str, &str)],
+    body: &str,
+) -> (u16, String) {
+    use std::io::Read;
+    let mut s = std::net::TcpStream::connect(addr).unwrap();
+    let mut req = format!(
+        "{method} {path} HTTP/1.1\r\nContent-Length: {}\r\n",
+        body.len()
+    );
+    if !headers.iter().any(|(k, _)| *k == "Host") {
+        req.push_str(&format!("Host: {addr}\r\n"));
+    }
+    for (k, v) in headers {
+        req.push_str(&format!("{k}: {v}\r\n"));
+    }
+    req.push_str("\r\n");
+    req.push_str(body);
+    s.write_all(req.as_bytes()).unwrap();
+    let mut out = String::new();
+    s.read_to_string(&mut out).unwrap();
+    let status = out[9..12].parse().unwrap();
+    let body = out
+        .split_once("\r\n\r\n")
+        .map(|(_, b)| b.to_string())
+        .unwrap_or_default();
+    (status, body)
+}
+
+#[test]
+fn http_transports() {
+    let mut child = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .args(["mcp", "--http", "--port", "0"])
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let mut log = BufReader::new(child.stderr.take().unwrap());
+    let mut line = String::new();
+    log.read_line(&mut line).unwrap();
+    let addr = line
+        .split("http://")
+        .nth(1)
+        .and_then(|r| r.split_whitespace().next())
+        .unwrap()
+        .to_string();
+    let json = [
+        ("Content-Type", "application/json"),
+        ("Accept", "application/json, text/event-stream"),
+    ];
+
+    // Streamable HTTP: a request gets its response, a notification 202
+    let init = r#"{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"t","version":"0"}}}"#;
+    let (status, body) = http(&addr, "POST", "/mcp", &json, init);
+    assert_eq!(status, 200);
+    let reply: Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(reply["result"]["serverInfo"]["name"], "markitdown");
+    let note = r#"{"jsonrpc":"2.0","method":"notifications/initialized"}"#;
+    assert_eq!(http(&addr, "POST", "/mcp", &json, note).0, 202);
+    let call = r#"{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"convert_to_markdown","arguments":{"uri":"data:text/html,<h1>Hi</h1>"}}}"#;
+    let (_, body) = http(&addr, "POST", "/mcp", &json, call);
+    let reply: Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(reply["result"]["content"][0]["text"], "# Hi");
+    assert_eq!(http(&addr, "GET", "/mcp", &[], "").0, 405);
+    assert_eq!(
+        http(
+            &addr,
+            "POST",
+            "/mcp",
+            &[("Content-Type", "text/plain")],
+            "{}"
+        )
+        .0,
+        415
+    );
+    // DNS rebinding protection on localhost
+    let rebound = [json[0], json[1], ("Host", "evil.example")];
+    assert_eq!(http(&addr, "POST", "/mcp", &rebound, init).0, 421);
+
+    // SSE: the endpoint event, then replies on the stream
+    let mut sse = std::net::TcpStream::connect(&addr).unwrap();
+    write!(
+        sse,
+        "GET /sse HTTP/1.1\r\nHost: {addr}\r\nAccept: text/event-stream\r\n\r\n"
+    )
+    .unwrap();
+    let mut events = BufReader::new(sse);
+    let mut endpoint = String::new();
+    while !endpoint.starts_with("data: ") {
+        endpoint.clear();
+        events.read_line(&mut endpoint).unwrap();
+    }
+    let path = endpoint.trim_start_matches("data: ").trim().to_string();
+    assert!(path.starts_with("/messages/?session_id="));
+    let ping = r#"{"jsonrpc":"2.0","id":7,"method":"ping"}"#;
+    assert_eq!(http(&addr, "POST", &path, &json, ping).0, 202);
+    let mut data = String::new();
+    while !data.starts_with("data: ") {
+        data.clear();
+        events.read_line(&mut data).unwrap();
+    }
+    let reply: Value = serde_json::from_str(data.trim_start_matches("data: ").trim()).unwrap();
+    assert_eq!(reply, json!({"jsonrpc": "2.0", "id": 7, "result": {}}));
+    assert_eq!(
+        http(&addr, "POST", "/messages/?session_id=nope", &json, ping).0,
+        404
+    );
+
+    child.kill().unwrap();
+    child.wait().unwrap();
+
+    let out = Command::new(env!("CARGO_BIN_EXE_markitdown"))
+        .args(["mcp", "--port", "3001"])
+        .output()
+        .unwrap();
+    assert!(!out.status.success());
+    assert!(String::from_utf8_lossy(&out.stderr).contains("only valid when using streamable HTTP"));
+}

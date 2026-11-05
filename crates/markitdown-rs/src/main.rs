@@ -1,6 +1,7 @@
 //! `markitdown` command line, compatible with the Python CLI.
 
 mod mcp;
+mod mcp_http;
 
 use markitdown_core::fetch;
 use markitdown_core::{Options, StreamInfo};
@@ -13,7 +14,8 @@ const USAGE: &str =
 
 Convert various file formats to markdown.
 
-`markitdown mcp` runs an MCP server on stdio instead (tool: convert_to_markdown).
+`markitdown mcp` runs an MCP server on stdio instead (tool: convert_to_markdown);
+`markitdown mcp --http [--host HOST] [--port PORT]` serves it over HTTP.
 
 FILENAME can be a path, an http(s):// URL, a file: URI or a data: URI.
 If FILENAME is empty, markitdown reads from stdin.
@@ -169,11 +171,8 @@ fn run() -> Result<(), String> {
 fn main() -> ExitCode {
     // `markitdown mcp`, unless a file of that name is meant
     let mut args = std::env::args().skip(1);
-    let result = if args.next().as_deref() == Some("mcp")
-        && args.next().is_none()
-        && !std::path::Path::new("mcp").exists()
-    {
-        mcp::serve()
+    let result = if args.next().as_deref() == Some("mcp") && !std::path::Path::new("mcp").exists() {
+        mcp::main(args)
     } else {
         run()
     };

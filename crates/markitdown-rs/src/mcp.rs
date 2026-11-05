@@ -112,7 +112,7 @@ fn call_tool(params: &Value) -> Value {
 }
 
 /// One JSON-RPC message; None for notifications.
-fn handle(msg: &Value) -> Option<Value> {
+pub(crate) fn handle(msg: &Value) -> Option<Value> {
     let id = msg.get("id")?.clone();
     let method = msg["method"].as_str().unwrap_or("");
     let result = match method {
@@ -147,6 +147,61 @@ fn handle(msg: &Value) -> Option<Value> {
         }
     };
     Some(json!({"jsonrpc": "2.0", "id": id, "result": result}))
+}
+
+/// `markitdown mcp [--http] [--host HOST] [--port PORT]`, markitdown-mcp's
+/// options (`--sse` is its deprecated alias of `--http`).
+pub fn main(args: impl Iterator<Item = String>) -> Result<(), String> {
+    let (mut http, mut host, mut port) = (false, None, None);
+    let mut args = args.peekable();
+    while let Some(arg) = args.next() {
+        let (name, inline) = match arg.split_once('=') {
+            Some((n, v)) if n.starts_with("--") => (n.to_string(), Some(v.to_string())),
+            _ => (arg.clone(), None),
+        };
+        let mut value = |what: &str| {
+            inline
+                .clone()
+                .or_else(|| args.next())
+                .ok_or_else(|| format!("argument {what}: expected one argument"))
+        };
+        match name.as_str() {
+            "--http" | "--sse" => http = true,
+            "--host" => host = Some(value("--host")?),
+            "--port" => {
+                let v = value("--port")?;
+                port = Some(
+                    v.parse::<u16>()
+                        .map_err(|_| format!("argument --port: invalid int value: '{v}'"))?,
+                );
+            }
+            "-h" | "--help" => {
+                println!(
+                    "usage: markitdown mcp [-h] [--http] [--sse] [--host HOST] [--port PORT]\n\n\
+                     Run a MarkItDown MCP server (stdio unless --http).\n\n\
+                     options:\n  \
+                     --http       Run the server with Streamable HTTP and SSE transport rather than STDIO\n  \
+                     --sse        (Deprecated) An alias for --http\n  \
+                     --host HOST  Host to bind to (default: 127.0.0.1)\n  \
+                     --port PORT  Port to listen on (default: 3001)"
+                );
+                return Ok(());
+            }
+            other => return Err(format!("unrecognized arguments: {other}")),
+        }
+    }
+    if !http && (host.is_some() || port.is_some()) {
+        return Err(
+            "Host and port arguments are only valid when using streamable HTTP or SSE \
+                    transport (see: --http)."
+                .into(),
+        );
+    }
+    if http {
+        crate::mcp_http::serve(host.as_deref().unwrap_or("127.0.0.1"), port.unwrap_or(3001))
+    } else {
+        serve()
+    }
 }
 
 /// Serve newline-delimited JSON-RPC on stdin/stdout until stdin closes.

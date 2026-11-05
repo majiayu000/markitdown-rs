@@ -645,6 +645,7 @@ def test_mcp_tool(http_404, monkeypatch):
     assert check_plugins_enabled()
 
 
+@rs_only  # markitdown's own CLI reads `mcp` as a file name
 def test_markitdown_mcp_subcommand():
     r = run_cli("mcp", "--help")
     if b"needs the mcp package" in r.stdout:

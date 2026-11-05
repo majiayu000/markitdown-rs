@@ -56,7 +56,8 @@ converters are built in.
 Plugins depend on Microsoft's `markitdown`, which would overwrite this
 package's `markitdown` module; install them with `--no-deps` (or, with uv,
 `override-dependencies = ["markitdown; sys_platform == 'never'"]`). The
-package warns at start-up when both are installed.
+package warns, when `markitdown` is imported, if both are installed or if
+its `markitdown` module was removed or replaced.
 
 Or install it into a development environment and run the tests:
 

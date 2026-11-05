@@ -1,1 +1,1 @@
-import markitdown_rs_guard
+import markitdown_rs_guard; markitdown_rs_guard.install()

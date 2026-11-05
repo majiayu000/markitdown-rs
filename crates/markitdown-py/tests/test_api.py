@@ -536,23 +536,46 @@ def test_python_cli_version():
 
 
 @rs_only
-def test_guard_detects_microsofts_markitdown(tmp_path, monkeypatch, capsys):
+def test_guard(tmp_path, monkeypatch, capsys):
     import importlib.util
 
     spec = importlib.util.spec_from_file_location(
-        "markitdown_rs_guard", Path(__file__).parents[1] / "markitdown_rs_guard.py"
+        "markitdown_rs_guard_test", Path(__file__).parents[1] / "markitdown_rs_guard.py"
     )
     guard = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(guard)  # nothing to report next to the tests
+    spec.loader.exec_module(guard)  # importing it checks nothing
+    assert capsys.readouterr().err == ""
+
     (tmp_path / "markitdown_rs-0.2.0.dist-info").mkdir()
+    (tmp_path / "markitdown").mkdir()
+    init = tmp_path / "markitdown/__init__.py"
+    init.write_text('"""The Python API, backed by markitdown-rs."""')
     assert guard.check(str(tmp_path)) is None
     (tmp_path / "markitdown_ocr-0.1.2.dist-info").mkdir()
     assert guard.check(str(tmp_path)) is None
+    # Microsoft's markitdown next to it, in either install order
     (tmp_path / "markitdown-0.1.9.dist-info").mkdir()
-    assert guard.check(str(tmp_path)) == "markitdown-0.1.9.dist-info"
+    assert guard.check(str(tmp_path)) == ("conflict", "markitdown-0.1.9.dist-info")
+    # `pip uninstall markitdown` then removes or leaves foreign files
+    (tmp_path / "markitdown-0.1.9.dist-info").rmdir()
+    init.write_text("from ._markitdown import MarkItDown")
+    assert guard.check(str(tmp_path)) == ("damaged", "not markitdown-rs's")
+    init.unlink()
+    assert guard.check(str(tmp_path)) == ("damaged", "missing")
+
+    # the hook reports once, at the first import of markitdown
     monkeypatch.setattr(guard, "__file__", str(tmp_path / "markitdown_rs_guard.py"))
+    monkeypatch.setattr(sys, "meta_path", list(sys.meta_path))
+    guard.install()
+    assert guard._ImportHook.find_spec("json") is None
+    assert capsys.readouterr().err == ""
+    assert guard._ImportHook.find_spec("markitdown") is None
+    assert "pip install --force-reinstall --no-deps markitdown-rs" in capsys.readouterr().err
+    assert guard._ImportHook not in sys.meta_path
     guard.warn()
-    assert "pip install --no-deps markitdown-ocr" in capsys.readouterr().err
+    assert capsys.readouterr().err == ""
+    # and can be silenced
+    guard._checked = False
     monkeypatch.setenv("MARKITDOWN_RS_ALLOW_MARKITDOWN", "1")
     guard.warn()
     assert capsys.readouterr().err == ""

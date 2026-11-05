@@ -353,7 +353,9 @@ depend on Microsoft's `markitdown` package, so a plain `pip install
 markitdown-ocr` also installs it, and it overwrites this package's
 `markitdown` module: `import markitdown` then runs Microsoft's code (tens of
 times slower) and uninstalling either package removes shared files. markitdown-rs
-warns about this at start-up, with the fix. Install plugins without that
+warns about this, with the fix, when `markitdown` is imported (or the
+`markitdown` command runs), and also when another package's uninstall has
+left its `markitdown` module missing. Install plugins without that
 dependency instead:
 
 ```bash

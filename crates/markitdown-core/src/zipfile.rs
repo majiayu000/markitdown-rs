@@ -3,8 +3,35 @@
 
 use crate::zip::Archive;
 use crate::{Error, Options, StreamInfo};
+use std::cell::Cell;
+
+/// How deep ZIP archives may nest inside each other (MARKITDOWN_MAX_ZIP_DEPTH).
+const DEFAULT_MAX_DEPTH: usize = 10;
+
+thread_local! {
+    static DEPTH: Cell<usize> = const { Cell::new(0) };
+}
 
 pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String, Error> {
+    let max = opts.max_zip_depth.unwrap_or_else(|| {
+        std::env::var("MARKITDOWN_MAX_ZIP_DEPTH")
+            .ok()
+            .and_then(|v| v.trim().parse().ok())
+            .unwrap_or(DEFAULT_MAX_DEPTH)
+    });
+    let depth = DEPTH.get();
+    if depth >= max {
+        return Err(Error::Limit(format!(
+            "ZIP archives nested more than {max} deep (raise MARKITDOWN_MAX_ZIP_DEPTH to allow more)"
+        )));
+    }
+    DEPTH.set(depth + 1);
+    let result = convert_members(data, info, opts);
+    DEPTH.set(depth);
+    result
+}
+
+fn convert_members(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String, Error> {
     let path = info
         .url
         .as_deref()

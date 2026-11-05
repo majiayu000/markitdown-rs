@@ -133,6 +133,8 @@ pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<Documen
             }
             match (conv.convert)(data, info, opts) {
                 Ok(md) => return Ok(md),
+                // a safety limit stops the conversion, not just this converter
+                Err(e @ Error::Limit(_)) => return Err(e),
                 Err(e) => failures.push(format!("{} threw {e}", conv.name)),
             }
         }

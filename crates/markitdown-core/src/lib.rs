@@ -149,6 +149,12 @@ pub struct Options {
     pub image_hook: Option<ImageHook>,
     /// Adds a `### Transcript` section to YouTube pages.
     pub youtube_transcript: Option<TranscriptHook>,
+    /// Decompressed bytes a conversion may read from archives and Office
+    /// packages; `None`: MARKITDOWN_MAX_UNZIPPED_BYTES, else 1 GiB.
+    pub max_unzipped_bytes: Option<u64>,
+    /// How deep ZIP archives may nest; `None`: MARKITDOWN_MAX_ZIP_DEPTH,
+    /// else 10.
+    pub max_zip_depth: Option<usize>,
 }
 
 #[derive(Debug)]
@@ -161,6 +167,8 @@ pub enum Error {
     Unsupported(String),
     /// Every converter that accepted the input failed.
     Conversion(String),
+    /// The input exceeds a safety limit (decompressed size, nesting).
+    Limit(String),
 }
 
 impl fmt::Display for Error {
@@ -171,6 +179,7 @@ impl fmt::Display for Error {
             Error::MissingPart(p) => write!(f, "missing part: {p}"),
             Error::Unsupported(e) => write!(f, "unsupported input: {e}"),
             Error::Conversion(e) => write!(f, "conversion failed: {e}"),
+            Error::Limit(e) => write!(f, "input too large: {e}"),
         }
     }
 }
@@ -184,7 +193,7 @@ pub fn convert(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<String,
 
 /// `convert`, with the document's title.
 pub fn convert_document(data: &[u8], info: &StreamInfo, opts: &Options) -> Result<Document, Error> {
-    let doc = convert::convert(data, info, opts)?;
+    let doc = zip::with_budget(opts, || convert::convert(data, info, opts))?;
     Ok(Document {
         markdown: pystr::normalize_output(&doc.markdown),
         title: doc.title,
@@ -222,5 +231,6 @@ pub fn convert_with(
     info: &StreamInfo,
     opts: &Options,
 ) -> Result<Document, Error> {
-    (converter(name)?.convert)(data, info, opts)
+    let convert = converter(name)?.convert;
+    zip::with_budget(opts, || convert(data, info, opts))
 }

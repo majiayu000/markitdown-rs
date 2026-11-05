@@ -154,3 +154,50 @@ fn youtube_transcript_hook_adds_a_section() {
     );
     assert_eq!(*seen.lock().unwrap(), ["5C_HPTJg5ek"]);
 }
+
+fn zip_of(entries: &[(&str, &[u8])]) -> Vec<u8> {
+    use std::io::Write;
+    let mut w = zip::ZipWriter::new(std::io::Cursor::new(Vec::new()));
+    for (name, data) in entries {
+        w.start_file(*name, zip::write::SimpleFileOptions::default())
+            .unwrap();
+        w.write_all(data).unwrap();
+    }
+    w.finish().unwrap().into_inner()
+}
+
+#[test]
+fn archive_limits_fail_the_conversion_cleanly() {
+    let text = vec![b'a'; 10_000];
+    let archive = zip_of(&[("a.txt", &text), ("b.txt", &text)]);
+    let info = || StreamInfo::from_path("x.zip");
+    let opts = |bytes, depth| markitdown_core::Options {
+        max_unzipped_bytes: Some(bytes),
+        max_zip_depth: Some(depth),
+        ..Default::default()
+    };
+    // within the limits
+    assert!(convert(&archive, &info(), &opts(20_000, 1)).is_ok());
+    // the second member goes over the byte budget
+    let err = convert(&archive, &info(), &opts(15_000, 1)).unwrap_err();
+    assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
+    // Office packages share the budget
+    let docx = std::fs::read(
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../tests/fixtures/docx/markitdown-test.docx"),
+    )
+    .unwrap();
+    let err = convert(&docx, &StreamInfo::from_path("t.docx"), &opts(1_000, 1)).unwrap_err();
+    assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
+    // nesting: a zip in a zip in a zip
+    let inner = zip_of(&[("a.txt", b"hi")]);
+    let middle = zip_of(&[("inner.zip", &inner)]);
+    let outer = zip_of(&[("middle.zip", &middle)]);
+    assert!(
+        convert(&outer, &info(), &opts(1 << 20, 3))
+            .unwrap()
+            .contains("hi")
+    );
+    let err = convert(&outer, &info(), &opts(1 << 20, 2)).unwrap_err();
+    assert!(err.to_string().contains("nested more than 2 deep"), "{err}");
+}

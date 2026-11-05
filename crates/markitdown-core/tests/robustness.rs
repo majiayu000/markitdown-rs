@@ -201,3 +201,22 @@ fn archive_limits_fail_the_conversion_cleanly() {
     let err = convert(&outer, &info(), &opts(1 << 20, 2)).unwrap_err();
     assert!(err.to_string().contains("nested more than 2 deep"), "{err}");
 }
+
+#[test]
+fn declared_sizes_are_not_trusted() {
+    let opts = markitdown_core::Options {
+        max_unzipped_bytes: Some(1 << 20),
+        ..Default::default()
+    };
+    // an entry whose central directory claims 4 GiB but inflates to 5 bytes
+    let mut forged = zip_of(&[("a.txt", b"hello")]);
+    let cd = forged.windows(4).position(|w| w == b"PK\x01\x02").unwrap();
+    forged[cd + 24..cd + 28].copy_from_slice(&0xFFFF_FFF0u32.to_le_bytes());
+    let md = convert(&forged, &StreamInfo::from_path("f.zip"), &opts).unwrap();
+    assert!(md.ends_with("## File: a.txt\n\nhello"), "{md}");
+    // a real bomb: 4 MiB of zeros, a few KiB compressed, over the 1 MiB budget
+    let bomb = zip_of(&[("zeros.txt", &vec![b'0'; 4 << 20])]);
+    assert!(bomb.len() < 64 << 10);
+    let err = convert(&bomb, &StreamInfo::from_path("b.zip"), &opts).unwrap_err();
+    assert!(matches!(err, markitdown_core::Error::Limit(_)), "{err}");
+}

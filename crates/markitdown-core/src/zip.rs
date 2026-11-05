@@ -53,11 +53,9 @@ fn read_entry(
     name: &str,
 ) -> Result<Vec<u8>, Error> {
     let (left, limit) = BUDGET.get().unwrap_or((u64::MAX, u64::MAX));
-    if f.size() > left {
-        return Err(over_budget(limit));
-    }
-    let mut buf = Vec::with_capacity(f.size() as usize);
-    // the declared size may lie: never read past what is left
+    // the declared size may lie either way: it only sizes the first
+    // allocation, and only the bytes actually inflated count
+    let mut buf = Vec::with_capacity(f.size().min(left).min(1 << 26) as usize);
     (&mut f)
         .take(left.saturating_add(1))
         .read_to_end(&mut buf)

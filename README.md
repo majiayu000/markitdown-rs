@@ -374,8 +374,9 @@ or for one install: `uv pip install markitdown-rs markitdown-ocr --override
 overrides.txt` with that line in `overrides.txt`. If the warning appears,
 `pip uninstall -y markitdown markitdown-rs`, then install as above.
 
-Differences: unknown keyword arguments raise `TypeError` (unless plugins are
-enabled, since plugins read their own), HTTP failures without a
+Differences: unknown keyword arguments are ignored as in markitdown but
+named in a warning (unless plugins are enabled, since plugins read their
+own), HTTP failures without a
 `requests_session` raise
 `markitdown.HTTPError` (an `OSError`) instead of `requests.HTTPError`, and the
 ZIP converter converts members with the built-in converters only.

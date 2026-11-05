@@ -61,12 +61,19 @@ def test_priorities():
     assert PRIORITY_GENERIC_FILE_FORMAT == 10.0
 
 
-@rs_only
-def test_unknown_constructor_arguments_raise():
-    with pytest.raises(TypeError, match="llm_modle"):
-        MarkItDown(llm_modle="gpt-4o")
-    # plugins may read keyword arguments of their own
-    MarkItDown(enable_plugins=True, ocr_language="de")
+def test_unknown_constructor_arguments_are_accepted():
+    # markitdown ignores them; markitdown-rs also names them in a warning
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
+        md = MarkItDown(llm_modle="gpt-4o")
+    assert md.convert_stream(io.BytesIO(b"<h1>Hi</h1>"), stream_info=StreamInfo(extension=".html")).markdown == "# Hi"
+    if IS_RS:
+        assert len(caught) == 1 and "'llm_modle'" in str(caught[0].message)
+        assert caught[0].filename == __file__  # points at the caller
+    # plugins may read keyword arguments of their own: no warning then
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        MarkItDown(enable_plugins=True, ocr_language="de")
 
 
 def test_custom_converter_and_normalized_output():

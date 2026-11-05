@@ -131,12 +131,16 @@ class MarkItDown:
         enable_plugins: Union[None, bool] = None,
         **kwargs,
     ):
-        # plugins read keyword arguments of their own
+        # markitdown accepts and ignores unknown keyword arguments; say so,
+        # so that a misspelt option does not go unnoticed (plugins read
+        # keyword arguments of their own)
         if not enable_plugins:
             for key in kwargs:
                 if key not in _KNOWN_KWARGS:
-                    raise TypeError(
-                        f"MarkItDown.__init__() got an unexpected keyword argument '{key}'"
+                    warn(
+                        f"MarkItDown() got an unknown keyword argument '{key}', "
+                        "which is ignored",
+                        stacklevel=2,
                     )
 
         self._builtins_enabled = False

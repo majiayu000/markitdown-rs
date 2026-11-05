@@ -19,8 +19,8 @@ the `markitdown.converters` classes), plugins (`enable_plugins=True`, e.g.
 markitdown-ocr), `llm_client` image captions, `requests_session`,
 `exiftool_path` and the Azure `docintel_*` / `cu_*` options behave as in
 markitdown 0.1.9, and so does `style_map` (through mammoth, with the
-`docx` extra). Unknown keyword arguments raise `TypeError` unless plugins
-are enabled. The wheel installs markitdown's `markitdown` command too (also
+`docx` extra). Unknown keyword arguments are ignored, as in markitdown,
+with a warning naming them (unless plugins are enabled). The wheel installs markitdown's `markitdown` command too (also
 `python -m markitdown`), with all of 0.1.9's flags.
 The module is named `markitdown`, so install it instead of, not next to, the
 Python package of that name.

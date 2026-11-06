@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>markitdown-rs: markitdown in Rust, documents to Markdown</title>
-<meta name="description" content="Microsoft's markitdown in Rust: PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and URLs to Markdown for LLMs. Same output, no Python, far faster.">
+<meta name="description" content="Convert PDF, Word, Excel, PowerPoint and HTML to Markdown with markitdown-rs. Use a Rust CLI, Python API or MCP server; compare output and benchmarks.">
 <link rel="canonical" href="https://majiayu000.github.io/markitdown-rs/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
-<meta property="og:description" content="Convert PDF, Word, PowerPoint, Excel, HTML, EPUB and URLs to Markdown. Same output as markitdown, byte for byte. No Python, usually hundreds of times faster.">
+<meta property="og:description" content="Convert documents and URLs to Markdown with a standalone Rust CLI, Python API or MCP server. See measured compatibility and performance results.">
 <meta property="og:url" content="https://majiayu000.github.io/markitdown-rs/">
 <meta property="og:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="markitdown-rs: Microsoft's markitdown in one Rust binary">
-<meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Byte-identical to markitdown, no Python, usually hundreds of times faster.">
+<meta name="twitter:description" content="Documents and URLs to Markdown for LLMs. Standalone Rust CLI, Python API and MCP server, with published compatibility tests and benchmarks.">
 <meta name="twitter:image" content="https://majiayu000.github.io/markitdown-rs/social-preview.png">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","softwareVersion":"0.2.0","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","downloadUrl":"https://github.com/majiayu000/markitdown-rs/releases/latest","codeRepository":"https://github.com/majiayu000/markitdown-rs","programmingLanguage":"Rust","description":"Rust rewrite of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with byte-identical output, as one binary, a Python package with markitdown's API and an MCP server.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"markitdown-rs","softwareVersion":"0.2.1","applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows","license":"https://opensource.org/licenses/MIT","url":"https://majiayu000.github.io/markitdown-rs/","downloadUrl":"https://github.com/majiayu000/markitdown-rs/releases/latest","codeRepository":"https://github.com/majiayu000/markitdown-rs","programmingLanguage":"Rust","description":"Rust rewrite of Microsoft's markitdown: PDF, DOCX, PPTX, XLSX, HTML, EPUB, Outlook and URLs to Markdown with documented output compatibility, as one binary, a Python package with markitdown's API and an MCP server.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is markitdown-rs a drop-in replacement for markitdown?", "acceptedAnswer": {"@type": "Answer", "text": "For conversions, yes: the same command, the same flags and the same Markdown. 401 of the 406 test files, and all 232 real-world files both convert in an independent check, come out byte for byte the same as markitdown 0.1.9; the 5 documented differences are rare PDF layout ties and charset guesses. The Python package keeps the same import, from markitdown import MarkItDown, and the same API."}}, {"@type": "Question", "name": "Does markitdown-rs need Python?", "acceptedAnswer": {"@type": "Answer", "text": "No. The markitdown binary is a single 4.5 MB file with no runtime dependencies. Python is needed only for the optional Python package, which you install instead of Microsoft's markitdown package."}}, {"@type": "Question", "name": "How much faster is markitdown-rs than markitdown?", "acceptedAnswer": {"@type": "Answer", "text": "From the command line, usually hundreds of times faster: a median of 408× over 231 real-world files (14.5× to 1,660×), and about 16× on the largest PDFs and spreadsheets. In process, the Python package is 4.7× to 48× faster. It answers --version in 4 ms; Python markitdown takes 1.9 s to start."}}, {"@type": "Question", "name": "Does markitdown-rs support plugins, OCR and Azure?", "acceptedAnswer": {"@type": "Answer", "text": "In the Python package, yes. markitdown plugins load through the same entry points, and the markitdown-ocr plugin gives the same output as with markitdown (install it with pip install --no-deps markitdown-ocr). LLM image captions, audio transcription and style_map work too. Azure Document Intelligence and Content Understanding run markitdown's own converter code, tested with mocked clients only: they have not been run against a live Azure account. The Rust binary does none of these."}}, {"@type": "Question", "name": "Can I use markitdown-rs as an MCP server?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. markitdown mcp serves the same convert_to_markdown tool as markitdown-mcp over stdio, and markitdown mcp --http serves it over Streamable HTTP and SSE on 127.0.0.1:3001. For Claude Code: claude mcp add markitdown -- markitdown mcp."}}]}
@@ -54,12 +54,13 @@ a { color: var(--accent); }
 <body>
 <main>
 <h1>markitdown-rs</h1>
-<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> rewritten in Rust: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. The same command and the same Markdown, byte for byte, without a Python environment. From the command line it is usually hundreds of times faster.</p>
+<p class="lead">Microsoft's <a href="https://github.com/microsoft/markitdown">markitdown</a> rewritten in Rust: convert PDF, Word, PowerPoint, Excel, HTML, EPUB, Outlook and web pages to Markdown for LLMs and RAG pipelines. The standalone CLI needs no Python environment. Output compatibility and speed are measured against Microsoft markitdown 0.1.9; see the documented differences and benchmark conditions below.</p>
 
 <div class="cta">
   <a class="primary" href="https://github.com/majiayu000/markitdown-rs/releases/latest">Download a binary</a>
   <a href="https://github.com/majiayu000/markitdown-rs">GitHub</a>
   <a href="comparison.html">markitdown vs markitdown-rs</a>
+  <a href="https://github.com/majiayu000/markitdown-rs/issues">Report a conversion issue</a>
 </div>
 
 <pre><span class="dim">$</span> brew install majiayu000/tap/markitdown-rs   <span class="dim"># or: cargo install markitdown-rs</span>
@@ -83,7 +84,11 @@ Plain text markup language</pre>
 </div>
 
 <h2>Python package</h2>
-<p>The Python package <code>markitdown-rs</code> has markitdown's API on the same Rust converters. It installs the <code>markitdown</code> module, so existing code keeps <code>from markitdown import MarkItDown</code>; install it instead of Microsoft's package, not next to it. It is not on PyPI yet: build the wheel with maturin from <a href="https://github.com/majiayu000/markitdown-rs/tree/main/crates/markitdown-py">crates/markitdown-py</a>.</p>
+<p>The Python package <code>markitdown-rs</code> has markitdown's API on the same Rust converters. It installs the <code>markitdown</code> module, so existing code keeps <code>from markitdown import MarkItDown</code>; install it instead of Microsoft's package, not next to it. Install the published <a href="https://pypi.org/project/markitdown-rs/">PyPI package</a> in a fresh Python 3.10+ environment:</p>
+<pre>python -m pip install "markitdown-rs[mcp]"
+markitdown report.pdf
+markitdown-mcp</pre>
+<p>The Python package uses <code>markitdown-mcp</code> for MCP; the standalone Rust binary uses <code>markitdown mcp</code>.</p>
 <pre><span class="dim">&gt;&gt;&gt;</span> from markitdown import MarkItDown
 <span class="dim">&gt;&gt;&gt;</span> MarkItDown().convert("report.pdf").markdown</pre>
 <ul>
@@ -123,7 +128,8 @@ Plain text markup language</pre>
 <tr><td>MCP server</td><td>stdio and HTTP</td><td>stdio and HTTP</td><td>no</td><td>yes</td></tr>
 </tbody>
 </table>
-<p>The full table, with how each number was measured: <a href="comparison.html">markitdown vs markitdown-rs</a>.</p>
+<p>The full table, with how each number was measured: <a href="comparison.html">markitdown vs markitdown-rs</a>
+  <a href="https://github.com/majiayu000/markitdown-rs/issues">Report a conversion issue</a>.</p>
 
 <h2>FAQ</h2>
 <div class="faq">

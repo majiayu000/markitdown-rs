@@ -187,8 +187,8 @@ each [release](https://github.com/majiayu000/markitdown-rs/releases), with
 SHA-256 sums:
 
 ```bash
-curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.0/markitdown-v0.2.0-aarch64-apple-darwin.tar.gz | tar xz
-./markitdown-v0.2.0-aarch64-apple-darwin/markitdown --version
+curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.1/markitdown-v0.2.1-aarch64-apple-darwin.tar.gz | tar xz
+./markitdown-v0.2.1-aarch64-apple-darwin/markitdown --version
 ```
 
 From a checkout: `cargo install --path crates/markitdown-rs`. All of these

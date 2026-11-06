@@ -5,6 +5,7 @@
 //! sectors that are present.
 
 use std::cell::OnceCell;
+use std::collections::HashSet;
 
 const MAGIC: &[u8] = b"\xD0\xCF\x11\xE0\xA1\xB1\x1A\xE1";
 const ENDOFCHAIN: u32 = 0xFFFF_FFFE;
@@ -75,13 +76,14 @@ fn read_chain(
     size: Option<u64>,
 ) -> Vec<u8> {
     let size_or_all = size.unwrap_or(fat.len() as u64 * sector);
-    let nb_sectors = size_or_all.div_ceil(sector);
+    let nb_sectors = size_or_all.div_ceil(sector).min(fat.len() as u64);
+    let mut visited = HashSet::new();
     let mut data = Vec::new();
     for _ in 0..nb_sectors {
         if sect == ENDOFCHAIN && size.is_none() {
             break;
         }
-        if sect as usize >= fat.len() {
+        if sect as usize >= fat.len() || !visited.insert(sect) {
             break;
         }
         let start = (offset + sector * sect as u64).min(fp.len() as u64) as usize;
@@ -90,7 +92,7 @@ fn read_chain(
         sect = fat[sect as usize];
     }
     if let Some(size) = size {
-        data.truncate(size as usize);
+        data.truncate(size.min(data.len() as u64) as usize);
     }
     data
 }
@@ -333,5 +335,40 @@ impl<'a> Ole<'a> {
                 Some(e.size),
             ))
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn cyclic_chains_do_not_repeat_input_bytes() {
+        let bytes = vec![b'x'; 512];
+        let got = read_chain(&bytes, 0, 512, &[0], 0, Some(16 << 20));
+        assert_eq!(
+            got.len(),
+            512,
+            "one physical sector must not expand to the declared size"
+        );
+        let mini = read_chain(&bytes, 0, 64, &[1, 0], 0, Some(4095));
+        assert_eq!(
+            mini.len(),
+            128,
+            "a MiniFAT cycle must stop after unique sectors"
+        );
+    }
+
+    #[test]
+    fn short_chains_keep_available_bytes() {
+        let bytes = vec![b'x'; 600];
+        assert_eq!(
+            read_chain(&bytes, 0, 512, &[1, ENDOFCHAIN], 0, Some(1024)),
+            bytes
+        );
+        assert_eq!(
+            read_chain(&bytes, 0, 512, &[1, ENDOFCHAIN], 0, Some(20)),
+            vec![b'x'; 20]
+        );
     }
 }

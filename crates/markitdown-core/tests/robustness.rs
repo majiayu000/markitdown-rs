@@ -530,3 +530,52 @@ fn cjk_utf16_and_utf32_are_told_from_legacy_encodings() {
     // and short ASCII UTF-16 keeps its NUL-based byte order
     assert_eq!(md(b"H\0i\0", txt()), "Hi");
 }
+
+#[test]
+fn recovered_formula_below_and_right_of_existing_cells_is_not_lost() {
+    use std::io::{Cursor, Write};
+    fn record(out: &mut Vec<u8>, code: u16, data: &[u8]) {
+        out.extend(code.to_le_bytes());
+        out.extend((data.len() as u16).to_le_bytes());
+        out.extend(data);
+    }
+    let mut workbook = Vec::new();
+    let mut bof = vec![0; 16];
+    bof[..2].copy_from_slice(&0x0600u16.to_le_bytes());
+    bof[2..4].copy_from_slice(&0x0005u16.to_le_bytes());
+    record(&mut workbook, 0x0809, &bof);
+    let bound_pos = workbook.len() + 4;
+    let mut bound = vec![0; 8];
+    bound[6] = 5;
+    bound.extend(b"Sheet");
+    record(&mut workbook, 0x0085, &bound);
+    record(&mut workbook, 0x000a, &[]);
+    let sheet_offset = workbook.len() as u32;
+    workbook[bound_pos..bound_pos + 4].copy_from_slice(&sheet_offset.to_le_bytes());
+    bof[2..4].copy_from_slice(&0x0010u16.to_le_bytes());
+    record(&mut workbook, 0x0809, &bof);
+    let mut number = vec![0; 6];
+    number.extend(1.0f64.to_le_bytes());
+    record(&mut workbook, 0x0203, &number);
+    let mut formula = vec![0; 6];
+    formula[..2].copy_from_slice(&1u16.to_le_bytes());
+    formula[2..4].copy_from_slice(&1u16.to_le_bytes());
+    formula.extend(9876.0f64.to_le_bytes());
+    formula.extend([0; 8]);
+    record(&mut workbook, 0x0406, &formula);
+    record(&mut workbook, 0x000a, &[]);
+    let mut ole = cfb::CompoundFile::create(Cursor::new(Vec::new())).unwrap();
+    ole.create_stream("/Workbook")
+        .unwrap()
+        .write_all(&workbook)
+        .unwrap();
+    ole.flush().unwrap();
+    let got = md(
+        &ole.into_inner().into_inner(),
+        StreamInfo::from_path("outlying.xls"),
+    );
+    assert!(
+        got.contains("9876"),
+        "recovered B2 formula must appear in Markdown: {got}"
+    );
+}

@@ -652,3 +652,31 @@ def test_markitdown_mcp_subcommand():
         assert r.returncode == 1 and b"markitdown-rs[mcp]" in r.stdout
     else:
         assert r.returncode == 0 and b"usage: markitdown-mcp" in r.stdout
+
+
+@rs_only
+def test_mcp_slow_conversion_keeps_event_loop_responsive(monkeypatch):
+    pytest.importorskip("mcp")
+    import asyncio
+    import threading
+    from types import SimpleNamespace
+    from markitdown_mcp import __main__ as server
+
+    released = threading.Event()
+
+    class SlowConverter:
+        def __init__(self, **kwargs):
+            pass
+
+        def convert_uri(self, uri):
+            return SimpleNamespace(markdown="responsive" if released.wait(0.5) else "blocked")
+
+    monkeypatch.setattr(server, "MarkItDown", SlowConverter)
+
+    async def run():
+        task = asyncio.create_task(server.convert_to_markdown("data:text/plain,hello"))
+        await asyncio.sleep(0.01)
+        released.set()
+        return await task
+
+    assert asyncio.run(run()) == "responsive"

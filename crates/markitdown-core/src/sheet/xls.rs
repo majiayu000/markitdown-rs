@@ -48,15 +48,14 @@ pub fn read(data: &[u8]) -> Result<Vec<super::Sheet>, Error> {
             if r >= MAX_ROWS || c >= MAX_COLS {
                 continue;
             }
-            if r >= rows.len() {
-                let width = rows.first().map_or(c + 1, Vec::len).max(c + 1);
-                rows.resize(r + 1, vec![Cell::Empty; width]);
-            }
-            if c >= rows[r].len() {
-                let width = c + 1;
-                for row in rows.iter_mut() {
+            let width = rows.first().map_or(c + 1, Vec::len).max(c + 1);
+            if c >= rows.first().map_or(0, Vec::len) {
+                for row in &mut rows {
                     row.resize(width, Cell::Empty);
                 }
+            }
+            if r >= rows.len() {
+                rows.resize(r + 1, vec![Cell::Empty; width]);
             }
             if rows[r][c] == Cell::Empty {
                 rows[r][c] = v;

@@ -192,8 +192,8 @@ curl -L https://github.com/majiayu000/markitdown-rs/releases/download/v0.2.1/mar
 ```
 
 From a checkout: `cargo install --path crates/markitdown-rs`. All of these
-install a binary named `markitdown`. The PyPI package (`markitdown-rs`,
-the Python module) is not published yet.
+install a binary named `markitdown`. The [PyPI package](https://pypi.org/project/markitdown-rs/)
+is also available: `python -m pip install "markitdown-rs[mcp]"` in a fresh Python 3.10+ environment.
 
 ## Usage
 
@@ -288,8 +288,8 @@ flags (`--http`, `--host`, `--port`, `--sse`), honouring
 ### Python
 
 `crates/markitdown-py` builds a Python module with markitdown's API on top of
-the same converters (PyO3 + maturin). **It is not published to PyPI yet**;
-install it from source with maturin
+the same converters (PyO3 + maturin). Install from [PyPI](https://pypi.org/project/markitdown-rs/)
+with `python -m pip install "markitdown-rs[mcp]"`, or build from source with maturin
 ([crates/markitdown-py/README.md](crates/markitdown-py/README.md)). Its
 import name is `markitdown`, the same as Microsoft's package, so it cannot be
 installed in the same environment as `markitdown` from PyPI: use one or the

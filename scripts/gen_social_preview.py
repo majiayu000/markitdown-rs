@@ -22,8 +22,8 @@ img = Image.new("RGB", (W, H), BG)
 d = ImageDraw.Draw(img)
 d.rectangle([0, 0, W, 10], fill=ACCENT)
 d.text((72, 64), "markitdown-rs", font=sans_bold, fill=FG)
-d.text((72, 166), "Microsoft's markitdown in one Rust binary.", font=sans, fill=FG)
-d.text((72, 210), "Same Markdown, byte for byte. No Python. 23-112x faster.", font=sans, fill=DIM)
+d.text((72, 166), "Documents to Markdown with a Rust CLI.", font=sans, fill=FG)
+d.text((72, 210), "Standalone binary. Python API. MCP server.", font=sans, fill=DIM)
 
 box = [72, 280, W - 72, 520]
 d.rounded_rectangle(box, radius=14, fill=CODE_BG, outline="#30363d", width=2)

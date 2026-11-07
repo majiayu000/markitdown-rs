@@ -8,13 +8,13 @@
     "source": "github"
   },
   "websiteUrl": "https://majiayu000.github.io/markitdown-rs/",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "packages": [
     {
       "registryType": "cargo",
       "registryBaseUrl": "https://crates.io",
       "identifier": "markitdown-rs",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "transport": {
         "type": "stdio"
       },

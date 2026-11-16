@@ -309,15 +309,17 @@ fn utf16_without_a_bom_is_decoded_as_markitdown_does() {
 }
 
 #[test]
-fn a_panicking_converter_is_a_conversion_error() {
-    // calamine panics on this workbook cut short (an index out of range
-    // in its compound-file reader); markitdown raises an ordinary error
+fn a_truncated_workbook_is_a_conversion_error() {
+    // calamine up to 0.37 panicked on this workbook cut short (an index out
+    // of range in its compound-file reader, RUSTSEC-2026-0436) and 0.38
+    // reports it; either way markitdown raises an ordinary error. The panic
+    // path itself is covered by convert::tests.
     let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
     let xls = std::fs::read(root.join("tests/fixtures/xls/markitdown-test.xls")).unwrap();
     let cut = &xls[..xls.len() * 99 / 100];
     let err = convert(cut, &StreamInfo::from_path("cut.xls"), &Default::default()).unwrap_err();
     assert!(
-        matches!(&err, markitdown_core::Error::Conversion(m) if m.contains("internal error in XlsConverter")),
+        matches!(&err, markitdown_core::Error::Conversion(m) if m.contains("XlsConverter")),
         "{err}"
     );
 }

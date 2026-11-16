@@ -189,6 +189,19 @@ pub fn convert(data: &[u8], base: &StreamInfo, opts: &Options) -> Result<Documen
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn a_panic_in_a_converter_is_a_conversion_error() {
+        let result: Result<(), super::Error> =
+            super::guarded("TestConverter", || panic!("index out of range"));
+        assert!(
+            matches!(&result, Err(super::Error::Conversion(m))
+                if m == "internal error in TestConverter: index out of range"),
+            "{result:?}"
+        );
+        // and the next conversion on this thread runs normally
+        assert_eq!(super::guarded("TestConverter", || Ok(7)).unwrap(), 7);
+    }
+
     use super::charset_sample;
 
     const LIMIT: usize = 65536;

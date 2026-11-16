@@ -104,9 +104,19 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
     let mut stack: Vec<Element> = Vec::new();
     let mut root: Option<Element> = None;
     let mut names = HashSet::new();
+    // quick-xml reports `&amp;` and `&#10;` as events of their own, between the text on
+    // either side. A run of both is put back together and valued as one piece of text, so
+    // unescaping and line-ending rules see what they saw when it arrived as one event.
+    let mut pending = String::new();
     let err = |e: &dyn std::fmt::Display| Error::Xml(e.to_string());
     loop {
         let ev = reader.read_event_into(&mut buf).map_err(|e| err(&e))?;
+        if !matches!(ev, Event::Text(_) | Event::GeneralRef(_)) && !pending.is_empty() {
+            if let Some(parent) = stack.last_mut() {
+                push_text(parent, &text_value(&pending, opts)?);
+            }
+            pending.clear();
+        }
         match ev {
             Event::Start(e) => {
                 if stack.len() >= MAX_DEPTH {
@@ -129,9 +139,15 @@ pub fn parse(xml: &[u8], opts: &ParseOptions) -> Result<Element, Error> {
                 attach(&mut stack, &mut root, el);
             }
             Event::Text(t) => {
-                if let Some(parent) = stack.last_mut() {
-                    let raw = std::str::from_utf8(t.as_ref()).map_err(|e| err(&e))?;
-                    push_text(parent, &text_value(raw, opts)?);
+                if !stack.is_empty() {
+                    pending.push_str(std::str::from_utf8(t.as_ref()).map_err(|e| err(&e))?);
+                }
+            }
+            Event::GeneralRef(r) => {
+                if !stack.is_empty() {
+                    pending.push('&');
+                    pending.push_str(std::str::from_utf8(r.as_ref()).map_err(|e| err(&e))?);
+                    pending.push(';');
                 }
             }
             Event::CData(t) => {
@@ -213,7 +229,7 @@ fn start_element(
     opts: &ParseOptions,
     names: &mut HashSet<Rc<str>>,
 ) -> Result<Element, Error> {
-    let (ns, local) = reader.resolve_element(e.name());
+    let (ns, local) = reader.resolver().resolve_element(e.name());
     let (name, ns_uri) = if opts.raw_names {
         let uri = match ns {
             ResolveResult::Bound(u) => Some(intern(
@@ -248,7 +264,7 @@ fn start_element(
         }
         let k = if opts.raw_names {
             if !is_xmlns {
-                let (ans, _) = reader.resolve_attribute(QName(key));
+                let (ans, _) = reader.resolver().resolve_attribute(QName(key));
                 if let ResolveResult::Unknown(p) = ans {
                     return Err(Error::Xml(format!(
                         "unbound prefix {}",
@@ -258,7 +274,7 @@ fn start_element(
             }
             intern(names, String::from_utf8_lossy(key).into_owned())
         } else {
-            let (ans, local) = reader.resolve_attribute(QName(key));
+            let (ans, local) = reader.resolver().resolve_attribute(QName(key));
             intern(names, canonical(opts, ans, local.as_ref())?)
         };
         let raw = std::str::from_utf8(&a.value).map_err(|e| Error::Xml(e.to_string()))?;
